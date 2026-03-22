@@ -1,0 +1,13 @@
+{
+  "ignoredUrls": [
+    "**/*.tsx",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.js"
+  ],
+  "hints": {
+    "no-inline-styles": "off",
+    "axe/aria": "off",
+    "compat-api/css": "off"
+  }
+}

@@ -1,0 +1,96 @@
+'use client';
+
+import { useScroll, useTransform, motion } from 'framer-motion';
+import { useRef } from 'react';
+import { LucideIcon } from 'lucide-react';
+
+interface ServiceItem {
+	src: string;
+	title: string;
+	description: string;
+	icon?: LucideIcon;
+	alt?: string;
+	path?: string;
+}
+
+interface ZoomParallaxProps {
+	/** Array of services to be displayed in the parallax effect max 7 items */
+	items: ServiceItem[];
+}
+
+import { useNavigate } from 'react-router-dom';
+
+export function ZoomParallax({ items }: ZoomParallaxProps) {
+	const container = useRef(null);
+	const navigate = useNavigate();
+	const { scrollYProgress } = useScroll({
+		target: container,
+		offset: ['start start', 'end end'],
+	});
+
+	const scale4 = useTransform(scrollYProgress, [0, 1], [1, 4]);
+	const scale5 = useTransform(scrollYProgress, [0, 1], [1, 5]);
+	const scale6 = useTransform(scrollYProgress, [0, 1], [1, 6]);
+	const scale8 = useTransform(scrollYProgress, [0, 1], [1, 8]);
+	const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9]);
+
+	const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
+
+	return (
+		<div ref={container} className="relative h-[300vh]">
+			<div className="sticky top-0 h-screen overflow-hidden">
+				{items.map(({ src, title, description, icon: Icon, alt, path }, index) => {
+					const scale = scales[index % scales.length];
+
+					return (
+						<motion.div
+							key={index}
+							style={{ scale }}
+							className={`absolute top-0 flex h-full w-full items-center justify-center ${index === 1 ? '[&>*]:!-top-[30vh] [&>*]:!left-[5vw] [&>*]:!h-[32vh] [&>*]:!w-[32vw]' : ''} ${index === 2 ? '[&>*]:!-top-[10vh] [&>*]:!-left-[25vw] [&>*]:!h-[40vh] [&>*]:!w-[28vw]' : ''} ${index === 3 ? '[&>*]:!left-[27.5vw] [&>*]:!h-[28vh] [&>*]:!w-[30vw]' : ''} ${index === 4 ? '[&>*]:!top-[27.5vh] [&>*]:!left-[5vw] [&>*]:!h-[30vh] [&>*]:!w-[25vw]' : ''} ${index === 5 ? '[&>*]:!top-[27.5vh] [&>*]:!-left-[22.5vw] [&>*]:!h-[28vh] [&>*]:!w-[35vw]' : ''} ${index === 6 ? '[&>*]:!top-[22.5vh] [&>*]:!left-[25vw] [&>*]:!h-[22vh] [&>*]:!w-[22vw]' : ''} `}
+						>
+							<button 
+								onClick={() => path && navigate(path)}
+								className="relative h-[25vh] w-[25vw] bg-[#121212] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-[8px_8px_16px_rgba(0,0,0,0.6),-8px_-8px_16px_rgba(255,255,255,0.02)] flex flex-col items-center justify-center p-8 group hover:border-sasori-red/30 transition-all duration-500 text-center outline-none focus:ring-2 focus:ring-sasori-red/50"
+							>
+								{/* Background Image Overlay */}
+								{src && (
+									<div className="absolute inset-0 z-0">
+										<img loading="lazy" 
+											src={src} 
+											alt={title}
+											className="w-full h-full object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700 scale-110 group-hover:scale-100"
+										/>
+										<div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/80 to-transparent" />
+									</div>
+								)}
+
+								{/* Top-left subtle highlight for claymorphism */}
+								<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none z-1" />
+								
+								{/* Icon Section - Centered */}
+								{Icon && (
+									<div className="relative z-10 mb-3 md:mb-6 p-4 md:p-6 rounded-2xl md:rounded-3xl bg-[#1a1a1a]/80 backdrop-blur-sm shadow-[inset_4px_4px_8px_rgba(0,0,0,0.5),inset_-4px_-4px_8px_rgba(255,255,255,0.02)] border border-white/5 group-hover:shadow-[0_0_30px_rgba(226,6,19,0.2)] transition-all duration-500">
+										<Icon className="text-sasori-red w-6 h-6 md:w-[3.5vw] md:h-[3.5vw] drop-shadow-[0_0_10px_rgba(226,6,19,0.6)] group-hover:scale-110 transition-transform duration-500" />
+									</div>
+								)}
+
+								{/* Title Section - Centered below icon */}
+								<div className="relative z-10 flex flex-col items-center px-4">
+									<h3 className="text-[10px] sm:text-xs md:text-[1.3vw] font-black text-white/90 uppercase tracking-tighter leading-tight group-hover:text-white transition-colors text-center">
+										{title}
+									</h3>
+									{/* Subtle indicator dot */}
+									<div className="mt-2 md:mt-3 w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-sasori-red shadow-[0_0_8px_#E20613] opacity-0 group-hover:opacity-100 transition-opacity" />
+								</div>
+
+								{/* Red Glow on hover (inspired by Photo 2) */}
+								<div className="absolute inset-x-0 bottom-0 h-1 bg-sasori-red/0 group-hover:bg-sasori-red/40 blur-sm transition-all" />
+							</button>
+						</motion.div>
+					);
+				})}
+			</div>
+		</div>
+	);
+}
+
