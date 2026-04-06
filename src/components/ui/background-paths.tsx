@@ -82,7 +82,20 @@ export function BackgroundPaths({
     }, [showContent]);
 
     return (
-        <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-bg-dark">
+        <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#F2F2F2]">
+            {/* Tech Grid Pattern */}
+            <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+            
+            {/* Corner Panels (Decorative) */}
+            <div className="absolute top-0 left-0 w-1/4 h-1/4 bg-white shadow-[20px_20px_40px_rgba(0,0,0,0.02)] border-r border-b border-black/5 -translate-y-1/2 -translate-x-1/2 rotate-45 pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-1/4 h-1/4 bg-white shadow-[-20px_-20px_40px_rgba(0,0,0,0.02)] border-l border-t border-black/5 translate-y-1/2 translate-x-1/2 rotate-45 pointer-events-none" />
+
+            {/* Red Neon Strips */}
+            <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+                <div className="absolute top-[20%] -left-[5%] w-[40%] h-[2px] bg-sasori-red shadow-[0_0_15px_#E20613] rotate-[-25deg] opacity-60 animate-pulse" />
+                <div className="absolute bottom-[10%] -right-[5%] w-[50%] h-[1px] bg-sasori-red shadow-[0_0_10px_#E20613] rotate-[-25deg] opacity-40" />
+            </div>
+
             <div className="absolute inset-0">
                 <FloatingPaths position={1} />
                 <FloatingPaths position={-1} />
@@ -100,7 +113,7 @@ export function BackgroundPaths({
                             <img loading="lazy" 
                                 src="/Logo.png" 
                                 alt="SasoriLabs Logo" 
-                                className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_0_15px_rgba(226,6,19,0.3)]"
+                                className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.1)]"
                                 referrerPolicy="no-referrer"
                                 onError={(e) => {
                                     e.currentTarget.style.display = 'none';
@@ -128,7 +141,7 @@ export function BackgroundPaths({
                                                 damping: 25,
                                             }}
                                             className="inline-block text-transparent bg-clip-text 
-                                            bg-gradient-to-b from-white via-white to-sasori-red"
+                                            bg-gradient-to-b from-[#1A1A1A] via-[#444444] to-[#1A1A1A]"
                                         >
                                             {letter}
                                         </motion.span>
@@ -142,7 +155,7 @@ export function BackgroundPaths({
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1, duration: 1 }}
-                                className="text-lg md:text-2xl text-gray-400 mb-12 font-light tracking-wide"
+                                className="text-lg md:text-2xl text-gray-600 mb-12 font-light tracking-wide"
                             >
                                 {subtitle}
                             </motion.p>
@@ -157,9 +170,9 @@ export function BackgroundPaths({
                                 variant="ghost"
                                 onClick={onCtaClick}
                                 className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
-                                bg-bg-dark/95 hover:bg-bg-dark/100 
+                                bg-sasori-red hover:bg-sasori-red/90 
                                 text-white transition-all duration-300 
-                                group-hover:-translate-y-0.5 border border-white/10
+                                group-hover:-translate-y-0.5 border border-sasori-red/20
                                 hover:shadow-md hover:shadow-sasori-red/20"
                             >
                                 <span className="opacity-90 group-hover:opacity-100 transition-opacity">

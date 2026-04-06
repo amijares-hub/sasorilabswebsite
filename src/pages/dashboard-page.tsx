@@ -1,11 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
-import { Plus, Edit2, Trash2, LogOut, ArrowLeft, Image as ImageIcon, Save, CheckCircle2, Upload, Video as VideoIcon, Link, FileCode, BarChart, Code, FileText, Brain, Bold, Italic, Underline, List, Type, Strikethrough, Mail, BookOpen } from 'lucide-react';
+import { Plus, Edit2, Trash2, LogOut, ArrowLeft, Image as ImageIcon, Save, CheckCircle2, Upload, Video as VideoIcon, Link, FileCode, BarChart, Code, FileText, Brain, Bold, Italic, Underline, List, Type, Strikethrough, Mail, BookOpen, User, Rocket, CreditCard, Activity, Database, Server } from 'lucide-react';
 import { SasoriLogo } from '../components/ui/sasori-logo';
 import { MorphingSquare } from '../components/ui/morphing-square';
 import { NewsletterManager } from '../components/dashboard/newsletter-manager';
 import { cn } from '../lib/utils';
+import { ClientManager } from '../components/dashboard/crm-clients';
+import { ProjectManager } from '../components/dashboard/crm-projects';
+import { RequestManager } from '../components/dashboard/crm-requests';
+import { FinanceManager } from '../components/dashboard/crm-finance';
+import { SystemResources } from '../components/dashboard/system-resources';
+import { BillingStats } from '../components/dashboard/billing-stats';
+import { CRMAnalytics } from '../components/dashboard/crm-analytics';
+import { OwnerExpenses } from '../components/dashboard/owner-expenses';
 
 interface Blog {
   id: string;
@@ -26,7 +34,7 @@ export function DashboardPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState<any>(null);
-  const [activeModule, setActiveModule] = useState<'blogs' | 'newsletter'>('blogs');
+  const [activeModule, setActiveModule] = useState<'blogs' | 'newsletter' | 'crm_clients' | 'crm_projects' | 'crm_requests' | 'crm_finance' | 'system_resources' | 'billing_stats' | 'crm_analytics' | 'owner_expenses'>('blogs');
 
   // Editor State
   const [isEditing, setIsEditing] = useState(false);
@@ -159,12 +167,12 @@ export function DashboardPage() {
       if (trimmed.startsWith('<')) return line;
       
       if (trimmed.length < 50 && !trimmed.endsWith('.') && !trimmed.endsWith('?') && !trimmed.endsWith(':')) {
-        return `<h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mt-16 mb-8 text-white">${trimmed}</h2>`;
+        return `<h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mt-16 mb-8 text-[#1A1A1A]">${trimmed}</h2>`;
       }
       if (trimmed.endsWith('?') || (trimmed.length < 70 && trimmed.endsWith(':'))) {
-        return `<h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter mt-12 mb-6 text-white/90">${trimmed}</h3>`;
+        return `<h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter mt-12 mb-6 text-[#1A1A1A]/90">${trimmed}</h3>`;
       }
-      return `<p className="text-xl leading-relaxed text-white/70 mb-8 font-medium">${trimmed}</p>`;
+      return `<p className="text-xl leading-relaxed text-[#1A1A1A]/70 mb-8 font-medium">${trimmed}</p>`;
     }).filter(l => l !== '').join('\n\n\n');
     
     return formatted;
@@ -195,7 +203,7 @@ export function DashboardPage() {
             fontEls.forEach(el => {
                 const span = document.createElement('span');
                 span.style.fontSize = value || '24px';
-                span.className = "font-black text-white";
+                span.className = "font-black text-[#1A1A1A]";
                 span.innerHTML = el.innerHTML;
                 el.parentNode?.replaceChild(span, el);
             });
@@ -218,14 +226,14 @@ export function DashboardPage() {
     else if (tagType === 'img') {
         const url = prompt('URL de la imagen:');
         if (url) {
-            const img = `<img src="${url}" class="rounded-[3rem] shadow-2xl w-full my-32 border border-white/5" />`;
+            const img = `<img src="${url}" class="rounded-xl shadow-2xl w-full my-32 border border-black/10" />`;
             document.execCommand('insertHTML', false, img);
         }
     }
     else if (tagType === 'video') {
         const url = prompt('URL del video (iframe src):');
         if (url) {
-            const video = `<div class="aspect-video w-full my-32 overflow-hidden rounded-[3rem] border border-white/5"><iframe src="${url}" class="w-full h-full" /></div>`;
+            const video = `<div class="aspect-video w-full my-32 overflow-hidden rounded-xl border border-black/10"><iframe src="${url}" class="w-full h-full" /></div>`;
             document.execCommand('insertHTML', false, video);
         }
     }
@@ -263,7 +271,7 @@ export function DashboardPage() {
       if (target === 'cover') {
         setFormData(prev => ({ ...prev, cover_image: publicUrl }));
       } else {
-        const img = `<img src="${publicUrl}" class="rounded-[3rem] shadow-2xl w-full my-32 border border-white/5" />`;
+        const img = `<img src="${publicUrl}" class="rounded-xl shadow-2xl w-full my-32 border border-black/10" />`;
         if (editorRef.current) {
             editorRef.current.focus();
             document.execCommand('insertHTML', false, img);
@@ -288,7 +296,7 @@ export function DashboardPage() {
           try {
             setSaveStatus('saving');
             const publicUrl = await uploadFile(file);
-            const img = `<img src="${publicUrl}" class="rounded-[3rem] shadow-2xl w-full my-32 border border-white/5" />`;
+            const img = `<img src="${publicUrl}" class="rounded-xl shadow-2xl w-full my-32 border border-black/10" />`;
             if (editorRef.current) {
                 editorRef.current.focus();
                 document.execCommand('insertHTML', false, img);
@@ -435,31 +443,37 @@ export function DashboardPage() {
   };
 
   if (!session) return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black gap-12">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white gap-12">
       <MorphingSquare message="Autenticando Identidad..." />
     </div>
   );
 
   return (
-    <div className="flex min-h-screen bg-black text-white font-sans selection:bg-sasori-red selection:text-white">
+    <div className="flex min-h-screen bg-white text-[#1A1A1A] font-sans selection:bg-sasori-red selection:text-white">
       {/* SIDEBAR FOR DESKTOP */}
-      <aside className="hidden md:flex flex-col w-72 fixed h-screen z-50 bg-[#080808] border-r border-white/5 py-10 px-8 justify-between">
-        <div>
+      <aside className="hidden md:flex flex-col w-72 fixed h-screen z-50 bg-[#EDEDED] border-r border-black/5 py-10 px-8 justify-between relative shadow-xl">
+        {/* Metallic brushed grain overlay */}
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
+        
+        {/* Red Tech Strip */}
+        <div className="absolute top-0 right-0 w-[2px] h-full bg-sasori-red shadow-[0_0_15px_#E20613] opacity-20" />
+
+        <div className="relative z-10">
           <div className="flex items-center gap-4 mb-16">
             <SasoriLogo className="w-10 h-10 text-sasori-red drop-shadow-[0_0_15px_rgba(226,6,19,0.5)]" />
             <div>
-              <h1 className="text-2xl font-black uppercase tracking-tighter">Dashboard</h1>
-              <p className="text-white/40 font-normal tracking-widest text-[9px] uppercase mt-1">Master Access</p>
+              <h1 className="text-2xl font-black uppercase tracking-tighter text-[#1A1A1A]">Dashboard</h1>
+              <p className="text-black/40 font-normal tracking-widest text-[9px] uppercase mt-1">Master Access</p>
             </div>
           </div>
           
           <div className="flex flex-col gap-3">
-            <div className="text-[10px] font-black uppercase tracking-widest text-white/20 mb-2 pl-2">Módulos</div>
+            <div className="text-[10px] font-black uppercase tracking-widest text-black/20 mb-2 pl-2">Módulos</div>
             <button 
               onClick={() => setActiveModule('blogs')}
               className={cn(
-                "px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
-                activeModule === 'blogs' ? "bg-white text-black shadow-lg" : "text-white/50 hover:text-white hover:bg-white/5"
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'blogs' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
               <BookOpen size={18} className={activeModule === 'blogs' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
@@ -468,39 +482,123 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('newsletter')}
               className={cn(
-                "px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
-                activeModule === 'newsletter' ? "bg-sasori-red text-white shadow-[0_0_30px_rgba(226,6,19,0.3)]" : "text-white/50 hover:text-white hover:bg-white/5"
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'newsletter' ? "bg-sasori-red text-white shadow-[0_0_30px_rgba(226,6,19,0.3)]" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
               <Mail size={18} className={activeModule === 'newsletter' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
               Newsletter Engine
             </button>
+
+            <div className="text-[10px] font-black uppercase tracking-widest text-black/20 mb-2 mt-6 pl-2">Sistema CRM</div>
+            <button 
+              onClick={() => setActiveModule('crm_clients')}
+              className={cn(
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'crm_clients' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
+              )}
+            >
+              <User size={18} className={activeModule === 'crm_clients' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
+              Clientes
+            </button>
+            <button 
+              onClick={() => setActiveModule('crm_projects')}
+              className={cn(
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'crm_projects' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
+              )}
+            >
+              <Rocket size={18} className={activeModule === 'crm_projects' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
+              Proyectos
+            </button>
+            <button 
+              onClick={() => setActiveModule('crm_requests')}
+              className={cn(
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'crm_requests' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
+              )}
+            >
+              <BarChart size={18} className={activeModule === 'crm_requests' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
+              Solicitudes
+            </button>
+            <button 
+              onClick={() => setActiveModule('crm_finance')}
+              className={cn(
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'crm_finance' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
+              )}
+            >
+              <CreditCard size={18} className={activeModule === 'crm_finance' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
+              Finanzas
+            </button>
+            <button 
+              onClick={() => setActiveModule('billing_stats')}
+              className={cn(
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'billing_stats' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
+              )}
+            >
+              <CreditCard size={18} className={activeModule === 'billing_stats' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
+              Mensualidades
+            </button>
+
+            <div className="text-[10px] font-black uppercase tracking-widest text-black/20 mb-2 mt-6 pl-2">Análisis Avanzado</div>
+            <button 
+              onClick={() => setActiveModule('crm_analytics')}
+              className={cn(
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'crm_analytics' ? "bg-sasori-red text-white shadow-lg" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
+              )}
+            >
+              <BarChart size={18} className={activeModule === 'crm_analytics' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
+              Analítica Maestro
+            </button>
+            <button 
+              onClick={() => setActiveModule('system_resources')}
+              className={cn(
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'system_resources' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
+              )}
+            >
+              <Activity size={18} className={activeModule === 'system_resources' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
+              Infraestructura
+            </button>
+            <button 
+              onClick={() => setActiveModule('owner_expenses')}
+              className={cn(
+                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                activeModule === 'owner_expenses' ? "bg-sasori-red text-white shadow-lg" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
+              )}
+            >
+              <Server size={18} className={activeModule === 'owner_expenses' ? "" : "group-hover:text-sasori-red transition-colors"} /> 
+              Gastos Propios
+            </button>
           </div>
         </div>
 
-        <button onClick={handleLogout} className="flex items-center gap-4 px-6 py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white/30 hover:text-sasori-red hover:bg-sasori-red/10 transition-colors w-full text-left group">
+        <button onClick={handleLogout} className="flex items-center gap-4 px-6 py-5 rounded-xl text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/30 hover:text-sasori-red hover:bg-sasori-red/5 transition-colors w-full text-left group relative z-10">
           <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" /> Salir del Sistema
         </button>
       </aside>
 
       {/* MOBILE HEADER */}
-      <header className="md:hidden fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5 py-4 px-6 flex justify-between items-center">
+      <header className="md:hidden fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-black/5 py-4 px-6 flex justify-between items-center text-[#1A1A1A]">
         <div className="flex items-center gap-3">
           <SasoriLogo className="w-6 h-6 text-sasori-red" />
           <h1 className="text-lg font-black uppercase tracking-tighter">Dashboard</h1>
         </div>
-        <button onClick={handleLogout} className="text-white/50 hover:text-sasori-red transition-colors">
+        <button onClick={handleLogout} className="text-black/50 hover:text-sasori-red transition-colors">
           <LogOut size={20} />
         </button>
       </header>
 
       {/* MOBILE SWITCHER */}
-      <div className="md:hidden fixed top-[64px] w-full z-40 bg-[#080808]/90 backdrop-blur-lg border-b border-white/5 p-4 flex justify-center gap-2">
+      <div className="md:hidden fixed top-[64px] w-full z-40 bg-[#EDEDED]/90 backdrop-blur-lg border-b border-black/5 p-4 flex justify-center gap-2">
           <button 
             onClick={() => setActiveModule('blogs')}
             className={cn(
-              "flex-1 py-3 my-1 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all gap-2 flex items-center justify-center border border-white/5",
-              activeModule === 'blogs' ? "bg-white text-black shadow-lg" : "text-white/50 hover:text-white bg-black"
+              "flex-1 py-3 my-1 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all gap-2 flex items-center justify-center border border-black/5",
+              activeModule === 'blogs' ? "bg-white text-black shadow-lg" : "text-black/50 hover:text-[#1A1A1A] bg-black/5"
             )}
           >
             <BookOpen size={14} /> Blog
@@ -508,8 +606,8 @@ export function DashboardPage() {
           <button 
             onClick={() => setActiveModule('newsletter')}
             className={cn(
-              "flex-1 py-3 my-1 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all gap-2 flex items-center justify-center border border-white/5",
-              activeModule === 'newsletter' ? "bg-sasori-red text-white shadow-lg" : "text-white/50 hover:text-white bg-black"
+              "flex-1 py-3 my-1 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all gap-2 flex items-center justify-center border border-black/5",
+              activeModule === 'newsletter' ? "bg-sasori-red text-white shadow-lg" : "text-black/50 hover:text-[#1A1A1A] bg-black/5"
             )}
           >
             <Mail size={14} /> Newsletter
@@ -522,13 +620,29 @@ export function DashboardPage() {
         
         {activeModule === 'newsletter' ? (
            <NewsletterManager />
+        ) : activeModule === 'crm_clients' ? (
+           <ClientManager />
+        ) : activeModule === 'crm_projects' ? (
+           <ProjectManager />
+        ) : activeModule === 'crm_requests' ? (
+           <RequestManager />
+        ) : activeModule === 'crm_finance' ? (
+           <FinanceManager />
+        ) : activeModule === 'crm_analytics' ? (
+           <CRMAnalytics />
+        ) : activeModule === 'system_resources' ? (
+           <SystemResources />
+        ) : activeModule === 'billing_stats' ? (
+           <BillingStats />
+        ) : activeModule === 'owner_expenses' ? (
+           <OwnerExpenses />
         ) : !isEditing ? (
           // LIST VIEW
           <div className="animate-in fade-in zoom-in-95 duration-500">
-            <div className="flex justify-between items-end mb-10 border-b border-white/5 pb-6">
+            <div className="flex justify-between items-end mb-10 border-b border-black/5 pb-6">
               <div>
-                <h2 className="text-3xl font-black uppercase tracking-tighter">Artículos Publicados</h2>
-                <p className="text-white/40 text-sm mt-2">Gestiona el tejido de la información. Crea y destruye bloques de conocimiento.</p>
+                <h2 className="text-3xl font-black uppercase tracking-tighter text-[#1A1A1A]">Artículos Publicados</h2>
+                <p className="text-black/40 text-sm mt-2">Gestiona el tejido de la información. Crea y destruye bloques de conocimiento.</p>
               </div>
               <button 
                 onClick={() => openEditor()}
@@ -543,36 +657,36 @@ export function DashboardPage() {
                 <MorphingSquare message="Sincronizando Bóveda..." />
               </div>
             ) : blogs.length === 0 ? (
-              <div className="text-center py-20 border border-dash border-white/10 rounded-3xl">
-                <p className="text-white/30 text-lg uppercase tracking-widest font-black">La bóveda de información está vacía.</p>
+              <div className="text-center py-20 border border-dash border-black/10 rounded-xl bg-[#EDEDED]/30">
+                <p className="text-black/30 text-lg uppercase tracking-widest font-black">La bóveda de información está vacía.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {blogs.map(blog => (
-                  <div key={blog.id} className="group relative bg-[#111] border border-white/5 rounded-3xl p-6 hover:shadow-[0_10px_30px_rgba(0,0,0,0.8)] transition-all overflow-hidden flex flex-col justify-between h-72">
+                  <div key={blog.id} className="group relative bg-[#EDEDED] border border-black/5 rounded-xl p-6 hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-all overflow-hidden flex flex-col justify-between h-72">
                     {/* Background Glow */}
                     <div className="absolute inset-0 bg-sasori-red/0 group-hover:bg-sasori-red/5 transition-colors duration-500 z-0" />
                     
                     <div className="relative z-10 flex-grow">
-                      <div className="flex justify-between items-start mb-4 text-xs font-black tracking-widest text-white/40 uppercase">
+                      <div className="flex justify-between items-start mb-4 text-xs font-black tracking-widest text-black/40 uppercase">
                         <span>ES • {blog.read_time ?? 0}m Read</span>
-                        <span className="text-emerald-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Público</span>
+                        <span className="text-emerald-600 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-600" /> Público</span>
                       </div>
-                      <h3 className="text-2xl font-bold uppercase tracking-tighter leading-tight line-clamp-3">
+                      <h3 className="text-2xl font-bold uppercase tracking-tighter leading-tight line-clamp-3 text-[#1A1A1A]">
                         {blog.translations?.es?.title || blog.slug}
                       </h3>
                       <div className="flex gap-2 mt-2">
                         {['en', 'zh', 'ru', 'pt'].map(l => (
-                          <span key={l} className="text-[8px] bg-white/5 px-1.5 py-0.5 rounded text-white/40 font-black">{l.toUpperCase()} OK</span>
+                          <span key={l} className="text-[8px] bg-black/5 px-1.5 py-0.5 rounded text-black/40 font-black">{l.toUpperCase()} OK</span>
                         ))}
                       </div>
                     </div>
 
-                    <div className="relative z-10 flex gap-3 mt-4 pt-4 border-t border-white/5">
-                      <button onClick={() => openEditor(blog)} className="flex-1 bg-white/5 hover:bg-white text-white hover:text-black text-[10px] font-black tracking-widest uppercase py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
+                    <div className="relative z-10 flex gap-3 mt-4 pt-4 border-t border-black/5">
+                      <button onClick={() => openEditor(blog)} className="flex-1 bg-white border border-black/10 hover:bg-[#1A1A1A] text-[#1A1A1A] hover:text-white text-[10px] font-black tracking-widest uppercase py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
                         <Edit2 size={12} /> Editar
                       </button>
-                      <button onClick={() => deleteBlog(blog.id)} className="w-12 flex items-center justify-center border border-sasori-red/30 text-sasori-red hover:bg-sasori-red hover:text-white rounded-xl transition-all">
+                      <button onClick={() => deleteBlog(blog.id)} className="w-12 flex items-center justify-center border border-sasori-red/30 text-sasori-red hover:bg-sasori-red hover:text-white rounded-xl transition-all shadow-sm">
                         <Trash2 size={14} />
                       </button>
                     </div>
@@ -583,16 +697,16 @@ export function DashboardPage() {
           </div>
         ) : (
           // EDITOR VIEW
-          <div className="animate-in slide-in-from-bottom-8 duration-500 max-w-4xl mx-auto">
-            <div className="sticky top-20 z-40 bg-black/90 backdrop-blur-lg pt-4 pb-4 border-b border-white/5 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-              <button onClick={() => setIsEditing(false)} className="text-white/50 hover:text-white flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors">
+          <div className="animate-in slide-in-from-bottom-8 duration-500 max-w-4xl mx-auto pb-40">
+            <div className="sticky top-20 z-40 bg-white/90 backdrop-blur-lg pt-4 pb-4 border-b border-black/5 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+              <button onClick={() => setIsEditing(false)} className="text-[#1A1A1A]/50 hover:text-[#1A1A1A] flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors font-display">
                 <ArrowLeft size={16} /> Volver a Bóveda
               </button>
               
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2 mr-4">
                     <div className={cn("w-3 h-3 rounded-full animate-pulse", formData.seo_score > 70 ? "bg-emerald-500" : formData.seo_score > 40 ? "bg-yellow-500" : "bg-sasori-red")} />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-white/60">SEO Power: {formData.seo_score}%</span>
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/60">SEO Power: {formData.seo_score}%</span>
                 </div>
                 <button 
                   onClick={saveBlog} 
@@ -613,8 +727,8 @@ export function DashboardPage() {
             <div className="mt-10 space-y-12">
               {/* GLOBAL METADATA */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 space-y-6 bg-white/5 p-8 rounded-[2rem] border border-white/10">
-                  <h3 className="text-xl font-black uppercase tracking-widest text-white/50 border-b border-white/10 pb-4">Metadata Global</h3>
+                <div className="lg:col-span-2 space-y-6 bg-[#EDEDED] p-8 rounded-xl border border-black/5 shadow-sm">
+                  <h3 className="text-xl font-black uppercase tracking-widest text-[#1A1A1A]/50 border-b border-black/10 pb-4">Metadata Global</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-sasori-red">ID de Ruta (Slug)</label>
@@ -623,9 +737,9 @@ export function DashboardPage() {
                         placeholder="ej: revolucion-ia-2026"
                         value={formData.slug}
                         onChange={(e) => setFormData({...formData, slug: e.target.value.toLowerCase().replace(/\s+/g, '-')})}
-                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-sasori-red outline-none transition-colors"
+                        className="w-full bg-white border border-black/10 rounded-xl px-4 py-3 text-sm focus:border-sasori-red outline-none transition-colors shadow-[inset_1px_1px_4px_rgba(0,0,0,0.05)]"
                       />
-                      <p className="text-[10px] text-white/30">Se generará auto-mágicamente del título si lo dejas vacío.</p>
+                      <p className="text-[10px] text-black/30">Se generará auto-mágicamente del título si lo dejas vacío.</p>
                     </div>
                     <div className="space-y-3">
                       <label className="text-[10px] font-black uppercase tracking-[0.2em] text-sasori-red flex items-center justify-between">
@@ -642,9 +756,9 @@ export function DashboardPage() {
                         placeholder="O pega una URL: https://tu-bucket/imagen.jpg"
                         value={formData.cover_image}
                         onChange={(e) => setFormData({...formData, cover_image: e.target.value})}
-                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-sasori-red outline-none transition-colors"
+                        className="w-full bg-white border border-black/10 rounded-xl px-4 py-3 text-sm focus:border-sasori-red outline-none transition-colors shadow-[inset_1px_1px_4px_rgba(0,0,0,0.05)]"
                       />
-                      {formData.cover_image && <div className="h-20 w-32 mt-2 rounded-lg bg-cover bg-center border border-white/10" style={{ backgroundImage: `url(${formData.cover_image})` }} />}
+                      {formData.cover_image && <div className="h-20 w-32 mt-2 rounded-lg bg-cover bg-center border border-black/10 shadow-md" style={{ backgroundImage: `url(${formData.cover_image})` }} />}
                     </div>
 
                     <div className="space-y-3">
@@ -654,7 +768,7 @@ export function DashboardPage() {
                         placeholder="ej: Anita Tutić"
                         value={formData.author || ''}
                         onChange={(e) => setFormData({...formData, author: e.target.value})}
-                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-sasori-red outline-none transition-colors"
+                        className="w-full bg-white border border-black/10 rounded-xl px-4 py-3 text-sm focus:border-sasori-red outline-none transition-colors shadow-[inset_1px_1px_4px_rgba(0,0,0,0.05)]"
                       />
                     </div>
                     
@@ -665,9 +779,9 @@ export function DashboardPage() {
                         placeholder="URL de foto del autor"
                         value={formData.author_image || ''}
                         onChange={(e) => setFormData({...formData, author_image: e.target.value})}
-                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm focus:border-sasori-red outline-none transition-colors"
+                        className="w-full bg-white border border-black/10 rounded-xl px-4 py-3 text-sm focus:border-sasori-red outline-none transition-colors shadow-[inset_1px_1px_4px_rgba(0,0,0,0.05)]"
                       />
-                      {formData.author_image && <div className="h-12 w-12 mt-2 rounded-full bg-cover bg-center border border-white/10" style={{ backgroundImage: `url(${formData.author_image})` }} />}
+                      {formData.author_image && <div className="h-12 w-12 mt-2 rounded-full bg-cover bg-center border border-black/10 shadow-md" style={{ backgroundImage: `url(${formData.author_image})` }} />}
                     </div>
                   </div>
                 </div>
@@ -676,8 +790,8 @@ export function DashboardPage() {
                     <h3 className="text-sm font-black uppercase tracking-widest text-sasori-red">Análisis SEO Automático</h3>
                     <div className="space-y-4">
                         <div className="flex justify-between items-end">
-                            <span className="text-4xl font-black">{formData.seo_score}%</span>
-                            <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Potencia Actual</span>
+                            <span className="text-4xl font-black text-sasori-red">{formData.seo_score}%</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/40">Potencia Actual</span>
                         </div>
                         <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                             <div className="h-full bg-sasori-red transition-all duration-1000" style={{ width: `${formData.seo_score}%` }} />
@@ -685,7 +799,7 @@ export function DashboardPage() {
                         <div className="space-y-2 mt-4">
                             {formData.seo_recommendations.length > 0 ? (
                                 formData.seo_recommendations.map((rec, i) => (
-                                    <div key={i} className="flex gap-2 text-[9px] font-bold uppercase tracking-wider text-white/60 leading-relaxed border-l-2 border-sasori-red/30 pl-3">
+                                    <div key={i} className="flex gap-2 text-[9px] font-bold uppercase tracking-wider text-[#1A1A1A]/60 leading-relaxed border-l-2 border-sasori-red/30 pl-3">
                                         • {rec}
                                     </div>
                                 ))
@@ -700,16 +814,16 @@ export function DashboardPage() {
               {/* SINGLE LANGUAGE EDITOR */}
               <div className="animate-in fade-in slide-in-from-left-4 duration-300">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-                    <span className="bg-sasori-red/20 border border-sasori-red/30 text-sasori-red text-[10px] font-black px-4 py-2 rounded-xl uppercase tracking-widest">
+                    <span className="bg-sasori-red/10 border border-sasori-red/20 text-sasori-red text-[10px] font-black px-4 py-2 rounded-xl uppercase tracking-widest shadow-sm">
                       🌐 Traducción Automática a 5 Idiomas
                     </span>
-                    <span className="text-white/20 text-[10px] uppercase font-black tracking-widest italic">Escribe en cualquier idioma. El sistema detecta y traduce automáticamente.</span>
+                    <span className="text-[#1A1A1A]/20 text-[10px] uppercase font-black tracking-widest italic">Escribe en cualquier idioma. El sistema detecta y traduce automáticamente.</span>
                 </div>
                 
                 <input 
                   type="text" 
                   placeholder="Escribe el Título aquí..."
-                  className="w-full bg-transparent border-none text-4xl md:text-5xl font-black uppercase tracking-tighter placeholder-white/10 focus:outline-none"
+                  className="w-full bg-transparent border-none text-4xl md:text-5xl font-black uppercase tracking-tighter placeholder-black/10 focus:outline-none text-[#1A1A1A]"
                   value={formData.translations.es.title}
                   onChange={(e) => setFormData({
                     ...formData,
@@ -721,10 +835,10 @@ export function DashboardPage() {
                 />
 
                 {/* RICH TOOLBAR */}
-                <div className="flex flex-wrap gap-2 border-y border-white/5 py-4 mt-8 bg-white/[0.02] px-4 rounded-xl items-center">
-                  <div className="text-[8px] font-black uppercase tracking-widest text-white/30 mr-2 border-r border-white/5 pr-4">Herramientas</div>
+                <div className="flex flex-wrap gap-2 border-y border-black/5 py-4 mt-8 bg-[#EDEDED]/50 px-4 rounded-xl items-center shadow-sm">
+                  <div className="text-[8px] font-black uppercase tracking-widest text-black/30 mr-2 border-r border-black/5 pr-4">Herramientas</div>
                   <div className="flex flex-wrap gap-2 items-center">
-                    <div className="text-[8px] font-black uppercase tracking-widest text-white/30 mr-2 border-r border-white/5 pr-4">Bloques</div>
+                    <div className="text-[8px] font-black uppercase tracking-widest text-black/30 mr-2 border-r border-black/5 pr-4">Bloques</div>
                     {[
                       { label: 'H2', type: 'h2', icon: <FileCode size={14} /> },
                       { label: 'H3', type: 'h3', icon: <FileCode size={14} /> },
@@ -732,23 +846,23 @@ export function DashboardPage() {
                       { label: 'LISTA', type: 'list', icon: <List size={14} /> },
                       { label: 'CÓDIGO', type: 'code', icon: <Code size={14} /> },
                     ].map(btn => (
-                      <button key={btn.label} type="button" onClick={() => wrapSelection(btn.type as any)} className="bg-white/5 hover:bg-sasori-red text-white px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border border-white/5 group">
+                      <button key={btn.label} type="button" onClick={() => wrapSelection(btn.type as any)} className="bg-white border border-black/10 hover:bg-[#1A1A1A] text-[#1A1A1A] hover:text-white px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 group shadow-sm">
                         <span className="opacity-40 group-hover:opacity-100 transition-opacity">{btn.icon}</span>
                         {btn.label}
                       </button>
                     ))}
                   </div>
 
-                  <div className="h-6 w-px bg-white/10 mx-2" />
+                  <div className="h-6 w-px bg-black/10 mx-2" />
 
-                  <div className="text-[8px] font-black uppercase tracking-widest text-white/30 mr-2 border-r border-white/5 pr-4">Formato</div>
+                  <div className="text-[8px] font-black uppercase tracking-widest text-black/30 mr-2 border-r border-black/5 pr-4">Formato</div>
                   {[
                     { label: 'NEGRITA', type: 'bold', icon: <Bold size={14} /> },
                     { label: 'CURSIVA', type: 'italic', icon: <Italic size={14} /> },
                     { label: 'SUBRAYADO', type: 'underline', icon: <Underline size={14} /> },
                     { label: 'TACHADO', type: 'strike', icon: <Strikethrough size={14} /> },
                   ].map(btn => (
-                    <button key={btn.label} type="button" onClick={() => wrapSelection(btn.type as any)} className="bg-white/5 hover:bg-sasori-red text-white px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border border-white/5 group">
+                    <button key={btn.label} type="button" onClick={() => wrapSelection(btn.type as any)} className="bg-white border border-black/10 hover:bg-[#1A1A1A] text-[#1A1A1A] hover:text-white px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 group shadow-sm">
                       <span className="opacity-40 group-hover:opacity-100 transition-opacity">{btn.icon}</span>
                       {btn.label}
                     </button>
@@ -759,13 +873,13 @@ export function DashboardPage() {
                       <button 
                           type="button" 
                           onClick={() => setShowFontSizes(!showFontSizes)} 
-                          className="bg-white/5 hover:bg-sasori-red text-white px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border border-white/5 group"
+                          className="bg-white border border-black/10 hover:bg-[#1A1A1A] text-[#1A1A1A] hover:text-white px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 group shadow-sm"
                       >
-                          <Type size={14} className="opacity-40 group-hover:opacity-100" />
+                          <Type size={14} className="opacity-40 group-hover:opacity-100 font-display" />
                           TAMAÑO
                       </button>
                       {showFontSizes && (
-                          <div className="absolute top-full left-0 mt-2 bg-[#111] border border-white/10 rounded-xl shadow-2xl z-50 p-2 grid grid-cols-2 gap-1 w-32 animate-in fade-in zoom-in-95 duration-200">
+                          <div className="absolute top-full left-0 mt-2 bg-[#EDEDED] border border-black/10 rounded-xl shadow-2xl z-50 p-2 grid grid-cols-2 gap-1 w-32 animate-in fade-in zoom-in-95 duration-200">
                               {['12px', '16px', '18px', '20px', '24px', '32px', '48px', '64px'].map(size => (
                                   <button 
                                       key={size}
@@ -773,7 +887,7 @@ export function DashboardPage() {
                                           wrapSelection('fontsize', size);
                                           setShowFontSizes(false);
                                       }}
-                                      className="text-[10px] font-black hover:bg-sasori-red p-2 rounded-lg transition-colors text-center"
+                                      className="text-[10px] font-black hover:bg-sasori-red hover:text-white p-2 rounded-lg transition-colors text-center text-[#1A1A1A]"
                                   >
                                       {size}
                                   </button>
@@ -790,7 +904,7 @@ export function DashboardPage() {
                       { label: 'VIDEO', type: 'video', icon: <VideoIcon size={14}/> },
                       { label: 'ENLACE', type: 'link', icon: <Link size={14} /> },
                     ].map(btn => (
-                      <button key={btn.label} type="button" onClick={() => wrapSelection(btn.type as any)} className="bg-white/5 hover:bg-sasori-red text-white px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border border-white/5 group">
+                      <button key={btn.label} type="button" onClick={() => wrapSelection(btn.type as any)} className="bg-white border border-black/10 hover:bg-[#1A1A1A] text-[#1A1A1A] hover:text-white px-3 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 group shadow-sm">
                         <span className="opacity-40 group-hover:opacity-100 transition-opacity">{btn.icon}</span>
                         {btn.label}
                       </button>
@@ -816,12 +930,12 @@ export function DashboardPage() {
                 </div>
                 
                 {/* DISK UPLOAD BUTTON */}
-                <div className="flex flex-wrap gap-2 py-4 border-t border-white/5 mt-4 items-center">
+                <div className="flex flex-wrap gap-2 py-4 border-t border-black/5 mt-4 items-center">
                   <input type="file" accept="image/*" onChange={(e) => handleFileUpload(e, 'content')} className="hidden" id="content-img-upload" />
-                  <label htmlFor="content-img-upload" className="cursor-pointer bg-sasori-red/20 hover:bg-sasori-red text-sasori-red hover:text-white px-4 py-2 rounded-lg text-[9px] font-black tracking-widest transition-all flex items-center gap-2 uppercase whitespace-nowrap border border-sasori-red/30">
+                  <label htmlFor="content-img-upload" className="cursor-pointer bg-sasori-red/10 hover:bg-sasori-red text-sasori-red hover:text-white px-4 py-2 rounded-lg text-[9px] font-black tracking-widest transition-all flex items-center gap-2 uppercase whitespace-nowrap border border-sasori-red/30 shadow-sm">
                       <Upload size={12} /> Subir Imagen desde mi ordenador
                   </label>
-                  <p className="text-[8px] uppercase font-bold text-white/20 tracking-widest ml-4 italic">Recomendado para SEO: imágenes de alta calidad {'>'} 1200px</p>
+                  <p className="text-[8px] uppercase font-bold text-[#1A1A1A]/20 tracking-widest ml-4 italic">Recomendado para SEO: imágenes de alta calidad {'>'} 1200px</p>
                 </div>
                 
                 <div className="relative group mt-8">
@@ -846,15 +960,15 @@ export function DashboardPage() {
                     }}
                     dangerouslySetInnerHTML={{ __html: editorContent }}
                     className={cn(
-                        "w-full min-h-[60vh] bg-transparent border-none text-lg text-white/70 leading-relaxed placeholder-white/5 focus:outline-none outline-none",
-                        "prose prose-invert max-w-none",
-                        "prose-h2:text-3xl prose-h2:md:text-5xl prose-h2:font-black prose-h2:uppercase prose-h2:text-white prose-h2:mt-16 prose-h2:mb-8",
-                        "prose-h3:text-xl prose-h3:md:text-3xl prose-h3:font-black prose-h3:uppercase prose-h3:text-white/90 prose-h3:mt-12 prose-h3:mb-6",
-                        "prose-p:text-xl prose-p:leading-relaxed prose-p:text-white/70 prose-p:mb-8",
+                        "w-full min-h-[60vh] bg-transparent border-none text-lg text-[#1A1A1A]/70 leading-relaxed placeholder-black/5 focus:outline-none outline-none font-medium",
+                        "prose max-w-none",
+                        "prose-h2:text-3xl prose-h2:md:text-5xl prose-h2:font-black prose-h2:uppercase prose-h2:text-[#1A1A1A] prose-h2:mt-16 prose-h2:mb-8",
+                        "prose-h3:text-xl prose-h3:md:text-3xl prose-h3:font-black prose-h3:uppercase prose-h3:text-[#1A1A1A]/90 prose-h3:mt-12 prose-h3:mb-6",
+                        "prose-p:text-xl prose-p:leading-relaxed prose-p:text-[#1A1A1A]/70 prose-p:mb-8",
                         "prose-strong:text-sasori-red",
-                        "prose-pre:bg-white/5 prose-pre:p-8 prose-pre:rounded-[2.5rem] prose-pre:border prose-pre:border-white/5",
+                        "prose-pre:bg-black/5 prose-pre:p-8 prose-pre:rounded-xl prose-pre:border prose-pre:border-black/5",
                         "prose-ul:space-y-4 prose-ul:my-12 prose-ul:list-none",
-                        "prose-li:flex prose-li:items-start prose-li:gap-4 prose-li:text-xl prose-li:text-white/70"
+                        "prose-li:flex prose-li:items-start prose-li:gap-4 prose-li:text-xl prose-li:text-[#1A1A1A]/70"
                     )}
                     onPaste={handlePaste}
                     onMouseEnter={() => {

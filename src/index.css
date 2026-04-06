@@ -7,14 +7,19 @@
   
   --color-sasori-red: #E20613;
   --color-sasori-dark: #A50000;
-  --color-sasori-deep: #5F0000;
-  --color-sasori-black: #2B0000;
-  --color-bg-dark: #050505;
+  --color-sasori-wine: #5F0000;
+  --color-sasori-deep-wine: #2A0005;
+  --color-sasori-black: #0A0A0A;
+  --color-bg-dark: #F8FAFC;
+  --color-metallic-white: #F0F2F5;
+  --color-silver: #D1D1D1;
 }
 
 @layer base {
   body {
-    @apply bg-bg-dark text-white font-sans overflow-x-hidden;
+    @apply bg-bg-dark text-[#1A1A1A] font-sans overflow-x-hidden;
+    background: radial-gradient(circle at 50% 0%, #FFFFFF 0%, #F0F2F5 50%, #E2E8F0 100%);
+    background-attachment: fixed;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -27,7 +32,7 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #F5F5F5;
 }
 ::-webkit-scrollbar-thumb {
   background: #5F0000;
@@ -46,10 +51,70 @@
 }
 
 .glass-card {
-  background: rgba(43, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.7);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(226, 6, 19, 0.1);
+}
+
+.metallic-vinotinto-card {
+  background: linear-gradient(165deg, #0A0A0A 0%, #2A0005 60%, #000000 100%);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(61, 0, 0, 0.15);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metallic-vinotinto-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/brushed-alum.png');
+  opacity: 0.08;
+  pointer-events: none;
+  mix-blend-mode: color-dodge;
+}
+
+/* Cinematic Rim Light Effect */
+.metallic-vinotinto-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 20%,
+    transparent 80%,
+    rgba(122, 0, 18, 0.2) 100%
+  );
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.metallic-vinotinto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 40px 80px rgba(0, 0, 0, 0.8),
+    inset 0 0 50px rgba(122, 0, 18, 0.25);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.text-contrast-white {
+  color: #FFFFFF;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.01em;
+}
+
+.text-contrast-silver {
+  color: #D1D1D1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cinema-glow-red {
+  box-shadow: 0 0 40px rgba(122, 0, 18, 0.3);
 }
 
 .neon-glow {
@@ -61,27 +126,80 @@
 }
 
 .text-shadow-deep {
-  text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  text-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .text-shadow-subtle {
-  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  text-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .text-shadow-heavy {
-  text-shadow: 0 0 80px rgba(226,6,19,0.2), 0 20px 60px rgba(0,0,0,0.8);
+  text-shadow: 0 0 80px rgba(226,6,19,0.1), 0 20px 60px rgba(0,0,0,0.2);
 }
 
 .text-glow-red {
-  text-shadow: 0 0 40px rgba(226,6,19,0.5);
+  text-shadow: 0 0 40px rgba(226,6,19,0.3);
 }
 
 .text-shadow-dark {
-  text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.metallic-white-card {
+  background: linear-gradient(165deg, #FFFFFF 0%, #F0F2F5 60%, #E2E8F0 100%);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.05),
+    inset 0 0 20px rgba(255, 255, 255, 0.5);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metallic-white-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/brushed-alum.png');
+  opacity: 0.15;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.metallic-white-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.02) 100%
+  );
+  pointer-events: none;
+}
+
+.metallic-white-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    inset 0 0 30px rgba(255, 255, 255, 0.8);
+  border-color: rgba(226, 6, 19, 0.15);
+}
+
+.glass-metallic-white-nav {
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 6, 19, 0.1);
+  box-shadow: 
+    0 4px 30px rgba(0, 0, 0, 0.05),
+    inset 0 0 30px rgba(255, 255, 255, 0.5);
 }
 
 .bg-footer-gradient {
-  background: radial-gradient(125% 125% at 50% 10%, #0A0A0A 50%, #E2061310 100%);
+  background: radial-gradient(125% 125% at 50% 10%, #FFFFFF 50%, #E2061305 100%);
 }
 
 input[type="range"] {
@@ -366,7 +484,7 @@ input[type="range"]::-webkit-slider-thumb {
 .fx-footer-sub {
   font-size: clamp(0.7rem, 1.2vw, 1rem);
   letter-spacing: 0.2em;
-  color: rgba(255,255,255,0.4);
+  color: rgba(0,0,0,0.4);
   font-weight: 600;
 }
 

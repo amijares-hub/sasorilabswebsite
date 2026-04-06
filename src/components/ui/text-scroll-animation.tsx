@@ -26,7 +26,7 @@ const CharacterV1 = ({
 
   return (
     <motion.span
-      className={cn("inline-block text-sasori-red", isSpace && "w-4")}
+      className={cn("inline-block text-[#1A1A1A]", isSpace && "w-4")}
       style={{ x, rotateX }}
     >
       {char}
@@ -48,10 +48,13 @@ const TextScrollAnimation = ({ lang, serviceName }: { lang: string, serviceName?
   const centerIndex = Math.floor(characters.length / 2);
 
   return (
-    <main className="w-full bg-black">
+    <main className="w-full bg-[#EDEDED] relative overflow-hidden">
+      {/* Metallic brushed grain overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
+
       {/* Шапка-подсказка */}
-      <div className="top-22 absolute left-1/2 z-10 grid -translate-x-1/2 content-start justify-items-center gap-6 text-center text-white">
-        <span className="relative max-w-[12ch] text-xs uppercase leading-tight opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-white/10 after:to-sasori-red after:content-['']">
+      <div className="top-22 absolute left-1/2 z-10 grid -translate-x-1/2 content-start justify-items-center gap-6 text-center text-[#1A1A1A]">
+        <span className="relative max-w-[12ch] text-[10px] md:text-xs uppercase leading-tight font-black tracking-widest opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-black/10 after:to-sasori-red after:content-['']">
           {lang === 'es' ? 'Desliza para ver más' : lang === 'zh' ? '滑動查看更多' : lang === 'ru' ? 'Прокрутите, чтобы увидеть больше' : lang === 'pt' ? 'Deslize para ver mais' : 'Scroll to see more'}
         </span>
       </div>
@@ -59,10 +62,10 @@ const TextScrollAnimation = ({ lang, serviceName }: { lang: string, serviceName?
       {/* Блок 1 — текст */}
       <div
         ref={targetRef}
-        className="relative box-border flex h-[140vh] items-center justify-center overflow-hidden bg-black p-4 md:p-[2vw]"
+        className="relative box-border flex h-[140vh] items-center justify-center overflow-hidden bg-[#EDEDED] p-4 md:p-[2vw]"
       >
         <div
-          className="w-full max-w-4xl text-center text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white"
+          className="w-full max-w-4xl text-center text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A]"
           style={{ perspective: "500px" }}
         >
           {characters.map((char, index) => (
@@ -74,7 +77,7 @@ const TextScrollAnimation = ({ lang, serviceName }: { lang: string, serviceName?
               scrollYProgress={scrollYProgress}
             />
           ))}
-          <span className="text-white">{serviceName || "SASORILABS"}</span>
+          <span className="text-sasori-red">{serviceName || "SASORILABS"}</span>
         </div>
       </div>
     </main>

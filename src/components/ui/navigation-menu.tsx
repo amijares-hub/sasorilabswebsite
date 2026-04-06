@@ -125,7 +125,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
     { name: t.home, href: "/" },
     { name: t.services, isDropdown: true },
     { name: t.blog, href: "/blog" },
-    { name: t.contact, href: "/contact" },
+    { name: t.contact, href: "/#contact" },
   ];
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -182,7 +182,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
         onClick={handleNavClick}
         onMouseLeave={handleServicesLeave}
         className={cn(
-          "flex items-center overflow-visible rounded-full border border-white/10 bg-black/80 shadow-[0_4px_30px_rgba(226,6,19,0.2)] backdrop-blur-xl h-11 md:h-14",
+          "flex items-center overflow-visible rounded-full glass-metallic-white-nav h-11 md:h-14",
           !isExpanded && "cursor-pointer justify-center pl-0"
         )}
       >
@@ -217,8 +217,8 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                   }
                 }}
                 className={cn(
-                  "text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-white/50 hover:text-white transition-all px-3 py-2 rounded-full flex items-center gap-1",
-                  (item.isDropdown && showServices) && "text-white bg-white/10"
+                  "text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-black/70 hover:text-sasori-red transition-all px-3 py-2 rounded-full flex items-center gap-1",
+                  (item.isDropdown && showServices) && "text-sasori-red bg-sasori-red/5"
                 )}
               >
                 {item.name}
@@ -234,7 +234,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                       animate="visible"
                       exit="exit"
                       variants={dropdownVariants}
-                      className="absolute top-full left-0 mt-2 w-64 p-2 rounded-2xl border border-white/10 bg-black/95 shadow-2xl backdrop-blur-xl pointer-events-auto overflow-hidden"
+                      className="absolute top-full left-0 mt-2 w-64 p-2 rounded-2xl border border-sasori-red/10 bg-white/95 shadow-2xl backdrop-blur-xl pointer-events-auto overflow-hidden"
                     >
                       <div className="flex flex-col gap-1">
                         {services.map((service) => (
@@ -244,10 +244,10 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                               e.stopPropagation();
                               handleLinkClick(service.href);
                             }}
-                            className="text-left px-4 py-3 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group"
+                            className="text-left px-4 py-3 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-widest text-black/70 hover:text-sasori-red hover:bg-sasori-red/5 transition-all flex items-center justify-between group"
                           >
                             {service.name}
-                            <div className="w-1.5 h-1.5 rounded-full bg-sasori-red opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="w-1.5 h-1.5 rounded-full bg-sasori-red opacity-0 group-hover:opacity-100 transition-opacity cinema-glow-red" />
                           </button>
                         ))}
                       </div>
@@ -258,18 +258,17 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
             </div>
           ))}
           
-          {/* My Account Button */}
           <motion.button
             variants={itemVariants}
             onClick={() => handleLinkClick('/login')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-sasori-red/30 bg-sasori-red/10 hover:bg-sasori-red text-[9px] font-black tracking-[0.2em] uppercase text-sasori-red hover:text-white transition-all duration-300"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-sasori-red/20 bg-sasori-red/5 text-sasori-red shadow-[0_2px_10px_rgba(226,6,19,0.1)] hover:bg-sasori-red hover:text-white transition-all duration-500 group/acc"
           >
-            <UserCircle2 className="w-3.5 h-3.5" />
+            <UserCircle2 className="w-4 h-4 group-hover/acc:scale-110 transition-transform" />
             <span className="hidden sm:inline">{t.account}</span>
           </motion.button>
 
           {/* Language Selector Inside Menu */}
-          <div className="pl-2 border-l border-white/10 ml-1 relative">
+          <div className="pl-2 border-l border-black/10 ml-1 relative">
             <motion.button
               variants={itemVariants}
               onMouseEnter={handleLangEnter}
@@ -277,7 +276,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                 e.stopPropagation();
                 setShowLanguages(!showLanguages);
               }}
-              className="group flex items-center gap-2 px-3 py-2 rounded-full hover:bg-white/5 transition-all text-white/50 hover:text-white"
+              className="group flex items-center gap-2 px-3 py-2 rounded-full hover:bg-sasori-red/5 transition-all text-black/70 hover:text-sasori-red"
             >
               <Languages className="w-3 h-3 md:w-4 md:h-4 group-hover:rotate-12 transition-transform" />
               <span className="text-[10px] md:text-xs font-black tracking-widest uppercase">
@@ -293,7 +292,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                   animate="visible"
                   exit="exit"
                   variants={dropdownVariants}
-                  className="absolute top-full right-0 mt-2 w-32 p-1 rounded-xl border border-white/10 bg-black/95 shadow-2xl backdrop-blur-xl pointer-events-auto overflow-hidden"
+                  className="absolute top-full right-0 mt-2 w-32 p-1 rounded-xl border border-sasori-red/10 bg-white/95 shadow-2xl backdrop-blur-xl pointer-events-auto overflow-hidden"
                 >
                   {[
                     { code: 'es', label: 'Español' },
@@ -311,7 +310,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                       }}
                       className={cn(
                         "w-full text-left px-3 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
-                        lang === l.code ? "bg-sasori-red text-white" : "text-white/50 hover:text-white hover:bg-white/5"
+                        lang === l.code ? "bg-sasori-red text-white" : "text-black/70 hover:text-sasori-red hover:bg-sasori-red/5"
                       )}
                     >
                       {l.label}

@@ -160,11 +160,17 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             className="fixed inset-0 z-[201] flex items-center justify-center p-4 pointer-events-none"
           >
-            <div className="relative w-full max-w-lg pointer-events-auto bg-[#080808] rounded-[2rem] border border-white/10 overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.8)]">
+            <div className="relative w-full max-w-lg pointer-events-auto rounded-xl border border-white/10 overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.5)] metallic-vinotinto-card">
+              {/* Metallic brushed grain overlay */}
+              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
               
-              {/* Red ambient glow */}
-              <div className="absolute -top-20 -right-20 w-60 h-60 bg-sasori-red/20 blur-[80px] rounded-full pointer-events-none" />
-              <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-sasori-red/10 blur-[60px] rounded-full pointer-events-none" />
+              {/* Red Tech Strip */}
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-sasori-red shadow-[0_0_15px_#E20613] z-10" />
+              
+              
+              {/* White ambient glow */}
+              <div className="absolute -top-20 -right-20 w-60 h-60 bg-white/10 blur-[80px] rounded-full pointer-events-none" />
+              <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-white/5 blur-[60px] rounded-full pointer-events-none" />
 
               {/* Close button */}
               <button
@@ -179,21 +185,21 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
                   <>
                     {/* Badge */}
                     <div className="flex items-center gap-2 mb-6">
-                      <Sparkles className="w-3 h-3 text-sasori-red" />
-                      <span className="text-[9px] font-black uppercase tracking-[0.3em] text-sasori-red">
+                      <Sparkles className="w-3 h-3 text-white" />
+                      <span className="text-[9px] font-black uppercase tracking-[0.3em] text-white">
                         {t.badge}
                       </span>
                     </div>
 
                     {/* Headline */}
-                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] mb-2">
+                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white mb-2">
                       {t.headline}
                     </h2>
-                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-sasori-red mb-6">
+                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white/60 mb-6">
                       {t.subheadline}
                     </h2>
 
-                    <p className="text-white/50 text-sm leading-relaxed mb-8">
+                    <p className="text-white/60 text-sm leading-relaxed mb-8">
                       {t.body}
                     </p>
 
@@ -206,7 +212,7 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
                           value={name}
                           onChange={e => setName(e.target.value)}
                           placeholder={t.namePlaceholder}
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl py-3.5 pl-11 pr-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-sasori-red/50 transition-colors"
+                          className="w-full bg-white/10 border border-white/10 rounded-xl py-3.5 pl-11 pr-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/50 transition-colors shadow-[inset_1px_1px_4px_rgba(0,0,0,0.2)]"
                         />
                       </div>
 
@@ -219,7 +225,7 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
                           value={email}
                           onChange={e => setEmail(e.target.value)}
                           placeholder={t.emailPlaceholder}
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl py-3.5 pl-11 pr-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-sasori-red/50 transition-colors"
+                          className="w-full bg-white/10 border border-white/10 rounded-xl py-3.5 pl-11 pr-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-white/50 transition-colors shadow-[inset_1px_1px_4px_rgba(0,0,0,0.2)]"
                         />
                       </div>
 
@@ -235,7 +241,7 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
                       <button
                         type="submit"
                         disabled={status === 'sending'}
-                        className="w-full py-4 bg-sasori-red hover:bg-white text-white hover:text-sasori-red font-black text-xs tracking-[0.25em] uppercase rounded-2xl transition-all duration-300 shadow-[0_0_30px_rgba(226,6,19,0.3)] flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="w-full py-4 bg-sasori-red hover:bg-[#1A1A1A] text-white transition-all duration-300 rounded-xl shadow-[0_0_30px_rgba(226,6,19,0.3)] flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed text-xs font-black tracking-[0.25em] uppercase hover:-translate-y-0.5"
                       >
                         {status === 'sending' ? (
                           <span className="animate-pulse">{t.sending}</span>
@@ -248,7 +254,7 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
                       </button>
                     </form>
 
-                    <p className="text-center text-[10px] text-white/20 uppercase tracking-widest mt-4">
+                    <p className="text-center text-[10px] text-black/20 uppercase tracking-widest mt-4">
                       {t.noSpam}
                     </p>
                   </>
@@ -258,15 +264,15 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
                     <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-6">
                       <CheckCircle className="w-8 h-8 text-emerald-400" />
                     </div>
-                    <h3 className="text-3xl font-black uppercase tracking-tighter mb-3">
+                    <h3 className="text-3xl font-black uppercase tracking-tighter mb-3 text-white">
                       {t.successTitle}
                     </h3>
-                    <p className="text-white/50 text-sm leading-relaxed mb-8">
+                    <p className="text-white/60 text-sm leading-relaxed mb-8">
                       {t.successBody}
                     </p>
                     <button
                       onClick={handleClose}
-                      className="px-8 py-3 bg-white/5 hover:bg-white/10 rounded-2xl text-xs font-black uppercase tracking-widest transition-colors"
+                      className="px-8 py-3 bg-white/10 hover:bg-white/20 rounded-2xl text-xs font-black uppercase tracking-widest transition-colors text-white"
                     >
                       ✓ OK
                     </button>
@@ -349,10 +355,10 @@ export function NewsletterInline({ lang = 'es' }: { lang?: string }) {
 
   if (status === 'success') {
     return (
-      <div className="flex flex-col items-center gap-4 py-8 text-center">
-        <CheckCircle className="w-10 h-10 text-emerald-400" />
+      <div className="flex flex-col items-center gap-4 py-8 text-center text-[#1A1A1A]">
+        <CheckCircle className="w-10 h-10 text-emerald-500" />
         <p className="font-black uppercase tracking-tighter text-xl">{t.successTitle}</p>
-        <p className="text-white/50 text-sm max-w-xs">{t.successBody}</p>
+        <p className="text-black/50 text-sm max-w-xs">{t.successBody}</p>
       </div>
     );
   }
@@ -365,12 +371,12 @@ export function NewsletterInline({ lang = 'es' }: { lang?: string }) {
         value={email}
         onChange={e => setEmail(e.target.value)}
         placeholder={t.emailPlaceholder}
-        className="flex-1 bg-white/5 border border-white/10 rounded-2xl py-4 px-5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-sasori-red/50 transition-colors"
+        className="flex-1 bg-white border border-black/10 rounded-xl py-4 px-5 text-sm text-[#1A1A1A] placeholder-black/30 focus:outline-none focus:border-sasori-red/50 transition-colors shadow-[inset_1px_1px_4px_rgba(0,0,0,0.05)]"
       />
       <button
         type="submit"
         disabled={status === 'sending'}
-        className="px-8 py-4 bg-sasori-red hover:bg-white text-white hover:text-sasori-red font-black text-[10px] tracking-[0.25em] uppercase rounded-2xl transition-all duration-300 whitespace-nowrap disabled:opacity-60"
+        className="px-8 py-4 bg-sasori-red hover:bg-[#1A1A1A] text-white font-black text-[10px] tracking-[0.25em] uppercase rounded-xl transition-all duration-300 whitespace-nowrap disabled:opacity-60 shadow-[0_10px_20px_rgba(226,6,19,0.2)] hover:-translate-y-0.5"
       >
         {status === 'sending' ? '...' : t.cta}
       </button>

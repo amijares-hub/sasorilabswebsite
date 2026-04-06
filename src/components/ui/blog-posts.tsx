@@ -100,7 +100,7 @@ export const BlogPostSection = ({
       "container relative my-20 py-10 mx-auto px-4",
       className
     )}>
-      <h1 className="text-center text-4xl font-black uppercase tracking-tighter !leading-[1.1] md:text-5xl lg:text-7xl mb-6 text-white font-display">
+      <h1 className="text-center text-4xl font-black uppercase tracking-tighter !leading-[1.1] md:text-5xl lg:text-7xl mb-6 text-[#1A1A1A] font-display">
         {title.split(' ').map((word, i) => (
           <span key={i} className={i === title.split(' ').length - 1 ? "text-sasori-red" : ""}>
             {word}{' '}
@@ -111,7 +111,7 @@ export const BlogPostSection = ({
       {backgroundLabel && (
         <span
           className={cn(
-            "absolute top-0 -z-10 select-none text-[120px] font-black leading-[1] text-white/[0.02] md:text-[200px] lg:text-[300px] uppercase tracking-tighter",
+            "absolute top-0 -z-10 select-none text-[120px] font-black leading-[1] text-black/[0.03] md:text-[200px] lg:text-[300px] uppercase tracking-tighter",
             backgroundPosition === "left" ? "-left-[5%]" : "-right-[5%]"
           )}
         >
@@ -119,7 +119,7 @@ export const BlogPostSection = ({
         </span>
       )}
       
-      <p className="mx-auto max-w-3xl text-center text-lg !leading-relaxed text-white/50 md:text-xl mb-12 font-medium">
+      <p className="mx-auto max-w-3xl text-center text-lg !leading-relaxed text-black/60 md:text-xl mb-12 font-medium">
         {description}
       </p>
       
@@ -159,7 +159,7 @@ export const BlogPostSection = ({
                 else if (slug) navigate(`/blog/${slug}`);
               }}
             >
-              <div className="absolute inset-0 -z-0 h-[100%] w-full bg-gradient-to-t from-black/95 via-black/40 to-transparent transition-all duration-500" />
+              <div className="absolute inset-0 -z-0 h-[100%] w-full bg-gradient-to-t from-sasori-deep-wine/95 via-sasori-wine/40 to-transparent transition-all duration-500" />
               
               <article className="relative z-10 flex items-end justify-between gap-4 w-full">
                 <div className="flex flex-1 flex-col gap-4">

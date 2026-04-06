@@ -107,8 +107,9 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
   };
 
   return (
-    <footer className="relative z-30 pt-24 pb-12 overflow-hidden border-t border-white/5">
-      <FooterBackgroundGradient />
+    <footer className="relative z-30 pt-24 pb-12 overflow-hidden border-t border-black/5 bg-[#FFFFFF]">
+      {/* Subtle metallic texture for footre */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
           {/* Logo and Desc */}
@@ -118,14 +119,14 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
               className="flex items-center gap-3 cursor-pointer group"
             >
               <SasoriLogo className="w-10 h-10 group-hover:scale-110 transition-transform duration-500" />
-              <span className="text-2xl font-black tracking-tighter text-white uppercase italic">SASORILABS</span>
+              <span className="text-2xl font-black tracking-tighter text-[#1A1A1A] uppercase italic">SASORILABS</span>
             </div>
             <p className="max-w-xs text-gray-500 text-sm leading-relaxed uppercase tracking-widest font-bold">
               {t.desc}
             </p>
             <button 
               onClick={() => { navigate('/contact'); window.scrollTo(0, 0); }}
-              className="px-8 py-3 bg-sasori-red text-white text-[10px] font-black tracking-[0.3em] rounded-full hover:bg-white hover:text-sasori-red transition-all duration-500 shadow-[0_0_20px_rgba(226,6,19,0.3)]"
+              className="px-8 py-3 bg-sasori-red text-white text-[10px] font-black tracking-[0.3em] rounded-full hover:bg-black transition-all duration-500 shadow-[0_0_20px_rgba(226,6,19,0.3)]"
             >
               {lang === 'es' ? 'INICIAR PROYECTO' : 
                lang === 'en' ? 'START PROJECT' : 
@@ -137,8 +138,8 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
 
           {/* Services */}
           <div>
-            <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">{t.services}</h4>
-            <ul className="space-y-3 text-gray-500 text-sm">
+            <h4 className="text-[#1A1A1A] text-sm font-bold uppercase tracking-widest mb-6">{t.services}</h4>
+            <ul className="space-y-3 text-black/50 text-sm">
               {[
                 { label: t.labels.ai, path: '/services/ai-automation' },
                 { label: t.labels.web, path: '/services/immersive-webs' },
@@ -161,8 +162,8 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
 
           {/* Company */}
           <div>
-            <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">{t.company}</h4>
-            <ul className="space-y-3 text-gray-500 text-sm">
+            <h4 className="text-[#1A1A1A] text-sm font-bold uppercase tracking-widest mb-6">{t.company}</h4>
+            <ul className="space-y-3 text-black/50 text-sm">
               {[
                 { label: t.labels.about, href: "/#contact", isScroll: true },
                 { label: t.labels.cases, href: "/#contact", isScroll: true },
@@ -198,7 +199,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
                     navigate('/dashboard/login');
                     window.scrollTo(0, 0);
                   }}
-                  className="hover:text-sasori-red transition-colors uppercase text-[10px] font-black tracking-widest flex items-center gap-2 mt-4 text-white/50"
+                  className="hover:text-sasori-red transition-colors uppercase text-[10px] font-black tracking-widest flex items-center gap-2 mt-4 text-black/40"
                   title="Acceso Administrativo"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
@@ -210,8 +211,8 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-6">{t.contact}</h4>
-            <ul className="space-y-4 text-gray-500 text-sm">
+            <h4 className="text-[#1A1A1A] text-sm font-bold uppercase tracking-widest mb-6">{t.contact}</h4>
+            <ul className="space-y-4 text-black/50 text-sm">
               <li className="flex items-center gap-3">
                 <Globe className="w-4 h-4 text-sasori-red flex-shrink-0" />
                 <a href="mailto:hello@sasorilabs.com" className="hover:text-sasori-red transition-colors uppercase text-[10px] font-black tracking-widest">hello@sasorilabs.com</a>
@@ -229,7 +230,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
         </div>
 
         {/* Divider */}
-        <hr className="border-t border-white/5" />
+        <hr className="border-t border-black/5" />
 
         {/* Text Hover Effect (Giant Footer Text) */}
         <div className="w-full h-[20vh] md:h-[40vh] relative flex flex-col items-center justify-center my-8">
@@ -237,7 +238,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
         </div>
 
         {/* Bottom row */}
-        <div className="flex flex-col md:flex-row justify-between items-center py-6 text-gray-600 text-xs gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-center py-6 text-black/40 text-xs gap-4">
           <div className="flex gap-6">
             {['Twitter', 'LinkedIn', 'GitHub', 'Dribbble'].map(social => (
               <a key={social} href="#" className="hover:text-sasori-red transition-colors uppercase font-bold tracking-widest">{social}</a>

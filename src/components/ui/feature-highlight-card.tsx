@@ -60,7 +60,7 @@ export const FeatureHighlightCard = React.forwardRef<
     <motion.div
       ref={ref}
       className={cn(
-        "relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950 p-6 md:p-12 text-center shadow-2xl mx-auto",
+        "relative w-full max-w-4xl overflow-hidden rounded-xl border border-black/10 bg-[#EDEDED] p-6 md:p-12 text-center shadow-[inset_-2px_-2px_10px_rgba(255,255,255,0.8),inset_2px_2px_10px_rgba(0,0,0,0.05),0_40px_80px_rgba(0,0,0,0.1)] mx-auto group",
         className
       )}
       variants={containerVariants}
@@ -68,9 +68,22 @@ export const FeatureHighlightCard = React.forwardRef<
       whileInView="visible"
       viewport={{ once: true }}
     >
+      {/* Metallic brushed effect overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
+
+      {/* Tech Red Strips - inspired by image 1 */}
+      <div className="absolute top-0 left-0 w-24 h-[2px] bg-sasori-red shadow-[0_0_15px_#E20613]" />
+      <div className="absolute top-0 left-0 w-[2px] h-24 bg-sasori-red shadow-[0_0_15px_#E20613]" />
+      
+      <div className="absolute bottom-0 right-0 w-32 h-[1px] bg-sasori-red/40 rotate-[-15deg] shadow-[0_0_10px_#E20613] translate-x-10 translate-y-4" />
+      <div className="absolute top-[20%] -right-4 w-1 h-32 bg-sasori-red/20 shadow-[0_0_15px_#E20613] skew-y-12" />
+
+      {/* Decorative corner cutouts */}
+      <div className="absolute top-0 right-0 w-12 h-12 bg-white rotate-45 translate-x-6 -translate-y-6 border-l border-b border-black/10 transition-colors group-hover:bg-sasori-red/5" />
+      <div className="absolute bottom-0 left-0 w-12 h-12 bg-white rotate-45 -translate-x-6 translate-y-6 border-r border-t border-black/10 transition-colors group-hover:bg-sasori-red/5" />
+
       {/* Background glow effect */}
-      <div className="absolute left-1/2 top-0 -z-10 h-[300px] md:h-[500px] w-[300px] md:w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sasori-red/20 blur-[80px] md:blur-[120px]" />
-      <div className="absolute -right-10 md:-right-20 -bottom-10 md:-bottom-20 -z-10 h-40 md:h-60 w-40 md:w-60 rounded-full bg-sasori-red/5 blur-[50px] md:blur-[80px]" />
+      <div className="absolute left-1/2 top-0 -z-10 h-[300px] md:h-[500px] w-[300px] md:w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-sasori-red/10 blur-[80px] md:blur-[120px]" />
       
       {/* Image Section */}
       <motion.div variants={imageContainerVariants} className="mb-6 md:mb-10 flex justify-center px-4">
@@ -78,7 +91,7 @@ export const FeatureHighlightCard = React.forwardRef<
           <img loading="lazy"
             src={imageSrc}
             alt={imageAlt}
-            className="h-auto w-full max-w-xs md:max-w-md object-contain rounded-2xl shadow-xl border border-white/5"
+            className="h-auto w-full max-w-xs md:max-w-md object-contain rounded-2xl shadow-xl border border-black/5"
           />
         </AIImageHover>
       </motion.div>
@@ -86,7 +99,7 @@ export const FeatureHighlightCard = React.forwardRef<
       {/* Title Section */}
       <motion.h2
         variants={itemVariants}
-        className="text-2xl sm:text-4xl md:text-6xl font-black tracking-tighter text-white uppercase leading-none mb-4 md:mb-6 px-2"
+        className="text-2xl sm:text-4xl md:text-6xl font-black tracking-tighter text-[#1A1A1A] uppercase leading-none mb-4 md:mb-6 px-2"
       >
         {title.split(' ').map((word, i) => (
           <span key={i} className={word.toLowerCase() === "gratuita" || word.toLowerCase() === "free" ? "text-sasori-red" : ""}>
@@ -98,7 +111,7 @@ export const FeatureHighlightCard = React.forwardRef<
       {/* Description Section */}
       <motion.p
         variants={itemVariants}
-        className="mt-2 md:mt-4 text-sm md:text-xl text-white/50 max-w-2xl mx-auto font-medium leading-relaxed px-4 md:px-0"
+        className="mt-2 md:mt-4 text-sm md:text-xl text-[#1A1A1A]/50 max-w-2xl mx-auto font-medium leading-relaxed px-4 md:px-0"
       >
         {description}
       </motion.p>
@@ -108,7 +121,7 @@ export const FeatureHighlightCard = React.forwardRef<
         <Button 
           size="lg" 
           onClick={onButtonClick}
-          className="bg-sasori-red text-white font-black hover:bg-white hover:text-sasori-red transition-all duration-300 rounded-full px-8 md:px-12 py-6 md:py-8 text-sm md:text-lg uppercase tracking-widest shadow-[0_0_50px_rgba(226,6,19,0.3)] hover:shadow-white/20"
+          className="bg-sasori-red text-white font-black hover:bg-[#1A1A1A] hover:text-white transition-all duration-300 rounded-full px-8 md:px-12 py-6 md:py-8 text-sm md:text-lg uppercase tracking-widest shadow-[0_0_50px_rgba(226,6,19,0.3)] hover:shadow-black/10"
         >
           {buttonText}
         </Button>

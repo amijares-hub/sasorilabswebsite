@@ -50,7 +50,7 @@ export function ZoomParallax({ items }: ZoomParallaxProps) {
 						>
 							<button 
 								onClick={() => path && navigate(path)}
-								className="relative h-[25vh] w-[25vw] bg-[#121212] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-[8px_8px_16px_rgba(0,0,0,0.6),-8px_-8px_16px_rgba(255,255,255,0.02)] flex flex-col items-center justify-center p-8 group hover:border-sasori-red/30 transition-all duration-500 text-center outline-none focus:ring-2 focus:ring-sasori-red/50"
+								className="relative h-[25vh] w-[25vw] rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[8px_8px_24px_rgba(0,0,0,0.3)] flex flex-col items-center justify-center p-8 group transition-all duration-700 text-center outline-none focus:ring-2 focus:ring-sasori-red/30 metallic-vinotinto-card"
 							>
 								{/* Background Image Overlay */}
 								{src && (
@@ -58,9 +58,9 @@ export function ZoomParallax({ items }: ZoomParallaxProps) {
 										<img loading="lazy" 
 											src={src} 
 											alt={title}
-											className="w-full h-full object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700 scale-110 group-hover:scale-100"
+											className="w-full h-full object-cover opacity-15 grayscale group-hover:grayscale-0 group-hover:opacity-30 transition-all duration-700 scale-110 group-hover:scale-100"
 										/>
-										<div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/80 to-transparent" />
+										<div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-sasori-wine/60 to-transparent" />
 									</div>
 								)}
 
@@ -69,22 +69,22 @@ export function ZoomParallax({ items }: ZoomParallaxProps) {
 								
 								{/* Icon Section - Centered */}
 								{Icon && (
-									<div className="relative z-10 mb-3 md:mb-6 p-4 md:p-6 rounded-2xl md:rounded-3xl bg-[#1a1a1a]/80 backdrop-blur-sm shadow-[inset_4px_4px_8px_rgba(0,0,0,0.5),inset_-4px_-4px_8px_rgba(255,255,255,0.02)] border border-white/5 group-hover:shadow-[0_0_30px_rgba(226,6,19,0.2)] transition-all duration-500">
-										<Icon className="text-sasori-red w-6 h-6 md:w-[3.5vw] md:h-[3.5vw] drop-shadow-[0_0_10px_rgba(226,6,19,0.6)] group-hover:scale-110 transition-transform duration-500" />
+									<div className="relative z-10 mb-3 md:mb-6 p-4 md:p-6 rounded-2xl md:rounded-3xl bg-white/10 backdrop-blur-sm shadow-[inset_2px_2px_4px_rgba(255,255,255,0.1),inset_-2px_-2px_4px_rgba(0,0,0,0.1)] border border-white/10 group-hover:shadow-[0_0_30px_rgba(226,6,19,0.3)] transition-all duration-500">
+										<Icon className="text-white w-6 h-6 md:w-[3.5vw] md:h-[3.5vw] drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] group-hover:scale-110 transition-transform duration-500" />
 									</div>
 								)}
 
 								{/* Title Section - Centered below icon */}
 								<div className="relative z-10 flex flex-col items-center px-4">
-									<h3 className="text-[10px] sm:text-xs md:text-[1.3vw] font-black text-white/90 uppercase tracking-tighter leading-tight group-hover:text-white transition-colors text-center">
+									<h3 className="text-[10px] sm:text-xs md:text-[1.3vw] font-black text-white uppercase tracking-tighter leading-tight group-hover:text-sasori-red transition-colors text-center">
 										{title}
 									</h3>
 									{/* Subtle indicator dot */}
-									<div className="mt-2 md:mt-3 w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-sasori-red shadow-[0_0_8px_#E20613] opacity-0 group-hover:opacity-100 transition-opacity" />
+									<div className="mt-2 md:mt-3 w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-sasori-red shadow-[0_0_8px_rgba(226,6,19,0.5)] opacity-0 group-hover:opacity-100 transition-opacity" />
 								</div>
 
-								{/* Red Glow on hover (inspired by Photo 2) */}
-								<div className="absolute inset-x-0 bottom-0 h-1 bg-sasori-red/0 group-hover:bg-sasori-red/40 blur-sm transition-all" />
+								{/* White/Silver Glow on hover */}
+								<div className="absolute inset-x-0 bottom-0 h-1 bg-white/0 group-hover:bg-white/20 blur-sm transition-all" />
 							</button>
 						</motion.div>
 					);

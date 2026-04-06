@@ -42,7 +42,7 @@ export function NavBar({ items, className }: NavBarProps) {
         className,
       )}
     >
-      <div className="flex items-center gap-3 bg-black/20 border border-white/10 backdrop-blur-lg py-1 px-1 rounded-full shadow-2xl">
+      <div className="flex items-center gap-3 bg-white/20 border border-black/10 backdrop-blur-lg py-1 px-1 rounded-full shadow-2xl">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
@@ -54,8 +54,8 @@ export function NavBar({ items, className }: NavBarProps) {
               onClick={() => setActiveTab(item.name)}
               className={cn(
                 "relative cursor-pointer text-xs sm:text-sm font-semibold px-4 sm:px-6 py-2 rounded-full transition-colors",
-                "text-white/60 hover:text-white",
-                isActive && "bg-white/10 text-white",
+                "text-black/60 hover:text-black",
+                isActive && "bg-black/10 text-black",
               )}
             >
               <span className="hidden md:inline">{item.name}</span>

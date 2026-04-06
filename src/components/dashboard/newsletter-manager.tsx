@@ -192,10 +192,10 @@ export function NewsletterManager() {
             <Mail className="text-sasori-red w-8 h-8" /> 
             Newsletter Engine
           </h2>
-          <p className="text-white/40 text-sm mt-2">Gestiona el flujo masivo de información hacia tus seguidores.</p>
+          <p className="text-[#1A1A1A]/40 text-sm mt-2">Gestiona el flujo masivo de información hacia tus seguidores.</p>
         </div>
         
-        <div className="flex bg-white/5 p-1 rounded-2xl">
+        <div className="flex bg-black/5 p-1 rounded-2xl">
           <button 
             onClick={() => setActiveTab('subscribers')}
             className={cn(
@@ -209,7 +209,7 @@ export function NewsletterManager() {
             onClick={() => setActiveTab('campaigns')}
             className={cn(
               "px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-2 flex items-center",
-              activeTab === 'campaigns' ? "bg-white text-black shadow-lg" : "text-white/50 hover:text-white"
+              activeTab === 'campaigns' ? "bg-white text-black shadow-lg" : "text-[#1A1A1A]/50 hover:text-[#1A1A1A]"
             )}
           >
             <Send size={14} /> Campañas
@@ -218,28 +218,28 @@ export function NewsletterManager() {
       </div>
 
       {activeTab === 'subscribers' && (
-        <div className="bg-[#111] border border-white/5 rounded-3xl overflow-hidden">
+        <div className="bg-[#EDEDED] border border-black/5 rounded-3xl overflow-hidden shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-white/5 border-b border-white/5">
-                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/50">Email</th>
-                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/50">Nombre</th>
-                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/50">Estado</th>
-                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/50">Idioma</th>
-                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/50">Fecha</th>
-                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-white/50 text-right">Acción</th>
+                <tr className="bg-black/5 border-b border-black/5">
+                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/50">Email</th>
+                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/50">Nombre</th>
+                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/50">Estado</th>
+                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/50">Idioma</th>
+                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/50">Fecha</th>
+                  <th className="p-5 text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/50 text-right">Acción</th>
                 </tr>
               </thead>
               <tbody>
                 {subscribers.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="p-12 text-center text-white/30 text-sm italic">No hay suscriptores todavía.</td>
+                    <td colSpan={6} className="p-12 text-center text-[#1A1A1A]/30 text-sm italic">No hay suscriptores todavía.</td>
                   </tr>
                 ) : subscribers.map(s => (
-                  <tr key={s.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                  <tr key={s.id} className="border-b border-black/5 hover:bg-black/5 transition-colors text-[#1A1A1A]">
                     <td className="p-5 font-bold text-sm">{s.email}</td>
-                    <td className="p-5 text-white/70 text-sm">{s.name || '-'}</td>
+                    <td className="p-5 text-[#1A1A1A]/70 text-sm">{s.name || '-'}</td>
                     <td className="p-5">
                       <span className={cn(
                         "px-3 py-1 text-[10px] uppercase font-black tracking-widest flex inline-flex items-center gap-1 w-max rounded-full border",
@@ -250,10 +250,10 @@ export function NewsletterManager() {
                         {s.status}
                       </span>
                     </td>
-                    <td className="p-5 text-white/50 text-xs font-black uppercase tracking-widest">{s.lang}</td>
-                    <td className="p-5 text-white/50 text-xs">{new Date(s.created_at).toLocaleDateString()}</td>
+                    <td className="p-5 text-[#1A1A1A]/50 text-xs font-black uppercase tracking-widest">{s.lang}</td>
+                    <td className="p-5 text-[#1A1A1A]/50 text-xs">{new Date(s.created_at).toLocaleDateString()}</td>
                     <td className="p-5 text-right">
-                      <button onClick={() => handleDeleteSubscriber(s.id)} className="text-white/20 hover:text-red-500 transition-colors p-2">
+                      <button onClick={() => handleDeleteSubscriber(s.id)} className="text-[#1A1A1A]/20 hover:text-red-500 transition-colors p-2">
                         <Trash2 size={16} />
                       </button>
                     </td>
@@ -285,7 +285,7 @@ export function NewsletterManager() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {campaigns.length === 0 ? (
                   <div className="col-span-full py-20 text-center border border-dashed border-white/10 rounded-3xl">
-                    <p className="text-white/30 text-lg uppercase tracking-widest font-black">No hay campañas.</p>
+                    <p className="text-[#1A1A1A]/30 text-lg uppercase tracking-widest font-black">No hay campañas.</p>
                   </div>
                 ) : campaigns.map(c => (
                   <div key={c.id} className="bg-[#111] border border-white/5 rounded-3xl p-6 flex flex-col relative overflow-hidden group">
@@ -298,13 +298,13 @@ export function NewsletterManager() {
                         )}>
                           {c.status}
                         </span>
-                        <span className="text-white/30">{new Date(c.created_at).toLocaleDateString()}</span>
+                        <span className="text-[#1A1A1A]/30">{new Date(c.created_at).toLocaleDateString()}</span>
                       </div>
                       
-                      <h3 className="text-xl font-bold uppercase tracking-tighter leading-tight mb-2">
+                      <h3 className="text-xl font-bold uppercase tracking-tighter leading-tight mb-2 text-[#1A1A1A]">
                         {c.subject_es}
                       </h3>
-                      <p className="text-white/40 text-sm line-clamp-3 mb-4">
+                      <p className="text-[#1A1A1A]/40 text-sm line-clamp-3 mb-4">
                         {c.content_es.replace(/<[^>]+>/g, '')}
                       </p>
                     </div>
@@ -333,16 +333,16 @@ export function NewsletterManager() {
                                setCampaignForm({ subject: c.subject_es, content: c.content_es });
                                setIsCreatingCampaign(true);
                             }} 
-                            className="w-12 flex items-center justify-center border border-white/10 text-white/50 hover:bg-white hover:text-black rounded-xl transition-colors"
+                            className="w-12 flex items-center justify-center border border-black/10 text-[#1A1A1A]/50 hover:bg-white hover:text-black rounded-xl transition-colors shadow-sm"
                           >
                             <Edit2 size={14} />
                           </button>
-                          <button onClick={() => handleDeleteCampaign(c.id)} className="w-12 flex items-center justify-center border border-white/10 text-white/50 hover:bg-red-500 hover:text-white rounded-xl transition-colors">
+                          <button onClick={() => handleDeleteCampaign(c.id)} className="w-12 flex items-center justify-center border border-black/10 text-[#1A1A1A]/50 hover:bg-red-500 hover:text-white rounded-xl transition-colors shadow-sm">
                             <Trash2 size={14} />
                           </button>
                         </div>
                       ) : (
-                        <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-white/50 py-2">
+                        <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-[#1A1A1A]/50 py-2">
                           <span className="flex items-center gap-1"><CheckCircle2 size={14} className="text-emerald-400" /> Enviado</span>
                           <span>{c.sent_count} envíos</span>
                         </div>
@@ -353,8 +353,8 @@ export function NewsletterManager() {
               </div>
             </>
           ) : (
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 max-w-4xl mx-auto">
-              <h3 className="text-2xl font-black uppercase tracking-tighter mb-8">{editingCampaignId ? 'Editar Campaña Borrador' : 'Crear Campaña de Email'}</h3>
+            <div className="bg-[#EDEDED] border border-black/10 rounded-3xl p-8 max-w-4xl mx-auto shadow-xl">
+              <h3 className="text-2xl font-black uppercase tracking-tighter mb-8 text-[#1A1A1A]">{editingCampaignId ? 'Editar Campaña Borrador' : 'Crear Campaña de Email'}</h3>
               <form onSubmit={handleCreateCampaign} className="space-y-6">
                 <div>
                   <label className="text-[10px] font-black uppercase tracking-widest text-sasori-red mb-2 block">Asunto del Correo</label>
@@ -364,28 +364,28 @@ export function NewsletterManager() {
                     value={campaignForm.subject}
                     onChange={(e) => setCampaignForm({...campaignForm, subject: e.target.value})}
                     placeholder="Ej: Novedades impactantes del Q3"
-                    className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-4 focus:border-sasori-red outline-none transition-colors font-bold text-lg"
+                    className="w-full bg-white border border-black/10 rounded-xl px-4 py-4 focus:border-sasori-red outline-none transition-colors font-bold text-lg text-[#1A1A1A]"
                   />
                 </div>
                 <div>
                   <label className="text-[10px] font-black uppercase tracking-widest text-sasori-red mb-2 block">Contenido (Admite HTML)</label>
-                  <div className="bg-black/50 border border-white/10 rounded-xl overflow-hidden focus-within:border-sasori-red transition-colors">
+                  <div className="bg-white border border-black/10 rounded-xl overflow-hidden focus-within:border-sasori-red transition-colors">
                     <textarea 
                       required
                       value={campaignForm.content}
                       onChange={(e) => setCampaignForm({...campaignForm, content: e.target.value})}
                       rows={10}
                       placeholder={`<h2>Hola equipo!</h2>\n<p>Aquí tienes las novedades de este mes...</p>`}
-                      className="w-full bg-transparent p-4 outline-none resize-y font-mono text-sm text-white/80"
+                      className="w-full bg-transparent p-4 outline-none resize-y font-mono text-sm text-[#1A1A1A]/80"
                     />
                   </div>
                 </div>
                 
-                <div className="flex justify-between items-center pt-4 border-t border-white/5">
-                  <button type="button" onClick={() => { setIsCreatingCampaign(false); setEditingCampaignId(null); }} className="text-[10px] font-black uppercase tracking-widest text-white/50 hover:text-white transition-colors py-2 px-4">
+                <div className="flex justify-between items-center pt-4 border-t border-black/5">
+                  <button type="button" onClick={() => { setIsCreatingCampaign(false); setEditingCampaignId(null); }} className="text-[10px] font-black uppercase tracking-widest text-[#1A1A1A]/50 hover:text-[#1A1A1A] transition-colors py-2 px-4">
                     Cancelar
                   </button>
-                  <button type="submit" className="bg-white text-black hover:bg-sasori-red hover:text-white font-black uppercase tracking-widest text-[10px] px-8 py-4 rounded-xl transition-all shadow-lg flex items-center gap-2">
+                  <button type="submit" className="bg-[#1A1A1A] text-white hover:bg-sasori-red font-black uppercase tracking-widest text-[10px] px-8 py-4 rounded-xl transition-all shadow-lg flex items-center gap-2">
                     <Save size={14} /> Guardar Borrador
                   </button>
                 </div>

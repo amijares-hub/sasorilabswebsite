@@ -314,11 +314,11 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
   } as any;
 
   return (
-    <section className="relative py-16 md:py-32 bg-gradient-to-br from-black via-red-950/20 to-black text-white overflow-hidden">
+    <section className="relative py-16 md:py-32 bg-[#F2F2F2] text-[#1A1A1A] overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-red-500/[0.05] via-rose-500/[0.02] to-red-900/[0.05]"
+          className="absolute inset-0 bg-gradient-to-br from-sasori-red/[0.03] via-black/[0.01] to-sasori-red/[0.03]"
           animate={{ backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'] }}
           transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
           style={{ backgroundSize: '400% 400%' }}
@@ -346,19 +346,9 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
         {/* Header */}
         {!hideTitle && (
           <motion.div className="text-center mb-20" variants={fadeInUp}>
-            <motion.div
-              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.05] border border-red-500/[0.2] backdrop-blur-sm mb-6"
-              whileHover={{ scale: 1.05, borderColor: "rgba(226, 6, 19, 0.4)" }}
-            >
-              <motion.div animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }}>
-                <Sparkles className="h-4 w-4 text-sasori-red" />
-              </motion.div>
-              <span className="text-sm font-medium text-white/80 uppercase tracking-widest">{t.connect}</span>
-              <div className="w-2 h-2 bg-sasori-red rounded-full animate-pulse shadow-[0_0_10px_#E20613]" />
-            </motion.div>
 
             <motion.h2 className="text-3xl sm:text-6xl md:text-7xl font-black uppercase mb-6 md:mb-8 tracking-tighter" variants={fadeInUp}>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#1A1A1A] to-black/60">
                 {t.title1}
               </span>
               <br className="hidden sm:block" />
@@ -370,7 +360,7 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
               </motion.span>
             </motion.h2>
             
-            <motion.p className="text-base sm:text-xl md:text-2xl text-white/50 max-w-4xl mx-auto leading-relaxed px-4 md:px-0" variants={fadeInUp}>
+            <motion.p className="text-base sm:text-xl md:text-2xl text-black/50 max-w-4xl mx-auto leading-relaxed px-4 md:px-0" variants={fadeInUp}>
               {t.subtitle}
             </motion.p>
           </motion.div>
@@ -382,15 +372,15 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
             {companyStats.map((stat, index) => (
               <motion.div
                 key={index}
-                className="text-center p-4 md:p-6 bg-black/40 backdrop-blur-xl rounded-2xl border border-white/[0.05] group hover:border-sasori-red/30 transition-all"
+                className="text-center p-4 md:p-6 metallic-vinotinto-card rounded-2xl border border-white/5 group hover:border-sasori-red/30 transition-all shadow-lg"
                 whileHover={{ scale: 1.05, y: -5 }}
                 variants={fadeInUp}
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-sasori-red/10 border border-sasori-red/20 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:bg-sasori-red/20 transition-all">
-                  <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-sasori-red" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:bg-sasori-red/20 transition-all">
+                  <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <div className="text-xl md:text-2xl font-bold text-white mb-0.5 md:mb-1">{stat.value}</div>
-                <div className="text-white/50 text-[10px] md:text-xs uppercase tracking-widest">{stat.label}</div>
+                <div className="text-white/40 text-[10px] md:text-xs uppercase tracking-widest">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -400,8 +390,8 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
           {/* Form */}
           <motion.div className="space-y-8" variants={fadeInUp}>
             <div>
-              <h3 className="text-3xl font-bold text-white mb-4 uppercase tracking-tighter">{t.formTitle}</h3>
-              <p className="text-white/50 text-lg">{t.formSubtitle}</p>
+              <h3 className="text-3xl font-bold text-[#1A1A1A] mb-4 uppercase tracking-tighter">{t.formTitle}</h3>
+              <p className="text-black/50 text-lg">{t.formSubtitle}</p>
             </div>
 
             <AnimatePresence mode="wait">
@@ -416,46 +406,46 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="relative">
-                      <User className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/30" />
+                      <User className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-black/20" />
                       <input
                         type="text"
                         placeholder={t.namePlaceholder}
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
-                        className={`w-full pl-12 pr-4 py-4 bg-white/[0.03] border rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-sasori-red focus:bg-white/[0.05] transition-all ${errors.name ? 'border-red-500' : 'border-white/[0.1]'}`}
+                        className={`w-full pl-12 pr-4 py-4 bg-black/5 border rounded-xl text-[#1A1A1A] placeholder-black/20 focus:outline-none focus:border-sasori-red focus:bg-black/[0.08] transition-all ${errors.name ? 'border-red-500' : 'border-black/10'}`}
                       />
                     </div>
                     <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/30" />
+                      <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-black/20" />
                       <input
                         type="email"
                         placeholder={t.emailPlaceholder}
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
-                        className={`w-full pl-12 pr-4 py-4 bg-white/[0.03] border rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-sasori-red focus:bg-white/[0.05] transition-all ${errors.email ? 'border-red-500' : 'border-white/[0.1]'}`}
+                        className={`w-full pl-12 pr-4 py-4 bg-black/5 border rounded-xl text-[#1A1A1A] placeholder-black/20 focus:outline-none focus:border-sasori-red focus:bg-black/[0.08] transition-all ${errors.email ? 'border-red-500' : 'border-black/10'}`}
                       />
                     </div>
                   </div>
 
                   <div className="relative">
-                    <Building className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/30" />
+                    <Building className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-black/20" />
                     <input
                       type="text"
                       placeholder={t.companyPlaceholder}
                       value={formData.company}
                       onChange={(e) => handleInputChange('company', e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-white/[0.03] border border-white/[0.1] rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-sasori-red focus:bg-white/[0.05] transition-all"
+                      className="w-full pl-12 pr-4 py-4 bg-black/5 border border-black/10 rounded-xl text-[#1A1A1A] placeholder-black/20 focus:outline-none focus:border-sasori-red focus:bg-black/[0.08] transition-all"
                     />
                   </div>
 
                   <div className="relative">
-                    <MessageSquare className="absolute left-4 top-4 h-5 w-5 text-white/30" />
+                    <MessageSquare className="absolute left-4 top-4 h-5 w-5 text-black/20" />
                     <textarea
                       placeholder={t.msgPlaceholder}
                       rows={5}
                       value={formData.message}
                       onChange={(e) => handleInputChange('message', e.target.value)}
-                      className={`w-full pl-12 pr-4 py-4 bg-white/[0.03] border rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-sasori-red focus:bg-white/[0.05] transition-all resize-none ${errors.message ? 'border-red-500' : 'border-white/[0.1]'}`}
+                      className={`w-full pl-12 pr-4 py-4 bg-black/5 border rounded-xl text-[#1A1A1A] placeholder-black/20 focus:outline-none focus:border-sasori-red focus:bg-black/[0.08] transition-all resize-none ${errors.message ? 'border-red-500' : 'border-black/10'}`}
                     />
                   </div>
 
@@ -483,7 +473,7 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
                   key="success"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center py-16 bg-white/[0.03] border border-white/10 rounded-2xl"
+                  className="text-center py-16 metallic-vinotinto-card border border-white/10 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
                 >
                   <div className="w-20 h-20 rounded-full bg-sasori-red/20 border border-sasori-red flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(226,6,19,0.3)]">
                     <CheckCircle className="w-10 h-10 text-sasori-red" />
@@ -492,7 +482,7 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
                   <p className="text-white/50 text-lg mb-8 max-w-sm mx-auto">{t.successDesc}</p>
                   <button
                     onClick={() => { setIsSubmitted(false); setFormData({ name: '', email: '', company: '', message: '' }); }}
-                    className="px-8 py-3 bg-white/[0.05] border border-white/20 rounded-full text-white hover:bg-white/[0.1] hover:border-white/40 transition-all font-semibold text-sm uppercase tracking-widest"
+                    className="px-8 py-3 bg-sasori-red text-white border border-sasori-red rounded-full hover:bg-white hover:text-black hover:border-white transition-all font-semibold text-sm uppercase tracking-widest"
                   >
                     {t.sendAnother}
                   </button>
@@ -504,8 +494,8 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
           {/* Methods */}
           <motion.div className="space-y-8 lg:pl-12" variants={fadeInUp}>
             <div>
-              <h3 className="text-3xl font-bold text-white mb-4 uppercase tracking-tighter">{t.otherWays}</h3>
-              <p className="text-white/50 text-lg">{t.otherWaysDesc}</p>
+              <h3 className="text-3xl font-bold text-[#1A1A1A] mb-4 uppercase tracking-tighter">{t.otherWays}</h3>
+              <p className="text-black/50 text-lg">{t.otherWaysDesc}</p>
             </div>
 
             <div className="space-y-4">
@@ -513,11 +503,11 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
                 <a
                   key={index}
                   href={method.link}
-                  className="block p-5 bg-black/40 backdrop-blur-xl rounded-2xl border border-white/[0.05] hover:border-sasori-red/30 transition-all group"
+                  className="block p-5 metallic-vinotinto-card rounded-2xl border border-white/5 hover:border-sasori-red/30 transition-all group overflow-hidden shadow-lg"
                 >
                   <div className="flex items-center gap-5">
-                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${method.gradient} border border-sasori-red/20 flex flex-shrink-0 items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
-                      <method.icon className="w-6 h-6 text-sasori-red" />
+                    <div className={`w-14 h-14 rounded-xl bg-white/10 border border-white/10 flex flex-shrink-0 items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+                      <method.icon className="w-6 h-6 text-white group-hover:text-sasori-red" />
                     </div>
                     <div className="flex-1">
                       <h4 className="text-lg font-bold text-white uppercase tracking-widest">{method.title}</h4>
@@ -529,9 +519,9 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
               ))}
             </div>
 
-            <div className="p-6 bg-sasori-red/5 backdrop-blur-xl rounded-2xl border border-sasori-red/20">
+            <div className="p-6 metallic-vinotinto-card backdrop-blur-xl rounded-2xl border border-white/5 shadow-lg">
               <h4 className="text-lg font-bold text-white mb-2 uppercase tracking-tight">{t.guaranteeTitle}</h4>
-              <p className="text-white/50 text-sm leading-relaxed">{t.guaranteeDesc}</p>
+              <p className="text-white/40 text-sm leading-relaxed">{t.guaranteeDesc}</p>
             </div>
           </motion.div>
         </div>

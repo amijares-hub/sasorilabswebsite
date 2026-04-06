@@ -229,9 +229,22 @@ export const HeroFuturistic = ({
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black">
-      {/* Background Video (from original logic) */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#F2F2F2]">
+      {/* Tech Grid Pattern */}
+      <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+      
+      {/* Corner Panels (Decorative) */}
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-white shadow-[-20px_20px_40px_rgba(0,0,0,0.02)] border-l border-b border-black/5 -translate-y-1/2 translate-x-1/2 rotate-45 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-white shadow-[20px_-20px_40px_rgba(0,0,0,0.02)] border-t border-r border-black/5 translate-y-1/2 -translate-x-1/2 rotate-45 pointer-events-none" />
+
+      {/* Red Neon Strips (Inspired by images) */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+        <div className="absolute top-[15%] -right-[10%] w-[50%] h-[2px] bg-sasori-red shadow-[0_0_15px_#E20613] rotate-[-25deg] opacity-60 animate-pulse" />
+        <div className="absolute bottom-[20%] -left-[5%] w-[40%] h-[1px] bg-sasori-red shadow-[0_0_10px_#E20613] rotate-[-25deg] opacity-40" />
+        <div className="absolute top-[40%] left-[10%] w-[2px] h-[30%] bg-sasori-red/30 shadow-[0_0_15px_#E20613] skew-x-[-25deg] opacity-30" />
+      </div>
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0 opacity-20 contrast-[1.1] mix-blend-multiply">
         <video
           ref={videoRef}
           src={videoSrc}
@@ -243,22 +256,21 @@ export const HeroFuturistic = ({
             const video = e.currentTarget;
             video.pause();
           }}
-          className="w-full h-full object-cover opacity-30 grayscale-[0.5] contrast-[1.2]"
+          className="w-full h-full object-cover grayscale"
         />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#F2F2F2] via-transparent to-[#F2F2F2]/80" />
       </div>
 
       {/* Top navigation bar overlay for "Back" button consistency */}
       <nav className="fixed top-0 left-0 right-0 z-[110] flex items-center justify-between px-4 md:px-10 py-4 md:py-6 pointer-events-none">
         <button
           onClick={onBackClick}
-          className="flex items-center gap-2 p-1 md:px-6 md:py-3 border border-white/20 rounded-full bg-black/50 backdrop-blur-md hover:bg-sasori-red hover:border-sasori-red transition-all shadow-lg group pointer-events-auto"
+          className="flex items-center gap-2 p-1 md:px-6 md:py-3 border border-black/10 rounded-full bg-white/50 backdrop-blur-md hover:bg-sasori-red hover:border-sasori-red transition-all shadow-lg group pointer-events-auto"
         >
-          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/10 flex items-center justify-center bg-black/40 backdrop-blur-md group-hover:border-sasori-red group-hover:bg-sasori-red/20 transition-all">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-black/5 flex items-center justify-center bg-white/40 backdrop-blur-md group-hover:border-sasori-red group-hover:bg-sasori-red/20 transition-all text-black hover:text-white">
             <ArrowLeft className="w-3 h-3 md:w-4 md:h-4 group-hover:-translate-x-1 transition-transform" />
           </div>
-          <span className="hidden sm:inline font-bold uppercase tracking-widest text-[10px] md:text-xs">{lang === "es" ? "Volver" : lang === "zh" ? "返回" : lang === "ru" ? "НАЗАД" : lang === "pt" ? "VOLTAR" : "Back"}</span>
+          <span className="hidden sm:inline font-bold uppercase tracking-widest text-[10px] md:text-xs text-black group-hover:text-white">{lang === "es" ? "Volver" : lang === "zh" ? "返回" : lang === "ru" ? "НАЗАД" : lang === "pt" ? "VOLTAR" : "Back"}</span>
         </button>
       </nav>
 
@@ -270,7 +282,7 @@ export const HeroFuturistic = ({
         </div>
 
         <div className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.9] mb-4 md:mb-6">
-          <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 overflow-hidden text-white">
+          <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 overflow-hidden text-[#1A1A1A]">
             {titleWords.map((word, index) => (
               <div
                 key={index}
@@ -282,7 +294,7 @@ export const HeroFuturistic = ({
             ))}
           </div>
         </div>
-        <div className="text-sm md:text-xl text-white/60 leading-relaxed mb-8 md:mb-12 max-w-2xl overflow-hidden font-bold uppercase tracking-tight px-4 md:px-0">
+        <div className="text-sm md:text-xl text-black/70 leading-relaxed mb-8 md:mb-12 max-w-2xl overflow-hidden font-bold uppercase tracking-tight px-4 md:px-0">
           <div
             className={subtitleVisible ? 'fade-in-subtitle' : ''}
             style={{ animationDelay: `${titleWords.length * 0.13 + 0.2 + subtitleDelay}s`, opacity: subtitleVisible ? undefined : 0 }}
@@ -301,7 +313,7 @@ export const HeroFuturistic = ({
             </button>
             <button
               onClick={onExploreClick}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-8 py-4 text-sm font-bold text-white uppercase tracking-widest transition-all hover:bg-white/5 backdrop-blur-sm"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-black/10 px-8 py-4 text-sm font-bold text-black uppercase tracking-widest transition-all hover:bg-black/5 backdrop-blur-sm"
             >
               {lang === "es" ? "Explorar" : lang === "zh" ? "探索" : lang === "ru" ? "ИССЛЕДОВАТЬ" : lang === "pt" ? "EXPLORAR" : "Explore"}
             </button>
@@ -313,13 +325,13 @@ export const HeroFuturistic = ({
         className="explore-btn pointer-events-auto flex flex-col items-center gap-1"
         style={{ animationDelay: '2.2s' }}
       >
-        <span className="text-[10px] md:text-sm uppercase tracking-[0.2em]">
+        <span className="text-[10px] md:text-sm uppercase tracking-[0.2em] text-black/40">
           {lang === 'es' ? 'Desliza para explorar' : lang === 'zh' ? '滑動探索' : lang === 'ru' ? 'Прокрутите, чтобы исследовать' : lang === 'pt' ? 'Deslize para explorar' : 'Scroll to explore'}
         </span>
-        <span className="explore-arrow">
+        <span className="explore-arrow border-black/10">
           <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="arrow-svg scale-75 md:scale-100">
-            <path d="M11 5V17" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M6 12L11 17L16 12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M11 5V17" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round"/>
+            <path d="M6 12L11 17L16 12" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </span>
       </button>

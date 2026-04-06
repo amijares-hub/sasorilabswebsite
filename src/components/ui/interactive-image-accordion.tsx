@@ -131,20 +131,20 @@ export function LandingAccordionItem({
   };
 
   return (
-    <div className="bg-black py-12 md:py-20 px-4 md:px-6 overflow-hidden">
+    <div className="bg-white py-12 md:py-20 px-4 md:px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-10 md:gap-16">
           
           {/* Left Side: Text Content */}
           <div className="w-full lg:w-2/5 text-center lg:text-left">
-            <h2 className="text-4xl md:text-7xl font-black text-white leading-none tracking-tighter uppercase">
+            <h2 className="text-4xl md:text-7xl font-black text-[#1A1A1A] leading-none tracking-tighter uppercase">
               {title.split(' ').map((word, i) => (
                 <span key={i} className={i === title.split(' ').length - 1 ? "text-sasori-red" : ""}>
                   {word}{' '}
                 </span>
               ))}
             </h2>
-            <p className="mt-4 md:mt-8 text-base md:text-xl text-white/50 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+            <p className="mt-4 md:mt-8 text-base md:text-xl text-[#1A1A1A]/50 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
               {subtitle}
             </p>
             <div className="mt-8 md:mt-10 mb-8 md:mb-0">
