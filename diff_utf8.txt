@@ -1,0 +1,188 @@
+﻿diff --git a/src/App.tsx b/src/App.tsx
+index 694ae70..4238137 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -29,7 +29,6 @@ import {
+   ImmersiveWebsPage,
+   ModernizationPage,
+ } from './pages/service-pages';
+-import { ContactPage } from './pages/contact-page';
+ import BlogPage from './pages/blog-page';
+ import { BlogDetailPage } from './pages/blog-detail-page';
+ import { LoginPage } from './pages/login-page';
+@@ -39,6 +38,7 @@ import { UserAccountPage } from './pages/user-account-page';
+ import { UnsubscribePage } from './pages/unsubscribe-page';
+ import { Footer } from './components/ui/footer';
+ import { BlogPostSection } from './components/ui/blog-posts';
++import { CreativeDemosSection } from './components/ui/creative-demos';
+ import { NewsletterPopup } from './components/ui/newsletter';
+ import Lenis from '@studio-freight/lenis';
+ import { clsx, type ClassValue } from 'clsx';
+@@ -322,7 +322,7 @@ const MatrixRain = ({ color = '#E20613', opacity = 0.15 }: { color?: string; opa
+     const drops: number[] = new Array(columns).fill(1);
+ 
+     const draw = () => {
+-      ctx.fillStyle = `rgba(10, 10, 10, ${opacity})`;
++      ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+       ctx.fillRect(0, 0, width, height);
+ 
+       ctx.fillStyle = color;
+@@ -379,15 +379,21 @@ function ScrollToTop() {
+   return null;
+ }
+ 
+-// Claymorphic Service Tile for Timeline
++// Tech-Metal Service Tile for Timeline
+ const ServiceIconTile = ({ icon: Icon }: { icon: any }) => (
+-  <div className="relative aspect-square md:aspect-video lg:aspect-square w-full bg-[#0a0a0a] rounded-[2.5rem] overflow-hidden border border-white/5 shadow-[12px_12px_24px_rgba(0,0,0,0.5),-4px_-4px_12px_rgba(255,255,255,0.01)] flex items-center justify-center p-12 group">
+-    {/* Neomorphic subtle light source */}
+-    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
++  <div className="relative aspect-square md:aspect-video lg:aspect-square w-full rounded-xl overflow-hidden border border-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.3)] flex items-center justify-center p-12 group metallic-vinotinto-card">
++    {/* Metallic brushed effect overlay */}
++    <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
++
++    {/* Neon tech strip - inspired by image 1 */}
++    <div className="absolute top-0 right-[20%] w-[1px] h-full bg-sasori-red/30 shadow-[0_0_10px_rgba(226,6,19,0.5)] group-hover:bg-sasori-red group-hover:shadow-[0_0_20px_rgba(226,6,19,1)] transition-all duration-700 skew-x-[-15deg]" />
++    <div className="absolute top-[10%] left-0 w-8 h-[2px] bg-sasori-red/40 group-hover:bg-sasori-red transition-colors duration-500" />
+ 
+     {/* Inner claymorphic container for icon */}
+-    <div className="relative p-8 md:p-12 rounded-[2rem] bg-[#121212] shadow-[inset_6px_6px_12px_rgba(0,0,0,0.6),inset_-6px_-6px_12px_rgba(255,255,255,0.02)] border border-white/5 flex items-center justify-center group-hover:shadow-[0_0_40px_rgba(226,6,19,0.15)] transition-all duration-500">
+-      <Icon className="text-sasori-red w-16 h-16 md:w-24 md:h-24 drop-shadow-[0_0_15px_#E20613] group-hover:scale-110 transition-transform duration-500" />
++    <div className="relative p-8 md:p-12 rounded-lg bg-white/10 backdrop-blur-md shadow-[inset_1px_1px_4px_rgba(255,255,255,0.2),inset_-1px_-1px_4px_rgba(0,0,0,0.1),4px_4px_12px_rgba(0,0,0,0.2)] border border-white/10 flex items-center justify-center group-hover:shadow-[0_0_40px_rgba(226,6,19,0.4)] transition-all duration-500 overflow-hidden">
++        {/* Corner cut effect */}
++        <div className="absolute top-0 right-0 w-8 h-8 bg-[#3D0000] rotate-45 translate-x-4 -translate-y-4 border-l border-b border-white/10" />
++      <Icon className="text-white w-16 h-16 md:w-24 md:h-24 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] group-hover:scale-110 transition-transform duration-500" />
+     </div>
+ 
+     {/* Subtle glow effect */}
+@@ -418,15 +424,15 @@ export default function App() {
+       title: t.services.ai.title,
+       content: (
+         <div className="reveal">
+-          <p className="text-gray-400 text-sm md:text-base mb-8 leading-relaxed">
++          <p className="text-black/60 text-sm md:text-base mb-8 leading-relaxed">
+             {t.services.ai.desc}
+           </p>
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+             <ServiceIconTile icon={Brain} />
+-            <div className="flex flex-col justify-center space-y-4 p-6 md:p-8 glass-card rounded-2xl border-white/5">
++            <div className="flex flex-col justify-center space-y-4 p-6 md:p-8 metallic-vinotinto-card rounded-2xl border-white/5">
+               {t.services.ai.items.map((item, i) => (
+                 <div key={i} className="flex items-center gap-4 text-lg md:text-xl font-bold uppercase tracking-tight text-white">
+-                  <div className="w-2.5 h-2.5 rounded-full bg-sasori-red shadow-[0_0_12px_#E20613]" />
++                  <div className="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]" />
+                   {item}
+                 </div>
+               ))}
+@@ -436,7 +442,7 @@ export default function App() {
+                     navigate('/services/ai-automation');
+                     window.scrollTo(0, 0);
+                   }}
+-                  className="inline-flex items-center gap-2 px-6 py-3 bg-sasori-red text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all shadow-lg"
++                  className="inline-flex items-center gap-2 px-6 py-3 bg-sasori-red text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-black hover:text-white transition-all shadow-lg"
+                 >
+                   {lang === 'es' ? 'Ver Detalles' : lang === 'en' ? 'View Details' : lang === 'zh' ? 'µƒÑþ£ïÞ®│µâà' : lang === 'ru' ? 'ðƒð¥ð┤ÐÇð¥ð▒ð¢ðÁðÁ' : lang === 'pt' ? 'Ver Detalhes' : 'View Details'}
+                   <ArrowRight size={14} />
+@@ -451,14 +457,14 @@ export default function App() {
+       title: t.services.web.title,
+       content: (
+         <div className="reveal">
+-          <p className="text-gray-400 text-sm md:text-base mb-8 leading-relaxed">
++          <p className="text-black/60 text-sm md:text-base mb-8 leading-relaxed">
+             {t.services.web.desc}
+           </p>
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+-            <div className="flex flex-col justify-center space-y-4 p-6 md:p-8 glass-card rounded-2xl border-white/5 order-2 lg:order-1">
++            <div className="flex flex-col justify-center space-y-4 p-6 md:p-8 metallic-vinotinto-card rounded-2xl border-white/5 order-2 lg:order-1">
+               {t.services.web.items.map((item, i) => (
+                 <div key={i} className="flex items-center gap-4 text-lg md:text-xl font-bold uppercase tracking-tight text-white">
+-                  <div className="w-2.5 h-2.5 rounded-full bg-sasori-red shadow-[0_0_12px_#E20613]" />
++                  <div className="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]" />
+                   {item}
+                 </div>
+               ))}
+@@ -468,7 +474,7 @@ export default function App() {
+                     navigate('/services/immersive-webs');
+                     window.scrollTo(0, 0);
+                   }}
+-                  className="inline-flex items-center gap-2 px-6 py-3 bg-sasori-red text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all shadow-lg"
++                  className="inline-flex items-center gap-2 px-6 py-3 bg-sasori-red text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-black hover:text-white transition-all shadow-lg"
+                 >
+                   {lang === 'es' ? 'Ver Detalles' : lang === 'en' ? 'View Details' : lang === 'zh' ? 'µƒÑþ£ïÞ®│µâà' : lang === 'ru' ? 'ðƒð¥ð┤ÐÇð¥ð▒ð¢ðÁðÁ' : lang === 'pt' ? 'Ver Detalhes' : 'View Details'}
+                   <ArrowRight size={14} />
+@@ -484,15 +490,15 @@ export default function App() {
+       title: t.services.modernization.title,
+       content: (
+         <div className="reveal">
+-          <p className="text-gray-400 text-sm md:text-base mb-8 leading-relaxed">
++          <p className="text-black/60 text-sm md:text-base mb-8 leading-relaxed">
+             {t.services.modernization.desc}
+           </p>
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+             <ServiceIconTile icon={Layers} />
+-            <div className="flex flex-col justify-center space-y-4 p-6 md:p-8 glass-card rounded-2xl border-white/5">
++            <div className="flex flex-col justify-center space-y-4 p-6 md:p-8 metallic-vinotinto-card rounded-2xl border-white/5">
+               {t.services.modernization.items.map((item, i) => (
+                 <div key={i} className="flex items-center gap-4 text-lg md:text-xl font-bold uppercase tracking-tight text-white">
+-                  <div className="w-2.5 h-2.5 rounded-full bg-sasori-red shadow-[0_0_12px_#E20613]" />
++                  <div className="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]" />
+                   {item}
+                 </div>
+               ))}
+@@ -502,7 +508,7 @@ export default function App() {
+                     navigate('/services/modernization');
+                     window.scrollTo(0, 0);
+                   }}
+-                  className="inline-flex items-center gap-2 px-6 py-3 bg-sasori-red text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all shadow-lg"
++                  className="inline-flex items-center gap-2 px-6 py-3 bg-sasori-red text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-black hover:text-white transition-all shadow-lg"
+                 >
+                   {lang === 'es' ? 'Ver Detalles' : lang === 'en' ? 'View Details' : lang === 'zh' ? 'µƒÑþ£ïÞ®│µâà' : lang === 'ru' ? 'ðƒð¥ð┤ÐÇð¥ð▒ð¢ðÁðÁ' : lang === 'pt' ? 'Ver Detalhes' : 'View Details'}
+                   <ArrowRight size={14} />
+@@ -640,9 +646,9 @@ export default function App() {
+       {!isLoaded && (
+         <div
+           ref={entranceRef}
+-          className="fixed inset-0 z-[100] bg-bg-dark flex items-center justify-center overflow-hidden"
++          className="fixed inset-0 z-[100] bg-[#FFFFFF] flex items-center justify-center overflow-hidden"
+         >
+-          <MatrixRain color="#E20613" opacity={0.4} />
++          <MatrixRain color="#E20613" opacity={0.15} />
+           <div
+             ref={logoRef}
+             className="relative z-10 opacity-0 scale-90 text-center"
+@@ -659,7 +665,6 @@ export default function App() {
+ 
+       <Routes>
+         {/* Service detail pages */}
+-        <Route path="/contact" element={<ContactPage lang={lang} />} />
+         <Route path="/blog" element={<BlogPage lang={lang} />} />
+         <Route path="/blog/:slug" element={<BlogDetailPage lang={lang} setLang={setLang} />} />
+         <Route path="/services/ai-automation" element={<AIAutomationPage lang={lang} />} />
+@@ -706,10 +711,10 @@ export default function App() {
+               {/* Zoom Parallax Section */}
+               <section className="relative z-20 bg-bg-dark" id="services">
+                 <div className="py-20 text-center reveal">
+-                  <h2 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter mb-4">
++                  <h2 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter mb-4 text-[#1A1A1A]">
+                     {lang === 'es' ? 'NUESTRO ECOSISTEMA' : lang === 'zh' ? 'µêæÕÇæþÜäþöƒµàïþ│╗þÁ▒' : lang === 'ru' ? 'ðØðÉð¿ðÉ ð¡ðÜð×ðíðÿðíðóðòð£ðÉ' : lang === 'pt' ? 'NOSSO ECOSSISTEMA' : 'OUR ECOSYSTEM'}
+                   </h2>
+-                  <p className="text-gray-500 uppercase tracking-[0.3em] text-xs">
++                  <p className="text-black/40 uppercase tracking-[0.3em] text-xs">
+                     {lang === 'es' ? 'EXPLORA EL ECOSISTEMA' : lang === 'zh' ? 'µÄóþ┤óþöƒµàïþ│╗þÁ▒' : lang === 'ru' ? 'ðÿðíðíðøðòðöðúðÖðóðò ð¡ðÜð×ðíðÿðíðóðòð£ðú' : lang === 'pt' ? 'EXPLORE O ECOSSISTEMA' : 'EXPLORE THE ECOSYSTEM'}
+                   </p>
+                 </div>
+@@ -721,8 +726,13 @@ export default function App() {
+                 <Timeline data={timelineData} />
+               </section>
+ 
++              {/* Creative Demos Showcase */}
++              <section className="relative z-20">
++                <CreativeDemosSection lang={lang} />
++              </section>
++
+               {/* Blog Highlights Section */}
+-              <section className="relative z-20 bg-bg-dark border-y border-white/5">
++              <section className="relative z-20 bg-bg-dark border-y border-black/5">
+                 <BlogPostSection
+                   lang={lang}
+                   title={lang === 'es' ? "NUESTRO BLOG" : lang === 'zh' ? "µêæÕÇæþÜäÕìÜÕ«ó" : lang === 'ru' ? "ðØðÉð¿ ðæðøð×ðô" : lang === 'pt' ? "NOSSO BLOG" : "OUR BLOG"}

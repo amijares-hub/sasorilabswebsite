@@ -1,17 +1,27 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Regenerates src/pages/service-pages.tsx with:
+  - Clean UTF-8 encoding
+  - All 3 required exports: AIAutomationPage, ImmersiveWebsPage, ModernizationPage
+  - Correct JSX return types (not void)
+  - Full multilingual content (es, en, zh, ru, pt)
+"""
+
+content = '''\
 import React from "react";
 import { ServicePage } from "../components/ui/service-page";
-import HeroText from "../components/ui/hero-shutter-text";
 
 /* =========================================================
    AI AUTOMATION PAGE
    Route: /services/ai-automation
    ========================================================= */
 
-export function AIAutomationPage({ lang = "es" }: { lang?: string }) {
+export function AIAutomationPage({ lang = "es" }: { lang?: string }): JSX.Element {
   const content = {
     es: {
       serviceName: "Automatización IA",
-      tagline: "Agentes Inteligentes que\nTrabajan para su Éxito",
+      tagline: "Agentes Inteligentes que\\nTrabajan para su Éxito",
       description:
         "Diseñamos ecosistemas de agentes de IA de élite que automatizan procesos críticos, toman decisiones autónomas y escalan operaciones más allá de los límites humanos.",
       sections: [
@@ -57,13 +67,13 @@ export function AIAutomationPage({ lang = "es" }: { lang?: string }) {
             "Implementamos sistemas de voz inteligentes que gestionan llamadas entrantes y salientes con lenguaje natural, resolviendo hasta el 70% de las consultas sin operadores.",
           bodyText2:
             "Nuestros agentes de voz se integran con CRM, calendarios y bases de datos en tiempo real para una atención personalizada a escala.",
-          ctaLabel: "Explorar Servicio",
+          ctaLabel: "Explorar Solución",
         },
       ],
     },
     en: {
       serviceName: "AI Automation",
-      tagline: "Intelligent Agents that\nWork for Your Success",
+      tagline: "Intelligent Agents that\\nWork for Your Success",
       description:
         "We design elite AI agent ecosystems that automate critical processes, make autonomous decisions, and scale operations beyond human limits.",
       sections: [
@@ -109,13 +119,13 @@ export function AIAutomationPage({ lang = "es" }: { lang?: string }) {
             "We implement intelligent voice systems that handle inbound and outbound calls with natural language, resolving up to 70% of inquiries without operators.",
           bodyText2:
             "Our voice agents integrate with CRM, calendars, and databases in real time for personalized service at scale.",
-          ctaLabel: "Explore Service",
+          ctaLabel: "Explore Solution",
         },
       ],
     },
     zh: {
       serviceName: "AI 自动化",
-      tagline: "智能代理\n为您的成功而工作",
+      tagline: "智能代理\\n为您的成功而工作",
       description:
         "我们设计精英 AI 代理生态系统，自动化关键流程，做出自主决策，并将运营规模扩展到人类极限之外。",
       sections: [
@@ -161,13 +171,13 @@ export function AIAutomationPage({ lang = "es" }: { lang?: string }) {
             "我们实施智能语音系统，以自然语言处理入站和出站呼叫，无需操作员即可解决高达 70% 的查询。",
           bodyText2:
             "我们的语音代理实时与 CRM、日历和数据库集成，实现大规模个性化服务。",
-          ctaLabel: "探索服務",
+          ctaLabel: "探索解决方案",
         },
       ],
     },
     ru: {
       serviceName: "ИИ-Автоматизация",
-      tagline: "Интеллектуальные агенты,\nработающие для вашего успеха",
+      tagline: "Интеллектуальные агенты,\\nработающие для вашего успеха",
       description:
         "Мы разрабатываем элитные экосистемы ИИ-агентов, которые автоматизируют критические процессы, принимают автономные решения и масштабируют операции за пределы человеческих возможностей.",
       sections: [
@@ -213,13 +223,13 @@ export function AIAutomationPage({ lang = "es" }: { lang?: string }) {
             "Мы внедряем интеллектуальные голосовые системы, которые обрабатывают входящие и исходящие звонки на естественном языке, решая до 70% запросов без операторов.",
           bodyText2:
             "Наши голосовые агенты интегрируются с CRM, календарями и базами данных в режиме реального времени для персонализированного обслуживания в масштабе.",
-          ctaLabel: "Изучить Услугу",
+          ctaLabel: "Изучить Решение",
         },
       ],
     },
     pt: {
       serviceName: "Automação IA",
-      tagline: "Agentes Inteligentes que\nTrabalham para o seu Sucesso",
+      tagline: "Agentes Inteligentes que\\nTrabalham para o seu Sucesso",
       description:
         "Projetamos ecossistemas de agentes de IA de elite que automatizam processos críticos, tomam decisões autônomas e escalam operações além dos limites humanos.",
       sections: [
@@ -265,14 +275,14 @@ export function AIAutomationPage({ lang = "es" }: { lang?: string }) {
             "Implementamos sistemas de voz inteligentes que gerenciam chamadas recebidas e realizadas com linguagem natural, resolvendo até 70% das consultas sem operadores.",
           bodyText2:
             "Nossos agentes de voz se integram com CRM, calendários e bancos de dados em tempo real para atendimento personalizado em escala.",
-          ctaLabel: "Explorar Serviço",
+          ctaLabel: "Explorar Solução",
         },
       ],
     },
   };
 
   const c = content[lang as keyof typeof content] ?? content.es;
-  return <ServicePage {...c} serviceName={c.serviceName} lang={lang} customHero={<HeroText text={lang === 'es' ? 'AUTOMATIZACIÓN' : 'AUTOMATION'} />} />;
+  return <ServicePage {...c} serviceName={c.serviceName} lang={lang} />;
 }
 
 /* =========================================================
@@ -280,11 +290,11 @@ export function AIAutomationPage({ lang = "es" }: { lang?: string }) {
    Route: /services/immersive-webs
    ========================================================= */
 
-export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
+export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }): JSX.Element {
   const content = {
     es: {
       serviceName: "Webs Inmersivas",
-      tagline: "Experiencias Digitales que\nCaptivan y Convierten",
+      tagline: "Experiencias Digitales que\\nCaptivan y Convierten",
       description:
         "Construimos plataformas web de alto impacto para pymes y comercios locales que quieren competir con los grandes: diseño premium, velocidad nativa y presencia digital omnipresente.",
       sections: [
@@ -336,7 +346,7 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
     },
     en: {
       serviceName: "Immersive Webs",
-      tagline: "Digital Experiences that\nCaptivate and Convert",
+      tagline: "Digital Experiences that\\nCaptivate and Convert",
       description:
         "We build high-impact web platforms for SMEs and local businesses that want to compete with the big players: premium design, native speed, and omnipresent digital presence.",
       sections: [
@@ -388,7 +398,7 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
     },
     zh: {
       serviceName: "沉浸式网站",
-      tagline: "数字体验\n迷人且转化率高",
+      tagline: "数字体验\\n迷人且转化率高",
       description:
         "我们为希望与大品牌竞争的中小企业和本地商户构建高影响力网络平台：高端设计、原生速度和无处不在的数字存在。",
       sections: [
@@ -440,7 +450,7 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
     },
     ru: {
       serviceName: "Иммерсивные Сайты",
-      tagline: "Цифровые Опыты, которые\nЗавораживают и Конвертируют",
+      tagline: "Цифровые Опыты, которые\\nЗавораживают и Конвертируют",
       description:
         "Мы создаём высокоэффективные веб-платформы для МСП и местного бизнеса, который хочет конкурировать с крупными игроками: премиум-дизайн, нативная скорость и вездесущее цифровое присутствие.",
       sections: [
@@ -492,7 +502,7 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
     },
     pt: {
       serviceName: "Webs Imersivas",
-      tagline: "Experiências Digitais que\nCativam e Convertem",
+      tagline: "Experiências Digitais que\\nCativam e Convertem",
       description:
         "Construímos plataformas web de alto impacto para PMEs e comércios locais que querem competir com os grandes: design premium, velocidade nativa e presença digital onipresente.",
       sections: [
@@ -553,11 +563,11 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
    Route: /services/modernization
    ========================================================= */
 
-export function ModernizationPage({ lang = "es" }: { lang?: string }) {
+export function ModernizationPage({ lang = "es" }: { lang?: string }): JSX.Element {
   const content = {
     es: {
       serviceName: "Modernización",
-      tagline: "Transmutación de Sistemas\nLegacy en Arquitecturas de Élite",
+      tagline: "Transmutación de Sistemas\\nLegacy en Arquitecturas de Élite",
       description:
         "Convertimos infraestructuras tecnológicas obsoletas en plataformas de alto rendimiento. Eliminamos la deuda técnica, modernizamos el stack y preparamos tu empresa para el 2026 y más allá.",
       sections: [
@@ -609,7 +619,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
     },
     en: {
       serviceName: "Modernization",
-      tagline: "Transmutation of Legacy Systems\ninto Elite Architectures",
+      tagline: "Transmutation of Legacy Systems\\ninto Elite Architectures",
       description:
         "We convert obsolete technology infrastructures into high-performance platforms. We eliminate technical debt, modernize the stack, and prepare your company for 2026 and beyond.",
       sections: [
@@ -661,7 +671,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
     },
     zh: {
       serviceName: "现代化",
-      tagline: "将遗留系统转变为\n精英架构",
+      tagline: "将遗留系统转变为\\n精英架构",
       description:
         "我们将过时的技术基础设施转化为高性能平台。消除技术债务，现代化技术栈，为您的公司做好迎接2026年及未来的准备。",
       sections: [
@@ -713,7 +723,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
     },
     ru: {
       serviceName: "Модернизация",
-      tagline: "Трансмутация Устаревших Систем\nв Элитные Архитектуры",
+      tagline: "Трансмутация Устаревших Систем\\nв Элитные Архитектуры",
       description:
         "Мы преобразуем устаревшие технологические инфраструктуры в высокопроизводительные платформы. Устраняем технический долг, модернизируем стек и готовим вашу компанию к 2026 году и далее.",
       sections: [
@@ -765,7 +775,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
     },
     pt: {
       serviceName: "Modernização",
-      tagline: "Transmutação de Sistemas Legacy\nem Arquiteturas de Elite",
+      tagline: "Transmutação de Sistemas Legacy\\nem Arquiteturas de Elite",
       description:
         "Convertemos infraestruturas tecnológicas obsoletas em plataformas de alto desempenho. Eliminamos a dívida técnica, modernizamos o stack e preparamos sua empresa para 2026 e além.",
       sections: [
@@ -820,3 +830,18 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
   const c = content[lang as keyof typeof content] ?? content.es;
   return <ServicePage {...c} serviceName={c.serviceName} lang={lang} />;
 }
+'''
+
+output_path = "src/pages/service-pages.tsx"
+with open(output_path, "w", encoding="utf-8") as f:
+    f.write(content)
+
+print(f"SUCCESS: Written {len(content)} chars to {output_path}")
+
+# Verify
+with open(output_path, "r", encoding="utf-8") as f:
+    verify = f.read()
+exports = [line.strip() for line in verify.split("\n") if line.strip().startswith("export function")]
+print(f"Exports found ({len(exports)}):")
+for e in exports:
+    print(f"  {e}")

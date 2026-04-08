@@ -32,12 +32,13 @@ interface ServiceSection {
 
 interface ServicePageProps {
   serviceName: string;
-  serviceSlug: string;
+  serviceSlug?: string;
   tagline: string;
   description: string;
   sections: ServiceSection[];
   accentColor?: string;
   lang?: string;
+  customHero?: React.ReactNode;
 }
 
 
@@ -48,6 +49,7 @@ export function ServicePage({
   description,
   sections,
   lang = "es",
+  customHero,
 }: ServicePageProps) {
   const navigate = useNavigate();
 
@@ -69,16 +71,18 @@ export function ServicePage({
 
   return (
     <div className="bg-white min-h-screen">
-      <HeroFuturistic
-        serviceName={serviceName}
-        tagline={tagline.replace(/\n/g, " ")}
-        description={description}
-        videoSrc="/12.mp4"
-        lang={lang}
-        onBackClick={handleBack}
-        onCtaClick={handleCta}
-        onExploreClick={handleExplore}
-      />
+      {customHero ? customHero : (
+        <HeroFuturistic
+          serviceName={serviceName}
+          tagline={tagline.replace(/\n/g, " ")}
+          description={description}
+          videoSrc="/12.mp4"
+          lang={lang}
+          onBackClick={handleBack}
+          onCtaClick={handleCta}
+          onExploreClick={handleExplore}
+        />
+      )}
 
       {/* Replaced sections with TextScrollAnimation */}
       <div id="service-sections">

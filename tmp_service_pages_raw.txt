@@ -1,0 +1,1020 @@
+﻿import React from "react";
+import { ServicePage } from "../components/ui/service-page";
+
+export function AIAutomationPage({ lang = "es" }: { lang?: string }) {
+  const content = {
+    es: {
+      serviceName: "AutomatizaciÃ³n IA",
+      tagline: "Agentes Inteligentes que\nTrabajan para su Ã‰xito",
+      description:
+        "DiseÃ±amos ecosistemas de agentes de IA de Ã©lite que automatizan procesos crÃ­ticos, toman decisiones autÃ³nomas y escalan operaciones mÃ¡s allÃ¡ de los lÃ­mites humanos.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80",
+          subheading: "Multi-Agente",
+          heading: "OrquestraciÃ³n AutÃ³noma",
+          bodyTitle: "Sistemas que piensan y actÃºan",
+          bodyText1:
+            "Nuestros agentes multimodelo coordinan tareas complejas entre departamentos: ventas, soporte, operaciones y anÃ¡lisis, sin intervenciÃ³n humana constante.",
+          bodyText2:
+            "Integramos modelos GPT-4, Claude y Gemini con sus sistemas existentes para crear un cerebro operativo que funciona 24/7.",
+          ctaLabel: "Ver Demo",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&q=80",
+          subheading: "RAG & Memoria",
+          heading: "IA con Contexto de Negocio",
+          bodyTitle: "Su empresa como una base de conocimiento viva",
+          bodyText1:
+            "Implementamos sistemas RAG (Retrieval-Augmented Generation) que convierten su documentaciÃ³n, CRM y datos histÃ³ricos en el contexto que su IA necesita.",
+          bodyText2:
+            "El resultado: respuestas precisas, relevantes y especÃ­ficas para su industria en lugar de respuestas genÃ©ricas de modelos base.",
+          ctaLabel: "Saber MÃ¡s",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=80",
+          subheading: "ROI",
+          heading: "Rentabilidad desde el Primer DÃ­a",
+          bodyTitle: "Resultados medibles, no promesas",
+          bodyText1:
+            "Cada despliegue de IA incluye mÃ©tricas de impacto: horas ahorradas, costos reducidos, errores eliminados. Nuestros clientes reportan 60-80% de reducciÃ³n en tareas repetitivas.",
+          bodyText2:
+            "Comenzamos con una prueba piloto de 30 dÃ­as para validar el valor antes de escalar a toda la organizaciÃ³n.",
+          ctaLabel: "Iniciar Proyecto",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=1600&q=80",
+          subheading: "Voz e InteracciÃ³n",
+          heading: "Agentes de Voz con IA",
+          bodyTitle: "ComunicaciÃ³n fluida y natural 24/7",
+          bodyText1: "Implementamos sistemas de voz inteligentes que gestionan llamadas entrantes y salientes con lenguaje natural, resolviendo hasta el 70% de las consultas sin operadores.",
+          bodyText2: "IntegraciÃ³n directa con su PBX o sistemas en la nube para una experiencia telefÃ³nica sin esperas.",
+          ctaLabel: "Escuchar Demo",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1527430253228-e903f48ea317?w=1600&q=80",
+          subheading: "VisiÃ³n",
+          heading: "VisiÃ³n Artificial y OCR",
+          bodyTitle: "Su IA ahora puede ver",
+          bodyText1: "Automatizamos el procesamiento de documentos, facturas y vigilancia mediante modelos de visiÃ³n que extraen datos con un 99.9% de precisiÃ³n.",
+          bodyText2: "Ahorre miles de horas en entrada de datos manual y procesamiento de formularios complejos.",
+          ctaLabel: "Ver Casos",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1551288049-bbdac8626ad1?w=1600&q=80",
+          subheading: "AnÃ¡lisis",
+          heading: "Modelos Predictivos",
+          bodyTitle: "Anticipe el futuro de su negocio",
+          bodyText1: "Desarrollamos modelos de forecasting que predicen la demanda, la fuga de clientes y anomalÃ­as en las operaciones basÃ¡ndose en datos histÃ³ricos.",
+          bodyText2: "Tome decisiones basadas en proyecciones matemÃ¡ticas, no en suposiciones.",
+          ctaLabel: "Analizar Datos",
+        },
+      ],
+    },
+    en: {
+      serviceName: "AI Automation",
+      tagline: "Intelligent Agents\nWorking for Your Success",
+      description:
+        "We design elite AI agent ecosystems that automate critical processes, make autonomous decisions, and scale operations beyond human limits.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80",
+          subheading: "Multi-Agent",
+          heading: "Autonomous Orchestration",
+          bodyTitle: "Systems that think and act",
+          bodyText1:
+            "Our multi-model agents coordinate complex tasks across departments: sales, support, operations, and analyticsâ€”without constant human intervention.",
+          bodyText2:
+            "We integrate GPT-4, Claude, and Gemini models with your existing systems to create a 24/7 operational brain.",
+          ctaLabel: "Watch Demo",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&q=80",
+          subheading: "RAG & Memory",
+          heading: "Business-Context AI",
+          bodyTitle: "Your company as a living knowledge base",
+          bodyText1:
+            "We implement RAG (Retrieval-Augmented Generation) systems that turn your documentation, CRM, and historical data into the context your AI needs.",
+          bodyText2:
+            "The result: accurate, relevant, industry-specific answers instead of generic LLM talk.",
+          ctaLabel: "Learn More",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=80",
+          subheading: "Efficiency",
+          heading: "ROI from Day 1",
+          bodyTitle: "Measurable results, not promises",
+          bodyText1:
+            "Every AI deployment includes impact metrics: hours saved, costs reduced, errors eliminated. Our clients report 60-80% reduction in repetitive tasks.",
+          bodyText2:
+            "We start with a 30-day trial to validate value before scaling across the entire organization.",
+          ctaLabel: "Start Pilot",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=1600&q=80",
+          subheading: "Voice & Interaction",
+          heading: "AI Voice Agents",
+          bodyTitle: "24/7 natural communication",
+          bodyText1: "We deploy intelligent audio systems that handle inbound and outbound calls using natural language, resolving up to 70% of inquiries without operators.",
+          bodyText2: "Direct integration with your PBX or cloud systems for a seamless, wait-free phone experience.",
+          ctaLabel: "Listen to Demo",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1527430253228-e903f48ea317?w=1600&q=80",
+          subheading: "Vision",
+          heading: "Computer Vision & OCR",
+          bodyTitle: "Your AI can now see",
+          bodyText1: "We automate document processing, invoicing, and surveillance using vision models that extract data with 99.9% accuracy.",
+          bodyText2: "Save thousands of hours on manual data entry and complex form processing.",
+          ctaLabel: "See Cases",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1551288049-bbdac8626ad1?w=1600&q=80",
+          subheading: "Analytics",
+          heading: "Predictive Models",
+          bodyTitle: "Anticipate your business future",
+          bodyText1: "We develop forecasting models that predict demand, customer churn and operational anomalies based on historical data.",
+          bodyText2: "Make decisions based on mathematical projections, not assumptions.",
+          ctaLabel: "Analyze Data",
+        },
+      ],
+    },
+    zh: {
+      serviceName: "äººå·¥æ™ºèƒ½è‡ªå‹•åŒ–",
+      tagline: "ç‚ºæ‚¨é«˜æ•ˆå·¥ä½œçš„\nå…¨å¤©å€™æ™ºèƒ½ä»£ç†",
+      description:
+        "æˆ‘å€‘è‡ªä¸»è¨­è¨ˆé ‚å°–çš„äººå·¥æ™ºèƒ½ä»£ç†ç”Ÿæ…‹ç³»çµ±ï¼Œå°ˆæ³¨æ–¼è‡ªå‹•åŒ–æ ¸å¿ƒæ¥­å‹™æµç¨‹ã€åŸ·è¡Œè‡ªä¸»æ±ºç­–ã€ä¸¦çªç ´äººåŠ›é™åˆ¶å¯¦ç¾ç„¡é™åº¦çš„è¦æ¨¡æ“´å±•ã€‚",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80",
+          subheading: "å¤šä»£ç†ç³»çµ±",
+          heading: "è‡ªä¸»ç·¨æŽ’æž¶æ§‹",
+          bodyTitle: "å…·å‚™æ·±åº¦æ€è€ƒèˆ‡éˆæ´»è¡Œå‹•çš„ç³»çµ±",
+          bodyText1:
+            "æˆ‘å€‘çš„å¤šæ¨¡åž‹ä»£ç†ç”±å¤šç¶­åº¦ç¥žç¶“ç¶²çµ¡é©…å‹•ï¼Œèƒ½ç²¾æº–å”èª¿éŠ·å”®ã€å®¢æˆ¶æ”¯æ´ã€ç‡Ÿé‹åŠæ•¸æ“šåˆ†æžç­‰è·¨éƒ¨é–€çš„è¤‡é›œä»»å‹™â€”â€”çœŸæ­£å¯¦ç¾ç„¡äººå·¥å¹²é çš„è‡ªå‹•åŒ–é‹ä½œã€‚",
+          bodyText2:
+            "æˆ‘å€‘å°‡ GPT-4ã€Claude å’Œ Gemini ç­‰å‰æ²¿æ¨¡åž‹èˆ‡æ‚¨çš„ä¼æ¥­ç¾æœ‰æ·±åº¦ç³»çµ±å®Œç¾Žæ•´åˆï¼Œæ§‹å»ºä¸€å€‹ 24/7 æŒçºŒè‡ªæˆ‘é€²åŒ–çš„ä¼æ¥­æ™ºèƒ½é‹ç®—å¤§è…¦ã€‚",
+          ctaLabel: "æŸ¥çœ‹ç¾å ´æ¼”ç¤º",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&q=80",
+          subheading: "RAG èˆ‡ æ•¸æ“šè¨˜æ†¶",
+          heading: "ä¼æ¥­ç´šä¸Šä¸‹æ–‡ AI",
+          bodyTitle: "å°‡æ‚¨çš„ä¼æ¥­æ•¸æ“šè½‰åŒ–ç‚ºå‹•æ…‹æ™ºåº«",
+          bodyText1:
+            "æˆ‘å€‘å¯¦æ–½æœ€å…ˆé€²çš„ RAGï¼ˆæª¢ç´¢å¢žå¼·ç”Ÿæˆï¼‰ç³»çµ±ï¼Œå°‡æ‚¨çš„å°ˆåˆ©æ–‡æª”ã€CRM ç´€éŒ„å’Œæ­·å²å¤§æ•¸æ“šè½‰åŒ–ç‚º AI é‹ç®—æ‰€éœ€çš„é—œéµä¸Šä¸‹æ–‡ï¼Œç¢ºä¿è¼¸å‡ºçš„æ¯ä¸€é …æ±ºç­–éƒ½å…·å‚™å¯¦éš›æ¥­å‹™ä¾æ“šã€‚",
+          bodyText2:
+            "æœ€çµ‚æˆæžœï¼šæä¾›åŸºæ–¼è¡Œæ¥­æ·±åº¦çš„ç²¾æº–å›žæ‡‰ï¼Œè€ŒéžåŸºç¤Žå¤§èªžè¨€æ¨¡åž‹æ‰€ç”¢ç”Ÿçš„æ³›æ³›è€Œè«–ã€‚é€™æ˜¯å°ˆå±¬æ–¼æ‚¨çš„è¡Œæ¥­ç«¶çˆ­å„ªå‹¢ã€‚",
+          ctaLabel: "æ·±åº¦äº†è§£æŠ€è¡“",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=80",
+          subheading: "æŠ•è³‡å›žå ±çŽ‡",
+          heading: "é¦–æ—¥å³åˆ»è¦‹æ•ˆçš„ ROI",
+          bodyTitle: "ä»¥æ•¸æ“šèªªè©±çš„å¯¦éš›æˆæžœï¼Œè€Œéžç©ºæ´žæ‰¿è«¾",
+          bodyText1:
+            "æ¯ä¸€é … AI ä½ˆç½²å‡åŒ…å«åš´æ ¼çš„å½±éŸ¿åŠ›æŒ‡æ¨™ï¼šé¡¯è‘—ç¯€çœçš„äººåŠ›å·¥æ™‚ã€å¤§å¹…é™ä½Žçš„ç‡Ÿé‹æˆæœ¬ã€ä»¥åŠäººç‚ºéŒ¯èª¤çš„å¾¹åº•æ¶ˆé™¤ã€‚æˆ‘å€‘çš„å®¢æˆ¶å¹³å‡å ±å‘Šå¯æ¸›å°‘ 60-80% çš„é‡è¤‡æ€§ä»»å‹™ã€‚",
+          bodyText2:
+            "æˆ‘å€‘å¯¦è¡Œ 30 å¤©çš„é«˜æ•ˆè©¦é©—è¨ˆåŠƒï¼Œåœ¨å…¨é¢æ“´å±•è‡³æ•´å€‹çµ„ç¹”ä¹‹å‰ï¼Œä»¥å…·é«”æ•¸æ“šé©—è­‰æŠ€è¡“å¸¶ä¾†çš„å•†æ¥­åƒ¹å€¼ã€‚",
+          ctaLabel: "å•Ÿå‹•è©¦é©—é …ç›®",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=1600&q=80",
+          subheading: "èªžéŸ³èˆ‡äº’å‹•",
+          heading: "äººå·¥æ™ºèƒ½èªžéŸ³ä»£ç†",
+          bodyTitle: "å…¨å¤©å€™è‡ªç„¶çš„å“ç‰Œæºé€šé«”é©—",
+          bodyText1: "æˆ‘å€‘éƒ¨ç½²æ“æœ‰æ¥µé«˜è‡ªç„¶èªžè¨€ç†è§£ï¼ˆNLUï¼‰èƒ½åŠ›çš„èªžéŸ³ç³»çµ±ï¼Œå¯æµæš¢è™•ç†è¤‡é›œçš„å‘¼å…¥èˆ‡å‘¼å‡ºé›»è©±ä»»å‹™ï¼Œåœ¨ç„¡éœ€äººå·¥ä»‹å…¥çš„æƒ…æ³ä¸‹è§£æ±ºé«˜é” 70% çš„å®¢æˆ¶è«®è©¢ã€‚",
+          bodyText2: "èˆ‡æ‚¨çš„ PBX æˆ–é›²ç«¯é€šä¿¡ç³»çµ±ç›´æŽ¥é›†æˆï¼Œç‚ºæ‚¨çš„å®¢æˆ¶æä¾›ç„¡éœ€æŽ’éšŠã€åæ‡‰è¿…é€Ÿä¸”æ¥µè‡´æµæš¢çš„å“ç‰Œå°è©±é«”é©—ã€‚",
+          ctaLabel: "è†è½éŸ³é »æ¼”ç¤º",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1527430253228-e903f48ea317?w=1600&q=80",
+          subheading: "è¦–è¦ºè­˜åˆ¥",
+          heading: "è¨ˆç®—æ©Ÿè¦–è¦ºèˆ‡æ™ºèƒ½ OCR",
+          bodyTitle: "è³¦äºˆæ‚¨çš„ AI è¦–è¦ºæ´žå¯ŸåŠ›",
+          bodyText1: "æˆ‘å€‘åˆ©ç”¨å°–ç«¯çš„è¨ˆç®—æ©Ÿè¦–è¦ºæ¨¡åž‹è‡ªå‹•åŒ–æ–‡æª”è™•ç†ã€è‡ªå‹•åŒ–ç™¼ç¥¨å¯©æ ¸åŠå¤§è¦æ¨¡è¦–è¦ºç›£æŽ§ï¼Œæ•¸æ“šæå–æº–ç¢ºçŽ‡å¯é”é©šäººçš„ 99.9% ç´šåˆ¥ã€‚",
+          bodyText2: "é€™å°‡åœ¨ç¹ç‘£çš„æ‰‹å·¥æ•¸æ“šéŒ„å…¥å’Œå¾©é›œçš„è¡¨å–®è™•ç†ç’°ç¯€ä¸­ï¼Œç‚ºæ‚¨çš„åœ˜éšŠç¯€çœæ•¸åƒå°æ™‚çš„æ ¸å¿ƒç”Ÿç”¢åŠ›ã€‚",
+          ctaLabel: "æŸ¥çœ‹æŠ€è¡“æ¡ˆä¾‹",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1551288049-bbdac8626ad1?w=1600&q=80",
+          subheading: "æ·±åº¦åˆ†æž",
+          heading: "é æ¸¬æ€§æ™ºèƒ½æ¨¡åž‹",
+          bodyTitle: "ç²¾æº–é è¦‹æ‚¨æ¥­å‹™çš„æœªä¾†èµ°å‘",
+          bodyText1: "æˆ‘å€‘é–‹ç™¼å¼·å¤§çš„é æ¸¬æ¨¡åž‹ï¼ŒåŸºæ–¼æµ·é‡æ­·å²æ•¸æ“šç²¾æº–é æ¸¬å¸‚å ´éœ€æ±‚ã€å®¢æˆ¶æµå¤±é¢¨éšªï¼ˆChurn Rateï¼‰ä»¥åŠç‡Ÿé‹ä¸­çš„ç´°å¾®ç•°å¸¸ï¼Œè®“æ‚¨ç«‹æ–¼ä¸æ•—ä¹‹åœ°ã€‚",
+          bodyText2: "è®“æ¯ä¸€é …å•†æ¥­ç­–ç•¥éƒ½åŸºæ–¼åš´è¬¹çš„æ•¸å­¸æŠ•å½±è€Œéžä¸»è§€å‡è¨­ï¼Œå¼•é ˜æ‚¨çš„ä¼æ¥­é‚å‘æ•¸æ“šé©…å‹•çš„æ–°é«˜åº¦ã€‚",
+          ctaLabel: "åˆ†æžæ•¸æ“šè³‡ç”¢",
+        },
+      ],
+    },
+    ru: {
+      serviceName: "Ð˜Ð˜ ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ð·Ð°Ñ†Ð¸Ñ",
+      tagline: "Ð˜Ð½Ñ‚ÐµÐ»Ð»ÐµÐºÑ‚ÑƒÐ°Ð»ÑŒÐ½Ñ‹Ðµ Ð°Ð³ÐµÐ½Ñ‚Ñ‹,\nÑ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð¸Ðµ Ð½Ð° Ð²Ð°Ñˆ ÑƒÑÐ¿ÐµÑ…",
+      description:
+        "ÐœÑ‹ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð¸Ñ€ÑƒÐµÐ¼ Ð²Ñ‹ÑÐ¾ÐºÐ¾Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ñ‡Ð½Ñ‹Ðµ ÑÐºÐ¾ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ Ð˜Ð˜-Ð°Ð³ÐµÐ½Ñ‚Ð¾Ð², ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ð·Ð¸Ñ€ÑƒÑŽÑ‚ ÐºÑ€Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ð±Ð¸Ð·Ð½ÐµÑ-Ð¿Ñ€Ð¾Ñ†ÐµÑÑÑ‹, Ð¿Ñ€Ð¸Ð½Ð¸Ð¼Ð°ÑŽÑ‚ Ð°Ð²Ñ‚Ð¾Ð½Ð¾Ð¼Ð½Ñ‹Ðµ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ Ð¸ Ð¼Ð°ÑÑˆÑ‚Ð°Ð±Ð¸Ñ€ÑƒÑŽÑ‚ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ð°Ð¼Ð¸ Ñ‡ÐµÐ»Ð¾Ð²ÐµÑ‡ÐµÑÐºÐ¸Ñ… Ð²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ÑÑ‚ÐµÐ¹.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80",
+          subheading: "ÐœÑƒÐ»ÑŒÑ‚Ð¸-Ð°Ð³ÐµÐ½Ñ‚ÑÐºÐ¸Ðµ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹",
+          heading: "ÐÐ²Ñ‚Ð¾Ð½Ð¾Ð¼Ð½Ð°Ñ Ð¾Ñ€ÐºÐµÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ",
+          bodyTitle: "Ð¡Ð¸ÑÑ‚ÐµÐ¼Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð´ÑƒÐ¼Ð°ÑŽÑ‚ Ð¸ Ð´ÐµÐ¹ÑÑ‚Ð²ÑƒÑŽÑ‚",
+          bodyText1:
+            "ÐÐ°ÑˆÐ¸ Ð¼ÑƒÐ»ÑŒÑ‚Ð¸Ð¼Ð¾Ð´Ð°Ð»ÑŒÐ½Ñ‹Ðµ Ð°Ð³ÐµÐ½Ñ‚Ñ‹ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð¸Ñ€ÑƒÑŽÑ‚ ÑÐ»Ð¾Ð¶Ð½ÐµÐ¹ÑˆÐ¸Ðµ Ð·Ð°Ð´Ð°Ñ‡Ð¸ Ð¼ÐµÐ¶Ð´Ñƒ Ð¾Ñ‚Ð´ÐµÐ»Ð°Ð¼Ð¸: Ð¿Ñ€Ð¾Ð´Ð°Ð¶Ð¸, Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶ÐºÐ°, Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ð¸ Ð°Ð½Ð°Ð»Ð¸Ñ‚Ð¸ÐºÐ° â€” Ð±ÐµÐ· ÐºÐ°ÐºÐ¾Ð³Ð¾-Ð»Ð¸Ð±Ð¾ ÑƒÑ‡Ð°ÑÑ‚Ð¸Ñ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐºÐ°.",
+          bodyText2:
+            "ÐœÑ‹ Ð¸Ð½Ñ‚ÐµÐ³Ñ€Ð¸Ñ€ÑƒÐµÐ¼ Ð¼Ð¾Ð´ÐµÐ»Ð¸ GPT-4, Claude Ð¸ Gemini Ñ Ð²Ð°ÑˆÐ¸Ð¼Ð¸ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ð¼Ð¸ ÑÐ¸ÑÑ‚ÐµÐ¼Ð°Ð¼Ð¸ Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ ÐµÐ´Ð¸Ð½Ð¾Ð³Ð¾ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ð¾Ð³Ð¾ Ð¼Ð¾Ð·Ð³Ð°, Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰ÐµÐ³Ð¾ Ð² Ñ€ÐµÐ¶Ð¸Ð¼Ðµ 24/7.",
+          ctaLabel: "Ð¡Ð¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ð´ÐµÐ¼Ð¾",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1600&q=80",
+          subheading: "RAG Ð¸ ÐŸÐ°Ð¼ÑÑ‚ÑŒ",
+          heading: "Ð˜Ð˜ Ñ Ð±Ð¸Ð·Ð½ÐµÑ-ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚Ð¾Ð¼",
+          bodyTitle: "Ð’Ð°ÑˆÐ° ÐºÐ¾Ð¼Ð¿Ð°Ð½Ð¸Ñ ÐºÐ°Ðº Ð¶Ð¸Ð²Ð°Ñ Ð±Ð°Ð·Ð° Ð·Ð½Ð°Ð½Ð¸Ð¹",
+          bodyText1:
+            "ÐœÑ‹ Ð²Ð½ÐµÐ´Ñ€ÑÐµÐ¼ Ð¿ÐµÑ€ÐµÐ´Ð¾Ð²Ñ‹Ðµ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ RAG (Retrieval-Augmented Generation) ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¿Ñ€ÐµÐ²Ñ€Ð°Ñ‰Ð°ÑŽÑ‚ Ð²Ð°ÑˆÑƒ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸ÑŽ, CRM Ð¸ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ð¼Ð°ÑÑÐ¸Ð²Ñ‹ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð² Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ñ‹Ð¹ ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚ Ð´Ð»Ñ Ð˜Ð˜.",
+          bodyText2:
+            "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚: Ñ‚Ð¾Ñ‡Ð½Ñ‹Ðµ, Ñ€ÐµÐ»ÐµÐ²Ð°Ð½Ñ‚Ð½Ñ‹Ðµ Ð¸ Ð³Ð»ÑƒÐ±Ð¾ÐºÐ¾ Ð°Ð´Ð°Ð¿Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ðµ Ð¾Ñ‚Ð²ÐµÑ‚Ñ‹, ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ðµ Ð²Ð°ÑˆÐµÐ¹ Ð¸Ð½Ð´ÑƒÑÑ‚Ñ€Ð¸Ð¸, Ð²Ð¼ÐµÑÑ‚Ð¾ ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð½Ñ‹Ñ… ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð² Ð±Ð°Ð·Ð¾Ð²Ñ‹Ñ… ÑÐ·Ñ‹ÐºÐ¾Ð²Ñ‹Ñ… Ð¼Ð¾Ð´ÐµÐ»ÐµÐ¹.",
+          ctaLabel: "Ð£Ð·Ð½Ð°Ñ‚ÑŒ Ð±Ð¾Ð»ÑŒÑˆÐµ",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=80",
+          subheading: "ROI",
+          heading: "ÐžÐºÑƒÐ¿Ð°ÐµÐ¼Ð¾ÑÑ‚ÑŒ Ñ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ Ð´Ð½Ñ",
+          bodyTitle: "Ð˜Ð·Ð¼ÐµÑ€Ð¸Ð¼Ñ‹Ðµ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹, Ð° Ð½Ðµ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ Ð¾Ð±ÐµÑ‰Ð°Ð½Ð¸Ñ",
+          bodyText1:
+            "ÐšÐ°Ð¶Ð´Ð¾Ðµ Ð²Ð½ÐµÐ´Ñ€ÐµÐ½Ð¸Ðµ Ð˜Ð˜ Ð²ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ Ð¼ÐµÑ‚Ñ€Ð¸ÐºÐ¸ Ð²Ð¾Ð·Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ: ÑÑÐºÐ¾Ð½Ð¾Ð¼Ð»ÐµÐ½Ð½Ñ‹Ðµ Ñ‡Ð°ÑÑ‹, ÑÐ½Ð¸Ð¶ÐµÐ½Ð½Ñ‹Ðµ Ð·Ð°Ñ‚Ñ€Ð°Ñ‚Ñ‹, Ð¸ÑÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ñ‡ÐµÐ»Ð¾Ð²ÐµÑ‡ÐµÑÐºÐ¸Ñ… Ð¾ÑˆÐ¸Ð±Ð¾Ðº. ÐÐ°ÑˆÐ¸ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ñ‹ ÑÐ¾Ð¾Ð±Ñ‰Ð°ÑŽÑ‚ Ð¾ ÑÐ¾ÐºÑ€Ð°Ñ‰ÐµÐ½Ð¸Ð¸ Ñ€ÑƒÑ‚Ð¸Ð½Ð½Ñ‹Ñ… Ð·Ð°Ð´Ð°Ñ‡ Ð½Ð° 60â€“80%.",
+          bodyText2:
+            "ÐœÑ‹ Ð½Ð°Ñ‡Ð¸Ð½Ð°ÐµÐ¼ Ñ 30-Ð´Ð½ÐµÐ²Ð½Ð¾Ð³Ð¾ Ð¿Ð¸Ð»Ð¾Ñ‚Ð½Ð¾Ð³Ð¾ Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð° Ð´Ð»Ñ Ð¿Ð¾Ð´Ñ‚Ð²ÐµÑ€Ð¶Ð´ÐµÐ½Ð¸Ñ Ñ†ÐµÐ½Ð½Ð¾ÑÑ‚Ð¸ Ð¿ÐµÑ€ÐµÐ´ Ð¿Ð¾Ð»Ð½Ð¾Ð¼Ð°ÑÑˆÑ‚Ð°Ð±Ð½Ñ‹Ð¼ Ñ€Ð°Ð·Ð²ÐµÑ€Ñ‚Ñ‹Ð²Ð°Ð½Ð¸ÐµÐ¼ Ð²Ð¾ Ð²ÑÐµÐ¹ Ð¾Ñ€Ð³Ð°Ð½Ð¸Ð·Ð°Ñ†Ð¸Ð¸.",
+          ctaLabel: "Ð—Ð°Ð¿ÑƒÑÑ‚Ð¸Ñ‚ÑŒ Ð¿Ñ€Ð¾ÐµÐºÑ‚",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=1600&q=80",
+          subheading: "Ð“Ð¾Ð»Ð¾Ñ Ð¸ Ð§Ð°Ñ‚",
+          heading: "Ð“Ð¾Ð»Ð¾ÑÐ¾Ð²Ñ‹Ðµ Ð˜Ð˜-Ð°Ð³ÐµÐ½Ñ‚Ñ‹",
+          bodyTitle: "Ð•ÑÑ‚ÐµÑÑ‚Ð²ÐµÐ½Ð½Ð°Ñ ÐºÐ¾Ð¼Ð¼ÑƒÐ½Ð¸ÐºÐ°Ñ†Ð¸Ñ 24/7",
+          bodyText1: "ÐœÑ‹ Ð²Ð½ÐµÐ´Ñ€ÑÐµÐ¼ Ð¸Ð½Ñ‚ÐµÐ»Ð»ÐµÐºÑ‚ÑƒÐ°Ð»ÑŒÐ½Ñ‹Ðµ Ð°ÑƒÐ´Ð¸Ð¾ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¾Ð±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÑŽÑ‚ Ð²Ñ…Ð¾Ð´ÑÑ‰Ð¸Ðµ Ð¸ Ð¸ÑÑ…Ð¾Ð´ÑÑ‰Ð¸Ðµ Ð·Ð²Ð¾Ð½ÐºÐ¸ Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸ÐµÐ¼ ÐµÑÑ‚ÐµÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð³Ð¾ ÑÐ·Ñ‹ÐºÐ°, Ñ€ÐµÑˆÐ°Ñ Ð´Ð¾ 70% Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ð¹ Ð±ÐµÐ· Ð¾Ð¿ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð¾Ð².",
+          bodyText2: "ÐŸÑ€ÑÐ¼Ð°Ñ Ð¸Ð½Ñ‚ÐµÐ³Ñ€Ð°Ñ†Ð¸Ñ Ñ Ð²Ð°ÑˆÐµÐ¹ ÐÐ¢Ð¡ Ð¸Ð»Ð¸ Ð¾Ð±Ð»Ð°Ñ‡Ð½Ñ‹Ð¼Ð¸ ÑÐ¸ÑÑ‚ÐµÐ¼Ð°Ð¼Ð¸ ÑÐ²ÑÐ·Ð¸ Ð´Ð»Ñ Ð±ÐµÑÐ¿Ñ€ÐµÐ¿ÑÑ‚ÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¾Ð±ÑÐ»ÑƒÐ¶Ð¸Ð²Ð°Ð½Ð¸Ñ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð² Ð±ÐµÐ· Ð¾Ð¶Ð¸Ð´Ð°Ð½Ð¸Ñ Ð½Ð° Ð»Ð¸Ð½Ð¸Ð¸.",
+          ctaLabel: "Ð¡Ð»ÑƒÑˆÐ°Ñ‚ÑŒ Ð´ÐµÐ¼Ð¾",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1527430253228-e903f48ea317?w=1600&q=80",
+          subheading: "Vision",
+          heading: "ÐšÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€Ð½Ð¾Ðµ Ð·Ñ€ÐµÐ½Ð¸Ðµ Ð¸ OCR",
+          bodyTitle: "Ð’Ð°Ñˆ Ð˜Ð˜ Ð¾Ð±Ñ€ÐµÑ‚Ð°ÐµÑ‚ Ð·Ñ€ÐµÐ½Ð¸Ðµ",
+          bodyText1: "ÐœÑ‹ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ð·Ð¸Ñ€ÑƒÐµÐ¼ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÑƒ Ð´Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð², ÑÑ‡ÐµÑ‚Ð¾Ð² Ð¸ Ð²Ð¸Ð´ÐµÐ¾Ð¼Ð¾Ð½Ð¸Ñ‚Ð¾Ñ€Ð¸Ð½Ð³ Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ Ð¼Ð¾Ð´ÐµÐ»ÐµÐ¹ ÐºÐ¾Ð¼Ð¿ÑŒÑŽÑ‚ÐµÑ€Ð½Ð¾Ð³Ð¾ Ð·Ñ€ÐµÐ½Ð¸Ñ, Ð¸Ð·Ð²Ð»ÐµÐºÐ°ÑŽÑ‰Ð¸Ñ… Ð´Ð°Ð½Ð½Ñ‹Ðµ Ñ Ñ‚Ð¾Ñ‡Ð½Ð¾ÑÑ‚ÑŒÑŽ 99.9%.",
+          bodyText2: "Ð­ÐºÐ¾Ð½Ð¾Ð¼ÑŒÑ‚Ðµ Ñ‚Ñ‹ÑÑÑ‡Ð¸ Ñ€Ð°Ð±Ð¾Ñ‡Ð¸Ñ… Ñ‡Ð°ÑÐ¾Ð² Ð½Ð° Ñ€ÑƒÑ‡Ð½Ð¾Ð¼ Ð²Ð²Ð¾Ð´Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¸ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐµ ÑÐ»Ð¾Ð¶Ð½Ñ‹Ñ… ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ñ… Ñ„Ð¾Ñ€Ð¼.",
+          ctaLabel: "Ð¡Ð¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ ÐºÐµÐ¹ÑÑ‹",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1551288049-bbdac8626ad1?w=1600&q=80",
+          subheading: "ÐÐ½Ð°Ð»Ð¸Ñ‚Ð¸ÐºÐ°",
+          heading: "ÐŸÑ€ÐµÐ´Ð¸ÐºÑ‚Ð¸Ð²Ð½Ñ‹Ðµ Ð¼Ð¾Ð´ÐµÐ»Ð¸",
+          bodyTitle: "ÐŸÑ€ÐµÐ´Ð²Ð¸Ð´ÑŒÑ‚Ðµ Ð±ÑƒÐ´ÑƒÑ‰ÐµÐµ Ð²Ð°ÑˆÐµÐ³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ°",
+          bodyText1: "ÐœÑ‹ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ Ð¼Ð¾Ð´ÐµÐ»Ð¸ Ð¿Ñ€Ð¾Ð³Ð½Ð¾Ð·Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¿Ñ€ÐµÐ´ÑÐºÐ°Ð·Ñ‹Ð²Ð°ÑŽÑ‚ ÑÐ¿Ñ€Ð¾Ñ, Ð¾Ñ‚Ñ‚Ð¾Ðº ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð¾Ð² Ð¸ Ð°Ð½Ð¾Ð¼Ð°Ð»Ð¸Ð¸ Ð² Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸ÑÑ… Ð½Ð° Ð¾ÑÐ½Ð¾Ð²Ðµ Ð¸ÑÑ‚Ð¾Ñ€Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð·Ð° Ð¼Ð½Ð¾Ð³Ð¸Ðµ Ð³Ð¾Ð´Ñ‹.",
+          bodyText2: "ÐŸÑ€Ð¸Ð½Ð¸Ð¼Ð°Ð¹Ñ‚Ðµ ÑÑ‚Ñ€Ð°Ñ‚ÐµÐ³Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ Ñ€ÐµÑˆÐµÐ½Ð¸Ñ, Ð¾ÑÐ½Ð¾Ð²Ð°Ð½Ð½Ñ‹Ðµ Ð½Ð° Ñ‚Ð¾Ñ‡Ð½Ñ‹Ñ… Ð¼Ð°Ñ‚ÐµÐ¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¿Ñ€Ð¾ÐµÐºÑ†Ð¸ÑÑ…, Ð° Ð½Ðµ Ð½Ð° Ð¸Ð½Ñ‚ÑƒÐ¸Ñ‚Ð¸Ð²Ð½Ñ‹Ñ… Ð¿Ñ€ÐµÐ´Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸ÑÑ….",
+          ctaLabel: "ÐÐ½Ð°Ð»Ð¸Ð· Ð´Ð°Ð½Ð½Ñ‹Ñ…",
+        },
+      ],
+    },
+    pt: {
+      serviceName: "AutomaÃ§Ã£o IA",
+      tagline: "Agentes Inteligentes\nTrabalhando por VocÃª",
+      description:
+        "Projetamos ecossistemas de elite com agentes de IA que automatizam processos crÃ­ticos, tomam decisiones autÃ³nomas e escalam operaÃ§Ãµes para alÃ©m dos limites humanos.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80",
+          subheading: "Multi-Agente",
+          heading: "OrquestraÃ§Ã£o AutÃ´noma",
+          bodyTitle: "Sistemas que pensam e agem em tempo real",
+          bodyText1:
+            "Os nossos agentes multi-modelo coordenam tarefas complexas entre departamentos: vendas, suporte, operaÃ
+£o",
+          heading: "Agentes de Voz de IA",
+          bodyTitle: "ComunicaÃ§Ã£o fluÃ­da e natural 24/7",
+          bodyText1: "Implementamos sistemas de voz inteligentes que gerem chamadas de entrada e saÃ­da com processamento de linguagem natural, resolvendo atÃ© 70% das consultas sem necessidade de operadores humanos.",
+          bodyText2: "IntegraÃ§Ã£o direta com o seu PABX ou sistemas cloud para uma experiÃªncia telefÃ´nica premium e sem tempos de espera.",
+          ctaLabel: "Ouvir DemonstraÃ§Ã£o",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1527430253228-e903f48ea317?w=1600&q=80",
+          subheading: "VisÃ£o Computacional",
+          heading: "Computer Vision & OCR",
+          bodyTitle: "A sua inteligÃªncia artificial agora tem visÃ£o",
+          bodyText1: "Automatizamos o processamento de documentos, faturaÃ§Ã£o e vigilÃ¢ncia atravÃ©s de modelos de visÃ£o computacional que extraem dados complexos con uma precisÃ£o cirÃºrgica de 99,9%.",
+          bodyText2: "Poupe milhares de horas em introduÃ§Ã£o manual de datos e processamento de formulÃ¡rios burocrÃ¡ticos.",
+          ctaLabel: "Ver Casos de Sucesso",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/photo-1551288049-bbdac8626ad1?w=1600&q=80",
+          subheading: "AnÃ¡lises",
+          heading: "Modelos Preditivos",
+          bodyTitle: "Antecipe o futuro estratÃ©gico do seu negÃ³cio",
+          bodyText1: "Desenvolvemos modelos de forecasting avanÃ§ados que preveem a procura, o churn de clientes e anomalias operacionais baseando-se em inteligÃªncia de dados histÃ³ricos.",
+          bodyText2: "Tome decisÃµes de alto nÃ­vel baseadas em projeÃ§Ãµes matemÃ¡ticas robustas, e nÃ£o em meras suposiciones.",
+          ctaLabel: "Analisar Dados",
+        },
+      ],
+    },
+  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { serviceName: 'Loading', tagline: 'Loading', description: 'Loading...', sections: [] };
+
+  return <ServicePage {...content} serviceSlug="ai-automation" lang={lang} />;
+}
+
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1677442135703-1787eea5ce01?w=1600&q=80",
+          subheading: "AutomaÃ§Ã£o",
+          heading: "ROI do Dia 1",
+          bodyTitle: "Resultados reais",
+          bodyText1: "A implementaÃ§Ã£o reduz tarefas repetitivas.",
+          bodyText2: "Prova piloto grÃ¡tis.",
+          ctaLabel: "Piloto",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1589254065878-42c9da997008?w=1600&q=80",
+          subheading: "Voz",
+          heading: "Voz de IA",
+          bodyTitle: "InteraÃ§Ãµes naturais",
+          bodyText1: "As respostas podem ser fluÃ­das sem operadores humanos.",
+          bodyText2: "IntegraÃ§Ã£o PABX nas nuvens.",
+          ctaLabel: "Escutar",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1527430253228-e903f48ea317?w=1600&q=80",
+          subheading: "VisÃ£o",
+          heading: "VisÃ£o de Computador",
+          bodyTitle: "ExtrÃ§Ã£o dos papÃ©is",
+          bodyText1: "ExtraÃ­mos dados com 99,99%.",
+          bodyText2: "ExtraÃ§Ã£o sem digitaÃ§Ãµes errÃ´neas.",
+          ctaLabel: "Ver as Fontes",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1551288049-bbdac8626ad1?w=1600&q=80",
+          subheading: "AnÃ¡lises",
+          heading: "Modelos Preditivos",
+          bodyTitle: "Antecipe sua necessidade",
+          bodyText1: "ForneÃ§a preditores com facilidade.",
+          bodyText2: "PrevisÃµes em tempo hÃ¡bil.",
+          ctaLabel: "Projetar os Dados",
+        },
+      ],
+    },
+  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { serviceName: 'Loading', tagline: 'Loading', description: 'Loading...', sections: [] };
+
+  return <ServicePage {...content} serviceSlug="ai-automation" lang={lang} />;
+}
+
+export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
+  const content = {
+    es: {
+      serviceName: "Webs Inmersivas",
+      tagline: "Experiencias Digitales\nque Impactan",
+      description:
+        "Construimos interfaces de nueva generaciÃ³n que combinan animaciÃ³n avanzada, 3D interactivo y UX premium para marcas que quieren destacar.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1639762681485-074b7f938ba0?w=1600&q=80",
+          subheading: "WebGL & 3D",
+          heading: "MÃ¡s allÃ¡ del PÃ­xel",
+          bodyTitle: "Entornos tridimensionales en el navegador",
+          bodyText1:
+            "Usamos Three.js, React Three Fiber y WebGL para crear experiencias 3D interactivas que corren directamente en el navegador, sin plugins.",
+          bodyText2:
+            "Desde showrooms de productos hasta portfolios inmersivos: llevamos tu marca a la tercera dimensiÃ³n.",
+          ctaLabel: "Ver Proyectos",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550751827-4bd374c3f58b?w=1600&q=80",
+          subheading: "AnimaciÃ³n",
+          heading: "Microinteracciones Premium",
+          bodyTitle: "Cada pixel tiene propÃ³sito",
+          bodyText1:
+            "GSAP, Framer Motion y Lenis smooth scroll se combinan para crear transiciones cinematogrÃ¡ficas que guÃ­an al usuario con fluidez y precisiÃ³n.",
+          bodyText2:
+            "El resultado es una interfaz que no solo funciona bien, sino que se siente etÃ©rea y memorable.",
+          ctaLabel: "Ver Demo",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523459-c2f4c699c52e?w=1600&q=80",
+          subheading: "Performance",
+          heading: "Velocidad sin Compromiso",
+          bodyTitle: "Belleza y velocidad coexisten",
+          bodyText1:
+            "Optimizamos cada componente para lograr Core Web Vitals perfectos: LCP < 2.5s, CLS < 0.1, FID < 100ms. La velocidad no es negociable.",
+          bodyText2:
+            "Nuestras webs inmersivas cargan en <2s y mantienen 60fps incluso con efectos visuales complejos.",
+          ctaLabel: "Iniciar Proyecto",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1633356122544-f134324a6cee?w=1600&q=80",
+          subheading: "Realidad Mixta",
+          heading: "WebAR Integrada",
+          bodyTitle: "El mundo real como lienzo",
+          bodyText1: "Llevamos tus productos al espacio fÃ­sico de tus clientes mediante Realidad Aumentada que corre directamente en el navegador mÃ³vil, sin descargar apps.",
+          bodyText2: "Aumenta la tasa de conversiÃ³n permitiendo que los usuarios visualicen productos en su propio entorno.",
+          ctaLabel: "Probar AR",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1617839659905-2079d9465cc0?w=1600&q=80",
+          subheading: "InmersiÃ³n",
+          heading: "Showrooms 360",
+          bodyTitle: "Visitas virtuales de alta fidelidad",
+          bodyText1: "Creamos gemelos digitales y recorridos virtuales interactivos que permiten explorar instalaciones o productos con una calidad visual cinematogrÃ¡fica.",
+          bodyText2: "NavegaciÃ³n intuitiva y puntos de interacciÃ³n inteligentes para una experiencia de venta inmersiva.",
+          ctaLabel: "Entrar",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550684848-fac1c5b4e853?w=1600&q=80",
+          subheading: "Visuals",
+          heading: "Shader Art & FX",
+          bodyTitle: "EstÃ©tica digital de vanguardia",
+          bodyText1: "Desarrollamos efectos visuales personalizados mediante GLSL Shaders que reaccionan a la mÃºsica, al scroll o al movimiento del ratÃ³n.",
+          bodyText2: "DistinciÃ³n visual absoluta que posiciona a tu marca en el top tier de la innovaciÃ³n tecnolÃ³gica.",
+          ctaLabel: "Ver Efectos",
+        },
+      ],
+    },
+    en: {
+      serviceName: "Immersive Webs",
+      tagline: "Digital Experiences\nthat Impact",
+      description:
+        "We build next-generation interfaces combining advanced animation, interactive 3D, and premium UX for brands that want to stand out.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1639762681485-074b7f938ba0?w=1600&q=80",
+          subheading: "WebGL & 3D",
+          heading: "Beyond the Pixel",
+          bodyTitle: "Three-dimensional environments in the browser",
+          bodyText1:
+            "We use Three.js, React Three Fiber and WebGL to create interactive 3D experiences that run directly in the browser, no plugins needed.",
+          bodyText2:
+            "From product showrooms to immersive portfolios: we take your brand into the third dimension.",
+          ctaLabel: "See Projects",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550751827-4bd374c3f58b?w=1600&q=80",
+          subheading: "Animation",
+          heading: "Premium Microinteractions",
+          bodyTitle: "Every pixel has purpose",
+          bodyText1:
+            "GSAP, Framer Motion and Lenis smooth scroll combine to create cinematic transitions that guide users with fluidity and precision.",
+          bodyText2:
+            "The result is an interface that not only works well, but feels ethereal and memorable.",
+          ctaLabel: "See Demo",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523459-c2f4c699c52e?w=1600&q=80",
+          subheading: "Performance",
+          heading: "Speed Without Compromise",
+          bodyTitle: "Beauty and speed coexist",
+          bodyText1:
+            "We optimize every component for perfect Core Web Vitals: LCP < 2.5s, CLS < 0.1, FID < 100ms. Speed is non-negotiable.",
+          bodyText2:
+            "Our immersive webs load in <2s and maintain 60fps even with complex visual effects.",
+          ctaLabel: "Start Project",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1633356122544-f134324a6cee?w=1600&q=80",
+          subheading: "Mixed Reality",
+          heading: "Integrated WebAR",
+          bodyTitle: "The real world as a canvas",
+          bodyText1: "We bring your products into your customers' physical space through Augmented Reality that runs directly in the mobile browser, without downloading apps.",
+          bodyText2: "Increase conversion rates by allowing users to visualize products in their own environment.",
+          ctaLabel: "Try AR",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1617839659905-2079d9465cc0?w=1600&q=80",
+          subheading: "Immersion",
+          heading: "360 Showrooms",
+          bodyTitle: "High-fidelity virtual tours",
+          bodyText1: "We create digital twins and interactive virtual tours that allow exploring facilities or products with cinematic visual quality.",
+          bodyText2: "Intuitive navigation and smart interaction points for an immersive sales experience.",
+          ctaLabel: "Enter",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550684848-fac1c5b4e853?w=1600&q=80",
+          subheading: "Visuals",
+          heading: "Shader Art & FX",
+          bodyTitle: "Vanguard digital aesthetics",
+          bodyText1: "We develop custom visual effects using GLSL Shaders that react to music, scroll, or mouse movement.",
+          bodyText2: "Absolute visual distinction that positions your brand at the top tier of technological innovation.",
+          ctaLabel: "See Effects",
+        },
+      ],
+    },
+
+
+    zh: {
+      serviceName: "æ²‰æµ¸å¼ç¶²ç«™",
+      tagline: "æœ‰å½±éŸ¿åŠ›\nçš„æ•¸ä½é«”é©—",
+      description: "ç‚ºå¸Œæœ›çªç ´æ¡†æž¶çš„å“ç‰Œè€Œè¨­è¨ˆã€‚",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1639762681485-074b7f938ba0?w=1600&q=80",
+          subheading: "WebGL èˆ‡ 3D",
+          heading: "è¶…è¶Šåƒç´ ",
+          bodyTitle: "ä¸‰ç¶­ç©ºé–“",
+          bodyText1: "åŸºæ–¼ Three.js é©…å‹•ç€è¦½å™¨3Dç•Œé¢ã€‚",
+          bodyText2: "ä½¿ç”¢å“å±•ç¤ºå»³å‡åˆ°ä¸‰ç¶­å±¤æ¬¡ã€‚",
+          ctaLabel: "å°ˆæ¡ˆå±•ç¤º",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550751827-4bd374c3f58b?w=1600&q=80",
+          subheading: "å‹•ç•«æ•ˆæžœ",
+          heading: "ç´°å¾®äº’å‹•",
+          bodyTitle: "æ¯å€‹å€å¡Šå‡æœ‰çŽ„æ©Ÿ",
+          bodyText1: "GSAP æµæš¢åˆ‡æ›",
+          bodyText2: "å…·æœ‰é›»å½±æ„Ÿè¦ºçš„é é¢ã€‚",
+          ctaLabel: "ç¤ºç¯„",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523459-c2f4c699c52e?w=1600&q=80",
+          subheading: "ç³»çµ±æ•ˆèƒ½",
+          heading: "æ¥µé€ŸéŸ¿æ‡‰æ•ˆèƒ½",
+          bodyTitle: "ç¾Žæ„Ÿèˆ‡é€Ÿåº¦å…¼å…·",
+          bodyText1: "å®Œç¾Žæ”¯æ´LCPã€‚",
+          bodyText2: "è¼‰å…¥ç„¡é ˆç­‰å¾…å³å¯åŸ·è¡Œ60fpsè¤‡é›œç•«é¢ã€‚",
+          ctaLabel: "é€²è¡Œé–‹ç™¼",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1633356122544-f134324a6cee?w=1600&q=80",
+          subheading: "æ··åˆç¾å¯¦",
+          heading: "æ•´åˆçš„ WebAR",
+          bodyTitle: "èˆ‡ç¾å¯¦ç›¸é‡",
+          bodyText1: "ä¸éœ€è¦é–‹ç™¼åŽŸç”ŸAPPå³æ”¯æ´æ‰‹æ©Ÿå¯¦é«”å¯¦å¢ƒã€‚",
+          bodyText2: "åŠ å¼·è³¼è²·ä¸‹è¨‚æˆåŠŸæ©ŸçŽ‡ã€‚",
+          ctaLabel: "é¦¬ä¸Šå˜—è©¦",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1617839659905-2079d9465cc0?w=1600&q=80",
+          subheading: "æ²‰æµ¸å¼ç©ºé–“",
+          heading: "å…¨å ´æ™¯360åº¦å±•ç¤ºå»³",
+          bodyTitle: "é«˜å“è³ªå°Žè¦½è§£èªª",
+          bodyText1: "è£½ä½œæ‚¨çš„æ•¸ä½åˆ†èº«ï¼Œå¼•å°Žå®¢æˆ¶ç·šä¸Šè§£èªªç”¢å“ã€‚",
+          bodyText2: "è‡ªå‹•ç”Ÿæˆçš„æ™ºèƒ½éŠ·å”®ç³»çµ±ã€‚",
+          ctaLabel: "é€²å…¥",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550684848-fac1c5b4e853?w=1600&q=80",
+          subheading: "é ‚å°–ç¾Žå­¸",
+          heading: "æ•¸ä½æŠ€è¡“å‰æ²¿",
+          bodyTitle: "è¦–è¦ºäº’å‹•éœ‡æ’¼",
+          bodyText1: "è‡ªå®šGLSLæ¸²æŸ“æ•ˆæžœä¸¦é€²è¡Œå„ç¨®è§¸ç™¼äº’å‹•",
+          bodyText2: "å°‡æ‚¨çš„ä¼æ¥­å¸¶å‘é ˜å…ˆè€…çš„è¦–è¦ºç¶­åº¦",
+          ctaLabel: "å‰å¾€æ¬£è³ž",
+        },
+      ],
+    },
+    ru: {
+      serviceName: "Ð˜Ð¼Ð¼ÐµÑ€ÑÐ¸Ð²Ð½Ñ‹Ðµ Ð’ÐµÐ±-ÑÐ°Ð¹Ñ‚Ñ‹",
+      tagline: "Ð¦Ð¸Ñ„Ñ€Ð¾Ð²Ð¾Ð¹ Ð¾Ð¿Ñ‹Ñ‚,\nÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ð²Ð¿ÐµÑ‡Ð°Ñ‚Ð»ÑÐµÑ‚",
+      description: "ÐœÑ‹ ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÑ‹ Ð½Ð¾Ð²Ð¾Ð³Ð¾ Ð¿Ð¾ÐºÐ¾Ð»ÐµÐ½Ð¸Ñ.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1639762681485-074b7f938ba0?w=1600&q=80",
+          subheading: "WebGL & 3D",
+          heading: "Ð—Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ð°Ð¼Ð¸ Ð¿Ð¸ÐºÑÐµÐ»Ñ",
+          bodyTitle: "Ð¢Ñ€ÐµÑ…Ð¼ÐµÑ€Ð½Ñ‹Ðµ ÑÑ€ÐµÐ´Ñ‹",
+          bodyText1: "Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð¸Ð½Ñ‚ÐµÑ€Ð°ÐºÑ‚Ð¸Ð²Ð½Ñ‹Ðµ 3D-Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÑ‹.",
+          bodyText2: "Ð›ÑƒÑ‡ÑˆÐ¸Ðµ Ð¿Ñ€Ð¾Ð´ÑƒÐºÑ‚Ñ‹ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ showroom.",
+          ctaLabel: "ÐŸÑ€Ð¾ÐµÐºÑ‚Ñ‹",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550751827-4bd374c3f58b?w=1600&q=80",
+          subheading: "ÐÐ½Ð¸Ð¼Ð°Ñ†Ð¸Ñ",
+          heading: "ÐœÐ¸ÐºÑ€Ð¾Ð¸Ð½Ñ‚ÐµÑ€Ð°ÐºÑ‚Ñ‹",
+          bodyTitle: "Ð£ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ð¿Ð¸ÐºÑÐµÐ»Ñ ÐµÑÑ‚ÑŒ Ñ†ÐµÐ»ÑŒ",
+          bodyText1: "GSAP-Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´Ñ‹ ÐºÐ¸Ð½ÐµÐ¼Ð°Ñ‚Ð¾Ð³Ñ€Ð°Ñ„Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð°.",
+          bodyText2: "Ð˜Ð´ÐµÐ°Ð»ÑŒÐ½Ð°Ñ Ð°Ð´Ð°Ð¿Ñ‚Ð°Ñ†Ð¸Ñ.",
+          ctaLabel: "Ð”ÐµÐ¼Ð¾",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523459-c2f4c699c52e?w=1600&q=80",
+          subheading: "Ð¡Ñ†ÐµÐ½Ð°Ñ€Ð¸Ð¸",
+          heading: "ÐŸÑ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ",
+          bodyTitle: "Ð‘Ñ‹ÑÑ‚Ñ€Ñ‹Ð¹ ÐºÐ¾Ð´",
+          bodyText1: "Ð¡ÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒ Ð±ÐµÐ· ÐºÐ¾Ð¼Ð¿Ñ€Ð¾Ð¼Ð¸ÑÑÐ¾Ð² LCP < 2c.",
+          bodyText2: "ÐžÐ¶Ð¸Ð´Ð°Ð½Ð¸Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹ ÑÐ²ÐµÐ´ÐµÐ½Ð¾ Ðº Ð¼Ð¸Ð½Ð¸Ð¼ÑƒÐ¼Ñƒ.",
+          ctaLabel: "Ð—Ð°Ð¿ÑƒÑÐº",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1633356122544-f134324a6cee?w=1600&q=80",
+          subheading: "WebAR",
+          heading: "Ð”Ð¾Ð¿Ð¾Ð»Ð½ÐµÐ½Ð½Ð°Ñ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ",
+          bodyTitle: "Ð’Ð°Ñˆ Ð´Ð¾Ð¼ ÐºÐ°Ðº Ñ…Ð¾Ð»ÑÑ‚",
+          bodyText1: "Ð¡Ð¼Ð¾Ñ‚Ñ€Ð¸Ñ‚Ðµ Ñ‚Ð¾Ð²Ð°Ñ€Ñ‹ Ð±ÐµÐ· ÑÐºÐ°Ñ‡Ð¸Ð²Ð°Ð½Ð¸Ñ APP.",
+          bodyText2: "ÐšÐ¾ÑÑ„Ñ„Ð¸Ñ†Ð¸ÐµÐ½Ñ‚ ÐºÐ¾Ð½Ð²ÐµÑ€ÑÐ¸Ð¸ Ð½Ð°Ð¼Ð½Ð¾Ð³Ð¾ Ð²Ñ‹ÑˆÐµ.",
+          ctaLabel: "AR ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1617839659905-2079d9465cc0?w=1600&q=80",
+          subheading: "Ð­Ñ„Ñ„ÐµÐºÑ‚",
+          heading: "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ð² 360",
+          bodyTitle: "ÐŸÐ¾Ð»Ð½Ð¾Ñ†ÐµÐ½Ð½Ñ‹Ðµ Ñ‚ÑƒÑ€Ñ‹",
+          bodyText1: "Ð¨Ð¾ÑƒÑ€ÑƒÐ¼Ñ‹ Ð½Ð° Ð±Ð°Ð·Ðµ VR Ð¸ 3D.",
+          bodyText2: "ÐžÐ±ÑŠÐµÐ¼Ð½Ñ‹Ð¹ ÐºÐ¾Ð½Ñ‚ÐµÐ½Ñ‚ Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½ Ð¿Ð¾ ÐºÐ»Ð¸ÐºÑƒ.",
+          ctaLabel: "Ð—Ð°Ð¹Ñ‚Ð¸",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550684848-fac1c5b4e853?w=1600&q=80",
+          subheading: "Ð­Ñ„Ñ„ÐµÐºÑ‚Ñ‹",
+          heading: "Ð¨ÐµÐ¹Ð´ÐµÑ€Ñ‹",
+          bodyTitle: "Ð¤Ð°Ð½Ñ‚Ð°ÑÑ‚Ð¸Ñ‡ÐµÑÐºÐ°Ñ ÑÑÑ‚ÐµÑ‚Ð¸ÐºÐ°",
+          bodyText1: "ÐŸÑ€Ð¸Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ GLSL-Ñ€ÐµÐ½Ð´ÐµÑ€Ð¾Ð².",
+          bodyText2: "Ð­ÐºÑÐºÐ»ÑŽÐ·Ð¸Ð²Ð½Ð¾ÑÑ‚ÑŒ Ð²Ð°ÑˆÐµÐ³Ð¾ Ð±Ñ€ÐµÐ½Ð´Ð° Ð·Ð°Ñ‰Ð¸Ñ‰ÐµÐ½Ð°.",
+          ctaLabel: "Ð¡Ð¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ",
+        },
+      ],
+    },
+    pt: {
+      serviceName: "Webs Imersivas",
+      tagline: "ExperiÃªncias Digitais\nque Impactam",
+      description: "ConstruÃ­mos interfaces de nova geraÃ§Ã£o que combinam animaÃ§Ã£o avanÃ§ada.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1639762681485-074b7f938ba0?w=1600&q=80",
+          subheading: "WebGL & 3D",
+          heading: "AlÃ©m do Pixel",
+          bodyTitle: "Ambientes Tridimensionais",
+          bodyText1: "Three.js para cenÃ¡rios iterativos no navegador.",
+          bodyText2: "Showrooms de escala tridimensional.",
+          ctaLabel: "Projetos",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550751827-4bd374c3f58b?w=1600&q=80",
+          subheading: "AnimaÃ§Ã£o",
+          heading: "Interfaces CinematogrÃ¡ficas",
+          bodyTitle: "PropÃ³sito em Detalhes",
+          bodyText1: "Framer Motion com extrema velocidade.",
+          bodyText2: "Resultados surreais no navegador comum.",
+          ctaLabel: "Demo",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523459-c2f4c699c52e?w=1600&q=80",
+          subheading: "Performance",
+          heading: "OtimizaÃ§Ã£o AvanÃ§ada",
+          bodyTitle: "ReduÃ§Ã£o de LatÃªncia",
+          bodyText1: "O carregamento leva apenas alguns milissegundos nas tecnologias.",
+          bodyText2: "Garantia de que vocÃª nÃ£o perde oportunidades de vendas.",
+          ctaLabel: "Iniciar",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1633356122544-f134324a6cee?w=1600&q=80",
+          subheading: "AR na MÃ£o",
+          heading: "Sua Casa Conectada",
+          bodyTitle: "Prova RÃ¡pida nos Espelhos.",
+          bodyText1: "Sem baixar o APP da loja e convertendo de imediato.",
+          bodyText2: "Facilitamos os trÃ¢mites do dia a dia pro usuÃ¡rio.",
+          ctaLabel: "PÃ´r na Sala",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1617839659905-2079d9465cc0?w=1600&q=80",
+          subheading: "Viagens RealÃ­sticas",
+          heading: "ConcessionÃ¡ria Aberta",
+          bodyTitle: "Converse e Negocie",
+          bodyText1: "FaÃ§a seu ambiente online de maneira incopiÃ¡vel pelas marcas.",
+          bodyText2: "Gaste menos com a construÃ§Ã£o de lojas fÃ­sicas grandes.",
+          ctaLabel: "Vamos LÃ¡",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1550684848-fac1c5b4e853?w=1600&q=80",
+          subheading: "Arte Visual",
+          heading: "GLSL Shader",
+          bodyTitle: "RenderizaÃ§Ã£o com GrÃ¡ficos",
+          bodyText1: "Desenvolva interfaces fluidas baseadas na criatividade e no poder visual.",
+          bodyText2: "Tenha a melhor pÃ¡gina da web comparada com outros.",
+          ctaLabel: "Tocar",
+        },
+      ],
+    },
+  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { serviceName: 'Loading', tagline: 'Loading', description: 'Loading...', sections: [] };
+
+  return <ServicePage {...content} serviceSlug="immersive-webs" lang={lang} />;
+}
+
+export function ModernizationPage({ lang = "es" }: { lang?: string }) {
+  const content = {
+    es: {
+      serviceName: "ModernizaciÃ³n",
+      tagline: "Transmuta tu\nDeuda TÃ©cnica",
+      description:
+        "Convertimos sistemas legacy en arquitecturas modernas, escalables y rentables sin detener tus operaciones.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523296-d8c1af93d400?w=1600&q=80",
+          subheading: "MigraciÃ³n",
+          heading: "Legacy a Cloud-Native",
+          bodyTitle: "Sin interrupciÃ³n operativa",
+          bodyText1:
+            "Migramos monolitos a microservicios con estrategias de strangler fig y blue-green deployments que garantizan continuidad del negocio durante la transiciÃ³n.",
+          bodyText2:
+            "De COBOL, .NET Framework o Java 6 a arquitecturas modernas en AWS, GCP o Azure: lo hemos hecho antes y lo haremos de nuevo.",
+          ctaLabel: "Evaluar mi Sistema",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1451187580459-43490279c0fa?w=1600&q=80",
+          subheading: "Serverless",
+          heading: "Costos que Escalan con Ti",
+          bodyTitle: "Paga solo por lo que usas",
+          bodyText1:
+            "RediseÃ±amos tu infraestructura para aprovechar funciones serverless, containers y orquestaciÃ³n con Kubernetes, reduciendo costos hasta un 70%.",
+          bodyText2:
+            "Auto-scaling automÃ¡tico: tu sistema maneja picos de 10x sin configuraciÃ³n manual ni costos de sobreaprovisionamiento.",
+          ctaLabel: "Calcular Ahorro",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1518770660439-4636190af475?w=1600&q=80",
+          subheading: "DevOps",
+          heading: "CI/CD desde el DÃ­a 0",
+          bodyTitle: "Entregas continuas, calidad continua",
+          bodyText1:
+            "Implementamos pipelines de CI/CD con GitHub Actions, GitLab CI o Jenkins. Cada commit pasa por pruebas automÃ¡ticas, anÃ¡lisis de seguridad y deployment.",
+          bodyText2:
+            "El tiempo de deployment pasa de semanas a minutos. La tasa de fallos en producciÃ³n baja un promedio de 85%.",
+          ctaLabel: "Ver Proceso",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1558494949-ef010cbdcc51?w=1600&q=80",
+          subheading: "Refactoring",
+          heading: "ModernizaciÃ³n de APIs",
+          bodyTitle: "ComunicaciÃ³n eficiente y escalable",
+          bodyText1: "Transformamos interfaces REST legacy en arquitecturas modernas basadas en GraphQL o gRPC, mejorando el rendimiento y la flexibilidad de tus integraciones.",
+          bodyText2: "Implementamos gateways de API y patrones de seguridad modernos para proteger tu capa de datos.",
+          ctaLabel: "Ver Arquitectura",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1544383835-bda2bc66a55d?w=1600&q=80",
+          subheading: "Data",
+          heading: "EvoluciÃ³n de Bases de Datos",
+          bodyTitle: "Tus datos a la velocidad del maÃ±ana",
+          bodyText1: "Migramos bases de datos relacionales saturadas a soluciones NewSQL o NoSQL optimizadas para alto rendimiento y escalabilidad global.",
+          bodyText2: "Estrategias de migraciÃ³n con zero-downtime para asegurar la integridad de tu activo mÃ¡s valioso.",
+          ctaLabel: "Optimizar Datos",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1512941937669-90a1b58e7e9c?w=1600&q=80",
+          subheading: "Mobile",
+          heading: "Legacy a PWA / HÃ­brido",
+          bodyTitle: "Presencia mÃ³vil sin fricciones",
+          bodyText1: "Convertimos aplicaciones de escritorio o webs antiguas en PWAs modernas y aplicaciones mÃ³viles hÃ­bridas que ofrecen una experiencia nativa en Android e iOS.",
+          bodyText2: "Aprovecha notificaciones push, modo offline y acceso al hardware del dispositivo.",
+          ctaLabel: "Modernizar App",
+        },
+      ],
+    },
+    en: {
+      serviceName: "Modernization",
+      tagline: "Transmute Your\nTechnical Debt",
+      description:
+        "We convert legacy systems into modern, scalable, and profitable architectures without stopping your operations.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523296-d8c1af93d400?w=1600&q=80",
+          subheading: "Migration",
+          heading: "Legacy to Cloud-Native",
+          bodyTitle: "Without operational interruption",
+          bodyText1:
+            "We migrate monoliths to microservices with strangler fig and blue-green deployment strategies that guarantee business continuity during the transition.",
+          bodyText2:
+            "From COBOL, .NET Framework or Java 6 to modern architectures on AWS, GCP or Azure: we've done it before and we'll do it again.",
+          ctaLabel: "Evaluate My System",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1451187580459-43490279c0fa?w=1600&q=80",
+          subheading: "Serverless",
+          heading: "Costs that Scale with You",
+          bodyTitle: "Pay only for what you use",
+          bodyText1:
+            "We redesign your infrastructure to leverage serverless functions, containers and Kubernetes orchestration, reducing costs up to 70%.",
+          bodyText2:
+            "Automatic auto-scaling: your system handles 10x traffic spikes without manual configuration or over-provisioning costs.",
+          ctaLabel: "Calculate Savings",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1518770660439-4636190af475?w=1600&q=80",
+          subheading: "DevOps",
+          heading: "CI/CD from Day 0",
+          bodyTitle: "Continuous delivery, continuous quality",
+          bodyText1:
+            "We implement CI/CD pipelines with GitHub Actions, GitLab CI or Jenkins. Every commit goes through automated testing, security analysis and deployment.",
+          bodyText2:
+            "Deployment time goes from weeks to minutes. Production failure rates drop by an average of 85%.",
+          ctaLabel: "See Process",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1558494949-ef010cbdcc51?w=1600&q=80",
+          subheading: "Refactoring",
+          heading: "API Modernization",
+          bodyTitle: "Efficient and scalable communication",
+          bodyText1: "We transform legacy REST interfaces into modern GraphQL or gRPC based architectures, improving the performance and flexibility of your integrations.",
+          bodyText2: "We implement API gateways and modern security patterns to protect your data layer.",
+          ctaLabel: "See Architecture",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1544383835-bda2bc66a55d?w=1600&q=80",
+          subheading: "Data",
+          heading: "Database Evolution",
+          bodyTitle: "Your data at the speed of tomorrow",
+          bodyText1: "We migrate saturated relational databases to NewSQL or NoSQL solutions optimized for high performance and global scalability.",
+          bodyText2: "Zero-downtime migration strategies to ensure the integrity of your most valuable asset.",
+          ctaLabel: "Optimize Data",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1512941937669-90a1b58e7e9c?w=1600&q=80",
+          subheading: "Mobile",
+          heading: "Legacy to PWA / Hybrid",
+          bodyTitle: "Frictionless mobile presence",
+          bodyText1: "We convert desktop applications or old websites into modern PWAs and hybrid mobile apps that offer a native experience on Android and iOS.",
+          bodyText2: "Leverage push notifications, offline mode and device hardware access.",
+          ctaLabel: "Modernize App",
+        },
+      ],
+    },
+
+
+    zh: {
+      serviceName: "ç¾ä»£åŒ–è½‰åž‹",
+      tagline: "è½‰æ›æ‚¨çš„\næŠ€è¡“å‚µ",
+      description: "å°‡éºç•™ç³»çµ±è½‰åŒ–ç‚ºå¯æ“´å±•æž¶æ§‹ã€‚",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523296-d8c1af93d400?w=1600&q=80",
+          subheading: "é·ç§»",
+          heading: "Legacy è‡³ Cloud-Native",
+          bodyTitle: "ä¸ä¸­æ–·ç‡Ÿé‹",
+          bodyText1: "é‹ç”¨å¾®æœå‹™ç­–ç•¥è½‰åž‹ï¼Œè½‰ç§»å·¨åž‹ç¨‹å¼ã€‚",
+          bodyText2: "å®‰å…¨ã€ä¸æå¤±è³‡æ–™åœ°è½‰å¾€é›²ç«¯ã€‚",
+          ctaLabel: "ç«‹å³è«®è©¢",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1451187580459-43490279c0fa?w=1600&q=80",
+          subheading: "è‡ªå‹•æ“´å±•",
+          heading: "æŽ§åˆ¶ä¼ºæœå™¨é–‹éŠ·èˆ‡ç¯€çœæˆæœ¬",
+          bodyTitle: "æœ€ä½³æ€§åƒ¹æ¯”",
+          bodyText1: "å¤§å¹…ä¸‹é™ä¸å¿…è¦çš„è³‡æºï¼Œä»¥é™ä½Žç³»çµ±æè€—åŠæˆæœ¬æµªè²»ã€‚",
+          bodyText2: "é¢å°ä»»ä½•ä¿ƒéŠ·ç¯€æ—¥ç­‰ä¸æœƒå´©æ½°ç³»çµ±çš„å®Œç¾Žæ–¹æ¡ˆã€‚",
+          ctaLabel: "æŸ¥çœ‹ä¼°åƒ¹",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1518770660439-4636190af475?w=1600&q=80",
+          subheading: "DevOps",
+          heading: "åŸºç¤Žå»ºè¨­ç®¡é“",
+          bodyTitle: "æµç¨‹çš„æµæš¢åº¦èˆ‡ç¶­è­·åº¦",
+          bodyText1: "å»ºç½®CICDæµæ°´ç·šä¸¦ä»¥ GitHub ç­‰ç®¡é“å»ºç«‹ç¨‹å¼ç¢¼ç¨½æ ¸æ©Ÿåˆ¶ã€‚",
+          bodyText2: "é¿å…é‡å¤§éŽå¤±é€²å…¥éƒ¨ç½²çš„è‡ªå‹•åŒ–è™•ç†æ–¹å¼ã€‚",
+          ctaLabel: "æŽ¢è¨Žç ”ç©¶",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1558494949-ef010cbdcc51?w=1600&q=80",
+          subheading: "APIåŠç³»çµ±",
+          heading: "å»ºç«‹è³‡æ–™æºé€šé–˜é“",
+          bodyTitle: "REST ç¾ä»£åŒ–é‡æ§‹è¨ˆç•«",
+          bodyText1: "å¼•é€²æ–°ä¸–ä»£ç¶²é æŠ€è¡“åŒ…å«æœ€æ–°çš„APIå”å®šä¾†é˜²è­·ã€‚",
+          bodyText2: "å¼·åŒ–ä¼ºæœå‚³è¼¸è³‡æ–™ä¹‹å®‰å…¨æ€§ï¼Œä¸å—æ¼æ´žæ‰€æ“¾ã€‚",
+          ctaLabel: "ç ”ç©¶å®‰å…¨",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1544383835-bda2bc66a55d?w=1600&q=80",
+          subheading: "è³‡æ–™æ¼”é€²",
+          heading: "é—œè¯èˆ‡éžé—œè¯è½‰åž‹",
+          bodyTitle: "å°‡è³‡æ–™ç™¼æ®æ•ˆæ‡‰",
+          bodyText1: "åˆ©ç”¨NoSQLåŠç›¸é—œé›²ç«¯å­˜å–æŠ€è¡“æ‰“ç ´è³‡æ–™åº«æ­»éŽ–",
+          bodyText2: "ä¿æŒç©©å®šä¸”æä¾›æœªä¾†è³‡æ–™æ¨¡åž‹æ‹“å±•çš„å¯èƒ½æ€§",
+          ctaLabel: "å»ºç«‹æž¶æ§‹",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1512941937669-90a1b58e7e9c?w=1600&q=80",
+          subheading: "è·¨å¹³å°",
+          heading: "Legacyè‡³PWAæˆ–æ··åˆ App",
+          bodyTitle: "çªç ´æ‰‹æè¨­å‚™çš„é™åˆ¶èˆ‡é«”é©—å¼·åŒ–",
+          bodyText1: "è£½ä½œæ¡Œé¢ç³»çµ±è½‰ç§»è‡³æ‰‹æ©Ÿè¡Œå‹•åŠå„é¡žæ··åˆæ¨¡å¼ä¸Šçš„è½‰ç§»å·¥ç¨‹ã€‚",
+          bodyText2: "éš¨æ™‚é›¢ç·šå­˜å–æ”¯æ´åŠå¢žåŠ æŽ¨é€ç­‰å®¢æˆ¶è¯ç¹«ä»‹é¢ã€‚",
+          ctaLabel: "ç¾ä»£åŒ–è½‰æ›",
+        },
+      ],
+    },
+    ru: {
+      serviceName: "ÐœÐ¾Ð´ÐµÑ€Ð½Ð¸Ð·Ð°Ñ†Ð¸Ñ",
+      tagline: "Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð° Ð¾Ñ‚\nÑ‚ÐµÑ…Ð½Ð¸Ñ‡ÐµÑÐºÐ¾Ð³Ð¾ Ð´Ð¾Ð»Ð³Ð°",
+      description: "ÐœÐ¾Ð´ÐµÑ€Ð½Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð±ÐµÐ· Ð¿Ñ€ÐµÑ€Ñ‹Ð²Ð°Ð½Ð¸Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ â€” Ð´Ð»Ñ Ð±Ñ‹ÑÑ‚Ñ€Ð¾Ð³Ð¾ Ð±Ð¸Ð·Ð½ÐµÑÐ°.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523296-d8c1af93d400?w=1600&q=80",
+          subheading: "ÐœÐ¸Ð³Ñ€Ð°Ñ†Ð¸Ñ",
+          heading: "Ð˜Ð¼Ð¼Ð¸Ð³Ñ€Ð°Ñ†Ð¸Ñ Ðº Ð¾Ð±Ð»Ð°ÐºÑƒ",
+          bodyTitle: "Ð‘ÐµÐ· Ð¿Ñ€Ð¾ÑÑ‚Ð¾ÐµÐ² Ð² Ñ€Ð°Ð±Ð¾Ñ‚Ðµ",
+          bodyText1: "Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð½Ð¾Ð²Ñ‹Ðµ ÑÐ²ÑÐ·Ð¸ Ð¸ Ð¼Ð¸ÐºÑ€Ð¾ÑÐµÑ€Ð²Ð¸ÑÑ‹ Ð¸Ð· ÑÑ‚Ð°Ñ€Ð¾Ð³Ð¾ ÑÐ´Ñ€Ð°.",
+          bodyText2: "ÐœÐ¾Ð´ÐµÑ€Ð½Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð±ÐµÐ· Ñ€Ð¸ÑÐºÐ¾Ð² Ð´Ð»Ñ Ð²Ð°ÑˆÐµÐ¹ Ð²Ñ‹Ñ€ÑƒÑ‡ÐºÐ¸ Ð¸ Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ¾Ð².",
+          ctaLabel: "Ð˜Ð½ÑÐ¿ÐµÐºÑ†Ð¸Ñ",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1451187580459-43490279c0fa?w=1600&q=80",
+          subheading: "ÐÐ²Ñ‚Ð¾Ð½Ð¾Ð¼Ð¸ÐºÐ°",
+          heading: "Ð“Ð¸Ð±ÐºÐ°Ñ Ð±Ð°Ð»Ð°Ð½ÑÐ¸Ñ€Ð¾Ð²ÐºÐ°",
+          bodyTitle: "Ð­ÐºÐ¾Ð½Ð¾Ð¼ÑŒÑ‚Ðµ Ñ€ÐµÑÑƒÑ€ÑÑ‹",
+          bodyText1: "ÐœÐ°ÑÑˆÑ‚Ð°Ð±Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð²Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð¿Ð¸ÐºÐ¾Ð²Ñ‹Ñ… Ð½Ð°Ð³Ñ€ÑƒÐ·Ð¾Ðº Ð¸Ð»Ð¸ Ñ‚Ñ€Ð°Ñ„Ð¸ÐºÐ°.",
+          bodyText2: "Ð’Ð°Ñˆ Ð¿Ð»Ð°Ñ‚ÐµÐ¶ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð·Ð° Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ€ÐµÑÑƒÑ€ÑÐ¾Ð² Ð±ÐµÐ· Ð¿Ð¾Ñ‚ÐµÑ€ÑŒ.",
+          ctaLabel: "ÐžÑ†ÐµÐ½Ð¸Ñ‚ÑŒ ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚ÑŒ",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1518770660439-4636190af475?w=1600&q=80",
+          subheading: "DevOps",
+          heading: "Ð’Ð½ÐµÐ´Ñ€ÐµÐ½Ð¸Ðµ CI/CD",
+          bodyTitle: "Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð´ÐµÐ¿Ð»Ð¾ÐµÐ¼",
+          bodyText1: "ÐŸÐ°Ð¹Ð¿Ð»Ð°Ð¹Ð½Ñ‹ Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÑŽÑ‚, ÑÑ‚Ñ€Ð¾ÑÑ‚ Ð¸ Ð²Ñ‹Ð¿ÑƒÑÐºÐ°ÑŽÑ‚ Ñ€ÐµÐ»Ð¸Ð·Ñ‹.",
+          bodyText2: "Ð ÐµÐ»Ð¸Ð· Ñ‚ÐµÐ¿ÐµÑ€ÑŒ Ð·Ð°Ð½Ð¸Ð¼Ð°ÐµÑ‚ Ð¼Ð¸Ð½ÑƒÑ‚Ñƒ, Ð° Ð½Ðµ Ð½ÐµÐ´ÐµÐ»ÑŽ.",
+          ctaLabel: "Ð˜Ð·ÑƒÑ‡Ð¸Ñ‚ÑŒ",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1558494949-ef010cbdcc51?w=1600&q=80",
+          subheading: "Ð ÐµÑ„Ð°ÐºÑ‚Ð¾Ñ€Ð¸Ð½Ð³",
+          heading: "ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ API",
+          bodyTitle: "Ð Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð½Ð° Ð±Ð°Ð·Ðµ GraphQL",
+          bodyText1: "ÐŸÑ€Ð¸Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ ÑÐ¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ… ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð¾Ð² Ñ Ñ†ÐµÐ»ÑŒÑŽ Ð³Ð¸Ð±ÐºÐ¾ÑÑ‚Ð¸ Ð½Ð° Ð²ÑÐµÑ… ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð°Ñ….",
+          bodyText2: "Ð“Ð°Ñ€Ð°Ð½Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ð°Ñ ÐºÐ¸Ð±ÐµÑ€Ð±ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ð¾ÑÑ‚ÑŒ Ð¾Ñ‚ Ð»ÑŽÐ±Ñ‹Ñ… Ð²Ð¸Ð´Ð¾Ð² Ð¸Ð½ÑŠÐµÐºÑ†Ð¸Ð¹ Ð² Ð²Ð°ÑˆÐ¸ API ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹.",
+          ctaLabel: "Ð’Ð·Ð³Ð»ÑÐ½ÑƒÑ‚ÑŒ",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1544383835-bda2bc66a55d?w=1600&q=80",
+          subheading: "Ð¡Ð£Ð‘Ð”",
+          heading: "Ð¡ÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒ Ð‘Ð”",
+          bodyTitle: "NoSQL Ð¸ Ð¾Ð±Ð»Ð°Ñ‡Ð½Ñ‹Ðµ Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð¸ ÐºÐ»Ð°ÑÑ‚ÐµÑ€Ð¾Ð²",
+          bodyText1: "Ð¨Ð¸Ñ€Ð¾ÐºÐ¸Ð¹ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¾Ð½Ð°Ð» Ð‘Ð” Ð±ÐµÐ· Ð±Ð»Ð¾ÐºÐ¸Ñ€Ð¾Ð²Ð¾Ðº Ð¸ Ð¾Ð±Ñ€Ñ‹Ð²Ð¾Ð² Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ.",
+          bodyText2: "Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ NoSQL Ð´Ð»Ñ Ð±Ñ‹ÑÑ‚Ñ€Ð¾Ð¹ Ð¸ Ð³Ð¸Ð±ÐºÐ¾Ð¹ Ð°Ñ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ñ‹ Ð² Ñ€Ð°Ð·Ð²Ð¸Ñ‚Ð¸Ð¸.",
+          ctaLabel: "ÐŸÐ¾Ð´Ñ€Ð¾Ð±Ð½Ð¾ÑÑ‚Ð¸",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1512941937669-90a1b58e7e9c?w=1600&q=80",
+          subheading: "ÐœÐ¾Ð±Ð¸Ð»ÑŒÐ½Ð¾ÑÑ‚ÑŒ",
+          heading: "Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ PWA Ñ€ÐµÑˆÐµÐ½Ð¸Ð¹",
+          bodyTitle: "Ð”Ð»Ñ ÑÐ¼Ð°Ñ€Ñ‚Ñ„Ð¾Ð½Ð¾Ð² Ð² ÐºÐ°Ñ€Ð¼Ð°Ð½Ðµ",
+          bodyText1: "ÐŸÐ»Ð°Ð²Ð½Ð¾Ðµ Ð¿ÐµÑ€ÐµÑ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ðµ ÑÑ‚Ð°Ñ€Ð¾Ð¹ Ð±Ð°Ð·Ñ‹ Ð² Ð³Ð¸Ð±Ñ€Ð¸Ð´Ð½Ñ‹Ðµ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ Ð¸ PWA Ð¿Ñ€Ð¾Ð´ÑƒÐºÑ‚Ñ‹.",
+          bodyText2: "ÐŸÐ¾Ð·Ð²Ð¾Ð»ÑÐµÑ‚ Ð±Ð¸Ð·Ð½ÐµÑÑƒ Ð²ÑÐµÐ³Ð´Ð° Ð¾ÑÑ‚Ð°Ð²Ð°Ñ‚ÑŒÑÑ Ð¾Ð½Ð»Ð°Ð¹Ð½ Ð½Ð° Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ðµ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ.",
+          ctaLabel: "Ð£Ð»ÑƒÑ‡ÑˆÐ¸Ñ‚ÑŒ ÑÐµÐ¹Ñ‡Ð°Ñ",
+        },
+      ],
+    },
+    pt: {
+      serviceName: "ModernizaÃ§Ã£o",
+      tagline: "Transmute a Sua\nDÃ­vida TÃ©cnica",
+      description: "Convertemos sistemas legados em arquiteturas modernas sem parar a operaÃ§Ã£o.",
+      sections: [
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1614850523296-d8c1af93d400?w=1600&q=80",
+          subheading: "TransiÃ§Ã£o Cloud",
+          heading: "Arquitetura Cloud-Native",
+          bodyTitle: "OperaÃ§Ã£o ImparÃ¡vel",
+          bodyText1: "Transformamos os sistemas antigos sem causar perdas na produÃ§Ã£o.",
+          bodyText2: "De mainframes COBOL atÃ© o Azure mais moderno que temos.",
+          ctaLabel: "Consulte MigraÃ§Ã£o",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1451187580459-43490279c0fa?w=1600&q=80",
+          subheading: "Serverless",
+          heading: "Pague pelo Acesso",
+          bodyTitle: "Elasticidade Total em Tempo Real",
+          bodyText1: "Nossos servidores escalam com seus acessos, promovendo 70% de desconto no custo.",
+          bodyText2: "Sua campanha em Black Friday nunca ficarÃ¡ inativa nas nossas mÃ£os.",
+          ctaLabel: "Consulte Faturas",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1518770660439-4636190af475?w=1600&q=80",
+          subheading: "DevOps Ãgil",
+          heading: "AutomaÃ§Ãµes CI e CD",
+          bodyTitle: "Semanal para Mensal e InstantÃ¢neo",
+          bodyText1: "Trabalhos complexos e morosos se transformarÃ£o em algo leve com a nossa automaÃ§Ã£o.",
+          bodyText2: "Sempre analisado e revisto pelo time em fraÃ§Ãµes de segundos em pipelines seguros.",
+          ctaLabel: "Sistemas em AÃ§Ã£o",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1558494949-ef010cbdcc51?w=1600&q=80",
+          subheading: "ReformulaÃ§Ã£o Geral",
+          heading: "APIs e Pontes GrÃ¡ficas Modernas",
+          bodyTitle: "O GraphQL trazendo poder a interface",
+          bodyText1: "Conectividade robusta que garante menos trafego na infra e maior ganho na interface final do usuÃ¡rio.",
+          bodyText2: "ConexÃµes seguras entre as frentes.",
+          ctaLabel: "Reformule Suas PeÃ§as",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1544383835-bda2bc66a55d?w=1600&q=80",
+          subheading: "Re-banco",
+          heading: "ReconstruÃ§Ã£o do Banco",
+          bodyTitle: "Um novo folego sem travas ao SQL",
+          bodyText1: "Adicionamos modelos incrÃ­veis de busca a sua empresa via arquiteturas desatadas nÃ£o estruturadas.",
+          bodyText2: "Diga nÃ£o ao limite da base e suporte ilimitados dados no projeto.",
+          ctaLabel: "Expandir Terabytes",
+        },
+        {
+          imgUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1512941937669-90a1b58e7e9c?w=1600&q=80",
+          subheading: "Desktop a Mobile",
+          heading: "Sua vida dentro de PWA App",
+          bodyTitle: "Tenha a Web na MÃ£o Pelo Cel",
+          bodyText1: "Tenha recursos como NotificaÃ§Ãµes Locais sem um sistema iOS e Android pesadÃ­ssimos.",
+          bodyText2: "Mais fÃ¡cil de migrar em uma Ãºnica base de cÃ³digo nativo jÃ¡ construÃ­do e moldado.",
+          ctaLabel: "Testar as InovaÃ§Ãµes",
+        },
+      ],
+    },
+  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { serviceName: 'Loading', tagline: 'Loading', description: 'Loading...', sections: [] };
+
+  return <ServicePage {...content} serviceSlug="modernization" lang={lang} />;
+}
+

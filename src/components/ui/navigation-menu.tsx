@@ -27,7 +27,7 @@ const containerVariants = {
   collapsed: {
     y: 0,
     opacity: 1,
-    width: "3.5rem",
+    width: "4.5rem",
     transition: {
       type: "spring",
       damping: 20,
@@ -108,22 +108,24 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
   const scrollPositionOnCollapse = React.useRef(0);
 
   const t = {
-    es: { home: "Inicio", services: "Servicios", blog: "Blog", contact: "Contacto", ai: "Automatización IA", web: "Webs Inmersivas", mod: "Modernización", account: "Mi Cuenta" },
-    en: { home: "Home", services: "Services", blog: "Blog", contact: "Contact", ai: "AI Automation", web: "Immersive Webs", mod: "Modernization", account: "My Account" },
-    zh: { home: "首頁", services: "服務", blog: "部落格", contact: "聯繫", ai: "集成自動化", web: "沉浸式網站", mod: "現代化轉型", account: "我的帳戶" },
-    ru: { home: "Главная", services: "Услуги", blog: "Блог", contact: "Контакт", ai: "ИИ Автоматизация", web: "Иммерсивные Веб-сайты", mod: "Модернизация", account: "Мой Аккаунт" },
-    pt: { home: "Início", services: "Serviços", blog: "Blog", contact: "Contato", ai: "Automação IA", web: "Webs Imersivas", mod: "Modernização", account: "Minha Conta" },
-  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { home: "Home", services: "Services", blog: "Blog", contact: "Contact", ai: "AI Automation", web: "Immersive Webs", mod: "Modernization", account: "My Account" };
+    es: { home: "Inicio", solutions: "Servicios", blog: "Blog", contact: "Contacto", demo: "Demos", auto: "Automatización de Procesos", emp: "Empleados Digitales", webs: "Webs y Aplicaciones de Impacto", lim: "Limpieza y Aceleración de Negocios", account: "Mi Cuenta" },
+    en: { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Process Automation", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account" },
+    zh: { home: "首頁", solutions: "服務", blog: "博客", contact: "聯繫", demo: "演示", auto: "流程自動化", emp: "數位員工", webs: "影響力網站與應用", lim: "業務加速", account: "我的帳戶" },
+    ru: { home: "Главная", solutions: "Услуги", blog: "Блог", contact: "Контакт", demo: "Демо", auto: "Автоматизация Процессов", emp: "Цифровые Сотрудники", webs: "Влиятельные Веб-сайты", lim: "Ускорение Бизнеса", account: "Мой Аккаунт" },
+    pt: { home: "Início", solutions: "Serviços", blog: "Blog", contact: "Contato", demo: "Demos", auto: "Automação de Procesos", emp: "Funcionários Digitais", webs: "Webs e Apps de Impacto", lim: "Aceleração de Negócios", account: "Minha Conta" },
+  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Process Automation", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account" };
 
   const services = [
-    { name: t.ai, href: "/services/ai-automation" },
-    { name: t.web, href: "/services/immersive-webs" },
-    { name: t.mod, href: "/services/modernization" },
+    { name: t.auto, href: "/services/ai-automation" },
+    { name: t.emp, href: "/services/digital-employees" },
+    { name: t.webs, href: "/services/immersive-webs" },
+    { name: t.lim, href: "/services/modernization" },
   ];
 
   const translatedNavItems = [
     { name: t.home, href: "/" },
-    { name: t.services, isDropdown: true },
+    { name: t.solutions, isDropdown: true },
+    { name: t.demo, href: "/demos" },
     { name: t.blog, href: "/blog" },
     { name: t.contact, href: "/#contact" },
   ];
@@ -182,21 +184,21 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
         onClick={handleNavClick}
         onMouseLeave={handleServicesLeave}
         className={cn(
-          "flex items-center overflow-visible rounded-full glass-metallic-white-nav h-11 md:h-14",
+          "flex items-center overflow-visible rounded-full glass-metallic-white-nav h-16 md:h-24",
           !isExpanded && "cursor-pointer justify-center pl-0"
         )}
       >
         <motion.div
           variants={logoVariants}
-          className="flex-shrink-0 flex items-center font-semibold pl-3 md:pl-4 pr-2 md:pr-3 cursor-pointer"
+          className="flex-shrink-0 flex items-center font-semibold pl-4 md:pl-6 pr-3 md:pr-5 cursor-pointer"
           onClick={() => handleLinkClick("/")}
         >
-          <SasoriLogo className="h-5 w-5 md:h-6 md:w-6 ml-1 mr-1" />
+          <SasoriLogo className="h-8 w-8 md:h-14 md:w-14 ml-1 mr-3" />
         </motion.div>
         
         <motion.div
           className={cn(
-            "flex items-center gap-1 sm:gap-2 pr-6",
+            "flex items-center gap-2 sm:gap-4 pr-8",
             !isExpanded && "pointer-events-none" 
           )}
         >
@@ -217,7 +219,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                   }
                 }}
                 className={cn(
-                  "text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-black/70 hover:text-sasori-red transition-all px-3 py-2 rounded-full flex items-center gap-1",
+                  "text-xs md:text-base font-bold tracking-[0.2em] uppercase text-black/70 hover:text-sasori-red transition-all px-4 py-4 rounded-full flex items-center gap-2",
                   (item.isDropdown && showServices) && "text-sasori-red bg-sasori-red/5"
                 )}
               >
@@ -261,10 +263,10 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
           <motion.button
             variants={itemVariants}
             onClick={() => handleLinkClick('/login')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-sasori-red/20 bg-sasori-red/5 text-sasori-red shadow-[0_2px_10px_rgba(226,6,19,0.1)] hover:bg-sasori-red hover:text-white transition-all duration-500 group/acc"
+            className="flex items-center gap-2 px-6 py-3 rounded-full border border-sasori-red/20 bg-sasori-red/5 text-sasori-red shadow-[0_2px_10px_rgba(226,6,19,0.1)] hover:bg-sasori-red hover:text-white transition-all duration-500 group/acc"
           >
-            <UserCircle2 className="w-4 h-4 group-hover/acc:scale-110 transition-transform" />
-            <span className="hidden sm:inline">{t.account}</span>
+            <UserCircle2 className="w-6 h-6 group-hover/acc:scale-110 transition-transform" />
+            <span className="hidden sm:inline font-bold text-sm md:text-base">{t.account}</span>
           </motion.button>
 
           {/* Language Selector Inside Menu */}
@@ -276,13 +278,13 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                 e.stopPropagation();
                 setShowLanguages(!showLanguages);
               }}
-              className="group flex items-center gap-2 px-3 py-2 rounded-full hover:bg-sasori-red/5 transition-all text-black/70 hover:text-sasori-red"
+              className="group flex items-center gap-3 px-4 py-3 rounded-full hover:bg-sasori-red/5 transition-all text-black/70 hover:text-sasori-red"
             >
-              <Languages className="w-3 h-3 md:w-4 md:h-4 group-hover:rotate-12 transition-transform" />
-              <span className="text-[10px] md:text-xs font-black tracking-widest uppercase">
+              <Languages className="w-4 h-4 md:w-6 md:h-6 group-hover:rotate-12 transition-transform" />
+              <span className="text-xs md:text-sm font-black tracking-widest uppercase">
                 {lang.toUpperCase()}
               </span>
-              <ChevronDown className={cn("w-2 h-2 transition-transform", showLanguages && "rotate-180")} />
+              <ChevronDown className={cn("w-3 h-3 transition-transform", showLanguages && "rotate-180")} />
             </motion.button>
 
             <AnimatePresence>
@@ -327,7 +329,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
             variants={collapsedIconVariants}
             animate={isExpanded ? "expanded" : "collapsed"}
           >
-            <SasoriLogo className="h-6 w-6 opacity-100" />
+            <SasoriLogo className="h-10 w-10 md:h-12 md:w-12 opacity-100" />
           </motion.div>
         </div>
       </motion.nav>

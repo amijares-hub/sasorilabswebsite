@@ -16,11 +16,17 @@ interface ServiceItem {
 interface ZoomParallaxProps {
 	/** Array of services to be displayed in the parallax effect max 7 items */
 	items: ServiceItem[];
+	lang?: string;
+	categories?: {
+		audio: string;
+		creative: string;
+		data: string;
+	};
 }
 
 import { useNavigate } from 'react-router-dom';
 
-export function ZoomParallax({ items }: ZoomParallaxProps) {
+export function ZoomParallax({ items, lang = 'es', categories }: ZoomParallaxProps) {
 	const container = useRef(null);
 	const navigate = useNavigate();
 	const { scrollYProgress } = useScroll({

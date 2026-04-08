@@ -14,6 +14,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       company: "Empresa",
       contact: "Contacto",
       rights: "© 2026 SASORILABS. TODOS LOS DERECHOS RESERVADOS.",
+      startProject: "INICIAR PROYECTO",
       labels: {
         ai: "Automatización IA",
         web: "Webs Inmersivas",
@@ -30,6 +31,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       company: "Company",
       contact: "Get in touch",
       rights: "© 2026 SASORILABS. ALL RIGHTS RESERVED.",
+      startProject: "START PROJECT",
       labels: {
         ai: "AI Automation",
         web: "Immersive Webs",
@@ -45,7 +47,8 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       services: "服務",
       company: "公司",
       contact: "聯繫我們",
-      rights: "© 2026 SASORILABS。 版權所有。",
+      rights: "© 2026 SASORILABS。版權所有。",
+      startProject: "啟動項目",
       labels: {
         ai: "人工智能自動化",
         web: "沉浸式網站",
@@ -62,6 +65,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       company: "Компания",
       contact: "Связаться с нами",
       rights: "© 2026 SASORILABS. ВСЕ ПРАВА ЗАЩИЩЕНЫ.",
+      startProject: "НАЧАТЬ ПРОЕКТ",
       labels: {
         ai: "ИИ Автоматизация",
         web: "Иммерсивные Веб-сайты",
@@ -69,7 +73,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
         about: "О нас",
         cases: "Кейсы",
         blog: "Блог",
-        contact_btn: "Контракты"
+        contact_btn: "Контакт"
       }
     },
     pt: {
@@ -78,6 +82,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       company: "Empresa",
       contact: "Entre em contato",
       rights: "© 2026 SASORILABS. TODOS OS DIREITOS RESERVADOS.",
+      startProject: "INICIAR PROJETO",
       labels: {
         ai: "Automação IA",
         web: "Webs Imersivas",
@@ -89,12 +94,12 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       }
     }
   }[lang as 'es' | 'en' | 'zh' | 'ru' | 'pt'] || {
-    // Fallback if missing
     desc: "Premium software development for high-end brands seeking digital excellence.",
     services: "Services",
     company: "Company",
     contact: "Get in touch",
     rights: "© 2026 SASORILABS. ALL RIGHTS RESERVED.",
+    startProject: "START PROJECT",
     labels: {
       ai: "AI Automation",
       web: "Immersive Webs",
@@ -128,11 +133,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
               onClick={() => { navigate('/contact'); window.scrollTo(0, 0); }}
               className="px-8 py-3 bg-sasori-red text-white text-[10px] font-black tracking-[0.3em] rounded-full hover:bg-black transition-all duration-500 shadow-[0_0_20px_rgba(226,6,19,0.3)]"
             >
-              {lang === 'es' ? 'INICIAR PROYECTO' : 
-               lang === 'en' ? 'START PROJECT' : 
-               lang === 'zh' ? '啟動項目' : 
-               lang === 'ru' ? 'НАЧАТЬ ПРОЕКТ' : 
-               lang === 'pt' ? 'INICIAR PROJETO' : 'START PROJECT'}
+              {t.startProject}
             </button>
           </div>
 

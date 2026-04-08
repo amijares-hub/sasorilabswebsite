@@ -451,7 +451,7 @@ export function DashboardPage() {
   return (
     <div className="flex min-h-screen bg-white text-[#1A1A1A] font-sans selection:bg-sasori-red selection:text-white">
       {/* SIDEBAR FOR DESKTOP */}
-      <aside className="hidden md:flex flex-col w-72 fixed h-screen z-50 bg-[#EDEDED] border-r border-black/5 py-10 px-8 justify-between relative shadow-xl">
+      <aside className="hidden md:flex flex-col w-84 fixed h-screen z-50 bg-[#EDEDED] border-r border-black/5 py-12 px-10 justify-between relative shadow-xl">
         {/* Metallic brushed grain overlay */}
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
         
@@ -459,20 +459,20 @@ export function DashboardPage() {
         <div className="absolute top-0 right-0 w-[2px] h-full bg-sasori-red shadow-[0_0_15px_#E20613] opacity-20" />
 
         <div className="relative z-10">
-          <div className="flex items-center gap-4 mb-16">
-            <SasoriLogo className="w-10 h-10 text-sasori-red drop-shadow-[0_0_15px_rgba(226,6,19,0.5)]" />
-            <div>
-              <h1 className="text-2xl font-black uppercase tracking-tighter text-[#1A1A1A]">Dashboard</h1>
-              <p className="text-black/40 font-normal tracking-widest text-[9px] uppercase mt-1">Master Access</p>
-            </div>
+          <div className="p-8 flex items-center gap-4 mb-8">
+          <SasoriLogo className="w-10 h-10 text-sasori-red" />
+          <div>
+            <h1 className="text-xl font-black uppercase tracking-tighter text-[#1A1A1A]">SasoriLabs</h1>
+            <p className="text-[10px] font-bold text-sasori-red uppercase tracking-[0.2em]">Panel de Administración</p>
           </div>
+        </div>
           
           <div className="flex flex-col gap-3">
             <div className="text-[10px] font-black uppercase tracking-widest text-black/20 mb-2 pl-2">Módulos</div>
             <button 
               onClick={() => setActiveModule('blogs')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'blogs' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -482,7 +482,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('newsletter')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'newsletter' ? "bg-sasori-red text-white shadow-[0_0_30px_rgba(226,6,19,0.3)]" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -494,7 +494,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('crm_clients')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'crm_clients' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -504,7 +504,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('crm_projects')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'crm_projects' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -514,7 +514,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('crm_requests')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'crm_requests' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -524,7 +524,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('crm_finance')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'crm_finance' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -534,7 +534,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('billing_stats')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'billing_stats' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -546,7 +546,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('crm_analytics')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'crm_analytics' ? "bg-sasori-red text-white shadow-lg" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -556,7 +556,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('system_resources')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'system_resources' ? "bg-white text-black shadow-lg border border-black/5" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -566,7 +566,7 @@ export function DashboardPage() {
             <button 
               onClick={() => setActiveModule('owner_expenses')}
               className={cn(
-                "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all gap-4 flex items-center w-full text-left group",
+                "px-8 py-5 rounded-xl text-sm font-black uppercase tracking-widest transition-all gap-5 flex items-center w-full text-left group",
                 activeModule === 'owner_expenses' ? "bg-sasori-red text-white shadow-lg" : "text-black/50 hover:text-[#1A1A1A] hover:bg-black/5"
               )}
             >
@@ -582,10 +582,10 @@ export function DashboardPage() {
       </aside>
 
       {/* MOBILE HEADER */}
-      <header className="md:hidden fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-black/5 py-4 px-6 flex justify-between items-center text-[#1A1A1A]">
-        <div className="flex items-center gap-3">
-          <SasoriLogo className="w-6 h-6 text-sasori-red" />
-          <h1 className="text-lg font-black uppercase tracking-tighter">Dashboard</h1>
+      <header className="md:hidden fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-black/5 py-6 px-8 flex justify-between items-center text-[#1A1A1A]">
+        <div className="flex items-center gap-4">
+          <SasoriLogo className="w-8 h-8 text-sasori-red" />
+          <h1 className="text-xl font-black uppercase tracking-tighter">Panel de Administración</h1>
         </div>
         <button onClick={handleLogout} className="text-black/50 hover:text-sasori-red transition-colors">
           <LogOut size={20} />
@@ -615,7 +615,7 @@ export function DashboardPage() {
       </div>
 
       {/* MAIN CONTENT AREA */}
-      <div className="flex-1 md:ml-72 w-full lg:max-w-[calc(100vw-288px)]">
+      <div className="flex-1 md:ml-84 w-full lg:max-w-[calc(100vw-336px)]">
         <main className="pt-40 md:pt-16 px-4 md:px-12 w-full mx-auto pb-20">
         
         {activeModule === 'newsletter' ? (
