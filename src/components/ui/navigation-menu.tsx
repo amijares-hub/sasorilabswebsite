@@ -6,6 +6,7 @@ import { Menu, ChevronDown, Languages, ArrowRight, UserCircle2 } from "lucide-re
 import { cn } from "../../lib/utils";
 import { SasoriLogo } from "./sasori-logo";
 import { useNavigate } from "react-router-dom";
+import { Button } from "./button";
 
 const EXPAND_SCROLL_THRESHOLD = 80;
 
@@ -184,16 +185,16 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
         onClick={handleNavClick}
         onMouseLeave={handleServicesLeave}
         className={cn(
-          "flex items-center overflow-visible rounded-full glass-metallic-white-nav h-16 md:h-24",
+          "flex items-center overflow-visible rounded-full glass-metallic-white-nav h-12 md:h-20",
           !isExpanded && "cursor-pointer justify-center pl-0"
         )}
       >
         <motion.div
           variants={logoVariants}
-          className="flex-shrink-0 flex items-center font-semibold pl-4 md:pl-6 pr-3 md:pr-5 cursor-pointer"
+          className="flex-shrink-0 flex items-center font-semibold pl-4 md:pl-5 pr-2 md:pr-4 cursor-pointer"
           onClick={() => handleLinkClick("/")}
         >
-          <SasoriLogo className="h-8 w-8 md:h-14 md:w-14 ml-1 mr-3" />
+          <SasoriLogo className="h-6 w-6 md:h-11 md:w-11 ml-1 mr-2 md:mr-3" />
         </motion.div>
         
         <motion.div
@@ -260,14 +261,26 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
             </div>
           ))}
           
-          <motion.button
-            variants={itemVariants}
-            onClick={() => handleLinkClick('/login')}
-            className="flex items-center gap-2 px-6 py-3 rounded-full border border-sasori-red/20 bg-sasori-red/5 text-sasori-red shadow-[0_2px_10px_rgba(226,6,19,0.1)] hover:bg-sasori-red hover:text-white transition-all duration-500 group/acc"
-          >
-            <UserCircle2 className="w-6 h-6 group-hover/acc:scale-110 transition-transform" />
-            <span className="hidden sm:inline font-bold text-sm md:text-base">{t.account}</span>
-          </motion.button>
+          <motion.div variants={itemVariants}>
+            <Button
+              variant="default"
+              size="lg"
+              className="rounded-full gap-2 px-6 group h-9 md:h-12"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleLinkClick('/login');
+              }}
+            >
+              <UserCircle2 className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
+              <span className="hidden sm:inline font-bold text-xs md:text-sm uppercase tracking-widest">{t.account}</span>
+              <ArrowRight 
+                className="-me-1 ms-2 opacity-60 transition-transform group-hover:translate-x-0.5" 
+                size={16} 
+                strokeWidth={2} 
+                aria-hidden="true" 
+              />
+            </Button>
+          </motion.div>
 
           {/* Language Selector Inside Menu */}
           <div className="pl-2 border-l border-black/10 ml-1 relative">

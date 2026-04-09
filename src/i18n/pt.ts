@@ -380,5 +380,11 @@ export const pt = {
         { title: "Landing Page Cinematográfica", desc: "Site experiencial para marca de luxo com animações baseadas em scroll.", type: "Site Corporativo" },
         { title: "Assistente AI de Vendas", desc: "Bot que atende clientes via WhatsApp, negoceia preços e fecha vendas.", type: "Automação" }
       ]
+    },
+    integrations: {
+      badge: "⚡ Integrações",
+      title: "Integre suas ferramentas favoritas",
+      subtext: "Mais de 250 aplicativos líderes disponíveis para integrar-se sem fricções no seu fluxo de trabalho.",
+      cta: "Começar agora"
     }
 };

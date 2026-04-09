@@ -314,7 +314,7 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
   } as any;
 
   return (
-    <section className="relative py-16 md:py-32 bg-[#F2F2F2] text-[#1A1A1A] overflow-hidden">
+    <section id="contact" className="relative py-16 md:py-32 bg-[#F2F2F2] text-[#1A1A1A] overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <motion.div 

@@ -169,17 +169,17 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
                 { label: t.labels.about, href: "/#contact", isScroll: true },
                 { label: t.labels.cases, href: "/#contact", isScroll: true },
                 { label: t.labels.blog, href: "/blog" },
-                { label: t.labels.contact_btn, href: "/contact" }
+                { label: t.labels.contact_btn, href: "/#contact" }
               ].map(s => (
                 <li key={s.label}>
                   <button
                     onClick={() => {
                       if (s.href.startsWith('http')) {
                         window.open(s.href, '_blank');
-                      } else if (s.href.startsWith('#')) {
-                        const el = document.querySelector(s.href);
-                        if (el) {
-                          el.scrollIntoView({ behavior: 'smooth' });
+                      } else if (s.href.includes('#')) {
+                        const [path, hash] = s.href.split('#');
+                        if (window.location.pathname === path || (path === '/' && window.location.pathname === '')) {
+                          document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
                         } else {
                           navigate(s.href);
                         }

@@ -45,8 +45,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
   }, []);
 
   const handleCta = () => {
-    navigate("/contact");
-    window.scrollTo({ top: 0, behavior: "instant" });
+    navigate("/#contact");
   };
 
   return (

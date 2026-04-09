@@ -380,5 +380,11 @@ export const en = {
         { title: "Cinematic Landing Page", desc: "Experiential website for a luxury brand with scroll-based animations and fluid transitions.", type: "Corporate Site" },
         { title: "Autonomous AI Sales Assistant", desc: "Automated bot that serves customers via WhatsApp, negotiates prices under rules and closes sales naturally.", type: "Automation" }
       ]
+    },
+    integrations: {
+      badge: "⚡ Integrations",
+      title: "Integrate with favorite tools",
+      subtext: "250+ top apps are available to integrate seamlessly with your workflow.",
+      cta: "Get started"
     }
 };

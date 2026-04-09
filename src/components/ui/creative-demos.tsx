@@ -74,7 +74,7 @@ export function CreativeDemosSection({ lang = "es", className }: CreativeDemosSe
       description: lang === 'es' ? "IA conversacional con latencia zero y matices humanos." : "Conversational AI with zero latency and human nuances.",
       category: "AI AUDIO",
       imageUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1589254065878-42c9da997008?w=800&q=80",
-      link: "/contact"
+      link: "/#contact"
     },
     {
       id: 2,
@@ -82,7 +82,7 @@ export function CreativeDemosSection({ lang = "es", className }: CreativeDemosSe
       description: lang === 'es' ? "Navegación inmersiva para productos de alta gama." : "Immersive navigation for high-end products.",
       category: "CREATIVE WEB",
       imageUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1633177317976-3f9bc45e1d1d?w=800&q=80",
-      link: "/contact"
+      link: "/#contact"
     },
     {
       id: 3,
@@ -90,7 +90,7 @@ export function CreativeDemosSection({ lang = "es", className }: CreativeDemosSe
       description: lang === 'es' ? "Anticipación de churn basada en patrones cognitivos." : "Churn anticipation based on cognitive patterns.",
       category: "DATA ENGINE",
       imageUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1551288049-bbdac8626ad1?w=800&q=80",
-      link: "/contact"
+      link: "/#contact"
     }
   ];
 
@@ -150,7 +150,13 @@ export function CreativeDemosSection({ lang = "es", className }: CreativeDemosSe
                 </p>
                 
                 <button
-                  onClick={() => navigate(demo.link)}
+                  onClick={() => {
+                    if (window.location.pathname === '/') {
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      navigate('/#contact');
+                    }
+                  }}
                   className="flex items-center gap-3 w-fit text-[10px] font-black uppercase tracking-[0.2em] py-4 px-8 rounded-full border border-white/20 bg-white/5 text-white hover:bg-sasori-red hover:text-white transition-all duration-500"
                 >
                   {t.viewProject}

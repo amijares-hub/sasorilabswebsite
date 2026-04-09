@@ -60,9 +60,7 @@ export function ServicePage({
   };
 
   const handleCta = () => {
-    navigate("/contact");
-    window.scrollTo({ top: 0, behavior: "instant" });
-    setTimeout(() => window.scrollTo(0, 0), 10);
+    navigate("/#contact");
   };
 
   const handleExplore = () => {

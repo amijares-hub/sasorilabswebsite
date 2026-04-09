@@ -41,6 +41,8 @@ import { DemosPage } from './pages/demos-page';
 import { Footer } from './components/ui/footer';
 import { BlogPostSection } from './components/ui/blog-posts';
 import { CreativeDemosSection } from './components/ui/creative-demos';
+import { IntegrationHero } from './components/ui/integration-hero';
+import ClientSlideshow from './components/ui/slideshow';
 import { NewsletterPopup } from './components/ui/newsletter';
 import Lenis from '@studio-freight/lenis';
 import { clsx, type ClassValue } from 'clsx';
@@ -115,19 +117,40 @@ const MatrixRain = ({ color = '#E20613', opacity = 0.15 }: { color?: string; opa
 };
 
 // Scroll to top helper
+// Scroll to top or anchor helper
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
+
   useEffect(() => {
-    // Standard scroll
+    // If there's a hash, scroll to the element
+    if (hash) {
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+
+    // Standard scroll to top
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
-    // Sometimes scroll preservation kicks in, so we force it again
+    // Handle delayed rendering or lazy loaded content
     const timer = setTimeout(() => {
+      if (hash) {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+      }
       window.scrollTo(0, 0);
-    }, 10);
+    }, 150); // Increased delay for safety
 
     return () => clearTimeout(timer);
-  }, [pathname]);
+  }, [pathname, hash]);
+
   return null;
 }
 
@@ -483,6 +506,15 @@ export default function App() {
                 <CreativeDemosSection lang={lang} />
               </section>
 
+              {/* Integrations Hero Section */}
+              <IntegrationHero 
+                lang={lang}
+                badge={t.integrations.badge}
+                title={t.integrations.title}
+                subtext={t.integrations.subtext}
+                ctaText={t.integrations.cta}
+              />
+
               {/* Blog Highlights Section */}
               <section className="relative z-20 bg-bg-dark border-y border-black/5">
                 <BlogPostSection
@@ -513,6 +545,11 @@ export default function App() {
                   }}
                   showContent={true}
                 />
+              </section>
+
+              {/* Satisfied Clients Slideshow Section */}
+              <section className="relative z-20">
+                <ClientSlideshow lang={lang} />
               </section>
 
               {/* Contact Section */}
