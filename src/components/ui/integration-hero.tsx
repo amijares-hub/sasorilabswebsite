@@ -15,24 +15,24 @@ interface IntegrationHeroProps {
 }
 
 const integrationLogos = [
-  { name: "Slack", color: "#4A154B" },
-  { name: "Shopify", color: "#95BF47" },
-  { name: "WhatsApp", color: "#25D366" },
-  { name: "HubSpot", color: "#FF7A59" },
-  { name: "Salesforce", color: "#00A1E0" },
-  { name: "Stripe", color: "#008CDD" },
-  { name: "Notion", color: "#000000" },
-  { name: "Zapier", color: "#FF4A00" },
-  { name: "Gmail", color: "#EA4335" },
-  { name: "Figma", color: "#F24E1E" },
-  { name: "TikTok", color: "#000000" },
-  { name: "Meta", color: "#0668E1" },
-  { name: "Google Drive", color: "#4285F4" },
-  { name: "Airtable", color: "#18BFFF" },
-  { name: "Intercom", color: "#000000" },
-  { name: "Mailchimp", color: "#FFE01B" },
-  { name: "Typeform", color: "#262627" },
-  { name: "Webflow", color: "#4353FF" },
+  { name: "Slack", color: "#4A154B", slug: "slack" },
+  { name: "Shopify", color: "#7AB55C", slug: "shopify" },
+  { name: "WhatsApp", color: "#25D366", slug: "whatsapp" },
+  { name: "HubSpot", color: "#FF7A59", slug: "hubspot" },
+  { name: "Salesforce", color: "#00A1E0", slug: "salesforce" },
+  { name: "Stripe", color: "#635BFF", slug: "stripe" },
+  { name: "Notion", color: "#000000", slug: "notion" },
+  { name: "Zapier", color: "#FF4F00", slug: "zapier" },
+  { name: "Gmail", color: "#EA4335", slug: "gmail" },
+  { name: "Figma", color: "#F24E1E", slug: "figma" },
+  { name: "TikTok", color: "#000000", slug: "tiktok" },
+  { name: "Meta", color: "#0668E1", slug: "meta" },
+  { name: "Google Drive", color: "#4285F4", slug: "googledrive" },
+  { name: "Airtable", color: "#18BFFF", slug: "airtable" },
+  { name: "Intercom", color: "#000000", slug: "intercom" },
+  { name: "Mailchimp", color: "#FFE01B", slug: "mailchimp" },
+  { name: "Typeform", color: "#262627", slug: "typeform" },
+  { name: "Webflow", color: "#4353FF", slug: "webflow" },
 ];
 
 export function IntegrationHero({
@@ -110,21 +110,21 @@ export function IntegrationHero({
         {/* Row 1 */}
         <motion.div style={{ x: x1 }} className="flex gap-8 whitespace-nowrap px-4 justify-center">
           {[...row1, ...row1, ...row1].map((logo, i) => (
-            <LogoIcon key={i} name={logo.name} color={logo.color} />
+            <LogoIcon key={i} name={logo.name} color={logo.color} slug={logo.slug} />
           ))}
         </motion.div>
         
         {/* Row 2 */}
         <motion.div style={{ x: x2 }} className="flex gap-8 whitespace-nowrap px-4 justify-center">
           {[...row2, ...row2, ...row2].map((logo, i) => (
-            <LogoIcon key={i} name={logo.name} color={logo.color} />
+            <LogoIcon key={i} name={logo.name} color={logo.color} slug={logo.slug} />
           ))}
         </motion.div>
 
         {/* Row 3 */}
         <motion.div style={{ x: x3 }} className="flex gap-8 whitespace-nowrap px-4 justify-center">
           {[...row3, ...row3, ...row3].map((logo, i) => (
-            <LogoIcon key={i} name={logo.name} color={logo.color} />
+            <LogoIcon key={i} name={logo.name} color={logo.color} slug={logo.slug} />
           ))}
         </motion.div>
 
@@ -160,16 +160,24 @@ export function IntegrationHero({
   );
 }
 
-function LogoIcon({ name, color }: { name: string; color: string }) {
+function LogoIcon({ name, color, slug }: { name: string; color: string; slug?: string }) {
+  const logoUrl = slug 
+    ? `https://cdn.simpleicons.org/${slug}/white` 
+    : null;
+
   return (
-    <div className="flex items-center gap-3 bg-white px-6 py-4 rounded-2xl border border-black/5 shadow-lg shadow-black/[0.02] hover:shadow-xl transition-all duration-500 group cursor-default">
+    <div className="flex items-center gap-4 bg-white px-5 py-3 rounded-[18px] border border-black/5 shadow-sm hover:shadow-md hover:border-sasori-red/10 transition-all duration-500 group cursor-default min-w-[160px]">
       <div 
-        className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-black text-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500"
+        className="w-10 h-10 rounded-xl flex items-center justify-center text-white overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 p-2.5"
         style={{ backgroundColor: color }}
       >
-        {name.charAt(0)}
+        {logoUrl ? (
+          <img src={logoUrl} alt={name} className="w-full h-full object-contain" />
+        ) : (
+          <span className="font-bold text-lg">{name.charAt(0)}</span>
+        )}
       </div>
-      <span className="text-sm font-bold tracking-tight text-[#1A1A1A] opacity-40 group-hover:opacity-100 transition-opacity">
+      <span className="text-[15px] font-semibold tracking-tight text-[#1A1A1A]/40 group-hover:text-[#1A1A1A] transition-colors duration-500">
         {name}
       </span>
     </div>

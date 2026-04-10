@@ -2,8 +2,10 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Mail, Phone, MapPin, Send, User, MessageSquare, Building, 
-  ArrowRight, Sparkles, CheckCircle, Clock, Globe, Shield, Zap
+  ArrowRight, Sparkles, CheckCircle, Clock, Globe, Shield, Zap,
+  MessageCircle
 } from 'lucide-react';
+import { SITE_CONFIG } from '../../config/site-config';
 
 export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: string, hideTitle?: boolean }) {
   const [formData, setFormData] = useState({
@@ -247,23 +249,23 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
       icon: Mail,
       title: t.email,
       description: t.emailDesc,
-      value: "hello@sasorilabs.com",
-      link: "mailto:hello@sasorilabs.com",
+      value: SITE_CONFIG.emails.support,
+      link: `mailto:${SITE_CONFIG.emails.support}`,
       gradient: "from-red-500/20 to-red-900/20",
     },
     {
-      icon: Phone,
-      title: t.phone,
-      description: t.phoneDesc,
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
-      gradient: "from-rose-500/20 to-red-600/20",
+      icon: MessageCircle,
+      title: "WhatsApp",
+      description: lang === 'es' ? "Chatea con nosotros" : "Chat with us",
+      value: SITE_CONFIG.whatsapp.number,
+      link: `https://wa.me/${SITE_CONFIG.whatsapp.number.replace('+', '')}?text=${encodeURIComponent(SITE_CONFIG.whatsapp.message)}`,
+      gradient: "from-green-500/20 to-emerald-600/20",
     },
     {
       icon: MapPin,
       title: t.visit,
       description: t.visitDesc,
-      value: "Ciudad de México",
+      value: SITE_CONFIG.location,
       link: "#",
       gradient: "from-red-700/20 to-rose-900/20",
     }

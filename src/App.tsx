@@ -44,6 +44,7 @@ import { CreativeDemosSection } from './components/ui/creative-demos';
 import { IntegrationHero } from './components/ui/integration-hero';
 import ClientSlideshow from './components/ui/slideshow';
 import { NewsletterPopup } from './components/ui/newsletter';
+import { FloatingWhatsApp } from './components/ui/floating-whatsapp';
 import Lenis from '@studio-freight/lenis';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -406,6 +407,8 @@ export default function App() {
       <AnimatedNavFramer lang={lang} onToggleLang={(l) => setLang(l as any)} />
       {/* Newsletter Popup - auto-shows after 8 seconds */}
       <NewsletterPopup lang={lang} />
+      {/* WhatsApp Floating Button */}
+      <FloatingWhatsApp />
 
       {/* Cinematic Entrance */}
       {!isLoaded && (

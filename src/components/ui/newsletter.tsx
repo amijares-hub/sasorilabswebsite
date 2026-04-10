@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, User, ArrowRight, CheckCircle, AlertCircle, Sparkles } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
+import { SITE_CONFIG } from '../../config/site-config';
 
 interface NewsletterPopupProps {
   lang?: string;
@@ -22,7 +23,7 @@ const dict: Record<string, any> = {
     cta: 'SUSCRIBIRME GRATIS',
     sending: 'PROCESANDO...',
     successTitle: '¡Bienvenido al futuro!',
-    successBody: 'Te hemos enviado un email de bienvenida. Prepárate para lo extraordinario.',
+    successBody: `Te hemos enviado un email de bienvenida desde ${SITE_CONFIG.emails.notifications}. Prepárate para lo extraordinario.`,
     error: 'Error al suscribirse. Inténtalo de nuevo.',
     already: 'Este email ya está suscrito.',
     noSpam: 'Sin spam. Cancela cuando quieras.',
@@ -37,7 +38,7 @@ const dict: Record<string, any> = {
     cta: 'SUBSCRIBE FREE',
     sending: 'PROCESSING...',
     successTitle: 'Welcome to the future!',
-    successBody: 'We sent you a welcome email. Get ready for the extraordinary.',
+    successBody: `We sent you a welcome email from ${SITE_CONFIG.emails.notifications}. Get ready for the extraordinary.`,
     error: 'Subscription failed. Please try again.',
     already: 'This email is already subscribed.',
     noSpam: 'No spam. Unsubscribe anytime.',
@@ -121,6 +122,7 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
           name: name.trim() || '',
           lang,
           unsubscribeToken: subscriber?.unsubscribe_token || '',
+          from: SITE_CONFIG.emails.notifications,
         }),
       });
 
@@ -342,6 +344,7 @@ export function NewsletterInline({ lang = 'es' }: { lang?: string }) {
           name: name.trim() || '',
           lang,
           unsubscribeToken: subscriber?.unsubscribe_token || '',
+          from: SITE_CONFIG.emails.notifications,
         }),
       });
 

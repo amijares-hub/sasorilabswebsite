@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabaseClient';
 import { SasoriLogo } from '../components/ui/sasori-logo';
 import { BackgroundPaths } from '../components/ui/background-paths';
 import { Lock, Mail, ArrowRight, AlertCircle } from 'lucide-react';
+import { SITE_CONFIG } from '../config/site-config';
 
 export function LoginPage({ lang = 'es' }: { lang?: string }) {
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ export function LoginPage({ lang = 'es' }: { lang?: string }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full bg-white border border-black/10 rounded-xl py-4 pl-12 pr-4 text-[#1A1A1A] placeholder-black/20 focus:outline-none focus:border-sasori-red transition-colors shadow-[inset_1px_1px_4px_rgba(0,0,0,0.05)]"
-                placeholder="admin@sasorilabs.com"
+                placeholder={`admin@${SITE_CONFIG.domain}`}
               />
             </div>
           </div>

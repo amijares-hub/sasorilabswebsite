@@ -6,6 +6,7 @@ import { BackgroundPaths } from '../components/ui/background-paths';
 import { SasoriLogo } from '../components/ui/sasori-logo';
 import { Footer } from '../components/ui/footer';
 import { cn } from '../lib/utils';
+import { SITE_CONFIG } from '../config/site-config';
 
 const dict: Record<string, any> = {
   es: {
@@ -147,6 +148,7 @@ export function UserAuthPage({ lang = 'es' }: { lang?: string }) {
           name: fullName,
           lang,
           unsubscribeToken: '',
+          from: SITE_CONFIG.emails.notifications,
         }),
       });
     } catch (_) {}

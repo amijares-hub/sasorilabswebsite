@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Globe, Globe2 } from 'lucide-react';
 import { SasoriLogo } from './sasori-logo';
 import { TextHoverEffect, FooterBackgroundGradient } from './hover-footer';
+import { SITE_CONFIG } from '../../config/site-config';
 
 export function Footer({ lang = 'es' }: { lang?: string }) {
   const navigate = useNavigate();
@@ -216,15 +217,15 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
             <ul className="space-y-4 text-black/50 text-sm">
               <li className="flex items-center gap-3">
                 <Globe className="w-4 h-4 text-sasori-red flex-shrink-0" />
-                <a href="mailto:hello@sasorilabs.com" className="hover:text-sasori-red transition-colors uppercase text-[10px] font-black tracking-widest">hello@sasorilabs.com</a>
+                <a href={`mailto:${SITE_CONFIG.emails.support}`} className="hover:text-sasori-red transition-colors uppercase text-[10px] font-black tracking-widest">{SITE_CONFIG.emails.support}</a>
               </li>
               <li className="flex items-center gap-3">
                 <Globe2 className="w-4 h-4 text-sasori-red flex-shrink-0" />
-                <a href="#" className="hover:text-sasori-red transition-colors uppercase text-[10px] font-black tracking-widest">sasorilabs.com</a>
+                <a href="#" className="hover:text-sasori-red transition-colors uppercase text-[10px] font-black tracking-widest">{SITE_CONFIG.domain}</a>
               </li>
               <li className="flex items-center gap-3">
                 <Globe className="w-4 h-4 text-sasori-red flex-shrink-0" />
-                <span className="uppercase text-[10px] font-black tracking-widest">Ciudad de México</span>
+                <span className="uppercase text-[10px] font-black tracking-widest">{SITE_CONFIG.location}</span>
               </li>
             </ul>
           </div>

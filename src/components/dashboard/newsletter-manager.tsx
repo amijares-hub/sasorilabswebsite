@@ -3,6 +3,7 @@ import { supabase } from '../../lib/supabaseClient';
 import { Users, Mail, Plus, Trash2, Send, CheckCircle2, Clock, AlertCircle, RefreshCw, Save, Edit2 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { MorphingSquare } from '../ui/morphing-square';
+import { SITE_CONFIG } from '../../config/site-config';
 
 interface Subscriber {
   id: string;
@@ -141,9 +142,10 @@ export function NewsletterManager() {
             type: 'campaign',
             to: sub.email,
             lang: sub.lang,
-            unsubscribeToken: sub.id, // we use ID as token for simplicity or fetch actual unsubscribe_token, but our component uses token
+            unsubscribeToken: sub.id, // we use ID as token for simplicity
             subject: campaign.subject_es,
-            content: campaign.content_es
+            content: campaign.content_es,
+            from: SITE_CONFIG.emails.notifications,
           })
         });
 
