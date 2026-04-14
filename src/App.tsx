@@ -49,6 +49,9 @@ import Lenis from '@studio-freight/lenis';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { translations } from './i18n/translations';
+import { Canvas } from '@react-three/fiber';
+import { ActivityParticles } from './components/canvas/ActivityParticles';
+import { useExperienceStore } from './store/useExperienceStore';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -167,6 +170,13 @@ export default function App() {
   }, [lang]);
   const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
+  const initRealtime = useExperienceStore(state => state.initRealtime);
+
+  useEffect(() => {
+    // Initialize real-time listener for Hollywood-style feedback
+    const cleanup = initRealtime();
+    return () => cleanup();
+  }, [initRealtime]);
 
   const entranceRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
@@ -402,6 +412,13 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      
+      {/* Dynamic 3D Activity Particles Background (Hollywood Vibe) */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
+          <ActivityParticles />
+        </Canvas>
+      </div>
 
       {/* Universal Components */}
       <AnimatedNavFramer lang={lang} onToggleLang={(l) => setLang(l as any)} />

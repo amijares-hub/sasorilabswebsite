@@ -242,9 +242,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
         {/* Bottom row */}
         <div className="flex flex-col md:flex-row justify-between items-center py-6 text-black/40 text-xs gap-4">
           <div className="flex gap-6">
-            {['Twitter', 'LinkedIn', 'GitHub', 'Dribbble'].map(social => (
-              <a key={social} href="#" className="hover:text-sasori-red transition-colors uppercase font-bold tracking-widest">{social}</a>
-            ))}
+            {/* Social links removed as requested */}
           </div>
           <span className="text-[10px] uppercase font-bold tracking-widest">
             {t.rights}

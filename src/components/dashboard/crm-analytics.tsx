@@ -34,7 +34,7 @@ export function CRMAnalytics() {
   const recentUsers = [
     { id: 1, name: 'Alice Johnson', city: 'Madrid, ES', email: 'alice@corp.com', activity: 'Activa', last_seen: 'Hace 2 min', conversion: '84%' },
     { id: 2, name: 'Bob Smith', city: 'London, UK', email: 'bob@tech.io', activity: 'Inactiva', last_seen: 'Hace 4 hrs', conversion: '12%' },
-    { id: 3, name: 'Carlos Ruíz', city: 'CDMX, MX', email: 'carlos@sasori.mx', activity: 'Activa', last_seen: 'Hace 12 min', conversion: '95%' },
+    { id: 3, name: 'Carlos Ruíz', city: 'Tenerife, ES', email: 'carlos@sasori.io', activity: 'Activa', last_seen: 'Hace 12 min', conversion: '95%' },
     { id: 4, name: 'Diana Prince', city: 'New York, US', email: 'diana@amazon.com', activity: 'Activa', last_seen: 'Hace 1 hr', conversion: '50%' },
     { id: 5, name: 'Eduardo M.', city: 'Berlin, DE', email: 'edu@startup.de', activity: 'Inactiva', last_seen: 'Hace 2 días', conversion: '0%' },
   ];
@@ -175,7 +175,7 @@ export function CRMAnalytics() {
             <div className="space-y-8">
                 {[
                     { country: 'España', users: '12.4k', growth: '+5.2%', percent: 85 },
-                    { country: 'México', users: '8.1k', growth: '+12.4%', percent: 62 },
+                    { country: 'UK', users: '8.1k', growth: '+12.4%', percent: 62 },
                     { country: 'Estados Unidos', users: '15.2k', growth: '+2.1%', percent: 45 },
                     { country: 'Brasil', users: '4.5k', growth: '+24.5%', percent: 30 },
                     { country: 'China', users: '25.1k', growth: '+15.2%', percent: 92 },

@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EmployeeStatus {
+  ACTIVE
+  IDLE
+  ERROR
+}
+
+model User {
+  id               String            @id @default(uuid())
+  email            String            @unique
+  companyName      String            @map("company_name")
+  apiKeySecret     String            @map("api_key_secret")
+  digitalEmployees DigitalEmployee[] @relation("UserToEmployees")
+
+  @@map("users")
+}
+
+model DigitalEmployee {
+  id            String          @id @default(uuid())
+  name          String
+  status        EmployeeStatus  @default(IDLE)
+  configuration Json            @db.JsonB
+  userId        String          @map("user_id")
+  user          User            @relation("UserToEmployees", fields: [userId], references: [id])
+  logs          AutomationLog[] @relation("EmployeeToLogs")
+
+  @@map("digital_employees")
+}
+
+model AutomationLog {
+  id              String          @id @default(uuid())
+  createdAt       DateTime        @default(now()) @map("created_at")
+  actionPerformed String          @map("action_performed")
+  tokensUsed      Int             @map("tokens_used")
+  metadata        Json            @db.JsonB
+  employeeId      String          @map("employee_id")
+  employee        DigitalEmployee @relation("EmployeeToLogs", fields: [employeeId], references: [id])
+
+  @@map("automation_logs")
+}

@@ -162,22 +162,37 @@ export function IntegrationHero({
 
 function LogoIcon({ name, color, slug }: { name: string; color: string; slug?: string }) {
   const logoUrl = slug 
-    ? `https://cdn.simpleicons.org/${slug}/white` 
+    ? `https://api.iconify.design/simple-icons:${slug}.svg?color=white` 
     : null;
 
   return (
     <div className="flex items-center gap-4 bg-white px-5 py-3 rounded-[18px] border border-black/5 shadow-sm hover:shadow-md hover:border-sasori-red/10 transition-all duration-500 group cursor-default min-w-[160px]">
       <div 
-        className="w-10 h-10 rounded-xl flex items-center justify-center text-white overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700 p-2.5"
+        className="w-10 h-10 rounded-xl flex items-center justify-center text-white overflow-hidden transition-all duration-700 p-2.5 shadow-inner"
         style={{ backgroundColor: color }}
       >
         {logoUrl ? (
-          <img src={logoUrl} alt={name} className="w-full h-full object-contain" />
+          <img 
+            src={logoUrl} 
+            alt={name} 
+            className="w-full h-full object-contain" 
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const parent = target.parentElement;
+              if (parent) {
+                const span = document.createElement('span');
+                span.className = "font-bold text-lg leading-none";
+                span.innerText = name.charAt(0);
+                parent.appendChild(span);
+              }
+            }}
+          />
         ) : (
-          <span className="font-bold text-lg">{name.charAt(0)}</span>
+          <span className="font-bold text-lg italic">{name.charAt(0)}</span>
         )}
       </div>
-      <span className="text-[15px] font-semibold tracking-tight text-[#1A1A1A]/40 group-hover:text-[#1A1A1A] transition-colors duration-500">
+      <span className="text-[14px] font-black uppercase tracking-tight text-[#1A1A1A]/40 group-hover:text-[#1A1A1A] transition-colors duration-500">
         {name}
       </span>
     </div>

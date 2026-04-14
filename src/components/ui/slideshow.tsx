@@ -12,11 +12,6 @@ const slides = [
     url: "https://galaxydust.io/"
   },
   {
-    img: "/Valannia.png",
-    client: "Valannia",
-    url: "https://valannia.com/"
-  },
-  {
     img: "/SasoriMusic.png",
     client: "SasoriMusic",
     url: "https://sasorimusic-app-google-ai-studio.vercel.app/#/login"

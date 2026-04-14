@@ -18,10 +18,10 @@ export const SITE_CONFIG = {
     message: 'Hola SasoriLabs, me gustaría obtener más información sobre sus servicios digitales.',
   },
   social: {
-    twitter: '#',
-    linkedin: '#',
-    github: '#',
-    dribbble: '#',
+    twitter: '',
+    linkedin: '',
+    github: '',
+    dribbble: '',
   },
-  location: 'Ciudad de México',
+  location: 'Tenerife, Spain',
 };
