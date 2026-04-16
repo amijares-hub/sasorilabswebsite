@@ -100,7 +100,7 @@ export const BlogPostSection = ({
       "container relative my-20 py-10 mx-auto px-4",
       className
     )}>
-      <h1 className="text-center text-4xl font-black uppercase tracking-tighter !leading-[1.1] md:text-5xl lg:text-7xl mb-6 text-[#1A1A1A] font-display">
+      <h1 className="text-center text-4xl font-black uppercase tracking-tighter !leading-[1.1] md:text-4xl sm:text-5xl lg:text-7xl mb-6 text-[#1A1A1A] font-display">
         {title.split(' ').map((word, i) => (
           <span key={i} className={i === title.split(' ').length - 1 ? "text-sasori-red" : ""}>
             {word}{' '}

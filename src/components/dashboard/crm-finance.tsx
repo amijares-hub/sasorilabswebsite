@@ -51,7 +51,7 @@ export function FinanceManager() {
     }
   };
 
-  if (loading) return <div className="p-20 text-center uppercase font-black text-[#1A1A1A]/20 tracking-widest">Abriendo Bóveda Financiera...</div>;
+  if (loading) return <div className="p-6 sm:p-10 md:p-20 text-center uppercase font-black text-[#1A1A1A]/20 tracking-widest">Abriendo Bóveda Financiera...</div>;
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -124,7 +124,7 @@ export function FinanceManager() {
             ))}
             {payments.length === 0 && (
               <tr>
-                <td colSpan={5} className="py-20 text-center text-[#1A1A1A]/10 font-black uppercase">No hay registros financieros</td>
+                <td colSpan={5} className="py-10 md:py-20 text-center text-[#1A1A1A]/10 font-black uppercase">No hay registros financieros</td>
               </tr>
             )}
           </tbody>

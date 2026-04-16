@@ -47,7 +47,7 @@ export function ClientManager() {
     }
   };
 
-  if (loading) return <div className="p-20 text-center uppercase font-black text-[#1A1A1A]/20 tracking-widest">Accediendo al Directorio de Clientes...</div>;
+  if (loading) return <div className="p-6 sm:p-10 md:p-20 text-center uppercase font-black text-[#1A1A1A]/20 tracking-widest">Accediendo al Directorio de Clientes...</div>;
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -114,7 +114,7 @@ export function ClientManager() {
             ))} 
             {filteredClients.length === 0 && (
               <tr>
-                <td colSpan={4} className="py-20 text-center text-[#1A1A1A]/20 font-black uppercase">No se encontraron clientes</td>
+                <td colSpan={4} className="py-10 md:py-20 text-center text-[#1A1A1A]/20 font-black uppercase">No se encontraron clientes</td>
               </tr>
             )}
           </tbody>

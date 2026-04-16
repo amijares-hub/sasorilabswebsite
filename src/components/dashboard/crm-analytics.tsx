@@ -92,7 +92,7 @@ export function CRMAnalytics() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Geographic/Activity Overview */}
-        <div className="lg:col-span-2 bg-[#1A1A1A] rounded-[3rem] p-10 border border-white/5 relative overflow-hidden shadow-2xl">
+        <div className="lg:col-span-2 bg-[#1A1A1A] rounded-[3rem] p-5 sm:p-8 md:p-10 border border-white/5 relative overflow-hidden shadow-2xl">
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
           
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
@@ -166,7 +166,7 @@ export function CRMAnalytics() {
         </div>
 
         {/* Global Overview Breakdown */}
-        <div className="bg-[#EDEDED] rounded-[3rem] p-10 border border-black/5 shadow-inner space-y-12">
+        <div className="bg-[#EDEDED] rounded-[3rem] p-5 sm:p-8 md:p-10 border border-black/5 shadow-inner space-y-12">
             <div>
                 <h3 className="text-xl font-black uppercase tracking-widest text-[#1A1A1A] mb-2">Resumen Global</h3>
                 <p className="text-black/30 text-[10px] font-black uppercase tracking-widest">Saturación del mercado digital por regiones.</p>

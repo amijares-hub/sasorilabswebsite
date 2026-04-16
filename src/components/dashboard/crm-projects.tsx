@@ -79,7 +79,7 @@ export function ProjectManager() {
     }
   };
 
-  if (loading) return <div className="p-20 text-center uppercase font-black text-[#1A1A1A]/20 tracking-widest">Desplegando Mapa de Operaciones...</div>;
+  if (loading) return <div className="p-6 sm:p-10 md:p-20 text-center uppercase font-black text-[#1A1A1A]/20 tracking-widest">Desplegando Mapa de Operaciones...</div>;
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">

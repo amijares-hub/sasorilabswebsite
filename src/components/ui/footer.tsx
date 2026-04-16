@@ -117,7 +117,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       {/* Subtle metallic texture for footre */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-10 md:mb-20">
           {/* Logo and Desc */}
           <div className="lg:col-span-2 space-y-8">
             <div 

@@ -147,10 +147,11 @@ Deno.serve(async (req: Request) => {
 
   try {
     const body = await req.json();
-    const { type, to, name, lang = 'es', unsubscribeToken, subject, content } = body;
+    const { type, to, name, lang = 'es', unsubscribeToken, subject, content, subscriber_id, campaign_id } = body;
 
     let emailHTML = '';
     let emailSubject = '';
+    let trackingCampaignId = campaign_id || (type === 'welcome' ? 'welcome_flow' : 'transactional');
 
     if (type === 'welcome') {
       emailSubject = lang === 'en' ? 'Welcome to the digital revolution! 🚀' : '¡Bienvenido a la revolución digital! 🚀';
@@ -175,6 +176,10 @@ Deno.serve(async (req: Request) => {
         to: [to],
         subject: emailSubject,
         html: emailHTML,
+        tags: [
+          ...(subscriber_id ? [{ name: 'subscriber_id', value: subscriber_id }] : []),
+          { name: 'campaign_id', value: trackingCampaignId }
+        ]
       }),
     });
 

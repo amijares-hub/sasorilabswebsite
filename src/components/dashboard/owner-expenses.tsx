@@ -183,7 +183,7 @@ export function OwnerExpenses() {
       )}
 
       {/* Cumulative Control Panel */}
-      <div className="bg-[#1A1A1A] rounded-[3rem] p-10 md:p-12 border border-white/5 relative overflow-hidden shadow-2xl">
+      <div className="bg-[#1A1A1A] rounded-[3rem] p-5 sm:p-8 md:p-10 md:p-12 border border-white/5 relative overflow-hidden shadow-2xl">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
         
         <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center">

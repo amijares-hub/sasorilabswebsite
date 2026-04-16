@@ -26,7 +26,7 @@ function HandWrittenTitle({
     };
 
     return (
-        <div className="relative w-full max-w-4xl mx-auto py-12 md:py-20 mb-8 overflow-visible">
+        <div className="relative w-full max-w-4xl mx-auto py-8 md:py-12 md:py-20 mb-8 overflow-visible">
             <div className="absolute inset-0 scale-125 md:scale-150">
                 <motion.svg
                     width="100%"
@@ -55,7 +55,7 @@ function HandWrittenTitle({
             </div>
             <div className="relative text-center z-10 flex flex-col items-center justify-center pt-8 md:pt-16">
                 <motion.h1
-                    className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter flex items-center gap-2"
+                    className="text-3xl sm:text-4xl md:text-7xl font-black text-white uppercase tracking-tighter flex items-center gap-2"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

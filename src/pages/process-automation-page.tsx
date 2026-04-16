@@ -49,9 +49,9 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
       {/* 2. ¿Cómo lo hacemos? (El Arte de la Conectividad) */}
       <section className="py-24 px-6 bg-[#F8F8F8] relative overflow-hidden border-t border-black/5">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16 text-center">
+          <div className="mb-10 md:mb-16 text-center">
             <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">{tp.howTitle}</h3>
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A]">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A]">
               {tp.howHeading}
             </h2>
             <div className="w-24 h-1.5 bg-sasori-red mx-auto mt-6 rounded-full" />
@@ -105,10 +105,10 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
       {/* 3. Servicios que podemos automatizar (Catálogo de Servicios) */}
       <section className="py-24 px-6 relative bg-white border-t border-black/5">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="mb-10 md:mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div>
               <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">{tp.catalogTitle}</h3>
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A]">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A]">
                 {tp.catalogHeading}
               </h2>
             </div>
@@ -149,9 +149,9 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sasori-red/5 blur-[100px] rounded-full pointer-events-none -translate-x-1/3 translate-y-1/3" />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="mb-20">
+          <div className="mb-10 md:mb-20">
             <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-sasori-red mb-4">{tp.industriesTitle}</h2>
-            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
+            <h3 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
               {tp.industriesHeading1} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40">{tp.industriesHeading2}</span>
             </h3>
@@ -265,8 +265,8 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
 
       {/* 5. Ejemplos Reales de Impacto */}
       <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-16">
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] text-center">
+        <div className="max-w-7xl mx-auto px-6 mb-10 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] text-center">
             Casos Reales de <span className="text-sasori-red">Impacto</span>
           </h2>
         </div>

@@ -71,7 +71,7 @@ export function IntegrationHero({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(226,6,19,0.1)_0%,transparent_70%)]" />
       </div>
 
-      <div className="max-w-4xl mx-auto text-center relative z-10 mb-20">
+      <div className="max-w-4xl mx-auto text-center relative z-10 mb-10 md:mb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ export function IntegrationHero({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#1A1A1A] mb-8 leading-none"
+          className="text-3xl sm:text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#1A1A1A] mb-8 leading-none"
         >
           {title}
         </motion.h2>
@@ -146,7 +146,7 @@ export function IntegrationHero({
             const contactSection = document.getElementById('contact');
             if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="group flex items-center gap-4 bg-[#1A1A1A] text-white px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs hover:bg-sasori-red transition-all duration-300 shadow-2xl"
+          className="group flex items-center gap-4 bg-[#1A1A1A] text-white px-4 md:px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs hover:bg-sasori-red transition-all duration-300 shadow-2xl"
         >
           {ctaText}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

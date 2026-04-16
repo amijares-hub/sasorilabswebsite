@@ -71,9 +71,9 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
       {/* 2. Metodología (Nuestra Ingeniería Visual) */}
       <section className="py-24 px-6 bg-[#F8F8F8] relative overflow-hidden border-t border-black/5">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16 text-center">
+          <div className="mb-10 md:mb-16 text-center">
             <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">{tp.designTitle}</h3>
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] mb-6">
               {tp.designHeading}
             </h2>
             <div className="w-24 h-1.5 bg-sasori-red mx-auto mt-6 rounded-full" />
@@ -129,9 +129,9 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="mb-20">
+          <div className="mb-10 md:mb-20">
             <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-sasori-red mb-4">Industrias Target</h2>
-            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
+            <h3 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
               ¿Quiénes se <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40">benefician?</span>
             </h3>
@@ -232,8 +232,8 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
 
       {/* 4. Marquee de Casos Reales */}
       <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-16">
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] text-center">
+        <div className="max-w-7xl mx-auto px-6 mb-10 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] text-center">
             Ejemplos y <span className="text-sasori-red">Casos Reales</span>
           </h2>
         </div>
@@ -277,9 +277,9 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
       {/* 5. Pricing / Mantenimiento */}
       <section className="py-24 px-6 bg-[#111111] text-white relative">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">Planes de Acompañamiento y Evolución Digital</h3>
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter text-white mb-6">
               "Tu tecnología <span className="text-sasori-red">nunca se queda atrás.</span><br />Nosotros nos encargamos de que siempre sea el primer día."
             </h2>
             <p className="text-white/50 max-w-3xl mx-auto">
@@ -288,7 +288,7 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 md:mb-16">
             {/* Essential */}
             <div className="bg-[#1A1A1A] border border-white/5 hover:border-sasori-red/30 rounded-3xl p-8 flex flex-col transition-all duration-300 relative group">
               <h4 className="text-2xl font-black mb-2 text-white/50 group-hover:text-white">Plan Essential</h4>
@@ -345,9 +345,9 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
       {/* 6. Preguntas Frecuentes */}
       <section className="py-24 px-6 bg-white relative">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">Despejando dudas</h3>
-            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#1A1A1A]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#1A1A1A]">
               Preguntas Frecuentes
             </h2>
           </div>

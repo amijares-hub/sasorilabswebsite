@@ -77,7 +77,7 @@ export function RequestManager() {
     }
   };
 
-  if (loading) return <div className="p-20 text-center uppercase font-black text-[#1A1A1A]/20 tracking-widest">Sincronizando Bóveda de Solicitudes...</div>;
+  if (loading) return <div className="p-6 sm:p-10 md:p-20 text-center uppercase font-black text-[#1A1A1A]/20 tracking-widest">Sincronizando Bóveda de Solicitudes...</div>;
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -88,7 +88,7 @@ export function RequestManager() {
 
       <div className="space-y-4">
         {requests.length === 0 ? (
-          <div className="py-20 text-center border border-dashed border-white/10 rounded-3xl text-[#1A1A1A]/20 uppercase font-black">No hay solicitudes pendientes</div>
+          <div className="py-10 md:py-20 text-center border border-dashed border-white/10 rounded-3xl text-[#1A1A1A]/20 uppercase font-black">No hay solicitudes pendientes</div>
         ) : (
           requests.map(req => (
             <div key={req.id} className="bg-[#EDEDED] border border-black/5 shadow-sm rounded-3xl p-8 shadow-md transition-all group-hover:bg-black/5">

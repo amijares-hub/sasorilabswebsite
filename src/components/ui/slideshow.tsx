@@ -76,7 +76,7 @@ export default function ClientSlideshow({ lang = "es" }: { lang?: string }) {
                  initial={{ y: "110%" }}
                  animate={{ y: 0 }}
                  transition={{ delay: 0.7, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                 className="block text-5xl md:text-9xl font-black text-white uppercase tracking-tighter leading-none italic drop-shadow-2xl"
+                 className="block text-4xl sm:text-5xl md:text-9xl font-black text-white uppercase tracking-tighter leading-none italic drop-shadow-2xl"
                >
                  {slides[current].client}
                </motion.span>
@@ -101,7 +101,7 @@ export default function ClientSlideshow({ lang = "es" }: { lang?: string }) {
       </AnimatePresence>
 
       {/* Navigation Controls */}
-      <div className="absolute bottom-12 left-0 w-full px-12 flex items-center justify-between z-20 pointer-events-none">
+      <div className="absolute bottom-12 left-0 w-full px-5 md:px-12 flex items-center justify-between z-20 pointer-events-none">
         <div className="flex items-center gap-4 pointer-events-auto">
           <button 
             onClick={prevSlide}

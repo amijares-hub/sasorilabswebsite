@@ -70,9 +70,9 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
       {/* 2. Metodología (Nuestra Ingeniería de Alto Rendimiento) */}
       <section className="py-24 px-6 bg-[#F8F8F8] relative overflow-hidden border-t border-black/5">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16 text-center">
+          <div className="mb-10 md:mb-16 text-center">
             <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">{tp.engTitle}</h3>
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] mb-6">
               {tp.engHeading}
             </h2>
             <div className="w-24 h-1.5 bg-sasori-red mx-auto mt-6 rounded-full" />
@@ -126,7 +126,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
       {/* 3. Servicios de Optimización y Futuro (Grid de 6) */}
       <section className="py-24 px-6 bg-white relative">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-[#1A1A1A]">
               {tp.servicesHeading}
             </h2>
@@ -159,14 +159,14 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="mb-20">
+          <div className="mb-10 md:mb-20">
             <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-sasori-red mb-4">{tp.sectorsTitle}</h2>
-            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
+            <h3 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
               {tp.sectorsHeading}
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 md:mb-16">
             {tp.sectors.map((sector: any, i: number) => (
               <motion.div 
                 key={i}
@@ -187,7 +187,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
           {/* Gráficos Vivos (BI Avanzado) Box gigante */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
-            className="metallic-vinotinto-card p-10 md:p-16 rounded-[3rem] flex flex-col md:flex-row gap-12 overflow-hidden relative group"
+            className="metallic-vinotinto-card p-5 sm:p-8 md:p-10 md:p-16 rounded-[3rem] flex flex-col md:flex-row gap-12 overflow-hidden relative group"
           >
             <div className="absolute right-0 top-0 w-[600px] h-full bg-gradient-to-l from-sasori-red/5 to-transparent pointer-events-none" />
             <Activity className="absolute right-[-100px] bottom-[-100px] w-[500px] h-[500px] text-white/5 pointer-events-none" />
@@ -197,7 +197,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
                 <span className="w-2 h-2 rounded-full bg-sasori-red animate-pulse" />
                 {tp.biLabel}
               </div>
-              <h4 className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-6 text-white leading-none">
+              <h4 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight mb-6 text-white leading-none">
                 {tp.biHeading}
               </h4>
               <p className="text-white/60 text-lg leading-relaxed mb-4">
@@ -224,8 +224,8 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
 
       {/* 5. Marquee de Casos Reales */}
       <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-16">
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] text-center">
+        <div className="max-w-7xl mx-auto px-6 mb-10 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] text-center">
             {tp.casesHeading}
           </h2>
         </div>
@@ -287,7 +287,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
 
           {/* Mantenimiento Seguro (Right) */}
           <div className="flex items-center">
-            <div className="bg-[#111111] p-10 rounded-[2rem] text-white shadow-2xl relative overflow-hidden w-full h-full lg:h-auto border border-white/5">
+            <div className="bg-[#111111] p-5 sm:p-8 md:p-10 rounded-[2rem] text-white shadow-2xl relative overflow-hidden w-full h-full lg:h-auto border border-white/5">
               <div className="absolute -top-24 -right-24 w-64 h-64 bg-sasori-red/20 blur-[80px] rounded-full pointer-events-none" />
               
               <ShieldCheck className="w-12 h-12 text-sasori-red mb-6" />
@@ -322,7 +322,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
           <div className="absolute inset-0 bg-[#0A0A0A] mix-blend-multiply" />
           <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80" alt="Supercar tech engine" className="w-full h-full object-cover opacity-20" />
         </div>
-        <div className="relative z-10 w-full max-w-5xl mx-auto text-center bg-black/60 backdrop-blur-md p-10 md:p-16 rounded-[3rem] border border-white/10 shadow-[0_0_100px_rgba(226,6,19,0.1)] hover:border-sasori-red/30 transition-colors duration-500">
+        <div className="relative z-10 w-full max-w-5xl mx-auto text-center bg-black/60 backdrop-blur-md p-5 sm:p-8 md:p-10 md:p-16 rounded-[3rem] border border-white/10 shadow-[0_0_100px_rgba(226,6,19,0.1)] hover:border-sasori-red/30 transition-colors duration-500">
           <Rocket className="w-16 h-16 text-sasori-red mx-auto mb-8" />
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-6 leading-tight">
             {tp.ctaTitle}
@@ -332,7 +332,7 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
           </p>
           <button 
             onClick={handleCta}
-            className="px-10 py-5 bg-sasori-red hover:bg-[#C2000B] text-white font-bold uppercase tracking-widest text-sm rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(226,6,19,0.3)] hover:shadow-[0_0_50px_rgba(226,6,19,0.5)] hover:-translate-y-1"
+            className="px-4 md:px-10 py-5 bg-sasori-red hover:bg-[#C2000B] text-white font-bold uppercase tracking-widest text-sm rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(226,6,19,0.3)] hover:shadow-[0_0_50px_rgba(226,6,19,0.5)] hover:-translate-y-1"
           >
             {tp.ctaBtn}
           </button>

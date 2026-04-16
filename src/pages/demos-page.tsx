@@ -158,9 +158,9 @@ export function DemosPage({ lang = 'es' }: { lang?: string }) {
       {/* 2. Demos Grid Section */}
       <section className="py-24 px-6 bg-[#F8F8F8] relative overflow-hidden border-t border-black/5">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16 text-center">
+          <div className="mb-10 md:mb-16 text-center">
             <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">{t.catalogueTitle}</h3>
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A]">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A]">
               {t.catalogueHeadline}
             </h2>
             <div className="w-24 h-1.5 bg-sasori-red mx-auto mt-6 rounded-full" />

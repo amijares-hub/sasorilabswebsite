@@ -103,13 +103,13 @@ export function CreativeDemosSection({ lang = "es", className }: CreativeDemosSe
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-8">
           <div className="max-w-2xl">
              <div className="flex items-center gap-2 mb-4">
                 <Sparkles className="w-5 h-5 text-sasori-red" />
                 <span className="text-[10px] uppercase font-black tracking-[0.3em] text-black/40">SHOWCASE TÉCNICO</span>
              </div>
-             <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#1A1A1A] leading-none">
+             <h2 className="text-3xl sm:text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#1A1A1A] leading-none">
                {t.titlePrefix} <span className="text-sasori-red">{t.titleSuffix}</span>
              </h2>
              <p className="mt-6 text-black/60 text-lg md:text-xl font-medium leading-relaxed">

@@ -326,7 +326,7 @@ export default function EnhancedBackgroundPaths({
         >
           {/* Main Title */}
           <div className="mb-8">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 tracking-tighter leading-none text-white">
+            <h1 className="text-4xl sm:text-4xl sm:text-4xl sm:text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none text-white">
               {words.map((word, wordIndex) => (
                 <span key={wordIndex} className="inline-block mr-4 last:mr-0">
                   {word.split("").map((letter, letterIndex) => (
@@ -372,7 +372,7 @@ export default function EnhancedBackgroundPaths({
             <div className="relative p-[1px] bg-gradient-to-r from-sasori-red via-red-900 to-sasori-red rounded-full group-hover:scale-105 transition-all duration-500 shadow-[0_0_30px_rgba(226,6,19,0.3)]">
               <Button
                 onClick={() => navigate('/contact')}
-                className="relative rounded-full px-12 py-8 text-sm font-black tracking-widest
+                className="relative rounded-full px-5 md:px-12 py-8 text-sm font-black tracking-widest
                             bg-black text-white hover:bg-white hover:text-sasori-red transition-all duration-500 border-0"
               >
                 <div className="flex items-center gap-3">
