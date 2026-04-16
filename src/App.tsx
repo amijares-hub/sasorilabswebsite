@@ -194,7 +194,7 @@ export default function App() {
             {t.services.entrepreneurs.desc}
           </p>
           
-          <div className="flex flex-col justify-center space-y-6 p-5 sm:p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
+          <div className="flex flex-col justify-center space-y-6 p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
             <div className="space-y-5">
               {t.services.entrepreneurs.items.map((item, i) => (
                 <div key={i} className="flex items-start gap-4 text-base md:text-lg font-semibold uppercase tracking-wide text-white/90">
@@ -209,7 +209,7 @@ export default function App() {
                   navigate('/services/ai-automation');
                   window.scrollTo(0, 0);
                 }}
-                className="group inline-flex items-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 bg-sasori-red text-white text-xs sm:text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-sasori-red text-white text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
               >
                 {t.common.viewDetails}
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -228,7 +228,7 @@ export default function App() {
             {t.services.companies.desc}
           </p>
           
-          <div className="flex flex-col justify-center space-y-6 p-5 sm:p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
+          <div className="flex flex-col justify-center space-y-6 p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
             <div className="space-y-5">
               {t.services.companies.items.map((item, i) => (
                 <div key={i} className="flex items-start gap-4 text-base md:text-lg font-semibold uppercase tracking-wide text-white/90">
@@ -243,7 +243,7 @@ export default function App() {
                   navigate('/services/modernization');
                   window.scrollTo(0, 0);
                 }}
-                className="group inline-flex items-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 bg-sasori-red text-white text-xs sm:text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-sasori-red text-white text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
               >
                 {t.common.viewDetails}
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -262,7 +262,7 @@ export default function App() {
             {t.services.pymes.desc}
           </p>
 
-          <div className="flex flex-col justify-center space-y-6 p-5 sm:p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
+          <div className="flex flex-col justify-center space-y-6 p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
             <div className="space-y-5">
               {t.services.pymes.items.map((item, i) => (
                 <div key={i} className="flex items-start gap-4 text-base md:text-lg font-semibold uppercase tracking-wide text-white/90">
@@ -277,7 +277,7 @@ export default function App() {
                   navigate('/services/immersive-webs');
                   window.scrollTo(0, 0);
                 }}
-                className="group inline-flex items-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 bg-sasori-red text-white text-xs sm:text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-sasori-red text-white text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
               >
                 {t.common.viewDetails}
                 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -414,7 +414,7 @@ export default function App() {
       <ScrollToTop />
       
       {/* Dynamic 3D Activity Particles Background (Hollywood Vibe) */}
-      <div className="fixed inset-0 pointer-events-none z-[-1]">
+      <div className="fixed inset-0 pointer-events-none z-0">
         <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
           <ActivityParticles />
         </Canvas>
@@ -438,7 +438,7 @@ export default function App() {
             ref={logoRef}
             className="relative z-10 opacity-0 scale-90 text-center"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-[0.1em] md:tracking-[0.2em] text-sasori-red neon-glow">
+            <h1 className="text-6xl md:text-8xl font-bold tracking-[0.2em] text-sasori-red neon-glow">
               SASORILABS
             </h1>
             <p className="mt-4 text-gray-500 tracking-[0.5em] text-xs uppercase">
@@ -495,7 +495,7 @@ export default function App() {
               {/* Zoom Parallax Section */}
               <section className="relative z-20 bg-bg-dark" id="services">
                 <div className="py-20 text-center reveal">
-                  <h2 className="text-3xl md:text-7xl font-bold uppercase tracking-tighter mb-4 text-[#1A1A1A] px-4">
+                  <h2 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter mb-4 text-[#1A1A1A]">
                     {t.common.ecosystem}
                   </h2>
                   <p className="text-black/40 uppercase tracking-[0.3em] text-xs">

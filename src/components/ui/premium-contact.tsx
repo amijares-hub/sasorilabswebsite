@@ -316,7 +316,7 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
   } as any;
 
   return (
-    <section id="contact" className="relative py-10 md:py-16 md:py-32 bg-[#F2F2F2] text-[#1A1A1A] overflow-hidden">
+    <section id="contact" className="relative py-16 md:py-32 bg-[#F2F2F2] text-[#1A1A1A] overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <motion.div 
@@ -347,9 +347,9 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
       >
         {/* Header */}
         {!hideTitle && (
-          <motion.div className="text-center mb-10 md:mb-20" variants={fadeInUp}>
+          <motion.div className="text-center mb-20" variants={fadeInUp}>
 
-            <motion.h2 className="text-3xl sm:text-4xl sm:text-4xl sm:text-5xl md:text-7xl font-black uppercase mb-6 md:mb-8 tracking-tighter" variants={fadeInUp}>
+            <motion.h2 className="text-3xl sm:text-6xl md:text-7xl font-black uppercase mb-6 md:mb-8 tracking-tighter" variants={fadeInUp}>
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#1A1A1A] to-black/60">
                 {t.title1}
               </span>
@@ -475,7 +475,7 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
                   key="success"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-center py-10 md:py-16 metallic-vinotinto-card border border-white/10 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
+                  className="text-center py-16 metallic-vinotinto-card border border-white/10 rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)]"
                 >
                   <div className="w-20 h-20 rounded-full bg-sasori-red/20 border border-sasori-red flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(226,6,19,0.3)]">
                     <CheckCircle className="w-10 h-10 text-sasori-red" />

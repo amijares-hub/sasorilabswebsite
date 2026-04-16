@@ -88,7 +88,7 @@ export function PromoSection({
   }, [logoPosition]);
 
   return (
-    <section ref={containerRef} className={`relative z-20 py-10 md:py-16 md:py-24 bg-bg-dark overflow-hidden ${className}`}>
+    <section ref={containerRef} className={`relative z-20 py-16 md:py-24 bg-bg-dark overflow-hidden ${className}`}>
       {/* Background glow effects */}
       <div className={`absolute top-1/2 ${logoPosition === 'left' ? 'left-1/4' : 'right-1/4'} -translate-y-1/2 w-96 h-96 bg-sasori-red/5 rounded-full blur-[100px] pointer-events-none`} />
       <div className={`absolute top-1/2 ${logoPosition === 'left' ? 'right-1/4' : 'left-1/4'} -translate-y-1/2 w-[500px] h-[500px] bg-sasori-red/3 rounded-full blur-[120px] pointer-events-none`} />
@@ -115,7 +115,7 @@ export function PromoSection({
             {/* Cinematic overlay for the card */}
             <div className={`absolute top-0 ${logoPosition === 'left' ? 'right-0' : 'left-0'} w-64 h-64 bg-sasori-red/20 blur-[80px] -translate-y-1/2 ${logoPosition === 'left' ? 'translate-x-1/2' : '-translate-x-1/2'} rounded-full pointer-events-none`} />
             
-            <h2 className="text-3xl md:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 uppercase tracking-tight leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4 uppercase tracking-tight leading-tight">
               {titleStart} <span className="text-sasori-red">{titleHighlight}</span><br/> {titleEnd}
             </h2>
             <p className="text-lg md:text-xl text-white/70 font-light mb-10 tracking-wide border-l-4 border-sasori-red pl-4">

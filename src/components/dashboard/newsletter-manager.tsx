@@ -184,7 +184,7 @@ export function NewsletterManager() {
     alert(`Campaña enviada exitosamente a ${successCount} de ${activeSubs.length} suscriptores.`);
   };
 
-  if (loading) return <div className="py-10 md:py-20 flex justify-center"><MorphingSquare message="Cargando Datos..." /></div>;
+  if (loading) return <div className="py-20 flex justify-center"><MorphingSquare message="Cargando Datos..." /></div>;
 
   return (
     <div className="animate-in fade-in zoom-in-95 duration-500">
@@ -236,7 +236,7 @@ export function NewsletterManager() {
               <tbody>
                 {subscribers.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="p-5 sm:p-8 md:p-12 text-center text-[#1A1A1A]/30 text-sm italic">No hay suscriptores todavía.</td>
+                    <td colSpan={6} className="p-12 text-center text-[#1A1A1A]/30 text-sm italic">No hay suscriptores todavía.</td>
                   </tr>
                 ) : subscribers.map(s => (
                   <tr key={s.id} className="border-b border-black/5 hover:bg-black/5 transition-colors text-[#1A1A1A]">
@@ -286,7 +286,7 @@ export function NewsletterManager() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {campaigns.length === 0 ? (
-                  <div className="col-span-full py-10 md:py-20 text-center border border-dashed border-white/10 rounded-3xl">
+                  <div className="col-span-full py-20 text-center border border-dashed border-white/10 rounded-3xl">
                     <p className="text-[#1A1A1A]/30 text-lg uppercase tracking-widest font-black">No hay campañas.</p>
                   </div>
                 ) : campaigns.map(c => (

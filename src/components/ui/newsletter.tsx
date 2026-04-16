@@ -194,10 +194,10 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
                     </div>
 
                     {/* Headline */}
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white mb-2">
+                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white mb-2">
                       {t.headline}
                     </h2>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white/60 mb-6">
+                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white/60 mb-6">
                       {t.subheadline}
                     </h2>
 

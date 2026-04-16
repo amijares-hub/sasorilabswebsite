@@ -80,7 +80,7 @@ export function SasoriHero({ lang = "es" }: { lang?: string }) {
               </span>
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter leading-[0.95] text-[#1A1A1A]">
+            <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.95] text-[#1A1A1A]">
               <motion.span
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}

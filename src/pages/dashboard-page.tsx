@@ -451,7 +451,7 @@ export function DashboardPage() {
   return (
     <div className="flex min-h-screen bg-white text-[#1A1A1A] font-sans selection:bg-sasori-red selection:text-white">
       {/* SIDEBAR FOR DESKTOP */}
-      <aside className="hidden md:flex flex-col w-84 fixed h-screen z-50 bg-[#EDEDED] border-r border-black/5 py-8 md:py-12 px-4 md:px-10 justify-between relative shadow-xl">
+      <aside className="hidden md:flex flex-col w-84 fixed h-screen z-50 bg-[#EDEDED] border-r border-black/5 py-12 px-10 justify-between relative shadow-xl">
         {/* Metallic brushed grain overlay */}
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
         
@@ -657,7 +657,7 @@ export function DashboardPage() {
                 <MorphingSquare message="Sincronizando Bóveda..." />
               </div>
             ) : blogs.length === 0 ? (
-              <div className="text-center py-10 md:py-20 border border-dash border-black/10 rounded-xl bg-[#EDEDED]/30">
+              <div className="text-center py-20 border border-dash border-black/10 rounded-xl bg-[#EDEDED]/30">
                 <p className="text-black/30 text-lg uppercase tracking-widest font-black">La bóveda de información está vacía.</p>
               </div>
             ) : (
@@ -823,7 +823,7 @@ export function DashboardPage() {
                 <input 
                   type="text" 
                   placeholder="Escribe el Título aquí..."
-                  className="w-full bg-transparent border-none text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter placeholder-black/10 focus:outline-none text-[#1A1A1A]"
+                  className="w-full bg-transparent border-none text-4xl md:text-5xl font-black uppercase tracking-tighter placeholder-black/10 focus:outline-none text-[#1A1A1A]"
                   value={formData.translations.es.title}
                   onChange={(e) => setFormData({
                     ...formData,

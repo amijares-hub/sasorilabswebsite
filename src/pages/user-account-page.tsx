@@ -275,12 +275,12 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
                               </div>
                            </div>
                         </div>
-                      )) : <div className="col-span-2 py-10 md:py-20 text-center text-white/10 uppercase font-black tracking-widest">Selecciona un proyecto para ver sus hitos</div>}
+                      )) : <div className="col-span-2 py-20 text-center text-white/10 uppercase font-black tracking-widest">Selecciona un proyecto para ver sus hitos</div>}
                    </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-sasori-red/20 to-gray-900 border border-sasori-red/30 rounded-[2.5rem] p-5 sm:p-8 md:p-10 relative overflow-hidden flex flex-col items-center justify-center">
+              <div className="bg-gradient-to-br from-sasori-red/20 to-gray-900 border border-sasori-red/30 rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col items-center justify-center">
                  <h3 className="text-xs font-black uppercase tracking-widest text-white/50 mb-10 text-center">Total Completado</h3>
                  <div className="relative w-48 h-48">
                     <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
@@ -348,7 +348,7 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
                            </button>
                         </td>
                       </tr>
-                    )) : <tr><td colSpan={5} className="py-10 md:py-20 text-center text-white/10 font-black uppercase">{t.noData}</td></tr>}
+                    )) : <tr><td colSpan={5} className="py-20 text-center text-white/10 font-black uppercase">{t.noData}</td></tr>}
                   </tbody>
                 </table>
               </div>
@@ -428,7 +428,7 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-xl bg-gradient-to-b from-[#111] to-black border border-white/10 rounded-[3rem] p-5 sm:p-8 md:p-10 md:p-14 shadow-2xl"
+              className="relative w-full max-w-xl bg-gradient-to-b from-[#111] to-black border border-white/10 rounded-[3rem] p-10 md:p-14 shadow-2xl"
             >
               <div className="flex justify-between items-center mb-10">
                  <h2 className="text-3xl font-black uppercase tracking-tighter text-white">Nueva Solicitud</h2>
@@ -495,7 +495,7 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
               initial={{ opacity: 0, scale: 0.9, rotateX: 10 }}
               animate={{ opacity: 1, scale: 1, rotateX: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 30 }}
-              className="relative w-full max-w-2xl bg-gradient-to-br from-[#111] via-black to-[#050505] border border-white/10 rounded-[4rem] p-5 sm:p-8 md:p-10 md:p-16 shadow-[0_0_100px_rgba(226,6,19,0.1)] overflow-y-auto max-h-[90vh]"
+              className="relative w-full max-w-2xl bg-gradient-to-br from-[#111] via-black to-[#050505] border border-white/10 rounded-[4rem] p-10 md:p-16 shadow-[0_0_100px_rgba(226,6,19,0.1)] overflow-y-auto max-h-[90vh]"
             >
               <div className="flex justify-between items-start mb-12">
                  <div>

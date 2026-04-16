@@ -57,7 +57,7 @@ export function FinalSection({ lang = 'es' }: { lang?: 'es' | 'en' }) {
           </div>
 
           {/* Main title */}
-          <h2 className="text-4xl sm:text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter text-white leading-none mb-8 text-shadow-heavy">
+          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter text-white leading-none mb-8 text-shadow-heavy">
             {t.title.split('\n').map((line, i) => (
               <React.Fragment key={i}>
                 {i === 1 ? <span className="text-sasori-red text-glow-red">{line}</span> : line}

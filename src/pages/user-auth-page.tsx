@@ -184,11 +184,11 @@ export function UserAuthPage({ lang = 'es' }: { lang?: string }) {
       </div>
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-0" />
 
-      <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-10 md:py-20">
+      <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-20">
         <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.8)]">
           
           {/* Left Panel - Branding */}
-          <div className="hidden lg:flex flex-col justify-between bg-[#0a0a0a] p-5 sm:p-8 md:p-12 border-r border-white/5 relative overflow-hidden">
+          <div className="hidden lg:flex flex-col justify-between bg-[#0a0a0a] p-12 border-r border-white/5 relative overflow-hidden">
             <div className="absolute -top-20 -left-20 w-80 h-80 bg-sasori-red/10 blur-[100px] rounded-full" />
             <div className="absolute -bottom-10 -right-10 w-60 h-60 bg-sasori-red/5 blur-[80px] rounded-full" />
             

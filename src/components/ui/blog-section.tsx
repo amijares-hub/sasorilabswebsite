@@ -92,7 +92,7 @@ export function BlogSection({ lang = 'es' }: { lang?: string }) {
     };
 
 	return (
-		<div className="mx-auto w-full max-w-7xl px-4 py-10 md:py-20 relative overflow-hidden">
+		<div className="mx-auto w-full max-w-7xl px-4 py-20 relative overflow-hidden">
 			<div
 				aria-hidden
 				className="absolute inset-0 pointer-events-none -z-10 opacity-30 h-full"
@@ -106,7 +106,7 @@ export function BlogSection({ lang = 'es' }: { lang?: string }) {
                         <span className="w-1.5 h-1.5 rounded-full bg-sasori-red animate-pulse" />
                         <span className="text-sasori-red text-[10px] uppercase font-black tracking-widest leading-none">{t.tag}</span>
                     </div>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#1A1A1A]">
+                    <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#1A1A1A]">
                         {t.title1} <span className="text-sasori-red">{t.title2}</span>
                     </h2>
                     <p className="text-[#1A1A1A]/50 text-base md:text-lg max-w-2xl font-medium">
@@ -116,11 +116,11 @@ export function BlogSection({ lang = 'es' }: { lang?: string }) {
 			</div>
 
             {loading ? (
-                <div className="flex justify-center py-10 md:py-20">
+                <div className="flex justify-center py-20">
                     <span className="text-sasori-red animate-pulse text-xs font-black uppercase tracking-widest">Cargando Bóveda...</span>
                 </div>
             ) : blogs.length === 0 ? (
-                <div className="flex justify-center py-10 md:py-20 border border-black/5 rounded-3xl bg-black/5 backdrop-blur-md">
+                <div className="flex justify-center py-20 border border-black/5 rounded-3xl bg-black/5 backdrop-blur-md">
                     <span className="text-black/30 text-xs font-bold uppercase tracking-widest">No hay artículos publicados aún.</span>
                 </div>
             ) : (

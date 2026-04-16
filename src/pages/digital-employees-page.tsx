@@ -70,9 +70,9 @@ export function DigitalEmployeesPage({ lang = "es" }: { lang?: string }) {
       {/* 2. ¿Cómo lo hacemos? (Nuestra Metodología) */}
       <section className="py-24 px-6 bg-[#F8F8F8] relative overflow-hidden border-t border-black/5">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-10 md:mb-16 text-center">
+          <div className="mb-16 text-center">
             <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">{tp.methodTitle}</h3>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] mb-6">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-[#1A1A1A] mb-6">
               {tp.methodHeading}
             </h2>
             <div className="w-24 h-1.5 bg-sasori-red mx-auto mt-6 rounded-full" />
@@ -130,9 +130,9 @@ export function DigitalEmployeesPage({ lang = "es" }: { lang?: string }) {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sasori-red/5 blur-[100px] rounded-full pointer-events-none -translate-x-1/3 translate-y-1/3" />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="mb-10 md:mb-20">
+          <div className="mb-20">
             <h2 className="text-sm font-bold tracking-[0.3em] uppercase text-sasori-red mb-4">Industrias y Casos</h2>
-            <h3 className="text-3xl sm:text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
+            <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">
               ¿Quiénes se <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/40">benefician?</span>
             </h3>
@@ -257,9 +257,9 @@ export function DigitalEmployeesPage({ lang = "es" }: { lang?: string }) {
       {/* 4. Preguntas Frecuentes */}
       <section className="py-24 px-6 bg-white relative">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-16">
             <h3 className="text-sasori-red text-sm font-bold tracking-[0.2em] uppercase mb-4">{tp.faqTitle}</h3>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#1A1A1A]">
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-[#1A1A1A]">
               {tp.faqHeading}
             </h2>
             <p className="mt-4 text-black/50">

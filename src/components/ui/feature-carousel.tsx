@@ -252,7 +252,7 @@ export function FeatureCarousel({ lang = 'es' }: { lang?: 'es' | 'en' }) {
           </div>
         </div>
 
-        <div className="flex-1 min-h-[500px] md:min-h-[600px] lg:h-full relative bg-black/40 flex items-center justify-center py-10 md:py-16 md:py-24 lg:py-16 px-6 md:px-12 lg:px-10 overflow-hidden border-t lg:border-t-0 lg:border-l border-white/10">
+        <div className="flex-1 min-h-[500px] md:min-h-[600px] lg:h-full relative bg-black/40 flex items-center justify-center py-16 md:py-24 lg:py-16 px-6 md:px-12 lg:px-10 overflow-hidden border-t lg:border-t-0 lg:border-l border-white/10">
           <div className="relative w-full max-w-[420px] aspect-[4/5] flex items-center justify-center">
             {FEATURES.map((feature, index) => {
               const status = getCardStatus(index);
@@ -298,7 +298,7 @@ export function FeatureCarousel({ lang = 'es' }: { lang?: 'es' | 'en' }) {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute inset-x-0 bottom-0 p-5 sm:p-8 md:p-10 pt-32 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end pointer-events-none"
+                        className="absolute inset-x-0 bottom-0 p-10 pt-32 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end pointer-events-none"
                       >
                         <div className="bg-sasori-red text-white px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] w-fit shadow-lg mb-3 border border-white/10">
                           {index + 1} • {feature.label}

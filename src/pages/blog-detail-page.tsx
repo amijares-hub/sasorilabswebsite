@@ -105,7 +105,7 @@ export function BlogDetailPage({ lang, setLang }: { lang: string, setLang: any }
             </button>
 
             <div className="space-y-8">
-                <h1 className="text-4xl sm:text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.85] animate-in slide-in-from-bottom-12 duration-1000">
+                <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.85] animate-in slide-in-from-bottom-12 duration-1000">
                     {tr.title}
                 </h1>
 
