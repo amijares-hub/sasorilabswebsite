@@ -46,7 +46,9 @@ const TextScrollAnimation = ({
   serviceName?: string, 
   customText?: string, 
   customHighlight?: string, 
-  customSubtext?: React.ReactNode 
+  customHighlight?: string, 
+  customSubtext?: React.ReactNode,
+  children?: React.ReactNode
 }) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
 
@@ -94,17 +96,23 @@ const TextScrollAnimation = ({
           <span className="text-sasori-red">{customHighlight || serviceName || "SASORILABS"}</span>
         </div>
         
-        {customSubtext && (
-           <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ delay: 0.5, duration: 0.8 }}
-             className="text-xl md:text-3xl font-medium text-[#1A1A1A]/60 leading-relaxed text-center max-w-4xl"
-           >
-             {customSubtext}
-           </motion.div>
-        )}
+         {customSubtext && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="text-xl md:text-3xl font-medium text-[#1A1A1A]/60 leading-relaxed text-center max-w-4xl"
+            >
+              {customSubtext}
+            </motion.div>
+         )}
+
+         {children && (
+           <div className="w-full mt-12 z-10">
+             {children}
+           </div>
+         )}
       </div>
     </main>
   );

@@ -22,6 +22,7 @@ import { ParticleTextEffect } from './components/ui/particle-text-effect';
 import { AnimatedNavFramer } from './components/ui/navigation-menu';
 import { SasoriLogo } from './components/ui/sasori-logo';
 import { TextScrollAnimation } from './components/ui/text-scroll-animation';
+import { RulerCarousel, type CarouselItem } from './components/ui/ruler-carousel';
 import { ServicesScrollFX } from './components/ui/services-scroll-fx';
 
 // --- Lazy loaded components for performance ---
@@ -197,6 +198,17 @@ export default function App() {
 
   const [isMobile, setIsMobile] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
+
+  const carouselItems: CarouselItem[] = [
+    { id: 1, title: t.nav.ai || "AUTOMATIZACIÓN" },
+    { id: 2, title: t.nav.web || "WEBS INMERSIVAS" },
+    { id: 3, title: t.nav.mod || "MODERNIZACIÓN" },
+    { id: 4, title: "IA GENERATIVA" },
+    { id: 5, title: "ESTRATEGIA" },
+    { id: 6, title: "INGENIERÍA" },
+    { id: 7, title: "CLOUD" },
+    { id: 8, title: "SECURITY" },
+  ];
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -560,7 +572,11 @@ export default function App() {
 
               {/* Text Scroll Animation Section */}
               <section className="relative z-20">
-                <TextScrollAnimation lang={lang} />
+                <TextScrollAnimation lang={lang}>
+                  <div className="max-w-7xl mx-auto">
+                    <RulerCarousel originalItems={carouselItems} />
+                  </div>
+                </TextScrollAnimation>
               </section>
 
               <React.Suspense fallback={<div className="h-40" />}>
