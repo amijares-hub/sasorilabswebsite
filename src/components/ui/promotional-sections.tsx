@@ -55,11 +55,13 @@ export function PromoSection({
       ease: 'sine.inOut'
     });
 
+    const isMobile = window.innerWidth < 768;
+
     // Reveal animation
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: 'top 75%',
+        start: isMobile ? 'top bottom+=400' : 'top 75%',
         end: 'bottom 25%',
         toggleActions: 'play none none reverse'
       }
@@ -67,20 +69,39 @@ export function PromoSection({
 
     const isLeft = logoPosition === 'left';
 
-    tl.fromTo(logoRef.current, 
-      { opacity: 0, scale: 0.8, x: isLeft ? -50 : 50 },
-      { opacity: 1, scale: 1, x: 0, duration: 1, ease: 'power3.out' }
-    )
-    .fromTo(cardRef.current,
-      { opacity: 0, x: isLeft ? 50 : -50 },
-      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' },
-      '-=0.6'
-    )
-    .fromTo(items,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' },
-      '-=0.4'
-    );
+    if (isMobile) {
+      // Entrada cinemática personalizada para mobile: Logo (izquierda -> derecha) y Card (derecha -> izquierda)
+      tl.fromTo(logoRef.current, 
+        { opacity: 0, x: -50, scale: 0.9 },
+        { opacity: 1, x: 0, scale: 1, duration: 0.8, ease: 'power3.out' }
+      )
+      .fromTo(cardRef.current,
+        { opacity: 0, x: 50 },
+        { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.6'
+      )
+      .fromTo(items,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: 'power2.out' },
+        '-=0.4'
+      );
+    } else {
+      // Original desktop animations
+      tl.fromTo(logoRef.current, 
+        { opacity: 0, scale: 0.8, x: isLeft ? -50 : 50 },
+        { opacity: 1, scale: 1, x: 0, duration: 1, ease: 'power3.out' }
+      )
+      .fromTo(cardRef.current,
+        { opacity: 0, x: isLeft ? 50 : -50 },
+        { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' },
+        '-=0.6'
+      )
+      .fromTo(items,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' },
+        '-=0.4'
+      );
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
@@ -88,7 +109,7 @@ export function PromoSection({
   }, [logoPosition]);
 
   return (
-    <section ref={containerRef} className={`relative z-20 py-16 md:py-24 bg-bg-dark overflow-hidden ${className}`}>
+    <section ref={containerRef} className={`relative z-20 py-10 md:py-24 bg-bg-dark overflow-hidden ${className}`}>
       {/* Background glow effects */}
       <div className={`absolute top-1/2 ${logoPosition === 'left' ? 'left-1/4' : 'right-1/4'} -translate-y-1/2 w-96 h-96 bg-sasori-red/5 rounded-full blur-[100px] pointer-events-none`} />
       <div className={`absolute top-1/2 ${logoPosition === 'left' ? 'right-1/4' : 'left-1/4'} -translate-y-1/2 w-[500px] h-[500px] bg-sasori-red/3 rounded-full blur-[120px] pointer-events-none`} />

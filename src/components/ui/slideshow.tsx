@@ -9,11 +9,25 @@ const slides = [
   {
     img: "/GD.png",
     client: "GalaxyDust",
+    quote: {
+      es: "Sasorilabs transformó nuestra presencia digital con una automatización sin precedentes.",
+      en: "Sasorilabs transformed our digital presence with unprecedented automation.",
+      zh: "Sasorilabs 以史无前例的自动化改变了我们的数字形象。",
+      ru: "Sasorilabs преобразил наше цифровое присутствие с беспрецедентной автоматизацией.",
+      pt: "Sasorilabs transformou nossa presença digital com uma automação sem precedentes."
+    },
     url: "https://galaxydust.io/"
   },
   {
     img: "/SasoriMusic.png",
     client: "SasoriMusic",
+    quote: {
+      es: "La mejor experiencia inmersiva que hemos construido para nuestros artistas.",
+      en: "The best immersive experience we've built for our artists.",
+      zh: "我们为艺术家打造的最佳沉浸式体验。",
+      ru: "Лучший иммерсивный опыт, который мы создали для наших артистов.",
+      pt: "A melhor experiência imersiva que construímos para nossos artistas."
+    },
     url: "https://sasorimusic-app-google-ai-studio.vercel.app/#/login"
   },
 ];
@@ -32,11 +46,11 @@ export default function ClientSlideshow({ lang = "es" }: { lang?: string }) {
   }, []);
 
   const t = {
-    es: { badge: "CLIENTES SATISFECHOS", viewWebsite: "VISITAR SITIO WEB", counter: "CLIENTES SATISFECHOS" },
-    en: { badge: "SATISFIED CLIENTS", viewWebsite: "VISIT WEBSITE", counter: "SATISFIED CLIENTS" },
-    zh: { badge: "滿意客戶", viewWebsite: "訪問網站", counter: "滿意客戶" },
-    ru: { badge: "ДОВОЛЬНЫЕ КЛИЕНТЫ", viewWebsite: "ПОСЕТИТЬ САЙТ", counter: "ДОВОЛЬНЫЕ КЛИЕНТЫ" },
-    pt: { badge: "CLIENTES SATISFEITOS", viewWebsite: "VISITAR SITE", counter: "CLIENTES SATISFEITOS" }
+    es: { badge: "CLIENTES SATISFECHOS", viewWebsite: "VISITAR SITIO WEB", counter: "CLIENTES SATISFECHOS", result: "RESULTADO EXITOSO" },
+    en: { badge: "SATISFIED CLIENTS", viewWebsite: "VISIT WEBSITE", counter: "SATISFIED CLIENTS", result: "SUCCESSFUL RESULT" },
+    zh: { badge: "滿意客戶", viewWebsite: "訪問網站", counter: "滿意客戶", result: "成功结果" },
+    ru: { badge: "ДОВОЛЬНЫЕ КЛИЕНТЫ", viewWebsite: "ПОСЕТИТЬ САЙТ", counter: "ДОВОЛЬНЫЕ КЛИЕНТЫ", result: "УСПЕШНЫЙ РЕЗУЛЬТАТ" },
+    pt: { badge: "CLIENTES SATISFEITOS", viewWebsite: "VISITAR SITE", counter: "CLIENTES SATISFEITOS", result: "RESULTADO DE SUCESSO" }
   }[lang as 'es' | 'en' | 'zh' | 'ru' | 'pt'] || { badge: "SATISFIED CLIENTS" };
 
   return (
@@ -53,7 +67,8 @@ export default function ClientSlideshow({ lang = "es" }: { lang?: string }) {
           style={{ backgroundImage: `url(${slides[current].img})` }}
         >
           {/* Overlay for cinematic feel */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
           <div className="absolute inset-0 bg-sasori-red/5 mix-blend-overlay" />
           
           {/* Content Center */}
@@ -65,13 +80,16 @@ export default function ClientSlideshow({ lang = "es" }: { lang?: string }) {
               className="flex items-center gap-3 mb-6"
             >
               <div className="h-[1px] w-12 bg-sasori-red/50" />
-              <span className="text-sasori-red text-[10px] font-black uppercase tracking-[0.4em] drop-shadow-sm">
-                {t.badge}
-              </span>
+              <div className="flex items-center gap-2">
+                <UserCheck className="w-4 h-4 text-sasori-red" />
+                <span className="text-sasori-red text-[10px] font-black uppercase tracking-[0.4em] drop-shadow-sm">
+                  {t.badge}
+                </span>
+              </div>
               <div className="h-[1px] w-12 bg-sasori-red/50" />
             </motion.div>
 
-            <div className="overflow-hidden py-4">
+            <div className="overflow-hidden py-4 mb-4">
                <motion.span 
                  initial={{ y: "110%" }}
                  animate={{ y: 0 }}
@@ -83,14 +101,21 @@ export default function ClientSlideshow({ lang = "es" }: { lang?: string }) {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="mt-4 flex flex-col items-center"
+              className="max-w-2xl mx-auto"
             >
+              <span className="text-sasori-red/60 text-[8px] font-black tracking-[0.3em] uppercase mb-4 block">
+                {t.result}
+              </span>
+              <p className="text-white/80 text-lg md:text-2xl font-medium italic border-l-2 border-sasori-red/30 pl-6 leading-relaxed">
+                "{slides[current].quote[lang as 'es' | 'en' | 'zh' | 'ru' | 'pt'] || slides[current].quote.en}"
+              </p>
+
                {/* Hover Hint */}
                <motion.div 
-                 className="mt-6 flex items-center gap-2 text-sasori-red text-[10px] font-black tracking-[0.2em] opacity-0 group-hover/slide:opacity-100 transition-all duration-300"
+                 className="mt-10 flex items-center justify-center gap-2 text-sasori-red text-[10px] font-black tracking-[0.2em] opacity-0 group-hover/slide:opacity-100 transition-all duration-300"
                >
                  <span>{t.viewWebsite}</span>
                  <ArrowRight className="w-4 h-4" />
@@ -105,14 +130,14 @@ export default function ClientSlideshow({ lang = "es" }: { lang?: string }) {
         <div className="flex items-center gap-4 pointer-events-auto">
           <button 
             onClick={prevSlide}
-            className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center bg-black/20 backdrop-blur-md text-white hover:bg-sasori-red hover:border-sasori-red transition-all duration-500 group/btn shadow-2xl"
+            className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center bg-black/40 backdrop-blur-md text-white hover:bg-sasori-red hover:border-sasori-red transition-all duration-500 group/btn shadow-2xl"
           >
             <ArrowLeft className="w-6 h-6 group-hover/btn:-translate-x-1 transition-transform" />
           </button>
           
           <button 
             onClick={nextSlide}
-            className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center bg-black/20 backdrop-blur-md text-white hover:bg-sasori-red hover:border-sasori-red transition-all duration-500 group/btn shadow-2xl"
+            className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center bg-black/40 backdrop-blur-md text-white hover:bg-sasori-red hover:border-sasori-red transition-all duration-500 group/btn shadow-2xl"
           >
             <ArrowRight className="w-6 h-6 group-hover/btn:translate-x-1 transition-transform" />
           </button>

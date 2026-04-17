@@ -4,6 +4,7 @@
  */
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { ThemeProvider } from './providers/theme-provider';
 import { CombinedPromotionalSections } from './components/ui/promotional-sections';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -410,7 +411,7 @@ export default function App() {
   ];
 
   return (
-    <>
+    <ThemeProvider>
       <ScrollToTop />
       
       {/* Dynamic 3D Activity Particles Background (Hollywood Vibe) */}
@@ -438,10 +439,10 @@ export default function App() {
             ref={logoRef}
             className="relative z-10 opacity-0 scale-90 text-center"
           >
-            <h1 className="text-6xl md:text-8xl font-bold tracking-[0.2em] text-sasori-red neon-glow">
+            <h1 className="text-3xl sm:text-4xl md:text-8xl font-bold tracking-[0.15em] sm:tracking-[0.2em] text-sasori-red neon-glow">
               SASORILABS
             </h1>
-            <p className="mt-4 text-gray-500 tracking-[0.5em] text-xs uppercase">
+            <p className="mt-4 text-gray-500 tracking-[0.3em] sm:tracking-[0.5em] text-[10px] md:text-xs uppercase px-4">
               {t.entrance.tagline}
             </p>
           </div>
@@ -582,6 +583,6 @@ export default function App() {
           </div>
         } />
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }

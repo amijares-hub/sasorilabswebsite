@@ -25,10 +25,20 @@ interface ZoomParallaxProps {
 }
 
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export function ZoomParallax({ items, lang = 'es', categories }: ZoomParallaxProps) {
 	const container = useRef(null);
 	const navigate = useNavigate();
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => setIsMobile(window.innerWidth < 768);
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
+
 	const { scrollYProgress } = useScroll({
 		target: container,
 		offset: ['start start', 'end end'],
@@ -41,6 +51,42 @@ export function ZoomParallax({ items, lang = 'es', categories }: ZoomParallaxPro
 	const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9]);
 
 	const scales = [scale4, scale5, scale6, scale5, scale6, scale8, scale9];
+
+	// Fallback Mobile Parallax (Simple Vertical Grid)
+	if (isMobile) {
+		return (
+			<div className="w-full px-6 py-12 flex flex-col gap-6">
+				{items.map(({ src, title, description, icon: Icon, alt, path }, index) => (
+					<button 
+						key={index}
+						onClick={() => path && navigate(path)}
+						className="relative h-[25vh] w-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-lg flex flex-col items-center justify-center p-6 group transition-all duration-700 text-center outline-none metallic-vinotinto-card ring-1 ring-white/5 focus:ring-2 focus:ring-sasori-red/30"
+					>
+						{src && (
+							<div className="absolute inset-0 z-0">
+								<img loading="lazy" 
+									src={src} 
+									alt={title}
+									className="w-full h-full object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-700 scale-105"
+								/>
+								<div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-sasori-wine/70 to-transparent" />
+							</div>
+						)}
+						{Icon && (
+							<div className="relative z-10 mb-4 p-4 rounded-2xl bg-white/10 backdrop-blur-sm shadow-inner border border-white/10 group-hover:shadow-[0_0_20px_rgba(226,6,19,0.5)] transition-all duration-500">
+								<Icon className="text-white w-8 h-8 drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" />
+							</div>
+						)}
+						<div className="relative z-10 flex flex-col items-center px-2">
+							<h3 className="text-sm font-black text-white uppercase tracking-[0.1em] leading-tight group-hover:text-sasori-red transition-colors text-center">
+								{title}
+							</h3>
+						</div>
+					</button>
+				))}
+			</div>
+		);
+	}
 
 	return (
 		<div ref={container} className="relative h-[300vh]">

@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { Menu, ChevronDown, Languages, ArrowRight, UserCircle2 } from "lucide-react";
+import { Menu, ChevronDown, Languages, ArrowRight, UserCircle2, X } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { SasoriLogo } from "./sasori-logo";
+import { ThemeToggle } from "./theme-toggle";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./button";
 
@@ -25,19 +26,17 @@ const containerVariants = {
       delayChildren: 0.2,
     },
   },
-  collapsed: {
+  collapsed: (isDesktop: boolean) => ({
     y: 0,
     opacity: 1,
-    width: "4.5rem",
+    width: isDesktop ? "5rem" : "3rem",
     transition: {
       type: "spring",
-      damping: 20,
-      stiffness: 300,
+      damping: 25,
+      stiffness: 400,
       when: "afterChildren",
-      staggerChildren: 0.05,
-      staggerDirection: -1,
     },
-  },
+  }),
 } as any;
 
 const logoVariants = {
@@ -77,8 +76,9 @@ const dropdownVariants = {
 
 export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string, onToggleLang?: (l: string) => void }) {
   const [showLanguages, setShowLanguages] = React.useState(false);
-  const [isExpanded, setExpanded] = React.useState(true);
   const [showServices, setShowServices] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isExpanded, setExpanded] = React.useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : false);
   const navigate = useNavigate();
   
   const servicesTimeout = React.useRef<NodeJS.Timeout | null>(null);
@@ -98,10 +98,6 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
     if (langTimeout.current) clearTimeout(langTimeout.current);
     setShowLanguages(true);
     setShowServices(false);
-  };
-
-  const handleLangLeave = () => {
-    // Dropdowns intentionally left open until selection per user request
   };
 
   const { scrollY } = useScroll();
@@ -133,7 +129,14 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = lastScrollY.current;
+    const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
     
+    // En desktop expandimos al llegar arriba. En mobile NO, se queda contraído por diseño.
+    if (isDesktop && latest < 50) {
+      setExpanded(true);
+      return;
+    }
+
     if (isExpanded && latest > previous && latest > 150) {
       setExpanded(false);
       setShowServices(false);
@@ -147,9 +150,14 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
   });
 
   const handleNavClick = (e: React.MouseEvent) => {
+    const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
     if (!isExpanded) {
       e.preventDefault();
-      setExpanded(true);
+      if (isDesktop) {
+        setExpanded(true);
+      } else {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+      }
     }
   };
 
@@ -157,7 +165,10 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
     if (href.startsWith("/#")) {
       const id = href.split("#")[1];
       if (window.location.pathname === "/") {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
       } else {
         navigate("/");
         setTimeout(() => {
@@ -175,32 +186,37 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
   };
 
   return (
-    <div className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-[100]">
+    <>
+    <div className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-[100] max-w-[100vw]">
       <motion.nav
-        initial={{ y: -80, opacity: 0 }}
+        initial={isExpanded ? "expanded" : "collapsed"}
         animate={isExpanded ? "expanded" : "collapsed"}
+        custom={typeof window !== 'undefined' ? window.innerWidth >= 1024 : false}
         variants={containerVariants}
         whileHover={!isExpanded ? { scale: 1.1 } : {}}
         whileTap={!isExpanded ? { scale: 0.95 } : {}}
         onClick={handleNavClick}
         onMouseLeave={handleServicesLeave}
         className={cn(
-          "flex items-center overflow-visible rounded-full glass-metallic-white-nav h-12 md:h-20",
-          !isExpanded && "cursor-pointer justify-center pl-0"
+          "flex items-center overflow-hidden rounded-full glass-metallic-white-nav h-12 md:h-20 transition-all duration-300",
+          isExpanded ? "w-auto min-w-[max-content] px-4" : "justify-center px-0 cursor-pointer"
         )}
       >
         <motion.div
           variants={logoVariants}
-          className="flex-shrink-0 flex items-center font-semibold pl-4 md:pl-5 pr-2 md:pr-4 cursor-pointer"
-          onClick={() => handleLinkClick("/")}
+          className={cn(
+            "flex-shrink-0 items-center font-semibold pl-4 md:pl-5 pr-2 md:pr-4 cursor-pointer",
+            isExpanded ? "flex" : "hidden pointer-events-none w-0 p-0"
+          )}
+          onClick={() => { handleLinkClick("/"); setIsMobileMenuOpen(false); }}
         >
           <SasoriLogo className="h-6 w-6 md:h-11 md:w-11 ml-1 mr-2 md:mr-3" />
         </motion.div>
         
         <motion.div
           className={cn(
-            "flex items-center gap-2 sm:gap-4 pr-8",
-            !isExpanded && "pointer-events-none" 
+            "hidden lg:flex items-center gap-2 sm:gap-4 pr-8 transition-opacity duration-300",
+            !isExpanded && "opacity-0 pointer-events-none" 
           )}
         >
           {translatedNavItems.map((item, idx) => (
@@ -282,8 +298,16 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
             </Button>
           </motion.div>
 
+          {/* Theme Toggle Inside Menu */}
+          <motion.div 
+            variants={itemVariants}
+            className="pl-1 sm:pl-2 border-l border-black/10 ml-0 sm:ml-1 relative flex items-center h-full"
+          >
+            <ThemeToggle />
+          </motion.div>
+
           {/* Language Selector Inside Menu */}
-          <div className="pl-2 border-l border-black/10 ml-1 relative">
+          <div className="pl-1 sm:pl-2 border-l border-black/10 relative">
             <motion.button
               variants={itemVariants}
               onMouseEnter={handleLangEnter}
@@ -336,7 +360,23 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
             </AnimatePresence>
           </div>
         </motion.div>
-        
+
+        {/* Mobile Hamburger Button */}
+        <motion.div 
+          variants={itemVariants}
+          className={cn(
+            "lg:hidden items-center pr-3 sm:pr-4 transition-all duration-300", 
+            isExpanded ? "flex" : "hidden pointer-events-none opacity-0 w-0 overflow-hidden"
+          )}
+        >
+          <button 
+            onClick={(e) => { e.stopPropagation(); setIsMobileMenuOpen(!isMobileMenuOpen); }}
+            className="p-2 text-black/70 hover:text-sasori-red transition-all outline-none"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+          </button>
+        </motion.div>
+
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <motion.div
             variants={collapsedIconVariants}
@@ -347,5 +387,135 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
         </div>
       </motion.nav>
     </div>
+
+    {/* Mobile Menu Overlay */}
+    <AnimatePresence>
+      {isMobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -20, scale: 0.95 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="fixed top-[4.5rem] md:top-[6rem] inset-x-4 max-h-[80vh] overflow-y-auto glass-metallic-white-nav rounded-3xl p-6 shadow-2xl z-[99] lg:hidden border border-sasori-red/10"
+        >
+          <div className="flex flex-col gap-1">
+            {translatedNavItems.map((item, idx) => (
+              <div key={`mob-${item.name}-${idx}`} className="flex flex-col border-b border-black/5 last:border-0">
+                <button
+                  onClick={() => {
+                    if (item.isDropdown) {
+                      setShowServices(!showServices);
+                    } else {
+                      handleLinkClick(item.href!);
+                      setIsMobileMenuOpen(false);
+                    }
+                  }}
+                  className="flex justify-between items-center py-4 text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] text-black/80 hover:text-sasori-red transition-colors text-left"
+                >
+                  {item.name}
+                  {item.isDropdown && <ChevronDown className={cn("w-4 h-4 transition-transform", showServices && "rotate-180")} />}
+                </button>
+                
+                <AnimatePresence>
+                  {item.isDropdown && showServices && (
+                    <motion.div 
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="flex flex-col gap-1 pl-4 pb-4">
+                        {services.map((service) => (
+                          <button
+                            key={`mob-${service.name}`}
+                            onClick={() => {
+                              handleLinkClick(service.href);
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className="py-3 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-black/60 hover:text-sasori-red transition-all text-left flex items-center group gap-2"
+                          >
+                            <div className="w-1.5 h-1.5 rounded-full bg-sasori-red opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                            {service.name}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+            
+            <div className="mt-6 pt-6 border-t border-black/10 flex flex-col gap-6">
+              <Button
+                variant="default"
+                className="w-full rounded-full gap-2 h-12 bg-sasori-red text-white hover:bg-black transition-colors"
+                onClick={() => {
+                  handleLinkClick('/login');
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <UserCircle2 className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span className="font-bold text-xs uppercase tracking-widest">{t.account}</span>
+              </Button>
+              
+              <div className="flex items-center justify-between px-2 bg-black/5 rounded-2xl p-4 border border-black/5">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] font-black uppercase tracking-widest text-black/40">TEMA</span>
+                  <ThemeToggle />
+                </div>
+                
+                <div className="flex flex-col right items-end gap-1">
+                  <span className="text-[9px] font-black uppercase tracking-widest text-black/40">IDIOMA</span>
+                  <div className="flex flex-col gap-2 relative">
+                    <button
+                      onClick={() => setShowLanguages(!showLanguages)}
+                      className="flex items-center gap-2 px-3 py-2 bg-white rounded-full border border-black/10 shadow-sm text-[10px] font-black uppercase tracking-widest"
+                    >
+                      <Languages className="w-3 h-3" />
+                      {lang}
+                      <ChevronDown className={cn("w-3 h-3 transition-transform", showLanguages && "rotate-180")} />
+                    </button>
+                    <AnimatePresence>
+                      {showLanguages && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          className="absolute right-0 bottom-full mb-2 bg-white border border-black/10 rounded-xl shadow-xl flex flex-col p-1 w-32 origin-bottom"
+                        >
+                          {[
+                            { code: 'es', label: 'Español' },
+                            { code: 'en', label: 'English' },
+                            { code: 'zh', label: '中文' },
+                            { code: 'ru', label: 'Русский' },
+                            { code: 'pt', label: 'Português' },
+                          ].map((l) => (
+                            <button
+                              key={`mob-lang-${l.code}`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onToggleLang?.(l.code);
+                                setShowLanguages(false);
+                              }}
+                              className={cn(
+                                "w-full text-left px-3 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
+                                lang === l.code ? "bg-sasori-red text-white" : "text-black/70 hover:text-sasori-red hover:bg-sasori-red/5"
+                              )}
+                            >
+                              {l.label}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
