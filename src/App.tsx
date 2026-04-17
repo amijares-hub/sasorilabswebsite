@@ -5,28 +5,35 @@
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { ThemeProvider } from './providers/theme-provider';
-import { CombinedPromotionalSections } from './components/ui/promotional-sections';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Menu, X, ArrowRight, Code, Rocket, ShieldCheck,
   Globe, Cpu, Database, Zap, Languages,
-  FileCode, Activity, ChevronRight,
+  FileCode, Activity, ChevronRight, ChevronDown,
   Brain, Monitor, Layers, Settings, Globe2, Terminal,
   Home, Eye, Shield, Box, Search, Palette, BookOpen, FileText, Newspaper,
   Building, Store
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BackgroundPaths } from './components/ui/background-paths';
 import { ParticleTextEffect } from './components/ui/particle-text-effect';
 import { AnimatedNavFramer } from './components/ui/navigation-menu';
 import { SasoriLogo } from './components/ui/sasori-logo';
-import { ZoomParallax } from './components/ui/zoom-parallax';
 import { TextScrollAnimation } from './components/ui/text-scroll-animation';
-import { Timeline } from './components/ui/timeline';
-import { PremiumContact } from './components/ui/premium-contact';
-import { TextHoverEffect, FooterBackgroundGradient } from './components/ui/hover-footer';
 import { ServicesScrollFX } from './components/ui/services-scroll-fx';
+
+// --- Lazy loaded components for performance ---
+const ZoomParallax = React.lazy(() => import('./components/ui/zoom-parallax').then(m => ({ default: m.ZoomParallax })));
+const Timeline = React.lazy(() => import('./components/ui/timeline').then(m => ({ default: m.Timeline })));
+const CombinedPromotionalSections = React.lazy(() => import('./components/ui/promotional-sections').then(m => ({ default: m.CombinedPromotionalSections })));
+const IntegrationHero = React.lazy(() => import('./components/ui/integration-hero').then(m => ({ default: m.IntegrationHero })));
+const BlogPostSection = React.lazy(() => import('./components/ui/blog-posts').then(m => ({ default: m.BlogPostSection })));
+const CreativeDemosSection = React.lazy(() => import('./components/ui/creative-demos').then(m => ({ default: m.CreativeDemosSection })));
+const PremiumContact = React.lazy(() => import('./components/ui/premium-contact').then(m => ({ default: m.PremiumContact })));
+const Footer = React.lazy(() => import('./components/ui/footer').then(m => ({ default: m.Footer })));
+
 import BlogPage from './pages/blog-page';
 import { ProcessAutomationPage } from './pages/process-automation-page';
 import { DigitalEmployeesPage } from './pages/digital-employees-page';
@@ -39,10 +46,10 @@ import { UserAuthPage } from './pages/user-auth-page';
 import { UserAccountPage } from './pages/user-account-page';
 import { UnsubscribePage } from './pages/unsubscribe-page';
 import { DemosPage } from './pages/demos-page';
-import { Footer } from './components/ui/footer';
-import { BlogPostSection } from './components/ui/blog-posts';
-import { CreativeDemosSection } from './components/ui/creative-demos';
-import { IntegrationHero } from './components/ui/integration-hero';
+// import { Footer } from './components/ui/footer'; // Moved to lazy
+// import { BlogPostSection } from './components/ui/blog-posts'; // Moved to lazy
+// import { CreativeDemosSection } from './components/ui/creative-demos'; // Moved to lazy
+// import { IntegrationHero } from './components/ui/integration-hero'; // Moved to lazy
 import ClientSlideshow from './components/ui/slideshow';
 import { NewsletterPopup } from './components/ui/newsletter';
 import { FloatingWhatsApp } from './components/ui/floating-whatsapp';
@@ -80,7 +87,17 @@ const MatrixRain = ({ color = '#E20613', opacity = 0.15 }: { color?: string; opa
     const columns = Math.floor(width / 20);
     const drops: number[] = new Array(columns).fill(1);
 
-    const draw = () => {
+    let animationId: number;
+    const isMobile = window.innerWidth < 768;
+    const interval = isMobile ? 66 : 33; // 15fps on mobile, 30fps on desktop for matrix
+    let lastTime = 0;
+
+    const draw = (time: number) => {
+      animationId = requestAnimationFrame(draw);
+      
+      if (time - lastTime < interval) return;
+      lastTime = time;
+
       ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
       ctx.fillRect(0, 0, width, height);
 
@@ -97,8 +114,7 @@ const MatrixRain = ({ color = '#E20613', opacity = 0.15 }: { color?: string; opa
         drops[i]++;
       }
     };
-
-    const interval = setInterval(draw, 33);
+    animationId = requestAnimationFrame(draw);
 
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
@@ -108,7 +124,7 @@ const MatrixRain = ({ color = '#E20613', opacity = 0.15 }: { color?: string; opa
     window.addEventListener('resize', handleResize);
 
     return () => {
-      clearInterval(interval);
+      cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
     };
   }, [color, opacity]);
@@ -178,6 +194,16 @@ export default function App() {
     const cleanup = initRealtime();
     return () => cleanup();
   }, [initRealtime]);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const entranceRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
@@ -473,19 +499,61 @@ export default function App() {
               {/* Hero Section */}
               <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg-dark">
                 <div className="absolute inset-0 z-0">
-                  <BackgroundPaths
-                    title="SASORILABS"
-                    subtitle={t.hero.subheadline}
-                    ctaText={t.common.startProject}
-                    onCtaClick={() => {
-                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    showContent={true}
-                  />
+                  {isMobile ? (
+                    <div className="relative w-full h-full">
+                      <video 
+                        src="/12.mp4"
+                        autoPlay
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                        onEnded={() => setVideoEnded(true)}
+                      />
+                      <AnimatePresence>
+                        {videoEnded && (
+                          <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center"
+                          >
+                            <motion.div
+                              initial={{ y: 20, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              transition={{ delay: 0.5, duration: 0.8 }}
+                              className="flex flex-col items-center gap-6"
+                            >
+                              <span className="text-white text-xs font-black uppercase tracking-[0.4em] mb-4 opacity-80">
+                                {t.hero.scrollToSeeMore}
+                              </span>
+                              <div className="w-[1px] h-12 bg-gradient-to-b from-sasori-red to-transparent mb-4" />
+                              <motion.div
+                                animate={{ y: [0, 8, 0] }}
+                                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                              >
+                                <ChevronDown className="text-sasori-red w-8 h-8" />
+                              </motion.div>
+                            </motion.div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <BackgroundPaths
+                      title="SASORILABS"
+                      subtitle={t.hero.subheadline}
+                      ctaText={t.common.startProject}
+                      onCtaClick={() => {
+                        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                      showContent={true}
+                    />
+                  )}
                 </div>
-                <div className="absolute inset-0 z-[1] pointer-events-none">
-                  <ParticleTextEffect words={t.hero.words} />
-                </div>
+                {!isMobile && (
+                  <div className="absolute inset-0 z-[1] pointer-events-none">
+                    <ParticleTextEffect words={t.hero.words} />
+                  </div>
+                )}
               </section>
 
               {/* Text Scroll Animation Section */}
@@ -493,16 +561,7 @@ export default function App() {
                 <TextScrollAnimation lang={lang} />
               </section>
 
-              {/* Zoom Parallax Section */}
-              <section className="relative z-20 bg-bg-dark" id="services">
-                <div className="py-20 text-center reveal">
-                  <h2 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter mb-4 text-[#1A1A1A]">
-                    {t.common.ecosystem}
-                  </h2>
-                  <p className="text-black/40 uppercase tracking-[0.3em] text-xs">
-                    {t.common.exploreEcosystem}
-                  </p>
-                </div>
+              <React.Suspense fallback={<div className="h-40" />}>
                 <ZoomParallax 
                   lang={lang}
                   categories={{
@@ -512,38 +571,50 @@ export default function App() {
                   }}
                   items={parallaxItems} 
                 />
-              </section>
+              </React.Suspense>
 
               {/* Timeline Section */}
               <section className="bg-bg-dark">
-                <Timeline data={timelineData} />
+                <React.Suspense fallback={<div className="h-96" />}>
+                  <Timeline data={timelineData} />
+                </React.Suspense>
               </section>
 
               {/* Digital Employees Special Promotion Section */}
-              <CombinedPromotionalSections lang={lang} />
+              <div id="contact" className="scroll-mt-20">
+                <React.Suspense fallback={<div className="h-96" />}>
+                  <CombinedPromotionalSections lang={lang} />
+                </React.Suspense>
+              </div>
 
               {/* Creative Demos Showcase */}
               <section className="relative z-20">
-                <CreativeDemosSection lang={lang} />
+                <React.Suspense fallback={<div className="h-96" />}>
+                  <CreativeDemosSection lang={lang} />
+                </React.Suspense>
               </section>
 
               {/* Integrations Hero Section */}
-              <IntegrationHero 
-                lang={lang}
-                badge={t.integrations.badge}
-                title={t.integrations.title}
-                subtext={t.integrations.subtext}
-                ctaText={t.integrations.cta}
-              />
+              <React.Suspense fallback={<div className="h-96" />}>
+                <IntegrationHero 
+                  lang={lang}
+                  badge={t.integrations.badge}
+                  title={t.integrations.title}
+                  subtext={t.integrations.subtext}
+                  ctaText={t.integrations.cta}
+                />
+              </React.Suspense>
 
               {/* Blog Highlights Section */}
               <section className="relative z-20 bg-bg-dark border-y border-black/5">
-                <BlogPostSection
-                  lang={lang}
-                  title={t.blog.title}
-                  description={t.blog.desc}
-                  backgroundLabel="NEWS"
-                />
+                <React.Suspense fallback={<div className="h-96" />}>
+                  <BlogPostSection
+                    lang={lang}
+                    title={t.blog.title}
+                    description={t.blog.desc}
+                    backgroundLabel="NEWS"
+                  />
+                </React.Suspense>
                 <div className="flex justify-center pb-20">
                   <button
                     onClick={() => navigate('/blog')}
@@ -574,11 +645,13 @@ export default function App() {
               </section>
 
               {/* Contact Section */}
-              <section id="contact">
+              <React.Suspense fallback={<div className="h-96" />}>
                 <PremiumContact lang={lang} />
-              </section>
+              </React.Suspense>
 
-              <Footer lang={lang} />
+              <React.Suspense fallback={<div className="h-40" />}>
+                <Footer lang={lang as any} />
+              </React.Suspense>
             </main>
           </div>
         } />

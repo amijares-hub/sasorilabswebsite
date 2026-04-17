@@ -124,6 +124,7 @@ export function PromoSection({
               ref={logoRef}
               src="/Logo.png" 
               alt="Sasorilabs Logo" 
+              loading="lazy"
               className="w-full max-w-[500px] drop-shadow-[0_0_40px_rgba(226,6,19,0.5)] z-10"
             />
           </div>

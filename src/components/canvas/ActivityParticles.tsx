@@ -15,13 +15,17 @@ interface ActivityParticlesProps {
 export function ActivityParticles({ count = 3000 }: ActivityParticlesProps) {
   const meshRef = useRef<THREE.Points>(null);
   
+  // Detect mobile for performance optimization
+  const isMobile = useMemo(() => typeof window !== 'undefined' && window.innerWidth < 768, []);
+  const actualCount = isMobile ? 800 : count;
+  
   // Select only the activityLevel to prevent unnecessary re-renders
   const activityLevel = useExperienceStore((state) => state.activityLevel);
 
   // Generate initial particle positions in a hollow sphere/cloud
   const particles = useMemo(() => {
-    const temp = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
+    const temp = new Float32Array(actualCount * 3);
+    for (let i = 0; i < actualCount; i++) {
         const i3 = i * 3;
         const radius = 4 + Math.random() * 2;
         const theta = Math.random() * Math.PI * 2;
@@ -32,7 +36,7 @@ export function ActivityParticles({ count = 3000 }: ActivityParticlesProps) {
         temp[i3 + 2] = radius * Math.cos(phi);
     }
     return temp;
-  }, [count]);
+  }, [actualCount]);
 
   useFrame((state) => {
     if (!meshRef.current) return;
@@ -40,7 +44,6 @@ export function ActivityParticles({ count = 3000 }: ActivityParticlesProps) {
     const time = state.clock.getElapsedTime();
     
     // Dynamic pulsing logic based on backend activity level
-    // High activity = faster, more aggressive pulse
     const basePulse = Math.sin(time * 2);
     const activityPulse = Math.sin(time * (10 * activityLevel));
     const finalPulse = 1 + (basePulse * 0.05) + (activityPulse * 0.15 * activityLevel);
@@ -51,12 +54,14 @@ export function ActivityParticles({ count = 3000 }: ActivityParticlesProps) {
     meshRef.current.rotation.y += 0.002 + (activityLevel * 0.05);
     meshRef.current.rotation.z += 0.001 + (activityLevel * 0.02);
 
-    // Subtle color shift towards brighter red on activity spikes
-    const material = meshRef.current.material as THREE.PointsMaterial;
-    material.color.lerpHSL(
-        new THREE.Color(activityLevel > 0.5 ? "#FF0000" : "#E20613"), 
-        0.1
-    );
+    // Disable expensive HSL lerping on mobile to save GPU cycles
+    if (!isMobile) {
+      const material = meshRef.current.material as THREE.PointsMaterial;
+      material.color.lerpHSL(
+          new THREE.Color(activityLevel > 0.5 ? "#FF0000" : "#E20613"), 
+          0.1
+      );
+    }
   });
 
   return (

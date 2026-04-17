@@ -47,6 +47,7 @@ export const zh = {
     cta_start: "开始项目",
     cta_showcase: "查看案例",
     words: ["自动化", "人工智能", "网页", "沉浸式", "现代化", "数字化"],
+    scrollToSeeMore: "向下滚动以发现未来",
   },
   ecosystem: {
     title: "我们的生态系统",

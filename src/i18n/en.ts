@@ -47,6 +47,7 @@ export const en = {
       cta_start: "START PROJECT",
       cta_showcase: "VIEW SHOWCASE",
       words: ["AUTOMATION", "AI", "WEBS", "IMMERSIVE", "MODERNIZATION", "DIGITAL"],
+      scrollToSeeMore: "SCROLL TO DISCOVER THE FUTURE",
     },
     ecosystem: {
       title: "OUR ECOSYSTEM",

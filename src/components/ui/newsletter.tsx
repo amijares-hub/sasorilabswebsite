@@ -8,7 +8,7 @@ interface NewsletterPopupProps {
   lang?: string;
 }
 
-const POPUP_DELAY_MS = 8000;     // Show after 8 seconds
+const POPUP_DELAY_MS = 300000;    // Show after 5 minutes (300,000 ms)
 const POPUP_SHOWN_KEY = 'sasori_newsletter_shown';
 const POPUP_SUBSCRIBED_KEY = 'sasori_newsletter_subscribed';
 
