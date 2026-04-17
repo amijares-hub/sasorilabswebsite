@@ -532,4 +532,31 @@ input[type="range"]::-webkit-slider-thumb {
   animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
+/* Cinematic Grain Overlay */
+.grain-overlay {
+  position: absolute;
+  inset: -100% -100%;
+  width: 300%;
+  height: 300%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url('https://www.transparenttextures.com/patterns/brushed-alum.png');
+  animation: grain-animation 4s steps(10) infinite;
+  mix-blend-mode: overlay;
+}
+
+@keyframes grain-animation {
+  0%, 100% { transform:translate(0, 0); }
+  10% { transform:translate(-5%, -10%); }
+  20% { transform:translate(-15%, 5%); }
+  30% { transform:translate(7%, -25%); }
+  40% { transform:translate(-5%, 25%); }
+  50% { transform:translate(-15%, 10%); }
+  60% { transform:translate(15%, 0%); }
+  70% { transform:translate(0%, 15%); }
+  80% { transform:translate(3%, 35%); }
+  90% { transform:translate(-10%, 10%); }
+}
+
 

@@ -506,9 +506,11 @@ export default function App() {
                         autoPlay
                         muted
                         playsInline
+                        style={{ filter: 'contrast(1.1) brightness(0.85) saturate(1.05)' }}
                         className="w-full h-full object-cover"
                         onEnded={() => setVideoEnded(true)}
                       />
+                      <div className="grain-overlay" />
                       <AnimatePresence>
                         {videoEnded && (
                           <motion.div 
