@@ -223,8 +223,8 @@ export const HeroFuturistic = ({
   }, [visibleWords, titleWords.length]);
 
   useEffect(() => {
-    if (videoRef.current && videoRef.current.duration) {
-        videoRef.current.playbackRate = videoRef.current.duration / 3;
+    if (videoRef.current) {
+        videoRef.current.playbackRate = 1.5;
     }
   }, []);
 
@@ -256,13 +256,7 @@ export const HeroFuturistic = ({
             const video = e.currentTarget;
             video.pause();
           }}
-          onLoadedMetadata={(e) => {
-            const video = e.currentTarget;
-            if (video.duration) {
-              video.playbackRate = video.duration / 3;
-            }
-          }}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#F2F2F2] via-transparent to-[#F2F2F2]/80" />
       </div>

@@ -74,7 +74,7 @@ export function ServicePage({
           serviceName={serviceName}
           tagline={tagline.replace(/\n/g, " ")}
           description={description}
-          videoSrc="/herovideo.mp4"
+          videoSrc="/12.mp4"
           lang={lang}
           onBackClick={handleBack}
           onCtaClick={handleCta}
