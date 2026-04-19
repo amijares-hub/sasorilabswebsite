@@ -34,7 +34,7 @@ export const en = {
       blog: "Blog",
       contact: "Contact",
       account: "My Account",
-      ai: "AI Automation",
+      ai: "Autonomous Agents",
       web: "Immersive Webs",
       mod: "Modernization",
     },
@@ -46,7 +46,7 @@ export const en = {
       subheadline: "DIGITAL EVOLUTION IS SIMPLER THAN YOU IMAGINE.",
       cta_start: "START PROJECT",
       cta_showcase: "VIEW SHOWCASE",
-      words: ["AUTOMATION", "AI", "WEBS", "IMMERSIVE", "MODERNIZATION", "DIGITAL"],
+      words: ["AGENTS", "AUTONOMOUS", "WEBS", "IMMERSIVE", "MODERNIZATION", "DIGITAL"],
       scrollToSeeMore: "SCROLL TO DISCOVER THE FUTURE",
     },
     ecosystem: {
@@ -117,7 +117,7 @@ export const en = {
     },
     servicesPages: {
       automation: {
-        hero: "AUTOMATION",
+        hero: "AUTONOMOUS AGENTS",
         tagline: "Services for ",
         taglineHighlight: "Process Automation",
         subtext: "Eliminate manual work and turn your company into a precision machine.",

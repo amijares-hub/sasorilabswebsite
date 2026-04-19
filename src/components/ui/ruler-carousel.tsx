@@ -159,8 +159,12 @@ export function RulerCarousel({
   // Calculate target position - center the active item
   // The original used 500 as width/offset
   const itemWidth = 500;
-  const centerPosition = Math.floor(itemsPerSet / 2); 
-  const targetX = -itemWidth + (centerPosition - (activeIndex % itemsPerSet)) * itemWidth;
+  const gap = 100;
+  const fullItemWidth = itemWidth + gap;
+  
+  // Calculate centering: center of the container (x=0) minus center of active item
+  const totalWidth = infiniteItems.length * itemWidth + (infiniteItems.length - 1) * gap;
+  const targetX = (totalWidth / 2) - (activeIndex * fullItemWidth + itemWidth / 2);
 
   // Get current page info
   const currentPage = (activeIndex % itemsPerSet) + 1;

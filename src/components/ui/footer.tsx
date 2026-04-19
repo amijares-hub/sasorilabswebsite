@@ -17,7 +17,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       rights: "© 2026 SASORILABS. TODOS LOS DERECHOS RESERVADOS.",
       startProject: "INICIAR PROYECTO",
       labels: {
-        ai: "Automatización IA",
+        ai: "Agentes Autónomos",
         web: "Webs Inmersivas",
         mod: "Modernización",
         about: "Sobre Nosotros",
@@ -34,7 +34,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       rights: "© 2026 SASORILABS. ALL RIGHTS RESERVED.",
       startProject: "START PROJECT",
       labels: {
-        ai: "AI Automation",
+        ai: "Autonomous Agents",
         web: "Immersive Webs",
         mod: "Modernization",
         about: "About Us",
@@ -51,7 +51,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       rights: "© 2026 SASORILABS。版權所有。",
       startProject: "啟動項目",
       labels: {
-        ai: "人工智能自動化",
+        ai: "自主代理",
         web: "沉浸式網站",
         mod: "現代化轉型",
         about: "關於我們",
@@ -68,7 +68,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       rights: "© 2026 SASORILABS. ВСЕ ПРАВА ЗАЩИЩЕНЫ.",
       startProject: "НАЧАТЬ ПРОЕКТ",
       labels: {
-        ai: "ИИ Автоматизация",
+        ai: "Автономные агенты",
         web: "Иммерсивные Веб-сайты",
         mod: "Модернизация",
         about: "О нас",
@@ -85,7 +85,7 @@ export function Footer({ lang = 'es' }: { lang?: string }) {
       rights: "© 2026 SASORILABS. TODOS OS DIREITOS RESERVADOS.",
       startProject: "INICIAR PROJETO",
       labels: {
-        ai: "Automação IA",
+        ai: "Agentes Autónomos",
         web: "Webs Imersivas",
         mod: "Modernização",
         about: "Sobre Nós",

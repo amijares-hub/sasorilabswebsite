@@ -34,7 +34,7 @@ export const zh = {
     blog: "博客",
     contact: "联系",
     account: "我的账户",
-    ai: "人工智能自动化",
+    ai: "自治代理",
     web: "沉浸式网页",
     mod: "现代化",
   },
@@ -46,7 +46,7 @@ export const zh = {
     subheadline: "数字化转型比您想象的要简单。",
     cta_start: "开始项目",
     cta_showcase: "查看案例",
-    words: ["自动化", "人工智能", "网页", "沉浸式", "现代化", "数字化"],
+    words: ["代理", "自治", "网页", "沉浸式", "现代化", "数字化"],
     scrollToSeeMore: "向下滚动以发现未来",
   },
   ecosystem: {
@@ -117,7 +117,7 @@ export const zh = {
   },
   servicesPages: {
     automation: {
-      hero: "自动化",
+      hero: "自治代理",
       tagline: "服务范围 ",
       taglineHighlight: "流程自动化",
       subtext: "消除手动工作，让您的公司成为精密机器。",

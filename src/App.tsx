@@ -183,6 +183,8 @@ export default function App() {
     if (saved && saved in translations) return saved as keyof typeof translations;
     return 'es';
   });
+
+  const t = translations[lang];
   useEffect(() => {
     localStorage.setItem('sasori-lang', lang);
   }, [lang]);
@@ -199,17 +201,6 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [videoEnded, setVideoEnded] = useState(false);
 
-  const carouselItems: CarouselItem[] = [
-    { id: 1, title: t.nav.ai || "AUTOMATIZACIÓN" },
-    { id: 2, title: t.nav.web || "WEBS INMERSIVAS" },
-    { id: 3, title: t.nav.mod || "MODERNIZACIÓN" },
-    { id: 4, title: "IA GENERATIVA" },
-    { id: 5, title: "ESTRATEGIA" },
-    { id: 6, title: "INGENIERÍA" },
-    { id: 7, title: "CLOUD" },
-    { id: 8, title: "SECURITY" },
-  ];
-
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
@@ -221,7 +212,7 @@ export default function App() {
   const logoRef = useRef<HTMLDivElement>(null);
   const navLogoRef = useRef<HTMLDivElement>(null);
 
-  const t = translations[lang];
+  // --- Hook and State Initializations ---
 
   const timelineData = [
     {
@@ -412,39 +403,59 @@ export default function App() {
     }
   }, [isLoaded, lang]);
 
+  const carouselItems: CarouselItem[] = [
+    { id: 1, title: t.nav.ai || "AGENTES AUTÓNOMOS" },
+    { id: 2, title: t.nav.web || "WEBS INMERSIVAS" },
+    { id: 3, title: t.nav.mod || "MODERNIZACIÓN" },
+    { id: 4, title: "IA CREATIVA" },
+    { id: 5, title: "ESTRATEGIA" },
+    { id: 6, title: "INGENIERÍA" },
+    { id: 7, title: "CLOUD" },
+    { id: 8, title: "SECURITY" },
+  ];
+
   const parallaxItems = [
     {
       title: t.services.entrepreneurs.title,
       description: t.services.entrepreneurs.desc,
       icon: Rocket,
       path: '/services/ai-automation',
-      src: ""
     },
     {
       title: t.services.companies.title,
       description: t.services.companies.desc,
       icon: Building,
       path: '/services/modernization',
-      src: ""
     },
     {
       title: t.services.pymes.title,
       description: t.services.pymes.desc,
       icon: Store,
       path: '/services/immersive-webs',
-      src: ""
     },
     {
-      title: t.otherServices.engineering.title,
-      description: t.otherServices.engineering.desc,
+      title: t.services.aiAutomation?.title || t.servicesPages.automation.hero,
+      description: t.services.aiAutomation?.desc || t.servicesPages.automation.subtext,
+      icon: Cpu,
+      path: '/services/ai-automation',
+    },
+    {
+      title: t.services.digitalEmployees?.title || t.servicesPages.employees.hero,
+      description: t.services.digitalEmployees?.desc || t.servicesPages.employees.subtext,
+      icon: Brain,
+      path: '/services/digital-employees',
+    },
+    {
+      title: t.services.immersiveWebs?.title || t.servicesPages.immersive.hero,
+      description: t.services.immersiveWebs?.desc || t.servicesPages.immersive.subtext,
+      icon: Globe,
+      path: '/services/immersive-webs',
+    },
+    {
+      title: t.services.modernization?.title || t.servicesPages.modernization.hero,
+      description: t.services.modernization?.desc || t.servicesPages.modernization.subtext,
       icon: Code,
-      src: ""
-    },
-    {
-      title: t.otherServices.strategy.title,
-      description: t.otherServices.strategy.desc,
-      icon: Rocket,
-      src: ""
+      path: '/services/modernization',
     },
   ];
 

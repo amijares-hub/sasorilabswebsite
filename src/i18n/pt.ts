@@ -34,7 +34,7 @@ export const pt = {
       blog: "Blog",
       contact: "Contato",
       account: "Minha Conta",
-      ai: "Automação IA",
+      ai: "Agentes Autónomos",
       web: "Webs Imersivas",
       mod: "Modernização",
     },
@@ -46,7 +46,7 @@ export const pt = {
       subheadline: "A EVOLUÇÃO DIGITAL É MAIS SIMPLES DO QUE VOCÊ IMAGINA.",
       cta_start: "INICIAR PROJETO",
       cta_showcase: "VER SHOWCASE",
-      words: ["AUTOMAÇÃO", "IA", "WEBS", "IMERSIVAS", "MODERNIZAÇÃO", "DIGITAL"],
+      words: ["AGENTES", "AUTÓNOMOS", "WEBS", "IMERSIVAS", "MODERNIZAÇÃO", "DIGITAL"],
       scrollToSeeMore: "DESLIZE PARA DESCOBRIR O FUTURO",
     },
     ecosystem: {
@@ -117,7 +117,7 @@ export const pt = {
     },
     servicesPages: {
       automation: {
-        hero: "AUTOMAÇÃO",
+        hero: "AGENTES AUTÓNOMOS",
         tagline: "Serviços de ",
         taglineHighlight: "Automação de Processos",
         subtext: "Elimine o trabalho manual e transforme sua empresa em uma máquina de precisão.",

@@ -40,12 +40,12 @@ const TextScrollAnimation = ({
   serviceName, 
   customText, 
   customHighlight, 
-  customSubtext 
+  customSubtext,
+  children
 }: { 
   lang: string, 
   serviceName?: string, 
   customText?: string, 
-  customHighlight?: string, 
   customHighlight?: string, 
   customSubtext?: React.ReactNode,
   children?: React.ReactNode
