@@ -529,6 +529,13 @@ export default function App() {
                         autoPlay
                         muted
                         playsInline
+                        onTimeUpdate={(e) => {
+                          const video = e.currentTarget;
+                          if (video.currentTime >= 4) {
+                            video.pause();
+                            setVideoEnded(true);
+                          }
+                        }}
                         style={{ filter: 'contrast(1.1) brightness(0.85) saturate(1.05)' }}
                         className="w-full h-full object-cover"
                         onEnded={() => setVideoEnded(true)}

@@ -252,6 +252,12 @@ export const HeroFuturistic = ({
           loop={false}
           muted
           playsInline
+          onTimeUpdate={(e) => {
+            const video = e.currentTarget;
+            if (video.currentTime >= 4) {
+              video.pause();
+            }
+          }}
           onEnded={(e) => {
             const video = e.currentTarget;
             video.pause();
