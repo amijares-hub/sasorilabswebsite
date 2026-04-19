@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { LucideIcon } from 'lucide-react';
 
 interface ServiceItem {
-	src: string;
+	src?: string;
 	title: string;
 	description: string;
 	icon?: LucideIcon;

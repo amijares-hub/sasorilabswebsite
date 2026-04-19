@@ -420,42 +420,49 @@ export default function App() {
       description: t.services.entrepreneurs.desc,
       icon: Rocket,
       path: '/services/ai-automation',
+      src: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&q=80&w=800"
     },
     {
       title: t.services.companies.title,
       description: t.services.companies.desc,
       icon: Building,
       path: '/services/modernization',
+      src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800"
     },
     {
       title: t.services.pymes.title,
       description: t.services.pymes.desc,
       icon: Store,
       path: '/services/immersive-webs',
+      src: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800"
     },
     {
-      title: t.services.aiAutomation?.title || t.servicesPages.automation.hero,
-      description: t.services.aiAutomation?.desc || t.servicesPages.automation.subtext,
+      title: t.servicesPages.automation.hero,
+      description: t.servicesPages.automation.subtext,
       icon: Cpu,
       path: '/services/ai-automation',
+      src: "https://images.unsplash.com/photo-148527404703-89b55fcc595e?auto=format&fit=crop&q=80&w=800"
     },
     {
-      title: t.services.digitalEmployees?.title || t.servicesPages.employees.hero,
-      description: t.services.digitalEmployees?.desc || t.servicesPages.employees.subtext,
+      title: t.servicesPages.employees.hero,
+      description: t.servicesPages.employees.subtext,
       icon: Brain,
       path: '/services/digital-employees',
+      src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800"
     },
     {
-      title: t.services.immersiveWebs?.title || t.servicesPages.immersive.hero,
-      description: t.services.immersiveWebs?.desc || t.servicesPages.immersive.subtext,
+      title: t.servicesPages.immersive.hero,
+      description: t.servicesPages.immersive.subtext,
       icon: Globe,
       path: '/services/immersive-webs',
+      src: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=800"
     },
     {
-      title: t.services.modernization?.title || t.servicesPages.modernization.hero,
-      description: t.services.modernization?.desc || t.servicesPages.modernization.subtext,
+      title: t.servicesPages.modernization.hero,
+      description: t.servicesPages.modernization.subtext,
       icon: Code,
       path: '/services/modernization',
+      src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800"
     },
   ];
 
