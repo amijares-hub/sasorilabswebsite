@@ -525,12 +525,18 @@ export default function App() {
                   {isMobile ? (
                     <div className="relative w-full h-full">
                       <video 
-                        src="/12.mp4"
+                        src="/herovideo.mp4"
                         autoPlay
                         muted
                         playsInline
-                        style={{ filter: 'contrast(1.1) brightness(0.85) saturate(1.05)' }}
-                        className="w-full h-full object-cover"
+                        onLoadedMetadata={(e) => {
+                          const video = e.currentTarget;
+                          if (video.duration) {
+                            video.playbackRate = video.duration / 3;
+                          }
+                        }}
+                        style={{ filter: 'contrast(1.05) brightness(1.0) saturate(1.1)' }}
+                        className="w-full h-full object-contain"
                         onEnded={() => setVideoEnded(true)}
                       />
                       <div className="grain-overlay" />
