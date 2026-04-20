@@ -98,7 +98,7 @@ export function UserAuthPage({ lang = 'es' }: { lang?: string }) {
       setError(error.message);
       setLoading(false);
     } else {
-      navigate('/mi-cuenta');
+      window.location.href = '/mi-cuenta';
     }
   };
 
@@ -158,7 +158,7 @@ export function UserAuthPage({ lang = 'es' }: { lang?: string }) {
       });
     } catch (_) {}
 
-    navigate('/mi-cuenta');
+    window.location.href = '/mi-cuenta';
     setLoading(false);
   };
 

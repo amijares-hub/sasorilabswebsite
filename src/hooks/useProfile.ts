@@ -56,35 +56,25 @@ export function useProfile() {
         }
 
         if (!currentData) {
+          console.error("DEBUG PERFIL: No data found after retries");
           throw new Error("Access Denied: Suspiro Node not initialized. Please try refreshing or contact support.");
         }
 
         setProfile(currentData);
 
-        // ALWAYS CHAIN .on() BEFORE .subscribe()
-        // Ensure fetchProfile is finished before this line
+        /* DISABLED REALTIME FOR DEBUGGING
         const channel = supabase
           .channel(`profile-updates-${session.user.id}`)
           .on(
             'postgres_changes',
-            {
-              event: '*',
-              schema: 'public',
-              table: 'profiles',
-              filter: `id=eq.${session.user.id}`,
-            },
-            (payload) => {
-              console.log('Realtime profile update received:', payload.new);
-              setProfile(payload.new as UserProfile);
-            }
+            { ... },
+            (payload) => { ... }
           );
-        
-        profileSubscription = channel.subscribe((status) => {
-          console.log(`Subscription status for ${session.user.id}:`, status);
-        });
+        profileSubscription = channel.subscribe();
+        */
 
       } catch (err) {
-        console.error('Error in useProfile:', err);
+        console.error('DEBUG PERFIL:', err);
         setError(err);
       } finally {
         setLoading(false);
@@ -106,9 +96,9 @@ export function useProfile() {
 
     return () => {
       authSubscription.unsubscribe();
-      if (profileSubscription) {
-        supabase.removeChannel(profileSubscription);
-      }
+      // if (profileSubscription) {
+      //   supabase.removeChannel(profileSubscription);
+      // }
     };
   }, []);
 
