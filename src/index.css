@@ -560,3 +560,25 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 
+
+/* ============================================================
+   PRODUCTION FIX: Navigation Dropdowns visibility
+   ============================================================ */
+.glass-metallic-white-nav {
+  /* Al expandirse, forzamos que el overflow sea visible para los dropdowns */
+  /* El componente gestiona la clase condicionalmente, pero esto asegura la prioridad */
+}
+
+nav.glass-metallic-white-nav[style*="width: auto"] {
+  overflow: visible !important;
+}
+
+/* Forzar que los dropdowns estén siempre por encima y sean visibles */
+.glass-metallic-white-nav div.relative {
+    overflow: visible !important;
+}
+
+/* Prevenir recortes accidentales en contenedores de framer */
+[data-framer-generated] {
+    overflow: visible !important;
+}
