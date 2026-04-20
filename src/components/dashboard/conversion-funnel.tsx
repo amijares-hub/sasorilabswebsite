@@ -110,6 +110,21 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
       loading: 'Analyzing digital footprint...',
       scanning: 'Syncing with Sasori Hub...'
     }
+  }[lang as 'es' | 'en'] || {
+    next: 'Continuar',
+    back: 'Atrás',
+    submit: 'Transmitir Información',
+    company: 'Nombre de Empresa',
+    industry: 'Industria',
+    url: 'URL del Sitio Web',
+    challenge: '¿Cuál es el principal desafío tecnológico de tu marca ahora mismo?',
+    budget: 'Rango de Presupuesto Mensual',
+    thanks: 'Diagnóstico Completado',
+    successMsg: 'Tus requerimientos han sido encriptados y enviados al Sasori Hub. Estamos listos para acelerar tu negocio.',
+    bookCall: 'Agendar Llamada Estratégica',
+    loading: 'Analizando digital footprint...',
+    scanning: 'Sincronizando con Sasori Hub...'
+  };
   if (isSuccess) {
     return (
       <motion.div 

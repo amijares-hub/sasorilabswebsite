@@ -14,6 +14,7 @@ import { Footer } from '../components/ui/footer';
 import { AnimatedNavFramer } from '../components/ui/navigation-menu';
 import { MorphingSquare } from '../components/ui/morphing-square';
 import { ConversionFunnel } from '../components/dashboard/conversion-funnel';
+import { BookingSystem } from '../components/dashboard/booking-system';
 import { cn } from '../lib/utils';
 
 // --- Shared Types ---
@@ -565,11 +566,14 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
     );
   }
 
-  if (!profile) {
-    // Redired handled by useEffect in App if session is lost, but safety check here
-    const timer = setTimeout(() => navigate('/login'), 100);
-    return () => clearTimeout(timer);
-  }
+  useEffect(() => {
+    if (!loading && !profile) {
+      const timer = setTimeout(() => navigate('/login'), 100);
+      return () => clearTimeout(timer);
+    }
+  }, [loading, profile, navigate]);
+
+  if (!profile) return null;
 
   return (
     <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
