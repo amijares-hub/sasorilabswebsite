@@ -61,9 +61,10 @@ export function useProfile() {
 
         setProfile(currentData);
 
-        // Subscribe to real-time changes
-        profileSubscription = supabase
-          .channel(`profile-${session.user.id}`)
+        // ALWAYS CHAIN .on() BEFORE .subscribe()
+        // Ensure fetchProfile is finished before this line
+        const channel = supabase
+          .channel(`profile-updates-${session.user.id}`)
           .on(
             'postgres_changes',
             {
@@ -73,10 +74,14 @@ export function useProfile() {
               filter: `id=eq.${session.user.id}`,
             },
             (payload) => {
+              console.log('Realtime profile update received:', payload.new);
               setProfile(payload.new as UserProfile);
             }
-          )
-          .subscribe();
+          );
+        
+        profileSubscription = channel.subscribe((status) => {
+          console.log(`Subscription status for ${session.user.id}:`, status);
+        });
 
       } catch (err) {
         console.error('Error in useProfile:', err);

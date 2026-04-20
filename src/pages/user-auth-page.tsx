@@ -122,8 +122,9 @@ export function UserAuthPage({ lang = 'es' }: { lang?: string }) {
     }
 
     // Also add them to the newsletter subscribers table
+    // Wrap in try/catch and ignore errors to prevent registration blockage (e.g. 403 RLS)
     try {
-      await supabase.from('subscribers').upsert([{
+      const { error: subError } = await supabase.from('subscribers').upsert([{
         email: email.toLowerCase().trim(),
         name: fullName.trim() || null,
         lang,
@@ -131,7 +132,11 @@ export function UserAuthPage({ lang = 'es' }: { lang?: string }) {
         status: 'active',
         confirmed: true,
       }], { onConflict: 'email' });
-    } catch (_) {}
+      
+      if (subError) console.warn('Newsletter subscription failed (403/RLS?), continuing login:', subError);
+    } catch (e) {
+      console.warn('Newsletter subscription exception, continuing login:', e);
+    }
 
     // Send welcome email
     const fnUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-email`;
