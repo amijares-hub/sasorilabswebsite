@@ -401,10 +401,10 @@ export default function App() {
       ease: "power4.inOut"
     });
 
-    // Safety timeout: 3 seconds
+    // Safety timeout: 0.5 seconds for much faster feedback
     safetyTimerRef.current = setTimeout(() => {
       setIsLoaded(true);
-    }, 3000);
+    }, 500);
 
     return () => {
       if (safetyTimerRef.current) clearTimeout(safetyTimerRef.current);
@@ -566,7 +566,7 @@ export default function App() {
       {!isLoaded && (
         <div
           ref={entranceRef}
-          className="fixed inset-0 z-[100] bg-[#FFFFFF] flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden"
         >
           <MatrixRain color="#E20613" opacity={0.15} />
           <div

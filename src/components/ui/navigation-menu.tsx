@@ -128,13 +128,13 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
   const lastScrollY = React.useRef(0);
   const scrollPositionOnCollapse = React.useRef(0);
 
-  const t = {
-    es: { home: "Inicio", solutions: "Servicios", blog: "Blog", contact: "Contacto", demo: "Demos", auto: "Agentes Autónomos", emp: "Empleados Digitales", webs: "Webs y Aplicaciones de Impacto", lim: "Limpieza y Aceleración de Negocios", account: "Mi Cuenta" },
+  const t = (({
+    es: { home: "Inicio", solutions: "Servicios", blog: "Blog", contact: "Contacto", demo: "Demos", auto: "Agentes Autónomos", emp: "Empleados Digitales", webs: "Webs y Aplicaciones de Impacto", lim: "Limpieza y Aceleración de Negocios", account: "Mi Cuenta", logout: "Cerrar Sesión" },
     en: { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account", logout: "Log Out" },
     zh: { home: "首頁", solutions: "服務", blog: "博客", contact: "聯繫", demo: "演示", auto: "自主代理", emp: "數位員工", webs: "影響力網站與應用", lim: "業務加速", account: "我的帳戶", logout: "登出" },
     ru: { home: "Главная", solutions: "Услуги", blog: "Блог", contact: "Контакт", demo: "Демо", auto: "Автономные Агенты", emp: "Цифровые Сотрудники", webs: "Влиятельные Веб-сайты", lim: "Ускорение Бизнеса", account: "Мой Аккаунт", logout: "Выйти" },
     pt: { home: "Início", solutions: "Serviços", blog: "Blog", contact: "Contato", demo: "Demos", auto: "Agentes Autônomos", emp: "Funcionários Digitais", webs: "Webs e Apps de Impacto", lim: "Aceleração de Negócios", account: "Minha Conta", logout: "Sair" },
-  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account", logout: "Cerrar Sesión" };
+  } as any)[lang] || { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account", logout: "Log Out" });
 
   const services = [
     { name: t.auto, href: "/services/ai-automation" },

@@ -513,7 +513,7 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
     navigate('/');
   };
 
-  const t = {
+  const t = (({
     es: {
       welcome: 'Bienvenido', member: role === 'client' ? 'CLIENTE PREFERENTE' : 'SUSCRIPTOR', 
       overview: 'Panel', projects: 'Proyectos',
@@ -528,11 +528,11 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
       memberSince: 'Member since', activeProjects: 'Active Projects', latestPayments: 'Latest Payments',
       newRequest: 'REQUEST CHANGE', noData: 'No data available',
     },
-  }[lang as 'es'|'en'] || {
+  } as any)[lang] || {
     welcome: 'Welcome', member: 'MEMBER', overview: 'Panel', projects: 'Projects', 
     payments: 'Finances', requests: 'Requests', settings: 'Settings', logout: 'Log Out',
     memberSince: 'Since', noData: 'No data'
-  };
+  });
 
   if (loading) {
     return (

@@ -79,7 +79,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
     }
   };
 
-  const t = {
+  const t = (({
     es: {
       next: 'Continuar',
       back: 'Atrás',
@@ -110,7 +110,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
       loading: 'Analyzing digital footprint...',
       scanning: 'Syncing with Sasori Hub...'
     }
-  }[lang as 'es' | 'en'] || {
+  } as any)[lang] || {
     next: 'Continuar',
     back: 'Atrás',
     submit: 'Transmitir Información',
@@ -124,7 +124,8 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
     bookCall: 'Agendar Llamada Estratégica',
     loading: 'Analizando digital footprint...',
     scanning: 'Sincronizando con Sasori Hub...'
-  };
+  });
+
   if (isSuccess) {
     return (
       <motion.div 
