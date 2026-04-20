@@ -102,23 +102,33 @@ function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang:
       )}
 
       {hasSubmitted ? (
-        <div className="max-w-3xl mx-auto py-20 text-center space-y-8">
-           <div className="w-24 h-24 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-8 cinema-glow-emerald">
-              <CheckCircle className="w-12 h-12 text-emerald-500" />
+        <div className="max-w-3xl mx-auto space-y-12">
+           <div className="text-center space-y-4">
+              <div className="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6 cinema-glow-emerald">
+                 <CheckCircle className="w-10 h-10 text-emerald-500" />
+              </div>
+              <h3 className="text-3xl font-black uppercase tracking-widest italic">Diagnóstico Recibido</h3>
+              <p className="text-white/40 text-sm max-w-md mx-auto uppercase tracking-widest">
+                 Tu información está segura en el Sasori Hub. El siguiente paso es agendar tu sesión técnica.
+              </p>
            </div>
-           <h3 className="text-4xl font-black uppercase tracking-widest italic">Diagnóstico Recibido</h3>
-           <p className="text-white/40 text-lg max-w-md mx-auto">
-              Tu información está siendo procesada por nuestro equipo técnico. Nos pondremos en contacto contigo pronto.
-           </p>
-           <button 
-             onClick={() => window.open('https://calendly.com/', '_blank')}
-             className="px-10 py-5 bg-white text-black font-black uppercase tracking-widest rounded-2xl hover:bg-sasori-red hover:text-white transition-all"
-           >
-             AGENDAR LLAMADA DE REVISIÓN
-           </button>
+           
+           <div className="bg-white/5 rounded-[2.5rem] p-8 md:p-12 border border-white/10 shadow-2xl">
+              <BookingSystem 
+                subscriberId={profile.id}
+                companyName={profile.full_name || 'Empresa'}
+                email={profile.email}
+                lang={lang}
+              />
+           </div>
         </div>
       ) : (
-        <ConversionFunnel subscriberId={profile.id} lang={lang} onSuccess={() => setHasSubmitted(true)} />
+        <ConversionFunnel 
+          subscriberId={profile.id} 
+          email={profile.email} 
+          lang={lang} 
+          onSuccess={() => setHasSubmitted(true)} 
+        />
       )}
       
       {/* Recommended Content */}

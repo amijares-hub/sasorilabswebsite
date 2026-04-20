@@ -13,9 +13,11 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
 import { Button } from '../ui/button';
+import { BookingSystem } from './booking-system';
 
 interface ConversionFunnelProps {
   subscriberId: string;
+  email?: string;
   lang: string;
   onSuccess?: () => void;
 }
@@ -26,7 +28,7 @@ const steps = [
   { id: 3, title: 'Proyección', icon: <Database className="w-5 h-5" /> }
 ];
 
-export function ConversionFunnel({ subscriberId, lang, onSuccess }: ConversionFunnelProps) {
+export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: ConversionFunnelProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -108,34 +110,35 @@ export function ConversionFunnel({ subscriberId, lang, onSuccess }: ConversionFu
       loading: 'Analyzing digital footprint...',
       scanning: 'Syncing with Sasori Hub...'
     }
-  }[lang === 'es' ? 'es' : 'en'];
-
   if (isSuccess) {
     return (
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center text-center p-8 md:p-12 glass-metallic-dark rounded-3xl border border-sasori-red/20 max-w-2xl mx-auto shadow-2xl relative overflow-hidden"
+        className="flex flex-col items-center p-8 md:p-12 glass-metallic-dark rounded-3xl border border-sasori-red/20 max-w-2xl mx-auto shadow-2xl relative overflow-hidden"
       >
         <div className="absolute top-0 left-0 w-full h-1 bg-sasori-red cinema-glow-red" />
-        <div className="w-20 h-20 rounded-full bg-sasori-red/10 flex items-center justify-center mb-8 cinema-glow-red border border-sasori-red/30">
-          <CheckCircle2 className="w-10 h-10 text-sasori-red animate-pulse" />
+        
+        <div className="text-center mb-10">
+          <div className="w-16 h-16 rounded-full bg-sasori-red/10 flex items-center justify-center mx-auto mb-6 cinema-glow-red border border-sasori-red/30">
+            <CheckCircle2 className="w-8 h-8 text-sasori-red animate-pulse" />
+          </div>
+          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-[0.2em] text-white mb-4">
+            {t.thanks}
+          </h2>
+          <p className="text-white/40 text-sm leading-relaxed max-w-lg mx-auto">
+            {t.successMsg}
+          </p>
         </div>
-        <h2 className="text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-white mb-6">
-          {t.thanks}
-        </h2>
-        <p className="text-white/60 text-lg mb-10 leading-relaxed max-w-lg">
-          {t.successMsg}
-        </p>
-        <Button 
-          variant="default" 
-          size="lg"
-          className="w-full bg-sasori-red text-white hover:bg-black rounded-full h-16 text-lg font-black uppercase tracking-widest gap-3 shadow-2xl cinema-shadow-red"
-          onClick={() => window.open('https://calendly.com/', '_blank')}
-        >
-          <Calendar className="w-6 h-6" />
-          {t.bookCall}
-        </Button>
+
+        <div className="w-full bg-white/5 rounded-[2rem] p-8 border border-white/10">
+           <BookingSystem 
+             subscriberId={subscriberId}
+             companyName={formData.company_name}
+             email={email || ''} // We need to pass email here
+             lang={lang}
+           />
+        </div>
       </motion.div>
     );
   }
