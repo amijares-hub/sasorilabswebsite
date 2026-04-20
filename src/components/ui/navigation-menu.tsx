@@ -111,7 +111,11 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
   };
 
   const handleServicesLeave = () => {
-    // Dropdowns intentionally left open until selection per user request
+    setShowServices(false);
+  };
+
+  const handleLangLeave = () => {
+    setShowLanguages(false);
   };
 
   const handleLangEnter = () => {
@@ -216,10 +220,13 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
         whileHover={!isExpanded ? { scale: 1.1 } : {}}
         whileTap={!isExpanded ? { scale: 0.95 } : {}}
         onClick={handleNavClick}
-        onMouseLeave={handleServicesLeave}
+        onMouseLeave={() => {
+          handleServicesLeave();
+          handleLangLeave();
+        }}
         className={cn(
-          "flex items-center overflow-hidden rounded-full glass-metallic-white-nav h-12 md:h-20 transition-all duration-300",
-          isExpanded ? "w-auto min-w-[max-content] px-4" : "justify-center px-0 cursor-pointer"
+          "flex items-center rounded-full glass-metallic-white-nav h-12 md:h-20 transition-all duration-300",
+          isExpanded ? "w-auto min-w-[max-content] px-4 overflow-visible" : "justify-center px-0 cursor-pointer overflow-hidden"
         )}
       >
         <motion.div
@@ -243,7 +250,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
             <div 
               key={`${item.name}-${idx}`} 
               className="relative"
-              onMouseEnter={handleServicesEnter}
+              onMouseEnter={() => item.isDropdown && handleServicesEnter()}
             >
               <motion.button
                 variants={itemVariants}
@@ -342,7 +349,10 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
           </motion.div>
 
           {/* Language Selector Inside Menu */}
-          <div className="pl-1 sm:pl-2 border-l border-black/10 relative">
+          <div 
+            className="pl-1 sm:pl-2 border-l border-black/10 relative"
+            onMouseLeave={handleLangLeave}
+          >
             <motion.button
               variants={itemVariants}
               onMouseEnter={handleLangEnter}
