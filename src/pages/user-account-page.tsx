@@ -6,13 +6,14 @@ import {
   User, Settings, Bell, BookOpen, LogOut, Sparkles, Mail, CheckCircle, 
   Rocket, Clock, CreditCard, PlusCircle, AlertCircle, ChevronRight, 
   MessageSquare, FileText, Globe, Send, Calendar, Shield, Zap, Target,
-  ArrowRight, ShieldCheck, Database, Layers
+  ArrowRight, ShieldCheck, Database, Layers, Loader2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SasoriLogo } from '../components/ui/sasori-logo';
 import { Footer } from '../components/ui/footer';
 import { AnimatedNavFramer } from '../components/ui/navigation-menu';
 import { MorphingSquare } from '../components/ui/morphing-square';
+import { ConversionFunnel } from '../components/dashboard/conversion-funnel';
 import { cn } from '../lib/utils';
 
 // --- Shared Types ---
@@ -55,78 +56,73 @@ type Notification = { type: 'success' | 'error', message: string } | null;
  */
 function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang: string, t: any }) {
   const navigate = useNavigate();
+  const [hasSubmitted, setHasSubmitted] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkSubmission = async () => {
+      const { data, error } = await supabase
+        .from('onboarding_submissions')
+        .select('id')
+        .eq('subscriber_id', profile.id)
+        .maybeSingle();
+      
+      if (!error && data) {
+        setHasSubmitted(true);
+      } else {
+        setHasSubmitted(false);
+      }
+    };
+    checkSubmission();
+  }, [profile.id]);
+
+  if (hasSubmitted === null) return <div className="py-20 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-sasori-red" /></div>;
+
   return (
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
       {/* Hero Welcome */}
-      <div className="relative p-10 md:p-16 rounded-[3rem] bg-gradient-to-br from-sasori-red/10 via-zinc-900 to-black border border-white/5 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-sasori-red/5 blur-[100px] -mr-20 -mt-20" />
-        <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
-          <div className="w-24 h-24 rounded-3xl bg-sasori-red/20 border border-sasori-red/30 flex items-center justify-center rotate-3 flex-shrink-0">
-            <Sparkles className="w-12 h-12 text-sasori-red" />
-          </div>
-          <div className="text-center md:text-left space-y-4">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight italic">
-              {lang === 'es' ? 'Tu viaje con' : 'Your journey with'} <span className="text-sasori-red">Sasori Labs</span> {lang === 'es' ? 'comienza aquí' : 'starts here'}
-            </h2>
-            <p className="text-zinc-400 text-lg font-medium max-w-2xl leading-relaxed">
-              {lang === 'es' 
-                ? 'Como suscriptor, tienes acceso a nuestro contenido exclusivo y actualizaciones anticipadas. Estamos listos para elevar tu negocio con IA cuando tú lo estés.' 
-                : 'As a subscriber, you have access to our exclusive content and early updates. We are ready to elevate your business with AI when you are.'}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Conversion Funnel Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="p-8 rounded-[2.5rem] bg-zinc-900/50 border border-white/5 hover:border-sasori-red/30 transition-all group flex flex-col justify-between">
-          <div>
-            <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 text-sasori-red group-hover:scale-110 transition-transform">
-              <Rocket className="w-6 h-6" />
+      {!hasSubmitted && (
+        <div className="relative p-10 md:p-16 rounded-[3rem] bg-gradient-to-br from-sasori-red/10 via-zinc-900 to-black border border-white/5 overflow-hidden mb-12">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-sasori-red/5 blur-[100px] -mr-20 -mt-20" />
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
+            <div className="w-24 h-24 rounded-3xl bg-sasori-red/20 border border-sasori-red/30 flex items-center justify-center rotate-3 flex-shrink-0">
+              <Sparkles className="w-12 h-12 text-sasori-red" />
             </div>
-            <h3 className="text-xl font-black uppercase mb-3 tracking-tighter">Plan de Automatización</h3>
-            <p className="text-zinc-500 text-sm font-medium leading-relaxed">
-              {lang === 'es' ? 'Recibe una hoja de ruta personalizada para implementar agentes de IA en tu flujo de trabajo.' : 'Receive a personalized roadmap to implement AI agents in your workflow.'}
-            </p>
-          </div>
-          <button onClick={() => navigate('/services/ai-automation')} className="mt-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-sasori-red group-hover:gap-4 transition-all">
-            {lang === 'es' ? 'EXPLORAR' : 'EXPLORE'} <ArrowRight className="w-3 h-3" />
-          </button>
-        </div>
-
-        <div className="p-8 rounded-[2.5rem] bg-zinc-900/50 border border-white/5 hover:border-sasori-red/30 transition-all group flex flex-col justify-between">
-          <div>
-            <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 text-sasori-red group-hover:scale-110 transition-transform">
-              <ShieldCheck className="w-6 h-6" />
+            <div className="text-center md:text-left space-y-4">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight italic">
+                {lang === 'es' ? 'Tu viaje con' : 'Your journey with'} <span className="text-sasori-red">Sasori Labs</span> {lang === 'es' ? 'comienza aquí' : 'starts here'}
+              </h2>
+              <p className="text-zinc-400 text-lg font-medium max-w-2xl leading-relaxed">
+                {lang === 'es' 
+                  ? 'Como suscriptor, estás a un paso de desbloquear el poder de la IA. Completa tu diagnóstico para empezar.' 
+                  : 'As a subscriber, you are one step away from unlocking the power of AI. Complete your diagnostic to start.'}
+              </p>
             </div>
-            <h3 className="text-xl font-black uppercase mb-3 tracking-tighter">Auditoría Técnica</h3>
-            <p className="text-zinc-500 text-sm font-medium leading-relaxed">
-              {lang === 'es' ? '¿Tu stack está listo para el futuro? Analizamos tus sistemas actuales y detectamos cuellos de botella.' : 'Is your stack future-ready? We analyze your current systems and detect bottlenecks.'}
-            </p>
           </div>
-          <button onClick={() => navigate('/services/modernization')} className="mt-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-sasori-red group-hover:gap-4 transition-all">
-            {lang === 'es' ? 'SOLICITAR' : 'REQUEST'} <ArrowRight className="w-3 h-3" />
-          </button>
         </div>
+      )}
 
-        <div className="p-8 rounded-[2.5rem] bg-sasori-red border border-sasori-red shadow-[0_20px_50px_rgba(226,6,19,0.2)] group flex flex-col justify-between">
-          <div>
-            <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
-              <Zap className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-black uppercase mb-3 tracking-tighter text-white">Inicia un Proyecto</h3>
-            <p className="text-white/80 text-sm font-medium leading-relaxed">
-              {lang === 'es' ? 'Conviértete en Cliente Sasori y desbloquea el panel de gestión de proyectos y soporte prioritario.' : 'Become a Sasori Client and unlock the project management dashboard and priority support.'}
-            </p>
-          </div>
-          <button onClick={() => window.scrollTo({top: document.getElementById('contact')?.offsetTop, behavior: 'smooth'})} className="mt-8 py-4 bg-white text-sasori-red rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:bg-black hover:text-white">
-            {lang === 'es' ? 'AGENDAR LLAMADA' : 'BOOK A CALL'}
-          </button>
+      {hasSubmitted ? (
+        <div className="max-w-3xl mx-auto py-20 text-center space-y-8">
+           <div className="w-24 h-24 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-8 cinema-glow-emerald">
+              <CheckCircle className="w-12 h-12 text-emerald-500" />
+           </div>
+           <h3 className="text-4xl font-black uppercase tracking-widest italic">Diagnóstico Recibido</h3>
+           <p className="text-white/40 text-lg max-w-md mx-auto">
+              Tu información está siendo procesada por nuestro equipo técnico. Nos pondremos en contacto contigo pronto.
+           </p>
+           <button 
+             onClick={() => window.open('https://calendly.com/', '_blank')}
+             className="px-10 py-5 bg-white text-black font-black uppercase tracking-widest rounded-2xl hover:bg-sasori-red hover:text-white transition-all"
+           >
+             AGENDAR LLAMADA DE REVISIÓN
+           </button>
         </div>
-      </div>
+      ) : (
+        <ConversionFunnel subscriberId={profile.id} lang={lang} onSuccess={() => setHasSubmitted(true)} />
+      )}
       
       {/* Recommended Content */}
-      <div className="space-y-6">
+      <div className="space-y-6 pt-12 border-t border-white/5">
         <div className="flex justify-between items-end">
            <h3 className="text-2xl font-black uppercase tracking-tighter italic">Contenido para Ti</h3>
            <button onClick={() => navigate('/blog')} className="text-[10px] font-black underline text-zinc-500 uppercase">Ver Todo</button>
@@ -138,7 +134,9 @@ function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang:
                 <img src={`https://images.unsplash.com/photo-${1550000000000+i}?auto=format&fit=crop&q=80&w=800`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60" />
                 <div className="absolute bottom-6 left-6 z-20">
                    <div className="px-2 py-1 bg-sasori-red text-[8px] font-black uppercase tracking-widest inline-block mb-2">Exclusive</div>
-                   <h4 className="text-lg font-bold uppercase tracking-tight">El auge de los Agentes Autónomos en 2026</h4>
+                   <h4 className="text-lg font-bold uppercase tracking-tight italic">
+                      {i === 1 ? 'El auge de los Agentes Autónomos' : 'Automatización de Pipelines 2026'}
+                   </h4>
                 </div>
              </div>
            ))}
@@ -496,7 +494,7 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
 
 export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
   const navigate = useNavigate();
-  const { profile, loading, role } = useProfile();
+  const { profile, loading, role, error } = useProfile();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -528,10 +526,38 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-1000">
+         <div className="w-20 h-20 rounded-full bg-sasori-red/10 border border-sasori-red/30 flex items-center justify-center mb-10 cinema-glow-red">
+            <AlertCircle className="w-10 h-10 text-sasori-red" />
+         </div>
+         <h2 className="text-4xl font-black uppercase tracking-widest text-white mb-6 italic">Acceso Denegado</h2>
+         <p className="text-white/40 max-w-lg mb-12 text-sm font-medium leading-relaxed uppercase tracking-widest">
+            {error.message || 'No se pudo sincronizar el nodo de usuario. La firma digital no ha sido validada en los servidores de SasoriLabs.'}
+         </p>
+         <div className="flex flex-col sm:flex-row gap-4">
+           <button 
+             onClick={() => window.location.reload()} 
+             className="px-10 py-5 bg-sasori-red text-white font-black uppercase rounded-[1.5rem] shadow-2xl shadow-sasori-red/20 hover:scale-105 transition-transform"
+           >
+             REPATRIAR SESIÓN
+           </button>
+           <button 
+             onClick={() => navigate('/')} 
+             className="px-10 py-5 bg-white/5 border border-white/10 text-white font-black uppercase rounded-[1.5rem] hover:bg-white/10 transition-all"
+           >
+             REGRESAR AL INICIO
+           </button>
+         </div>
+      </div>
+    );
+  }
+
   if (!profile) {
     // Redired handled by useEffect in App if session is lost, but safety check here
-    setTimeout(() => navigate('/login'), 100);
-    return null;
+    const timer = setTimeout(() => navigate('/login'), 100);
+    return () => clearTimeout(timer);
   }
 
   return (

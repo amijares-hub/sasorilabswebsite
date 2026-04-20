@@ -31,15 +31,35 @@ export function useProfile() {
           return;
         }
 
-        // Fetch initial profile
-        const { data, error: fetchError } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
+        // Fetch initial profile with retries to handle race conditions (Auth vs Profile creation)
+        let currentData = null;
+        let attempts = 0;
+        const maxAttempts = 3;
 
-        if (fetchError) throw fetchError;
-        setProfile(data);
+        while (attempts < maxAttempts) {
+          const { data, error: fetchError } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', session.user.id)
+            .maybeSingle();
+
+          if (data) {
+            currentData = data;
+            break;
+          }
+
+          attempts++;
+          if (attempts < maxAttempts) {
+            // Wait 500ms before next attempt
+            await new Promise(resolve => setTimeout(resolve, 500));
+          }
+        }
+
+        if (!currentData) {
+          throw new Error("Access Denied: Suspiro Node not initialized. Please try refreshing or contact support.");
+        }
+
+        setProfile(currentData);
 
         // Subscribe to real-time changes
         profileSubscription = supabase
