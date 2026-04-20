@@ -34,9 +34,8 @@ export function ConversionFunnel({ subscriberId, lang, onSuccess }: ConversionFu
   const [formData, setFormData] = useState({
     company_name: '',
     industry: '',
-    website_url: '',
     challenge: '',
-    budget_range: ''
+    estimated_budget: ''
   });
 
   const budgetRanges = [
@@ -62,9 +61,8 @@ export function ConversionFunnel({ subscriberId, lang, onSuccess }: ConversionFu
           subscriber_id: subscriberId,
           company_name: formData.company_name,
           industry: formData.industry,
-          website_url: formData.website_url,
           challenge: formData.challenge,
-          budget_range: formData.budget_range
+          estimated_budget: formData.estimated_budget
         });
 
       if (error) throw error;
@@ -191,38 +189,20 @@ export function ConversionFunnel({ subscriberId, lang, onSuccess }: ConversionFu
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="relative group">
-                    <span className="absolute -top-3 left-4 px-2 bg-[#090909] text-[10px] font-black uppercase tracking-widest text-sasori-red/60 z-10">
-                      {t.industry}
-                    </span>
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20">
-                      <Target className="w-5 h-5" />
-                    </div>
-                    <input
-                      type="text"
-                      value={formData.industry}
-                      onChange={(e) => setFormData({...formData, industry: e.target.value})}
-                      placeholder="E.g. Technology"
-                      className="w-full bg-white/[0.02] border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-white/10 focus:outline-none focus:border-sasori-red/50 transition-all text-lg font-bold"
-                    />
+                <div className="relative group">
+                  <span className="absolute -top-3 left-4 px-2 bg-[#090909] text-[10px] font-black uppercase tracking-widest text-sasori-red/60 z-10">
+                    {t.industry}
+                  </span>
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20">
+                    <Target className="w-5 h-5" />
                   </div>
-
-                  <div className="relative group">
-                    <span className="absolute -top-3 left-4 px-2 bg-[#090909] text-[10px] font-black uppercase tracking-widest text-sasori-red/60 z-10">
-                      {t.url}
-                    </span>
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20">
-                      <Globe className="w-5 h-5" />
-                    </div>
-                    <input
-                      type="text"
-                      value={formData.website_url}
-                      onChange={(e) => setFormData({...formData, website_url: e.target.value})}
-                      placeholder="www.example.com"
-                      className="w-full bg-white/[0.02] border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-white/10 focus:outline-none focus:border-sasori-red/50 transition-all text-lg font-bold"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    value={formData.industry}
+                    onChange={(e) => setFormData({...formData, industry: e.target.value})}
+                    placeholder="E.g. Technology"
+                    className="w-full bg-white/[0.02] border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-white/10 focus:outline-none focus:border-sasori-red/50 transition-all text-lg font-bold"
+                  />
                 </div>
               </div>
 
@@ -293,25 +273,25 @@ export function ConversionFunnel({ subscriberId, lang, onSuccess }: ConversionFu
                   {budgetRanges.map((range) => (
                     <button
                       key={range.value}
-                      onClick={() => setFormData({...formData, budget_range: range.value})}
+                      onClick={() => setFormData({...formData, estimated_budget: range.value})}
                       className={`relative overflow-hidden group p-6 rounded-2xl border transition-all duration-300 text-left ${
-                        formData.budget_range === range.value 
+                        formData.estimated_budget === range.value 
                           ? 'bg-sasori-red/10 border-sasori-red cinema-shadow-red' 
                           : 'bg-white/[0.02] border-white/10 hover:border-white/20'
                       }`}
                     >
                       <div className="flex justify-between items-center">
                         <span className={`text-xl font-black uppercase tracking-widest ${
-                          formData.budget_range === range.value ? 'text-sasori-red' : 'text-white/60'
+                          formData.estimated_budget === range.value ? 'text-sasori-red' : 'text-white/60'
                         }`}>
                           {range.label}
                         </span>
-                        {formData.budget_range === range.value && (
+                        {formData.estimated_budget === range.value && (
                           <div className="w-2 h-2 rounded-full bg-sasori-red cinema-glow-red animate-pulse" />
                         )}
                       </div>
                       <div className={`absolute bottom-0 left-0 h-0.5 bg-sasori-red transition-all duration-500 ${
-                        formData.budget_range === range.value ? 'w-full' : 'w-0'
+                        formData.estimated_budget === range.value ? 'w-full' : 'w-0'
                       }`} />
                     </button>
                   ))}
@@ -327,7 +307,7 @@ export function ConversionFunnel({ subscriberId, lang, onSuccess }: ConversionFu
                 </button>
                 <Button 
                   onClick={handleSubmit}
-                  disabled={!formData.budget_range || isSubmitting}
+                  disabled={!formData.estimated_budget || isSubmitting}
                   className="flex-1 h-16 rounded-2xl bg-sasori-red hover:bg-black text-white font-black uppercase tracking-widest gap-2 shadow-xl group disabled:opacity-50"
                 >
                   {isSubmitting ? (
