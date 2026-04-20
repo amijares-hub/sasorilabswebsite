@@ -225,9 +225,10 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
           handleLangLeave();
         }}
         className={cn(
-          "flex items-center rounded-full glass-metallic-white-nav h-12 md:h-20 transition-all duration-300",
+          "flex items-center rounded-full glass-metallic-white-nav h-12 md:h-20 transition-all duration-300 relative",
           isExpanded ? "w-auto min-w-[max-content] px-4 overflow-visible" : "justify-center px-0 cursor-pointer overflow-hidden"
         )}
+        style={{ pointerEvents: 'auto' }}
       >
         <motion.div
           variants={logoVariants}
@@ -243,7 +244,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
         <motion.div
           className={cn(
             "hidden lg:flex items-center gap-2 sm:gap-4 pr-8 transition-opacity duration-300",
-            !isExpanded && "opacity-0 pointer-events-none" 
+            !isExpanded ? "opacity-0 pointer-events-none invisible" : "opacity-100 pointer-events-auto visible" 
           )}
         >
           {translatedNavItems.map((item, idx) => (
@@ -280,7 +281,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                       animate="visible"
                       exit="exit"
                       variants={dropdownVariants}
-                      className="absolute top-full left-0 mt-2 w-64 p-2 rounded-2xl border border-sasori-red/10 bg-white/95 shadow-2xl backdrop-blur-xl pointer-events-auto overflow-hidden"
+                      className="absolute top-full left-0 mt-4 w-64 p-3 rounded-2xl border border-sasori-red/20 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.2)] backdrop-blur-2xl pointer-events-auto z-[999] overflow-visible"
                     >
                       <div className="flex flex-col gap-1">
                         {services.map((service) => (
