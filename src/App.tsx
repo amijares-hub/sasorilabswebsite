@@ -41,8 +41,6 @@ import { DigitalEmployeesPage } from './pages/digital-employees-page';
 import { ImmersiveWebsPage } from './pages/immersive-webs-page';
 import { ModernizationPage } from './pages/modernization-page';
 import { BlogDetailPage } from './pages/blog-detail-page';
-import { LoginPage } from './pages/login-page';
-import { DashboardPage } from './pages/dashboard-page';
 import { UserAuthPage } from './pages/user-auth-page';
 import { UserAccountPage } from './pages/user-account-page';
 import { UnsubscribePage } from './pages/unsubscribe-page';
@@ -61,6 +59,7 @@ import { translations } from './i18n/translations';
 import { Canvas } from '@react-three/fiber';
 import { ActivityParticles } from './components/canvas/ActivityParticles';
 import { useExperienceStore } from './store/useExperienceStore';
+import { supabase } from './lib/supabaseClient';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -188,9 +187,45 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('sasori-lang', lang);
   }, [lang]);
+  const { pathname } = useLocation();
+  const [authError, setAuthError] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const navigate = useNavigate();
   const initRealtime = useExperienceStore(state => state.initRealtime);
+
+  useEffect(() => {
+    // 🛡️ Security Check: Ensure user still exists in the database
+    const checkUserPersistence = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session?.user) {
+        // Query only the ID for maximum performance
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .select('id')
+          .eq('id', session.user.id)
+          .single();
+
+        if (error || !profile) {
+          console.warn("Security Alert: User session found but profile is missing in the 'profiles' table.");
+          setAuthError(lang === 'es' 
+            ? 'Error de sincronización: Su cuenta ya no está activa en Sasori Node. Por favor, contacte con soporte.'
+            : 'Synchronization error: Your account is no longer active in Sasori Node. Please contact support.');
+          
+          // Emergency Logout Sequence
+          setTimeout(async () => {
+            await supabase.auth.signOut();
+            localStorage.clear();
+            sessionStorage.clear();
+            // Force a hard reload to the home page to wipe all states
+            window.location.href = '/'; 
+          }, 5000); 
+        }
+      }
+    };
+
+    checkUserPersistence();
+  }, [pathname, lang]);
 
   useEffect(() => {
     // Initialize real-time listener for Hollywood-style feedback
@@ -477,6 +512,49 @@ export default function App() {
         </Canvas>
       </div>
 
+      {/* GLOBAL AUTH ERROR ALERT */}
+      <AnimatePresence>
+        {authError && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[1000] flex items-center justify-center p-6 backdrop-blur-3xl bg-black/80"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className="max-w-md w-full bg-zinc-900 border border-sasori-red/30 p-10 rounded-[3rem] shadow-[0_0_100px_rgba(226,6,19,0.15)] text-center relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
+                <motion.div 
+                  initial={{ width: "100%" }}
+                  animate={{ width: "0%" }}
+                  transition={{ duration: 5, ease: "linear" }}
+                  className="h-full bg-sasori-red shadow-[0_0_15px_rgba(226,6,19,0.8)]"
+                />
+              </div>
+
+              <div className="w-20 h-20 bg-sasori-red/10 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-sasori-red/20 rotate-3">
+                <ShieldCheck className="w-10 h-10 text-sasori-red" />
+              </div>
+              
+              <h2 className="text-2xl font-black text-white uppercase tracking-tighter mb-4 leading-none">Acceso Denegado</h2>
+              <p className="text-zinc-400 text-sm font-medium leading-relaxed mb-10 px-4">
+                {authError}
+              </p>
+              
+              <div className="pt-2">
+                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10">
+                    <div className="w-2 h-2 bg-sasori-red rounded-full animate-pulse" />
+                    <span className="text-[10px] text-zinc-500 uppercase font-bold tracking-[0.2em]">Cerrando sesión de forma segura...</span>
+                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Universal Components */}
       <AnimatedNavFramer lang={lang} onToggleLang={(l) => setLang(l as any)} />
       {/* Newsletter Popup - auto-shows after 8 seconds */}
@@ -513,10 +591,7 @@ export default function App() {
         <Route path="/services/digital-employees" element={<DigitalEmployeesPage lang={lang} />} />
         <Route path="/services/immersive-webs" element={<ImmersiveWebsPage lang={lang} />} />
         <Route path="/services/modernization" element={<ModernizationPage lang={lang} />} />
-        {/* Admin routes - completely isolated */}
-        <Route path="/dashboard/login" element={<LoginPage lang={lang} />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        {/* User routes - separate from admin */}
+        {/* User routes */}
         <Route path="/login" element={<UserAuthPage lang={lang} />} />
         <Route path="/mi-cuenta" element={<UserAccountPage lang={lang} />} />
         <Route path="/unsubscribe" element={<UnsubscribePage />} />

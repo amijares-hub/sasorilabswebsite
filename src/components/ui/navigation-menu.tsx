@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { Menu, ChevronDown, Languages, ArrowRight, UserCircle2, X } from "lucide-react";
+import { Menu, ChevronDown, Languages, ArrowRight, UserCircle2, X, LogOut } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { supabase } from "../../lib/supabaseClient";
 import { SasoriLogo } from "./sasori-logo";
 import { ThemeToggle } from "./theme-toggle";
 import { useNavigate } from "react-router-dom";
@@ -79,7 +80,26 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
   const [showServices, setShowServices] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isExpanded, setExpanded] = React.useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : false);
+  const [session, setSession] = React.useState<any>(null);
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+    setIsMobileMenuOpen(false);
+  };
   
   const servicesTimeout = React.useRef<NodeJS.Timeout | null>(null);
   const langTimeout = React.useRef<NodeJS.Timeout | null>(null);
@@ -106,11 +126,11 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
 
   const t = {
     es: { home: "Inicio", solutions: "Servicios", blog: "Blog", contact: "Contacto", demo: "Demos", auto: "Agentes Autónomos", emp: "Empleados Digitales", webs: "Webs y Aplicaciones de Impacto", lim: "Limpieza y Aceleración de Negocios", account: "Mi Cuenta" },
-    en: { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account" },
-    zh: { home: "首頁", solutions: "服務", blog: "博客", contact: "聯繫", demo: "演示", auto: "自主代理", emp: "數位員工", webs: "影響力網站與應用", lim: "業務加速", account: "我的帳戶" },
-    ru: { home: "Главная", solutions: "Услуги", blog: "Блог", contact: "Контакт", demo: "Демо", auto: "Автономные Агенты", emp: "Цифровые Сотрудники", webs: "Влиятельные Веб-сайты", lim: "Ускорение Бизнеса", account: "Мой Аккаунт" },
-    pt: { home: "Início", solutions: "Serviços", blog: "Blog", contact: "Contato", demo: "Demos", auto: "Agentes Autônomos", emp: "Funcionários Digitais", webs: "Webs e Apps de Impacto", lim: "Aceleração de Negócios", account: "Minha Conta" },
-  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account" };
+    en: { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account", logout: "Log Out" },
+    zh: { home: "首頁", solutions: "服務", blog: "博客", contact: "聯繫", demo: "演示", auto: "自主代理", emp: "數位員工", webs: "影響力網站與應用", lim: "業務加速", account: "我的帳戶", logout: "登出" },
+    ru: { home: "Главная", solutions: "Услуги", blog: "Блог", contact: "Контакт", demo: "Демо", auto: "Автономные Агенты", emp: "Цифровые Сотрудники", webs: "Влиятельные Веб-сайты", lim: "Ускорение Бизнеса", account: "Мой Аккаунт", logout: "Выйти" },
+    pt: { home: "Início", solutions: "Serviços", blog: "Blog", contact: "Contato", demo: "Demos", auto: "Agentes Autônomos", emp: "Funcionários Digitais", webs: "Webs e Apps de Impacto", lim: "Aceleração de Negócios", account: "Minha Conta", logout: "Sair" },
+  }[lang as 'es'|'en'|'zh'|'ru'|'pt'] || { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account", logout: "Cerrar Sesión" };
 
   const services = [
     { name: t.auto, href: "/services/ai-automation" },
@@ -277,25 +297,40 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
             </div>
           ))}
           
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="flex items-center gap-2">
             <Button
               variant="default"
               size="lg"
               className="rounded-full gap-2 px-6 group h-9 md:h-12"
               onClick={(e) => {
                 e.stopPropagation();
-                handleLinkClick('/login');
+                handleLinkClick(session ? '/mi-cuenta' : '/login');
               }}
             >
               <UserCircle2 className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:scale-110" />
               <span className="hidden sm:inline font-bold text-xs md:text-sm uppercase tracking-widest">{t.account}</span>
-              <ArrowRight 
-                className="-me-1 ms-2 opacity-60 transition-transform group-hover:translate-x-0.5" 
-                size={16} 
-                strokeWidth={2} 
-                aria-hidden="true" 
-              />
+              {!session && (
+                <ArrowRight 
+                  className="-me-1 ms-2 opacity-60 transition-transform group-hover:translate-x-0.5" 
+                  size={16} 
+                  strokeWidth={2} 
+                  aria-hidden="true" 
+                />
+              )}
             </Button>
+            
+            {session && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleLogout();
+                }}
+                className="p-2 md:p-3 text-black/40 hover:text-sasori-red transition-all hover:bg-sasori-red/5 rounded-full"
+                title={t.logout}
+              >
+                <LogOut className="w-5 h-5 md:w-6 md:h-6" />
+              </button>
+            )}
           </motion.div>
 
           {/* Theme Toggle Inside Menu */}
@@ -457,6 +492,17 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                 <UserCircle2 className="w-5 h-5 sm:w-6 sm:h-6" />
                 <span className="font-bold text-xs uppercase tracking-widest">{t.account}</span>
               </Button>
+              
+              {session && (
+                <Button
+                  variant="outline"
+                  className="w-full rounded-full gap-2 h-12 border-sasori-red/20 text-sasori-red hover:bg-sasori-red/5"
+                  onClick={handleLogout}
+                >
+                  <LogOut className="w-5 h-5" />
+                  <span className="font-bold text-xs uppercase tracking-widest">{t.logout}</span>
+                </Button>
+              )}
               
               <div className="flex items-center justify-between px-2 bg-black/5 rounded-2xl p-4 border border-black/5">
                 <div className="flex flex-col gap-1">
