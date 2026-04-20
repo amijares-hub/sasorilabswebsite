@@ -528,7 +528,11 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
       memberSince: 'Member since', activeProjects: 'Active Projects', latestPayments: 'Latest Payments',
       newRequest: 'REQUEST CHANGE', noData: 'No data available',
     },
-  }[lang as 'es'|'en'] || {};
+  }[lang as 'es'|'en'] || {
+    welcome: 'Welcome', member: 'MEMBER', overview: 'Panel', projects: 'Projects', 
+    payments: 'Finances', requests: 'Requests', settings: 'Settings', logout: 'Log Out',
+    memberSince: 'Since', noData: 'No data'
+  };
 
   if (loading) {
     return (
@@ -568,12 +572,17 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
 
   useEffect(() => {
     if (!loading && !profile) {
-      const timer = setTimeout(() => navigate('/login'), 100);
-      return () => clearTimeout(timer);
+      navigate('/login');
     }
   }, [loading, profile, navigate]);
 
-  if (!profile) return null;
+  if (loading || !profile) {
+    return (
+      <div className="min-h-screen bg-black flex flex-col items-center justify-center">
+        <MorphingSquare message="Sincronizando Sasori Node..." />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
