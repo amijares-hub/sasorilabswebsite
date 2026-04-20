@@ -141,7 +141,7 @@ function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang:
            {[1, 2].map(i => (
              <div key={i} className="h-48 rounded-[2rem] bg-zinc-900 border border-white/5 relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
-                <img src={`https://images.unsplash.com/photo-${1550000000000+i}?auto=format&fit=crop&q=80&w=800`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60" />
+                <img src={`https://images.unsplash.com/photo-${1550000000000+i}?auto=format&fit=crop&q=80&w=800`} alt="Contenido recomendado" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60" />
                 <div className="absolute bottom-6 left-6 z-20">
                    <div className="px-2 py-1 bg-sasori-red text-[8px] font-black uppercase tracking-widest inline-block mb-2">Exclusive</div>
                    <h4 className="text-lg font-bold uppercase tracking-tight italic">
@@ -316,6 +316,7 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
                       <select 
                         value={selectedProjectId || ''} 
                         onChange={(e) => setSelectedProjectId(e.target.value)}
+                        title="Seleccionar Proyecto"
                         className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-[10px] font-black uppercase outline-none focus:border-sasori-red transition-all text-white"
                       >
                         {projects.map(p => <option key={p.id} value={p.id} className="bg-black">{p.name}</option>)}
@@ -484,11 +485,11 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
                 <h2 className="text-3xl font-black uppercase tracking-tighter">Nueva Solicitud</h2>
                 <div className="space-y-2">
                    <label className="text-[9px] font-black uppercase tracking-widest text-white/30 ml-2">Asunto</label>
-                   <input type="text" placeholder="¿Qué necesitas?" required className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-bold outline-none focus:border-sasori-red transition-all" onChange={e => setRequestForm({...requestForm, title: e.target.value})} />
+                   <input type="text" placeholder="Asunto de la solicitud" title="Asunto" required className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-bold outline-none focus:border-sasori-red transition-all" onChange={e => setRequestForm({...requestForm, title: e.target.value})} />
                 </div>
                 <div className="space-y-2">
                    <label className="text-[9px] font-black uppercase tracking-widest text-white/30 ml-2">Descripción</label>
-                   <textarea required rows={4} className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-bold resize-none outline-none focus:border-sasori-red transition-all" onChange={e => setRequestForm({...requestForm, description: e.target.value})} />
+                   <textarea required rows={4} placeholder="Escribe aquí los detalles de tu solicitud..." title="Descripción" className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-bold resize-none outline-none focus:border-sasori-red transition-all" onChange={e => setRequestForm({...requestForm, description: e.target.value})} />
                 </div>
                 <button type="submit" className="w-full py-5 bg-sasori-red text-white font-black uppercase tracking-[0.2em] rounded-2xl">PROCESAR →</button>
               </form>

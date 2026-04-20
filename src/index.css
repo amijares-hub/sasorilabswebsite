@@ -416,8 +416,8 @@ input[type="range"]::-webkit-slider-thumb {
     scrollbar-width: none; /* Firefox */
   }
   .scrollbar-hide {
-    scrollbar-width: none;
     -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -581,4 +581,8 @@ nav.glass-metallic-white-nav[style*="width: auto"] {
 /* Prevenir recortes accidentales en contenedores de framer */
 [data-framer-generated] {
     overflow: visible !important;
+}
+
+.hero-video-filter {
+  filter: contrast(1.1) brightness(0.85) saturate(1.05);
 }

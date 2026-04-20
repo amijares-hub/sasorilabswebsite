@@ -618,8 +618,7 @@ export default function App() {
                             setVideoEnded(true);
                           }
                         }}
-                        style={{ filter: 'contrast(1.1) brightness(0.85) saturate(1.05)' }}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover hero-video-filter"
                         onEnded={() => setVideoEnded(true)}
                       />
                       <div className="grain-overlay" />
