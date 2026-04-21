@@ -32,26 +32,17 @@ serve(async (req) => {
     // Log credentials with masking for security verification
     if (GOOGLE_CLIENT_ID) {
       console.log(`Client ID: ${GOOGLE_CLIENT_ID.substring(0, 6)}...${GOOGLE_CLIENT_ID.slice(-6)}`);
-    } else {
-      console.error("Missing GOOGLE_CLIENT_ID");
     }
     
     if (GOOGLE_REFRESH_TOKEN) {
       console.log(`Refresh Token: ${GOOGLE_REFRESH_TOKEN.substring(0, 6)}...${GOOGLE_REFRESH_TOKEN.slice(-6)}`);
-    } else {
-      console.error("Missing GOOGLE_REFRESH_TOKEN");
     }
 
     if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET || !GOOGLE_REFRESH_TOKEN) {
-      const missing = [];
-      if (!GOOGLE_CLIENT_ID) missing.push("GOOGLE_CLIENT_ID");
-      if (!GOOGLE_CLIENT_SECRET) missing.push("GOOGLE_CLIENT_SECRET");
-      if (!GOOGLE_REFRESH_TOKEN) missing.push("GOOGLE_REFRESH_TOKEN");
-      console.error("Missing Google Credentials:", missing.join(", "));
-      throw new Error(`Server Configuration Error: Missing ${missing.join(", ")}`);
+      return new Response(JSON.stringify({ error: "Missing Google Credentials in Environment Variables" }), { status: 500, headers: corsHeaders });
     }
 
-    // 1. Get Access Token
+    // 1. Get Access Token (NO redirect_uri to avoid invalid_grant)
     console.log("Refreshing Google OAuth2 token...");
     const tokenParams = new URLSearchParams();
     tokenParams.append('client_id', GOOGLE_CLIENT_ID);
@@ -70,27 +61,24 @@ serve(async (req) => {
       console.error("Google Token Refresh Error Details:", errorText);
       return new Response(JSON.stringify({ 
         error: `Google Auth Error: ${errorText}`,
-        detail: "Verificar GOOGLE_CLIENT_ID, SECRET y REFRESH_TOKEN"
+        detail: "Verificar si el Refresh Token es válido y el Client ID/Secret son correctos."
       }), { status: 500, headers: corsHeaders });
     }
 
-    const tokenData = await tokenResponse.json();
-    const { access_token } = tokenData;
-    console.log("Access token obtained successfully.");
+    const { access_token } = await tokenResponse.json();
+    console.log("Access token obtained.");
 
     if (action === 'get_slots') {
       console.log(`Step: get_slots for date: ${date}`);
-      if (!date) throw new Error("Missing date parameter for get_slots");
+      if (!date) throw new Error("Missing date parameter");
 
-      // LOGICA DE FECHAS: Asegurarnos de que timeMin no sea pasado
       const now = new Date();
-      const selectedDayMidnight = new Date(`${date}T00:00:00Z`);
-      
-      const timeMinDate = selectedDayMidnight < now ? now : selectedDayMidnight;
+      const selectedDateStart = new Date(`${date}T00:00:00Z`);
+      const timeMinDate = selectedDateStart < now ? now : selectedDateStart;
       const timeMin = timeMinDate.toISOString();
       const timeMax = new Date(`${date}T23:59:59Z`).toISOString();
       
-      console.log(`Querying FreeBusy. timeMin: ${timeMin}, timeMax: ${timeMax}`);
+      console.log(`Querying FreeBusy (primary). timeMin: ${timeMin}`);
 
       let freeBusyResponse = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
         method: 'POST',
@@ -101,7 +89,7 @@ serve(async (req) => {
         body: JSON.stringify({
           timeMin,
           timeMax,
-          items: [{ id: CALENDAR_ID || 'primary' }],
+          items: [{ id: 'primary' }],
         }),
       });
 
@@ -114,21 +102,16 @@ serve(async (req) => {
       }
 
       const fbData = await freeBusyResponse.json();
-      console.log("Raw Google FreeBusy Response:", JSON.stringify(fbData));
+      const busy = fbData.calendars?.['primary']?.busy || [];
+      console.log(`Found ${busy.length} busy periods for primary.`);
 
-      // Intentar extraer ocupación de cualquier calendario devuelto
-      const calendarKey = CALENDAR_ID || 'primary';
-      const calendarData = fbData.calendars?.[calendarKey] || fbData.calendars?.['primary'] || (fbData.calendars ? Object.values(fbData.calendars)[0] : null);
-      const busy = calendarData?.busy || [];
-      console.log(`Found ${busy.length} busy periods for calendar.`);
-
-      // 24/7 TEST: 00:00 a 24:00 Madrid (UTC+2)
+      // HARDCODE TEST: 07:00 a 22:00 Madrid (UTC+2)
       const availableSlots = [];
-      const madridOffset = 2; // Hardcoded para abril
-      const localStart = 0;
-      const localEnd = 24;
+      const madridOffset = 2; 
+      const localStart = 7;
+      const localEnd = 22;
 
-      console.log(`24/7 TEST: Generating all slots 00:00-24:00 Madrid (UTC+${madridOffset})`);
+      console.log(`HARDCODE: Slots 07:00-22:00 Madrid (+2)`);
 
       for (let h = localStart; h < localEnd; h++) {
         for (let m of [0, 30]) {
@@ -138,7 +121,6 @@ serve(async (req) => {
           const slotEnd = new Date(slotStart);
           slotEnd.setMinutes(slotEnd.getMinutes() + 30);
 
-          // No permitir horas pasadas respecto a "ahora"
           if (slotStart < now) continue;
 
           const isBusy = busy.some((b: any) => {
