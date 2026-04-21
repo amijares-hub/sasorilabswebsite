@@ -110,17 +110,32 @@ serve(async (req) => {
       const busy = fbData.calendars?.[CALENDAR_ID]?.busy || fbData.calendars?.['primary']?.busy || [];
       console.log(`Found ${busy.length} busy periods.`);
 
-      // 3. Generate Available Slots (07:00 - 22:00 UTC)
+      // 3. Generate Available Slots (07:00 - 22:00 Madrid Time)
       const availableSlots = [];
-      const startHour = 8; 
-      const endHour = 20;
+      const localStartHour = 7; 
+      const localEndHour = 22;
 
-      console.log(`Generating slots between ${startHour}:00 and ${endHour}:00 UTC for date ${date}`);
+      // Determine Madrid offset for the selected date
+      let offsetInHours = 2; // Default to CEST
+      try {
+        const testDate = new Date(`${date}T12:00:00Z`);
+        const madridTimeStr = testDate.toLocaleString("en-US", { timeZone: "Europe/Madrid", hour: 'numeric', hour12: false });
+        offsetInHours = parseInt(madridTimeStr) - 12;
+        // In case of negative offset or crossing midnight
+        if (offsetInHours < -12) offsetInHours += 24;
+        if (offsetInHours > 12) offsetInHours -= 24;
+        console.log(`Detected Madrid offset for ${date}: UTC+${offsetInHours}`);
+      } catch (e) {
+        console.warn("Could not determine dynamic offset, defaulting to +2:", e.message);
+      }
 
-      for (let h = startHour; h < endHour; h++) {
+      console.log(`Generating slots between ${localStartHour}:00 and ${localEndHour}:00 Madrid Time (Local)`);
+
+      for (let h = localStartHour; h < localEndHour; h++) {
         for (let m of [0, 30]) {
           const slotStart = new Date(date);
-          slotStart.setUTCHours(h, m, 0, 0);
+          // Set UTC hours by subtracting Madrid offset from local hour
+          slotStart.setUTCHours(h - offsetInHours, m, 0, 0);
           
           const slotEnd = new Date(slotStart);
           slotEnd.setMinutes(slotEnd.getMinutes() + 30);
@@ -132,6 +147,7 @@ serve(async (req) => {
           const isBusy = busy.some((b: any) => {
             const bStart = new Date(b.start);
             const bEnd = new Date(b.end);
+            // 15 min buffer before and after
             const bufferedBStart = new Date(bStart.getTime() - 15 * 60000);
             const bufferedBEnd = new Date(bEnd.getTime() + 15 * 60000);
             return (slotStart < bufferedBEnd && slotEnd > bufferedBStart);
