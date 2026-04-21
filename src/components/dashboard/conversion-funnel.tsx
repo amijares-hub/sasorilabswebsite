@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
 import { Button } from '../ui/button';
-import { BookingSystem } from './booking-system';
+import { ContactSelection } from './contact-selection';
 
 interface ConversionFunnelProps {
   subscriberId: string;
@@ -148,10 +148,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
         </div>
 
         <div className="w-full bg-white/5 rounded-[2rem] p-8 border border-white/10">
-           <BookingSystem 
-             subscriberId={subscriberId}
-             companyName={formData.company_name}
-             email={email || ''} // We need to pass email here
+           <ContactSelection 
              lang={lang}
            />
         </div>

@@ -14,7 +14,7 @@ import { Footer } from '../components/ui/footer';
 import { AnimatedNavFramer } from '../components/ui/navigation-menu';
 import { MorphingSquare } from '../components/ui/morphing-square';
 import { ConversionFunnel } from '../components/dashboard/conversion-funnel';
-import { BookingSystem } from '../components/dashboard/booking-system';
+import { ContactSelection } from '../components/dashboard/contact-selection';
 import { cn } from '../lib/utils';
 
 // --- Shared Types ---
@@ -108,17 +108,14 @@ function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang:
               <div className="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6 cinema-glow-emerald">
                  <CheckCircle className="w-10 h-10 text-emerald-500" />
               </div>
-              <h3 className="text-3xl font-black uppercase tracking-widest italic">Diagnóstico Recibido</h3>
+              <h3 className="text-3xl font-black uppercase tracking-widest italic">¡Todo listo!</h3>
               <p className="text-white/40 text-sm max-w-md mx-auto uppercase tracking-widest">
-                 Tu información está segura en el Sasori Hub. El siguiente paso es agendar tu sesión técnica.
+                 Elige cómo prefieres continuar para agendar tu sesión técnica:
               </p>
            </div>
            
            <div className="bg-white/5 rounded-[2.5rem] p-8 md:p-12 border border-white/10 shadow-2xl">
-              <BookingSystem 
-                subscriberId={profile.id}
-                companyName={profile.full_name || 'Empresa'}
-                email={profile.email}
+              <ContactSelection 
                 lang={lang}
               />
            </div>
