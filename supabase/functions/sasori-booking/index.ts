@@ -16,6 +16,16 @@ serve(async (req) => {
     return new Response('ok', { headers: corsHeaders });
   }
 
+  try {
+    let body;
+    try {
+      body = await req.json();
+    } catch (e) {
+      console.error("JSON Parse Error in Request:", e);
+      return new Response(JSON.stringify({ error: "Invalid JSON in request body" }), { status: 400, headers: corsHeaders });
+    }
+
+    const { action, date, subscriber_id, company_name, email, slot } = body;
     console.log("--- SASORI BOOKING FUNCTION START ---");
     console.log(`Action: ${action}`);
     
@@ -76,7 +86,6 @@ serve(async (req) => {
       const now = new Date();
       const selectedDayMidnight = new Date(`${date}T00:00:00Z`);
       
-      // Si el día seleccionado es hoy, usamos "ahora" como timeMin. Si es futuro, el inicio del día.
       const timeMinDate = selectedDayMidnight < now ? now : selectedDayMidnight;
       const timeMin = timeMinDate.toISOString();
       const timeMax = new Date(`${date}T23:59:59Z`).toISOString();
@@ -108,7 +117,6 @@ serve(async (req) => {
       const busy = fbData.calendars?.[CALENDAR_ID]?.busy || fbData.calendars?.['primary']?.busy || [];
       console.log(`Found ${busy.length} busy periods.`);
 
-      // HARDCODE DE TEST: 07:00 a 22:00 Madrid (UTC+2)
       const availableSlots = [];
       const madridOffset = 2; // Hardcoded para abril
       const localStart = 7;
@@ -124,7 +132,6 @@ serve(async (req) => {
           const slotEnd = new Date(slotStart);
           slotEnd.setMinutes(slotEnd.getMinutes() + 30);
 
-          // No permitir horas pasadas respecto a "ahora"
           if (slotStart < now) continue;
 
           const isBusy = busy.some((b: any) => {
@@ -175,8 +182,6 @@ serve(async (req) => {
       }
 
       const eventData = await createResponse.json();
-      
-      // Update Supabase
       const supabase = createClient(Deno.env.get('SUPABASE_URL') ?? '', Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '');
       await supabase.from('onboarding_submissions').update({ scheduled_at: startTime.toISOString() }).eq('subscriber_id', subscriber_id);
 
@@ -189,8 +194,6 @@ serve(async (req) => {
 
   } catch (err) {
     console.error("CRITICAL FUNCTION ERROR:", err.message);
-    if (err.stack) console.error("Stack trace:", err.stack);
-    
     return new Response(JSON.stringify({ 
       error: err.message,
       detail: "Refer to Supabase Edge Function logs for full context."
