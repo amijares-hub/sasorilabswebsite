@@ -114,15 +114,21 @@ serve(async (req) => {
       }
 
       const fbData = await freeBusyResponse.json();
-      const busy = fbData.calendars?.[CALENDAR_ID]?.busy || fbData.calendars?.['primary']?.busy || [];
-      console.log(`Found ${busy.length} busy periods.`);
+      console.log("Raw Google FreeBusy Response:", JSON.stringify(fbData));
 
+      // Intentar extraer ocupación de cualquier calendario devuelto
+      const calendarKey = CALENDAR_ID || 'primary';
+      const calendarData = fbData.calendars?.[calendarKey] || fbData.calendars?.['primary'] || (fbData.calendars ? Object.values(fbData.calendars)[0] : null);
+      const busy = calendarData?.busy || [];
+      console.log(`Found ${busy.length} busy periods for calendar.`);
+
+      // 24/7 TEST: 00:00 a 24:00 Madrid (UTC+2)
       const availableSlots = [];
       const madridOffset = 2; // Hardcoded para abril
-      const localStart = 7;
-      const localEnd = 22;
+      const localStart = 0;
+      const localEnd = 24;
 
-      console.log(`HARDCODE TEST: Generating slots 07:00-22:00 Madrid (UTC+${madridOffset})`);
+      console.log(`24/7 TEST: Generating all slots 00:00-24:00 Madrid (UTC+${madridOffset})`);
 
       for (let h = localStart; h < localEnd; h++) {
         for (let m of [0, 30]) {
@@ -132,6 +138,7 @@ serve(async (req) => {
           const slotEnd = new Date(slotStart);
           slotEnd.setMinutes(slotEnd.getMinutes() + 30);
 
+          // No permitir horas pasadas respecto a "ahora"
           if (slotStart < now) continue;
 
           const isBusy = busy.some((b: any) => {
@@ -146,7 +153,7 @@ serve(async (req) => {
         }
       }
 
-      console.log(`Total available slots: ${availableSlots.length}`);
+      console.log(`Final Slots Count: ${availableSlots.length}`);
       return new Response(JSON.stringify({ slots: availableSlots }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
