@@ -12,16 +12,19 @@ const CALENDAR_ID = 'amijares@sasorilabs.io';
 // Service Account Credentials (from Secrets)
 const GOOGLE_SERVICE_ACCOUNT_JSON = Deno.env.get('GOOGLE_SERVICE_ACCOUNT_JSON');
 
+function base64url(buffer: Uint8Array | string) {
+  const base64 = typeof buffer === 'string' ? btoa(buffer) : btoa(String.fromCharCode(...buffer));
+  return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
 async function getAccessToken(serviceAccount: any) {
   const { client_email, private_key, token_uri } = serviceAccount;
   
-  // Scopes required for freebusy and event creation
   const scopes = [
     'https://www.googleapis.com/auth/calendar.readonly',
     'https://www.googleapis.com/auth/calendar.events'
   ].join(' ');
 
-  // Create JWT Header
   const header = { alg: 'RS256', typ: 'JWT' };
   const now = Math.floor(Date.now() / 1000);
   const claim = {
@@ -32,23 +35,17 @@ async function getAccessToken(serviceAccount: any) {
     iat: now,
   };
 
-  const encodedHeader = btoa(JSON.stringify(header));
-  const encodedClaim = btoa(JSON.stringify(claim));
+  const encodedHeader = base64url(JSON.stringify(header));
+  const encodedClaim = base64url(JSON.stringify(claim));
   const signatureInput = `${encodedHeader}.${encodedClaim}`;
 
-  // Sign with Web Crypto API
   const pemContents = private_key
     .replace("-----BEGIN PRIVATE KEY-----", "")
     .replace("-----END PRIVATE KEY-----", "")
-    .replace(/\\n/g, "")  // Remove literal \n strings if any survived
-    .replace(/\s/g, "");  // Remove all whitespace and newlines
+    .replace(/\\n/g, "")
+    .replace(/\s/g, "");
   
-  let binaryDerString;
-  try {
-    binaryDerString = atob(pemContents);
-  } catch (e) {
-    throw new Error(`Failed to decode base64 private key. Check if the key is valid. Error: ${e.message}`);
-  }
+  const binaryDerString = atob(pemContents);
   const binaryDer = new Uint8Array(binaryDerString.length);
   for (let i = 0; i < binaryDerString.length; i++) {
     binaryDer[i] = binaryDerString.charCodeAt(i);
@@ -68,14 +65,8 @@ async function getAccessToken(serviceAccount: any) {
     new TextEncoder().encode(signatureInput)
   );
 
-  const encodedSignature = btoa(String.fromCharCode(...new Uint8Array(signature)))
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
+  const jwt = `${signatureInput}.${base64url(new Uint8Array(signature))}`;
 
-  const jwt = `${signatureInput}.${encodedSignature}`;
-
-  // Exchange JWT for Access Token
   const response = await fetch(token_uri, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
