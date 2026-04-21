@@ -92,7 +92,7 @@ serve(async (req) => {
       
       console.log(`Querying FreeBusy. timeMin: ${timeMin}, timeMax: ${timeMax}`);
 
-      let freeBusyResponse = await fetch('https://www.googleapis.com/calendar/v3/freeBusy/query', {
+      let freeBusyResponse = await fetch('https://www.googleapis.com/calendar/v3/freeBusy', {
         method: 'POST',
         headers: { 
           Authorization: `Bearer ${access_token}`, 
@@ -101,7 +101,7 @@ serve(async (req) => {
         body: JSON.stringify({
           timeMin,
           timeMax,
-          items: [{ id: CALENDAR_ID }],
+          items: [{ id: CALENDAR_ID || 'primary' }],
         }),
       });
 
