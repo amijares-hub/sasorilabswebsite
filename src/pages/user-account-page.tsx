@@ -117,6 +117,7 @@ function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang:
            <div className="bg-white/5 rounded-[2.5rem] p-8 md:p-12 border border-white/10 shadow-2xl">
               <ContactSelection 
                 lang={lang}
+                subscriberId={profile.id}
               />
            </div>
         </div>

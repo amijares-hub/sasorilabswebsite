@@ -150,6 +150,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
         <div className="w-full bg-white/5 rounded-[2rem] p-8 border border-white/10">
            <ContactSelection 
              lang={lang}
+             subscriberId={subscriberId}
            />
         </div>
       </motion.div>

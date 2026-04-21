@@ -1,24 +1,176 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MessageCircle, 
   Mail, 
   ArrowRight,
   Sparkles,
-  ExternalLink
+  ExternalLink,
+  CalendarDays,
+  Clock,
+  CheckCircle2,
+  Loader2
 } from 'lucide-react';
-import { Button } from '../ui/button';
+import { supabase } from '../../lib/supabaseClient';
+import { cn } from '../../lib/utils';
 
 interface ContactSelectionProps {
   lang: string;
+  subscriberId?: string;
 }
 
-export function ContactSelection({ lang }: ContactSelectionProps) {
+export function ContactSelection({ lang, subscriberId }: ContactSelectionProps) {
+  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [selectedSlot, setSelectedSlot] = useState<string>('');
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [lastSaved, setLastSaved] = useState<string | null>(null);
+
   const whatsappUrl = "https://wa.me/34672106989?text=Hola!%20Vengo%20de%20la%20web%20de%20SasoriLabs%20y%20me%20gustaría%20agendar%20una%20cita.";
   const emailUrl = "mailto:amijares@sasorilabs.io?subject=Consulta%20SasoriLabs%20-%20Agendar%20Cita";
 
+  // Generate next 7 business days
+  const getBusinessDays = () => {
+    const days = [];
+    let current = new Date();
+    while (days.length < 7) {
+      current.setDate(current.getDate() + 1);
+      const dayOfWeek = current.getDay();
+      if (dayOfWeek !== 0 && dayOfWeek !== 6) { // Skip Sat/Sun
+        days.push(new Date(current));
+      }
+    }
+    return days;
+  };
+
+  const businessDays = getBusinessDays();
+
+  const timeSlots = [
+    { id: 'morning', label: 'Mañana', range: '09:00 - 12:00' },
+    { id: 'midday', label: 'Mediodía', range: '12:00 - 15:00' },
+    { id: 'afternoon', label: 'Tarde', range: '15:00 - 18:00' },
+    { id: 'night', label: 'Noche', range: '18:00 - 21:00' },
+  ];
+
+  // Auto-update Supabase when preferences change
+  useEffect(() => {
+    if ((selectedDate || selectedSlot) && subscriberId) {
+      const updatePreferences = async () => {
+        setIsUpdating(true);
+        try {
+          const { error } = await supabase
+            .from('onboarding_submissions')
+            .update({
+              pref_fecha_contacto: selectedDate,
+              pref_franja_horaria: selectedSlot
+            })
+            .eq('subscriber_id', subscriberId);
+          
+          if (error) throw error;
+          setLastSaved(new Date().toLocaleTimeString());
+        } catch (err) {
+          console.error('Error updating contact preferences:', err);
+        } finally {
+          setIsUpdating(false);
+        }
+      };
+
+      const timer = setTimeout(updatePreferences, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedDate, selectedSlot, subscriberId]);
+
   return (
-    <div className="space-y-10 py-4">
+    <div className="space-y-12 py-4">
+      
+      {/* PREFERENCE SELECTOR CARD */}
+      <div className="relative p-8 md:p-10 rounded-[3rem] bg-gradient-to-br from-sasori-red/10 via-zinc-900 to-black border border-sasori-red/30 cinema-shadow-red overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-sasori-red/10 blur-[80px] -mr-20 -mt-20 opacity-50" />
+        
+        <div className="relative z-10 space-y-8">
+          <div className="flex justify-between items-start">
+             <div>
+                <h3 className="text-xl font-black uppercase tracking-tighter italic text-white flex items-center gap-3">
+                   <CalendarDays className="w-6 h-6 text-sasori-red" />
+                   Preferencias de Contacto
+                </h3>
+                <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-1">¿Cuándo te viene mejor que hablemos?</p>
+             </div>
+             {isUpdating ? (
+               <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
+                 <Loader2 className="w-3 h-3 animate-spin text-sasori-red" />
+                 <span className="text-[8px] font-black uppercase tracking-widest text-white/40">Sincronizando...</span>
+               </div>
+             ) : lastSaved && (
+               <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20">
+                 <CheckCircle2 className="w-3 h-3 text-emerald-500" />
+                 <span className="text-[8px] font-black uppercase tracking-widest text-emerald-500/60">Guardado {lastSaved}</span>
+               </div>
+             )}
+          </div>
+
+          <div className="space-y-6">
+             {/* Day Selector */}
+             <div className="space-y-4">
+                <div className="flex overflow-x-auto gap-3 pb-2 no-scrollbar">
+                  {businessDays.map((date) => {
+                    const dateStr = date.toISOString().split('T')[0];
+                    const isSelected = selectedDate === dateStr;
+                    return (
+                      <button
+                        key={dateStr}
+                        onClick={() => setSelectedDate(dateStr)}
+                        className={cn(
+                          "flex-shrink-0 w-24 h-24 rounded-2xl border transition-all duration-300 flex flex-col items-center justify-center gap-1 group",
+                          isSelected 
+                            ? 'bg-sasori-red border-sasori-red cinema-glow-red text-white scale-105 z-10' 
+                            : 'bg-white/5 border-white/10 text-white/40 hover:border-white/20 hover:bg-white/[0.08]'
+                        )}
+                      >
+                        <span className="text-[9px] uppercase font-black tracking-widest opacity-60">
+                          {date.toLocaleDateString(lang, { weekday: 'short' })}
+                        </span>
+                        <span className="text-2xl font-black">{date.getDate()}</span>
+                        <span className="text-[8px] uppercase font-bold opacity-30">
+                          {date.toLocaleDateString(lang, { month: 'short' })}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+             </div>
+
+             {/* Slot Selector */}
+             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {timeSlots.map((slot) => {
+                  const isSelected = selectedSlot === slot.id;
+                  return (
+                    <button
+                      key={slot.id}
+                      onClick={() => setSelectedSlot(slot.id)}
+                      className={cn(
+                        "p-4 rounded-2xl border transition-all duration-300 text-left group relative overflow-hidden",
+                        isSelected 
+                          ? 'bg-white text-black border-white shadow-[0_0_30px_rgba(255,255,255,0.2)]' 
+                          : 'bg-white/5 border-white/10 text-white/40 hover:border-sasori-red/30'
+                      )}
+                    >
+                      <div className="flex justify-between items-start mb-2">
+                         <div className={cn("p-1.5 rounded-lg", isSelected ? "bg-black/5" : "bg-white/5")}>
+                            <Clock className={cn("w-4 h-4", isSelected ? "text-sasori-red" : "text-white/20")} />
+                         </div>
+                         {isSelected && <div className="w-2 h-2 rounded-full bg-sasori-red animate-pulse" />}
+                      </div>
+                      <p className="text-[10px] font-black uppercase tracking-widest mb-1">{slot.label}</p>
+                      <p className={cn("text-[9px] font-bold opacity-40", isSelected ? "text-black/60" : "text-white/20")}>{slot.range}</p>
+                    </button>
+                  );
+                })}
+             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* FINAL ACTION BUTTONS */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* WhatsApp Button */}
         <motion.a
@@ -36,7 +188,7 @@ export function ContactSelection({ lang }: ContactSelectionProps) {
           </div>
           
           <h4 className="relative z-10 text-2xl font-black uppercase tracking-tighter italic text-white mb-2">WhatsApp</h4>
-          <p className="relative z-10 text-[10px] font-black uppercase tracking-widest text-emerald-500/60 mb-6">Respuesta Inmediata</p>
+          <p className="relative z-10 text-[10px] font-black uppercase tracking-widest text-emerald-500/60 mb-6">Confirmar Vía Chat</p>
           
           <div className="relative z-10 flex items-center gap-2 px-6 py-3 bg-emerald-500 text-white rounded-xl font-black text-[10px] uppercase tracking-widest group-hover:bg-white group-hover:text-emerald-500 transition-all duration-300">
             Contactar ahora <ExternalLink className="w-3 h-3" />
@@ -57,7 +209,7 @@ export function ContactSelection({ lang }: ContactSelectionProps) {
           </div>
           
           <h4 className="relative z-10 text-2xl font-black uppercase tracking-tighter italic text-white mb-2">Email</h4>
-          <p className="relative z-10 text-[10px] font-black uppercase tracking-widest text-white/30 mb-6">Propuestas Formales</p>
+          <p className="relative z-10 text-[10px] font-black uppercase tracking-widest text-white/30 mb-6">Confirmar Vía Mail</p>
           
           <div className="relative z-10 flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-xl font-black text-[10px] uppercase tracking-widest group-hover:bg-sasori-red transition-all duration-300 border border-white/10">
             Enviar correo <ArrowRight className="w-3 h-3" />
@@ -66,13 +218,11 @@ export function ContactSelection({ lang }: ContactSelectionProps) {
       </div>
 
       <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center gap-4">
-        <div className="w-10 h-10 rounded-full bg-sasori-red/10 flex items-center justify-center flex-shrink-0 animate-pulse">
-          <Sparkles className="w-5 h-5 text-sasori-red" />
+        <div className="w-10 h-10 rounded-full bg-sasori-red/10 flex items-center justify-center flex-shrink-0">
+          <Sparkles className="w-5 h-5 text-sasori-red animate-pulse" />
         </div>
-        <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-relaxed">
-          {lang === 'es' 
-            ? "Agendaremos tu sesión de forma manual para asegurarnos de que el equipo técnico adecuado esté presente."
-            : "We will schedule your session manually to ensure the right technical team is present."}
+        <p className="text-[9px] font-black text-white/30 uppercase tracking-[0.2em] leading-relaxed text-left">
+          Tus preferencias de contacto han sido registradas. El Sasori Master revisará tu diagnóstico y te contactará en la ventana seleccionada.
         </p>
       </div>
     </div>
