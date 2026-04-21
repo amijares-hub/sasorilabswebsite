@@ -508,6 +508,12 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
   const navigate = useNavigate();
   const { profile, loading, role, error } = useProfile();
 
+  useEffect(() => {
+    if (!loading && !profile) {
+      navigate('/login');
+    }
+  }, [loading, profile, navigate]);
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/');
@@ -534,7 +540,7 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
     memberSince: 'Since', noData: 'No data'
   });
 
-  if (loading) {
+  if (loading || !profile) {
     return (
       <div className="min-h-screen bg-black flex flex-col items-center justify-center">
         <MorphingSquare message="Sincronizando Sasori Node..." />
@@ -566,20 +572,6 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
              REGRESAR AL INICIO
            </button>
          </div>
-      </div>
-    );
-  }
-
-  useEffect(() => {
-    if (!loading && !profile) {
-      navigate('/login');
-    }
-  }, [loading, profile, navigate]);
-
-  if (loading || !profile) {
-    return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center">
-        <MorphingSquare message="Sincronizando Sasori Node..." />
       </div>
     );
   }

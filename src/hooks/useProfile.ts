@@ -57,7 +57,7 @@ export function useProfile() {
 
         if (!currentData) {
           console.error("DEBUG PERFIL: No data found after retries");
-          throw new Error("Access Denied: Suspiro Node not initialized. Please try refreshing or contact support.");
+          throw new Error("Access Denied: Sasori Node not initialized. Please try refreshing or contact support.");
         }
 
         setProfile(currentData);
