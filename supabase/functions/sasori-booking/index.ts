@@ -37,14 +37,18 @@ async function getAccessToken(serviceAccount: any) {
   const signatureInput = `${encodedHeader}.${encodedClaim}`;
 
   // Sign with Web Crypto API
-  const pemHeader = "-----BEGIN PRIVATE KEY-----";
-  const pemFooter = "-----END PRIVATE KEY-----";
   const pemContents = private_key
-    .replace(pemHeader, "")
-    .replace(pemFooter, "")
-    .replace(/\s/g, "");
+    .replace("-----BEGIN PRIVATE KEY-----", "")
+    .replace("-----END PRIVATE KEY-----", "")
+    .replace(/\\n/g, "")  // Remove literal \n strings if any survived
+    .replace(/\s/g, "");  // Remove all whitespace and newlines
   
-  const binaryDerString = atob(pemContents);
+  let binaryDerString;
+  try {
+    binaryDerString = atob(pemContents);
+  } catch (e) {
+    throw new Error(`Failed to decode base64 private key. Check if the key is valid. Error: ${e.message}`);
+  }
   const binaryDer = new Uint8Array(binaryDerString.length);
   for (let i = 0; i < binaryDerString.length; i++) {
     binaryDer[i] = binaryDerString.charCodeAt(i);
@@ -96,20 +100,41 @@ serve(async (req) => {
   }
 
   try {
-    const body = await req.json();
+    let body;
+    try {
+       body = await req.json();
+    } catch (e) {
+      return new Response(JSON.stringify({ error: "Invalid JSON in request body", details: e.message }), { status: 400, headers: corsHeaders });
+    }
+
     const { action, date, subscriber_id, company_name, email, slot } = body;
 
-    console.log(`--- SASORI SERVICE ACCOUNT START ---`);
-    console.log(`Action: ${action}, Calendar: ${CALENDAR_ID}`);
+    console.log(`--- SASORI DEBUG START ---`);
+    console.log(`Action: ${action}, Date: ${date}`);
 
     if (!GOOGLE_SERVICE_ACCOUNT_JSON) {
-      throw new Error("Missing GOOGLE_SERVICE_ACCOUNT_JSON secret.");
+      console.error("CRITICAL: GOOGLE_SERVICE_ACCOUNT_JSON is missing");
+      return new Response(JSON.stringify({ error: "Secret GOOGLE_SERVICE_ACCOUNT_JSON not found in environment." }), { status: 500, headers: corsHeaders });
     }
-    const serviceAccount = JSON.parse(GOOGLE_SERVICE_ACCOUNT_JSON);
+
+    let serviceAccount;
+    try {
+      serviceAccount = JSON.parse(GOOGLE_SERVICE_ACCOUNT_JSON);
+      console.log("Service Account JSON parsed successfully.");
+    } catch (e) {
+      console.error("CRITICAL: Failed to parse GOOGLE_SERVICE_ACCOUNT_JSON", e);
+      return new Response(JSON.stringify({ error: "Failed to parse Service Account JSON. Check secret formatting.", details: e.message }), { status: 500, headers: corsHeaders });
+    }
 
     // 1. Get Access Token via Service Account Flow
-    const access_token = await getAccessToken(serviceAccount);
-    console.log("Service Account Token obtained.");
+    let access_token;
+    try {
+      access_token = await getAccessToken(serviceAccount);
+      console.log("Service Account Token obtained successfully.");
+    } catch (e) {
+      console.error("CRITICAL: Authentication failed", e);
+      return new Response(JSON.stringify({ error: "Google Authentication Failed", details: e.message }), { status: 501, headers: corsHeaders });
+    }
 
     if (action === 'get_slots') {
       const now = new Date();
