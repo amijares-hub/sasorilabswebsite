@@ -39,6 +39,7 @@ export function FloatingWhatsApp({ lang = 'es', onToggleLang }: FloatingWhatsApp
           className="relative flex flex-col items-center md:hidden"
           onMouseEnter={() => setIsLangMenuOpen(true)}
           onMouseLeave={() => setIsLangMenuOpen(false)}
+          onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
         >
           <AnimatePresence>
             {isLangMenuOpen && (
