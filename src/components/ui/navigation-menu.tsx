@@ -493,6 +493,17 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
             
             <div className="mt-6 pt-6 border-t border-black/10 flex flex-col gap-6">
               <Button
+                variant="outline"
+                className="w-full rounded-full gap-2 h-12 border-sasori-red text-sasori-red hover:bg-sasori-red hover:text-white transition-colors shadow-[0_0_10px_rgba(226,6,19,0.2)]"
+                onClick={() => {
+                  handleLinkClick('/#contact');
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span className="font-bold text-xs uppercase tracking-widest">Iniciar Proyecto</span>
+              </Button>
+              <Button
                 variant="default"
                 className="w-full rounded-full gap-2 h-12 bg-sasori-red text-white hover:bg-black transition-colors"
                 onClick={() => {

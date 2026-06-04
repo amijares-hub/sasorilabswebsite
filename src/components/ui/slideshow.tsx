@@ -7,7 +7,7 @@ import { cn } from "../../lib/utils";
 
 const slides = [
   {
-    img: "/GD.png",
+    img: "/Imagenes/Backgrounds/GD.png",
     client: "GalaxyDust",
     quote: {
       es: "Sasorilabs transformó nuestra presencia digital con una automatización sin precedentes.",
@@ -19,7 +19,7 @@ const slides = [
     url: "https://galaxydust.io/"
   },
   {
-    img: "/SasoriMusic.png",
+    img: "/Imagenes/Backgrounds/SasoriMusic.png",
     client: "SasoriMusic",
     quote: {
       es: "La mejor experiencia inmersiva que hemos construido para nuestros artistas.",

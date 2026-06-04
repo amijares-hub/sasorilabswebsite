@@ -70,24 +70,24 @@ export function CreativeDemosSection({ lang = "es", className }: CreativeDemosSe
   const demos: DemoItem[] = [
     {
       id: 1,
-      title: lang === 'es' ? "Agente de Voz Ultra-Realista" : "Ultra-Realistic Voice Agent",
-      description: lang === 'es' ? "IA conversacional con latencia zero y matices humanos." : "Conversational AI with zero latency and human nuances.",
+      title: lang === 'es' ? "Agente de Voz Ultra-Realista" : lang === 'zh' ? "超逼真語音代理" : lang === 'ru' ? "Ультрареалистичный голосовой агент" : lang === 'pt' ? "Agente de Voz Ultra-Realista" : "Ultra-Realistic Voice Agent",
+      description: lang === 'es' ? "IA conversacional con latencia zero y matices humanos." : lang === 'zh' ? "零延遲與人類細微差別的對話式AI。" : lang === 'ru' ? "Разговорный ИИ с нулевой задержкой и человеческими нюансами." : lang === 'pt' ? "IA conversacional com latência zero e nuances humanas." : "Conversational AI with zero latency and human nuances.",
       category: "AI AUDIO",
       imageUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1589254065878-42c9da997008?w=800&q=80",
       link: "/#contact"
     },
     {
       id: 2,
-      title: lang === 'es' ? "E-commerce Espacial 3D" : "3D Spatial E-commerce",
-      description: lang === 'es' ? "Navegación inmersiva para productos de alta gama." : "Immersive navigation for high-end products.",
+      title: lang === 'es' ? "E-commerce Espacial 3D" : lang === 'zh' ? "3D空間電子商務" : lang === 'ru' ? "Пространственная 3D-коммерция" : lang === 'pt' ? "E-commerce Espacial 3D" : "3D Spatial E-commerce",
+      description: lang === 'es' ? "Navegación inmersiva para productos de alta gama." : lang === 'zh' ? "高階產品的沉浸式導航。" : lang === 'ru' ? "Иммерсивная навигация для товаров премиум-класса." : lang === 'pt' ? "Navegação imersiva para produtos de alta qualidade." : "Immersive navigation for high-end products.",
       category: "CREATIVE WEB",
       imageUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1633177317976-3f9bc45e1d1d?w=800&q=80",
       link: "/#contact"
     },
     {
       id: 3,
-      title: lang === 'es' ? "Neural Predictor CRM" : "Neural Predictor CRM",
-      description: lang === 'es' ? "Anticipación de churn basada en patrones cognitivos." : "Churn anticipation based on cognitive patterns.",
+      title: lang === 'es' ? "Neural Predictor CRM" : lang === 'zh' ? "神經預測器 CRM" : lang === 'ru' ? "Нейронный предиктор CRM" : lang === 'pt' ? "Neural Predictor CRM" : "Neural Predictor CRM",
+      description: lang === 'es' ? "Anticipación de churn basada en patrones cognitivos." : lang === 'zh' ? "基於認知模式的流失預測。" : lang === 'ru' ? "Прогнозирование оттока на основе когнитивных паттернов." : lang === 'pt' ? "Antecipação de churn baseada em padrões cognitivos." : "Churn anticipation based on cognitive patterns.",
       category: "DATA ENGINE",
       imageUrl: "https://images.unsplash.com/p?auto=format,compress&fit=crop&w=800&q=70hoto-1551288049-bbdac8626ad1?w=800&q=80",
       link: "/#contact"
@@ -107,7 +107,9 @@ export function CreativeDemosSection({ lang = "es", className }: CreativeDemosSe
           <div className="max-w-2xl">
              <div className="flex items-center gap-2 mb-4">
                 <Sparkles className="w-5 h-5 text-sasori-red" />
-                <span className="text-[10px] uppercase font-black tracking-[0.3em] text-black/40">SHOWCASE TÉCNICO</span>
+                <span className="text-[10px] uppercase font-black tracking-[0.3em] text-black/40">
+                  {lang === 'es' ? "SHOWCASE TÉCNICO" : lang === 'zh' ? "技術展示" : lang === 'ru' ? "ТЕХНИЧЕСКИЙ ШОУКЕЙС" : lang === 'pt' ? "SHOWCASE TÉCNICO" : "TECHNICAL SHOWCASE"}
+                </span>
              </div>
              <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#1A1A1A] leading-none">
                {t.titlePrefix} <span className="text-sasori-red">{t.titleSuffix}</span>

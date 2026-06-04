@@ -34,6 +34,7 @@ const BlogPostSection = React.lazy(() => import('./components/ui/blog-posts').th
 const CreativeDemosSection = React.lazy(() => import('./components/ui/creative-demos').then(m => ({ default: m.CreativeDemosSection })));
 const PremiumContact = React.lazy(() => import('./components/ui/premium-contact').then(m => ({ default: m.PremiumContact })));
 const Footer = React.lazy(() => import('./components/ui/footer').then(m => ({ default: m.Footer })));
+const MobileServicesFeatures = React.lazy(() => import('./components/ui/mobile-services-features').then(m => ({ default: m.MobileServicesFeatures })));
 
 import BlogPage from './pages/blog-page';
 import { ProcessAutomationPage } from './pages/process-automation-page';
@@ -443,11 +444,11 @@ export default function App() {
     { id: 1, title: t.nav.ai || "AGENTES AUTÓNOMOS" },
     { id: 2, title: t.nav.web || "WEBS INMERSIVAS" },
     { id: 3, title: t.nav.mod || "MODERNIZACIÓN" },
-    { id: 4, title: "IA CREATIVA" },
-    { id: 5, title: "ESTRATEGIA" },
-    { id: 6, title: "INGENIERÍA" },
+    { id: 4, title: lang === 'es' ? "IA CREATIVA" : lang === 'zh' ? '創意 AI' : lang === 'ru' ? 'КРЕАТИВНЫЙ ИИ' : lang === 'pt' ? 'IA CRIATIVA' : "CREATIVE AI" },
+    { id: 5, title: lang === 'es' ? "ESTRATEGIA" : lang === 'zh' ? '策略' : lang === 'ru' ? 'СТРАТЕГИЯ' : lang === 'pt' ? 'ESTRATÉGIA' : "STRATEGY" },
+    { id: 6, title: lang === 'es' ? "INGENIERÍA" : lang === 'zh' ? '工程' : lang === 'ru' ? 'ИНЖЕНЕРИЯ' : lang === 'pt' ? 'ENGENHARIA' : "ENGINEERING" },
     { id: 7, title: "CLOUD" },
-    { id: 8, title: "SECURITY" },
+    { id: 8, title: lang === 'es' ? "SEGURIDAD" : lang === 'zh' ? '安全' : lang === 'ru' ? 'БЕЗОПАСНОСТЬ' : lang === 'pt' ? 'SEGURANÇA' : "SECURITY" },
   ];
 
   const parallaxItems = [
@@ -561,7 +562,7 @@ export default function App() {
       {/* Newsletter Popup - auto-shows after 8 seconds */}
       <NewsletterPopup lang={lang} />
       {/* WhatsApp Floating Button */}
-      <FloatingWhatsApp />
+      <FloatingWhatsApp lang={lang} onToggleLang={(l) => setLang(l as any)} />
 
       {/* Cinematic Entrance */}
       {!isLoaded && (
@@ -611,7 +612,7 @@ export default function App() {
                         brandText="SASORILABS"
                         ctaText={t.common.startProject}
                         kickerText={t.entrance.tagline}
-                        title={<>Soluciones<br/>Digitales</>}
+                        title={<>{lang === 'es' ? "Soluciones" : lang === 'zh' ? "數字" : lang === 'ru' ? "Цифровые" : lang === 'pt' ? "Soluções" : "Digital"}<br/>{lang === 'es' ? "Digitales" : lang === 'zh' ? "解決方案" : lang === 'ru' ? "Решения" : lang === 'pt' ? "Digitais" : "Solutions"}</>}
                         subtitle={t.hero.subheadline}
                         scrollPrompt={t.hero.scrollToSeeMore}
                         onCtaClick={() => {
@@ -621,7 +622,7 @@ export default function App() {
                     ) : (
                       <div className="relative w-full h-full">
                         <video 
-                          src="/12.mp4"
+                          src="/Videos/12.mp4"
                           autoPlay
                           muted
                           playsInline
@@ -694,23 +695,29 @@ export default function App() {
               </section>
 
               <React.Suspense fallback={<div className="h-40" />}>
-                <ZoomParallax 
-                  lang={lang}
-                  categories={{
-                    audio: t.showcase?.categories?.audio,
-                    creative: t.showcase?.categories?.creative,
-                    data: t.showcase?.categories?.data
-                  }}
-                  items={parallaxItems} 
-                />
+                {isMobile ? (
+                  <MobileServicesFeatures lang={lang} />
+                ) : (
+                  <ZoomParallax 
+                    lang={lang}
+                    categories={{
+                      audio: t.showcase?.categories?.audio,
+                      creative: t.showcase?.categories?.creative,
+                      data: t.showcase?.categories?.data
+                    }}
+                    items={parallaxItems} 
+                  />
+                )}
               </React.Suspense>
 
               {/* Timeline Section */}
-              <section className="bg-bg-dark">
-                <React.Suspense fallback={<div className="h-96" />}>
-                  <Timeline data={timelineData} />
-                </React.Suspense>
-              </section>
+              {!isMobile && (
+                <section className="bg-bg-dark">
+                  <React.Suspense fallback={<div className="h-96" />}>
+                    <Timeline data={timelineData} />
+                  </React.Suspense>
+                </section>
+              )}
 
               {/* Digital Employees Special Promotion Section */}
               <div id="contact" className="scroll-mt-20">

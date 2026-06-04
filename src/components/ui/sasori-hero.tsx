@@ -131,9 +131,9 @@ export function SasoriHero({ lang = "es" }: { lang?: string }) {
               }}
               className="absolute inset-0 bg-gradient-to-br from-white to-sasori-grey/50 rounded-3xl border border-black/5 shadow-2xl flex items-center justify-center overflow-hidden group perspective-1000"
             >
-              <div className="absolute inset-0 bg-[url('/Logo.png')] bg-center bg-no-repeat bg-contain opacity-5 scale-150 blur-3xl group-hover:scale-125 transition-transform duration-1000" />
+              <div className="absolute inset-0 bg-[url('/Logos/Logo%20Sasorilabs/Logo.png')] bg-center bg-no-repeat bg-contain opacity-5 scale-150 blur-3xl group-hover:scale-125 transition-transform duration-1000" />
               <motion.img
-                src="/Logo.png"
+                src="/Logos/Logo Sasorilabs/Logo.png"
                 alt="Sasori Labs"
                 className="w-48 h-48 object-contain drop-shadow-[0_35px_60px_-15px_rgba(243,6,19,0.5)] z-10"
                 animate={{ y: [0, -20, 0] }}

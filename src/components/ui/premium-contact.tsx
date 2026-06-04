@@ -256,7 +256,7 @@ export function PremiumContact({ lang = 'es', hideTitle = false }: { lang?: stri
     {
       icon: MessageCircle,
       title: "WhatsApp",
-      description: lang === 'es' ? "Chatea con nosotros" : "Chat with us",
+      description: lang === 'es' ? "Chatea con nosotros" : lang === 'zh' ? "與我們聊天" : lang === 'ru' ? "Свяжитесь с нами" : lang === 'pt' ? "Converse conosco" : "Chat with us",
       value: SITE_CONFIG.whatsapp.number,
       link: `https://wa.me/${SITE_CONFIG.whatsapp.number.replace('+', '')}?text=${encodeURIComponent(SITE_CONFIG.whatsapp.message)}`,
       gradient: "from-green-500/20 to-emerald-600/20",

@@ -321,7 +321,7 @@ export default function MinimalHero({
 
       {/* Header */}
       <header className="minimal-header">
-        <span className="minimal-brand neon-glow">{brandText}</span>
+        <span className="minimal-brand neon-glow hidden">{brandText}</span>
         <button className="minimal-cta" type="button" onClick={onCtaClick}>
           {ctaText}
         </button>

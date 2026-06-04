@@ -111,7 +111,7 @@ export function BackgroundPaths({
                     >
                         <div ref={heroLogoRef} className="mb-12 flex justify-center">
                             <img loading="lazy" 
-                                src="/Logo.png" 
+                                src="/Logos/Logo Sasorilabs/Logo.png" 
                                 alt="SasoriLabs Logo" 
                                 className="w-24 h-24 md:w-32 md:h-32 object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.1)]"
                                 referrerPolicy="no-referrer"

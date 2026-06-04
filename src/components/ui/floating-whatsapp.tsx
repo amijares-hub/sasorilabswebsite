@@ -1,10 +1,24 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageCircle, Languages } from 'lucide-react';
 import { SITE_CONFIG } from '../../config/site-config';
 
-export function FloatingWhatsApp() {
+interface FloatingWhatsAppProps {
+  lang?: string;
+  onToggleLang?: (lang: string) => void;
+}
+
+const LANGUAGES = [
+  { code: 'es', label: 'Español' },
+  { code: 'en', label: 'English' },
+  { code: 'pt', label: 'Português' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'zh', label: '中文' },
+];
+
+export function FloatingWhatsApp({ lang = 'es', onToggleLang }: FloatingWhatsAppProps) {
   const whatsappUrl = `https://wa.me/${SITE_CONFIG.whatsapp.number.replace('+', '')}?text=${encodeURIComponent(SITE_CONFIG.whatsapp.message)}`;
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
   return (
     <motion.div
@@ -17,8 +31,53 @@ export function FloatingWhatsApp() {
         stiffness: 260, 
         damping: 20 
       }}
-      className="fixed bottom-8 right-8 z-[100]"
+      className="fixed bottom-8 right-8 z-[100] flex flex-col items-center gap-4"
     >
+      {/* Language Selector */}
+      {onToggleLang && (
+        <div 
+          className="relative flex flex-col items-center md:hidden"
+          onMouseEnter={() => setIsLangMenuOpen(true)}
+          onMouseLeave={() => setIsLangMenuOpen(false)}
+        >
+          <AnimatePresence>
+            {isLangMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                className="absolute bottom-full mb-3 flex flex-col gap-2 p-2 bg-black/90 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl"
+              >
+                {LANGUAGES.map((l) => (
+                  <button
+                    key={l.code}
+                    onClick={() => onToggleLang(l.code)}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 whitespace-nowrap ${
+                      lang === l.code 
+                        ? 'bg-sasori-red text-white' 
+                        : 'text-white/60 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {l.label}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <button
+            className="group relative flex items-center justify-center w-12 h-12 bg-black/80 backdrop-blur-md rounded-full border border-white/10 hover:border-sasori-red transition-all duration-300 hover:scale-110 shadow-xl"
+            aria-label="Cambiar idioma"
+          >
+            <Languages className="w-5 h-5 text-white/80 group-hover:text-sasori-red transition-colors" />
+            <span className="absolute -top-1 -right-1 w-5 h-5 bg-sasori-red rounded-full text-[9px] font-black text-white flex items-center justify-center border-2 border-[#1A1A1A]">
+              {lang.toUpperCase()}
+            </span>
+          </button>
+        </div>
+      )}
+
+      {/* WhatsApp Button */}
       <a
         href={whatsappUrl}
         target="_blank"
