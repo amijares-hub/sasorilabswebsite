@@ -607,65 +607,17 @@ export default function App() {
               <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg-dark">
                 <div className="absolute inset-0 z-0">
                   {isMobile ? (
-                    import.meta.env.DEV ? (
-                      <MinimalHero
-                        brandText="SASORILABS"
-                        ctaText={t.common.startProject}
-                        kickerText={t.entrance.tagline}
-                        title={<>{lang === 'es' ? "Soluciones" : lang === 'zh' ? "數字" : lang === 'ru' ? "Цифровые" : lang === 'pt' ? "Soluções" : "Digital"}<br/>{lang === 'es' ? "Digitales" : lang === 'zh' ? "解決方案" : lang === 'ru' ? "Решения" : lang === 'pt' ? "Digitais" : "Solutions"}</>}
-                        subtitle={t.hero.subheadline}
-                        scrollPrompt={t.hero.scrollToSeeMore}
-                        onCtaClick={() => {
-                          document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                        }}
-                      />
-                    ) : (
-                      <div className="relative w-full h-full">
-                        <video 
-                          src="/Videos/12.mp4"
-                          autoPlay
-                          muted
-                          playsInline
-                          onTimeUpdate={(e) => {
-                            const video = e.currentTarget;
-                            if (video.currentTime >= 4) {
-                              video.pause();
-                              setVideoEnded(true);
-                            }
-                          }}
-                          className="w-full h-full object-cover hero-video-filter"
-                          onEnded={() => setVideoEnded(true)}
-                        />
-                        <div className="grain-overlay" />
-                        <AnimatePresence>
-                          {videoEnded && (
-                            <motion.div 
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              className="absolute inset-0 z-10 bg-black/60 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center"
-                            >
-                              <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.5, duration: 0.8 }}
-                                className="flex flex-col items-center gap-6"
-                              >
-                                <span className="text-white text-xs font-black uppercase tracking-[0.4em] mb-4 opacity-80">
-                                  {t.hero.scrollToSeeMore}
-                                </span>
-                                <div className="w-[1px] h-12 bg-gradient-to-b from-sasori-red to-transparent mb-4" />
-                                <motion.div
-                                  animate={{ y: [0, 8, 0] }}
-                                  transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                                >
-                                  <ChevronDown className="text-sasori-red w-8 h-8" />
-                                </motion.div>
-                              </motion.div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    )
+                    <MinimalHero
+                      brandText="SASORILABS"
+                      ctaText={t.common.startProject}
+                      kickerText={t.entrance.tagline}
+                      title={<>{lang === 'es' ? "Soluciones" : lang === 'zh' ? "數字" : lang === 'ru' ? "Цифровые" : lang === 'pt' ? "Soluções" : "Digital"}<br/>{lang === 'es' ? "Digitales" : lang === 'zh' ? "解決方案" : lang === 'ru' ? "Решения" : lang === 'pt' ? "Digitais" : "Solutions"}</>}
+                      subtitle={t.hero.subheadline}
+                      scrollPrompt={t.hero.scrollToSeeMore}
+                      onCtaClick={() => {
+                        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                      }}
+                    />
                   ) : (
                     <BackgroundPaths
                       title="SASORILABS"
