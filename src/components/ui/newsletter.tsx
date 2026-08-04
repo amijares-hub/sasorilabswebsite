@@ -83,7 +83,7 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
         .from('subscribers')
         .select('id, status')
         .eq('email', email.toLowerCase().trim())
-        .single();
+        .maybeSingle();
 
       if (existing) {
         setErrorMsg(t.already);
@@ -107,7 +107,6 @@ export function NewsletterPopup({ lang = 'es' }: NewsletterPopupProps) {
       if (insertError) throw insertError;
 
       // 2. Send welcome email via Edge Function
-      const siteUrl = import.meta.env.VITE_SUPABASE_URL?.replace('supabase.co', 'supabase.co') ?? '';
       const fnUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-email`;
       
       await fetch(fnUrl, {
@@ -308,7 +307,7 @@ export function NewsletterInline({ lang = 'es' }: { lang?: string }) {
         .from('subscribers')
         .select('id')
         .eq('email', email.toLowerCase().trim())
-        .single();
+        .maybeSingle();
 
       if (existing) {
         setErrorMsg(t.already);

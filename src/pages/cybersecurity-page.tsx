@@ -2,20 +2,18 @@
 import HeroText from "../components/ui/hero-shutter-text";
 import { useNavigate } from "react-router-dom";
 import { PremiumContact } from "../components/ui/premium-contact";
-import { LandingAccordionItem } from "../components/ui/interactive-image-accordion";
 import { TextScrollAnimation } from "../components/ui/text-scroll-animation";
 import { 
-  Network, Database, Workflow, BarChart3, 
-  Briefcase, LineChart, FileText, Users, MapPin, 
-  Mail, Settings, CheckCircle2, ShieldCheck, Zap
+  ShieldCheck, Lock, EyeOff, KeyRound,
+  Briefcase, Zap, LineChart
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { translations } from "../i18n/translations";
 
-export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
+export function CybersecurityPage({ lang = "es" }: { lang?: string }) {
   const navigate = useNavigate();
   const t = translations[lang as keyof typeof translations] || translations.es;
-  const tp = (t.servicesPages as any).automation;
+  const tp = (t.servicesPages as any).security;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,7 +26,7 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
   return (
     <div className="bg-white min-h-screen text-[#1A1A1A] font-sans selection:bg-sasori-red selection:text-white">
       {/* 1. Hero Section */}
-      <HeroText text={tp.hero} />
+      <HeroText text={tp.hero} subtitle={tp.subtitle} />
 
       {/* Tagline Section - Animated */}
       <section className="relative z-20">
@@ -44,7 +42,7 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
         />
       </section>
 
-      {/* 2. ¿Cómo lo hacemos? (El Arte de la Conectividad) */}
+      {/* 2. ¿Cómo lo hacemos? */}
       <section className="py-24 px-6 bg-[#F8F8F8] relative overflow-hidden border-t border-black/5">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16 text-center">
@@ -61,22 +59,22 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {[
               {
-                icon: <Workflow className="w-8 h-8" />,
+                icon: <Lock className="w-8 h-8" />,
                 title: tp.mapping,
                 desc: tp.mappingDesc
               },
               {
-                icon: <Network className="w-8 h-8" />,
+                icon: <EyeOff className="w-8 h-8" />,
                 title: tp.integration,
                 desc: tp.integrationDesc
               },
               {
-                icon: <Zap className="w-8 h-8" />,
+                icon: <KeyRound className="w-8 h-8" />,
                 title: tp.logic,
                 desc: tp.logicDesc
               },
               {
-                icon: <BarChart3 className="w-8 h-8" />,
+                icon: <ShieldCheck className="w-8 h-8" />,
                 title: tp.panel,
                 desc: tp.panelDesc
               }
@@ -100,7 +98,7 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
         </div>
       </section>
 
-      {/* 3. Servicios que podemos automatizar (Catálogo de Servicios) */}
+      {/* 3. Catálogo de Servicios */}
       <section className="py-24 px-6 relative bg-white border-t border-black/5">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
@@ -115,22 +113,19 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {tp.catalogItems.map((service, i) => (
               <div key={i} className="group relative bg-[#F8F8F8] p-8 rounded-2xl border border-black/5 overflow-hidden">
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                  {/* Map icon based on area if needed, or use generic icons */}
-                  {i === 0 && <LineChart className="w-24 h-24 text-sasori-red" />}
-                  {i === 1 && <FileText className="w-24 h-24 text-sasori-red" />}
-                  {i === 2 && <Users className="w-24 h-24 text-sasori-red" />}
-                  {i === 3 && <MapPin className="w-24 h-24 text-sasori-red" />}
-                  {i === 4 && <Mail className="w-24 h-24 text-sasori-red" />}
-                  {i === 5 && <CheckCircle2 className="w-24 h-24 text-sasori-red" />}
+                  {i === 0 && <Lock className="w-24 h-24 text-sasori-red" />}
+                  {i === 1 && <EyeOff className="w-24 h-24 text-sasori-red" />}
+                  {i === 2 && <KeyRound className="w-24 h-24 text-sasori-red" />}
+                  {i === 3 && <ShieldCheck className="w-24 h-24 text-sasori-red" />}
                 </div>
                 <h4 className="text-2xl font-black tracking-tight mb-4 relative z-10">{service.area}</h4>
                 <p className="text-black/60 mb-6 relative z-10 text-sm leading-relaxed min-h-[4rem]">{service.desc}</p>
                 <div className="mt-auto relative z-10 pt-4 border-t border-black/10">
-                  <span className="text-xs font-bold text-sasori-red uppercase tracking-widest block mb-1">Resultado Inmediato</span>
+                  <span className="text-xs font-bold text-sasori-red uppercase tracking-widest block mb-1">{t.common.immediateResult}</span>
                   <p className="font-medium text-[#1A1A1A]">{service.result}</p>
                 </div>
               </div>
@@ -141,7 +136,6 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
 
       {/* 4. Ecosystem & Security Bento Grid */}
       <section className="py-32 px-6 bg-gradient-to-br from-[#0A0A0A] via-[#2A0005] to-[#000000] text-white relative overflow-hidden">
-        {/* Cinematic Lighting Background */}
         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')]" />
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-sasori-red/10 blur-[120px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-sasori-red/5 blur-[100px] rounded-full pointer-events-none -translate-x-1/3 translate-y-1/3" />
@@ -179,7 +173,7 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
               </div>
             </motion.div>
 
-            {/* Box 2: PYMES */}
+            {/* Box 2 */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
               className="bg-[#111111] border border-white/5 hover:border-sasori-red/30 p-8 rounded-[2rem] flex flex-col justify-between min-h-[340px] transition-all duration-500 overflow-hidden relative group"
@@ -194,7 +188,7 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
               </div>
             </motion.div>
 
-            {/* Box 3: Startups */}
+            {/* Box 3 */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
               className="bg-[#111111] border border-white/5 hover:border-sasori-red/30 p-8 rounded-[2rem] flex flex-col justify-between min-h-[340px] transition-all duration-500 overflow-hidden relative group"
@@ -209,13 +203,13 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
               </div>
             </motion.div>
 
-            {/* Box 4: Financieros */}
+            {/* Box 4 */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
               className="bg-[#111111] border border-white/5 hover:border-sasori-red/30 p-8 rounded-[2rem] flex flex-col justify-between min-h-[340px] transition-all duration-500 overflow-hidden relative group"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <LineChart className="w-10 h-10 text-white/30 group-hover:text-white transition-colors duration-500 relative z-10" />
+              <Lock className="w-10 h-10 text-white/30 group-hover:text-white transition-colors duration-500 relative z-10" />
               <div className="relative z-10">
                 <h4 className="text-2xl font-black mb-3 text-white leading-tight">{tp.boxes.finance.title}</h4>
                 <p className="text-white/50 text-sm leading-relaxed">
@@ -224,13 +218,13 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
               </div>
             </motion.div>
 
-            {/* Box 5: Servicios */}
+            {/* Box 5 */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
               className="bg-[#111111] border border-white/5 hover:border-sasori-red/30 p-8 rounded-[2rem] flex flex-col justify-between min-h-[340px] transition-all duration-500 overflow-hidden relative group"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <Network className="w-10 h-10 text-white/30 group-hover:text-white transition-colors duration-500 relative z-10" />
+              <KeyRound className="w-10 h-10 text-white/30 group-hover:text-white transition-colors duration-500 relative z-10" />
               <div className="relative z-10">
                 <h4 className="text-2xl font-black mb-3 text-white leading-tight">{tp.boxes.services.title}</h4>
                 <p className="text-white/50 text-sm leading-relaxed">
@@ -245,11 +239,11 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
               className="metallic-vinotinto-card md:col-span-2 lg:col-span-2 p-8 md:p-12 rounded-[2rem] flex flex-col justify-center relative overflow-hidden group min-h-[340px]"
             >
               <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700 pointer-events-none">
-                <Database className="w-[400px] h-[400px]" />
+                <Lock className="w-[400px] h-[400px]" />
               </div>
               
               <div className="relative z-10 max-w-lg">
-                <Database className="w-12 h-12 text-white/50 mb-8" />
+                <Lock className="w-12 h-12 text-white/50 mb-8" />
                 <h4 className="text-3xl font-black uppercase tracking-tight mb-4 text-white">{tp.privacyTitle}</h4>
                 <p className="text-white/60 text-lg leading-relaxed">
                   {tp.privacyDesc}
@@ -275,7 +269,7 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
           <div className="absolute left-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-          {/* Scrolling track moving RIGHT */}
+          {/* Scrolling track */}
           <motion.div 
             className="flex gap-6 min-w-max px-6 py-4"
             animate={{ x: ["-50%", "0%"] }}
@@ -311,7 +305,7 @@ export function ProcessAutomationPage({ lang = "es" }: { lang?: string }) {
         </div>
       </section>
 
-      {/* 7. Contacto */}
+      {/* 6. Contacto */}
       <PremiumContact lang={lang} />
     </div>
   );

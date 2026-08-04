@@ -83,27 +83,27 @@ export function ContactSelection({ lang, subscriberId }: ContactSelectionProps) 
     <div className="space-y-12 py-4">
       
       {/* PREFERENCE SELECTOR CARD */}
-      <div className="relative p-8 md:p-10 rounded-[3rem] bg-gradient-to-br from-sasori-red/10 via-zinc-900 to-black border border-sasori-red/30 cinema-shadow-red overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-sasori-red/10 blur-[80px] -mr-20 -mt-20 opacity-50" />
+      <div className="relative p-8 md:p-10 rounded-[3rem] bg-white border border-black/10 shadow-[0_20px_60px_rgba(0,0,0,0.08)] overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-sasori-red/5 blur-[80px] -mr-20 -mt-20 opacity-50" />
         
         <div className="relative z-10 space-y-8">
           <div className="flex justify-between items-start">
              <div>
-                <h3 className="text-xl font-black uppercase tracking-tighter italic text-white flex items-center gap-3">
+                <h3 className="text-xl font-black uppercase tracking-tighter italic text-[#1a1a22] flex items-center gap-3">
                    <CalendarDays className="w-6 h-6 text-sasori-red" />
                    Preferencias de Contacto
                 </h3>
-                <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mt-1">¿Cuándo te viene mejor que hablemos?</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-[#1a1a22]/40 mt-1">¿Cuándo te viene mejor que hablemos?</p>
              </div>
              {isUpdating ? (
-               <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
+               <div className="flex items-center gap-2 px-3 py-1 bg-black/5 rounded-full border border-black/10">
                  <Loader2 className="w-3 h-3 animate-spin text-sasori-red" />
-                 <span className="text-[8px] font-black uppercase tracking-widest text-white/40">Sincronizando...</span>
+                 <span className="text-[8px] font-black uppercase tracking-widest text-[#1a1a22]/40">Sincronizando...</span>
                </div>
              ) : lastSaved && (
                <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 rounded-full border border-emerald-500/20">
                  <CheckCircle2 className="w-3 h-3 text-emerald-500" />
-                 <span className="text-[8px] font-black uppercase tracking-widest text-emerald-500/60">Guardado {lastSaved}</span>
+                 <span className="text-[8px] font-black uppercase tracking-widest text-emerald-600/70">Guardado {lastSaved}</span>
                </div>
              )}
           </div>
@@ -122,8 +122,8 @@ export function ContactSelection({ lang, subscriberId }: ContactSelectionProps) 
                         className={cn(
                           "flex-shrink-0 w-24 h-24 rounded-2xl border transition-all duration-300 flex flex-col items-center justify-center gap-1 group",
                           isSelected 
-                            ? 'bg-sasori-red border-sasori-red cinema-glow-red text-white scale-105 z-10' 
-                            : 'bg-white/5 border-white/10 text-white/40 hover:border-white/20 hover:bg-white/[0.08]'
+                            ? 'bg-sasori-red border-sasori-red text-white scale-105 z-10' 
+                            : 'bg-black/5 border-black/10 text-[#1a1a22]/50 hover:border-black/20 hover:bg-black/8'
                         )}
                       >
                         <span className="text-[9px] uppercase font-black tracking-widest opacity-60">
@@ -150,18 +150,18 @@ export function ContactSelection({ lang, subscriberId }: ContactSelectionProps) 
                       className={cn(
                         "p-4 rounded-2xl border transition-all duration-300 text-left group relative overflow-hidden",
                         isSelected 
-                          ? 'bg-white text-black border-white shadow-[0_0_30px_rgba(255,255,255,0.2)]' 
-                          : 'bg-white/5 border-white/10 text-white/40 hover:border-sasori-red/30'
+                          ? 'bg-sasori-red text-white border-sasori-red shadow-[0_0_20px_rgba(226,6,19,0.2)]' 
+                          : 'bg-black/5 border-black/10 text-[#1a1a22]/50 hover:border-sasori-red/30'
                       )}
                     >
                       <div className="flex justify-between items-start mb-2">
-                         <div className={cn("p-1.5 rounded-lg", isSelected ? "bg-black/5" : "bg-white/5")}>
-                            <Clock className={cn("w-4 h-4", isSelected ? "text-sasori-red" : "text-white/20")} />
+                         <div className={cn("p-1.5 rounded-lg", isSelected ? "bg-white/10" : "bg-black/5")}>
+                            <Clock className={cn("w-4 h-4", isSelected ? "text-white" : "text-[#1a1a22]/30")} />
                          </div>
                          {isSelected && <div className="w-2 h-2 rounded-full bg-sasori-red animate-pulse" />}
                       </div>
                       <p className="text-[10px] font-black uppercase tracking-widest mb-1">{slot.label}</p>
-                      <p className={cn("text-[9px] font-bold opacity-40", isSelected ? "text-black/60" : "text-white/20")}>{slot.range}</p>
+                      <p className={cn("text-[9px] font-bold", isSelected ? "text-white/70" : "text-[#1a1a22]/30")}>{slot.range}</p>
                     </button>
                   );
                 })}
@@ -179,7 +179,7 @@ export function ContactSelection({ lang, subscriberId }: ContactSelectionProps) 
           rel="noopener noreferrer"
           whileHover={{ scale: 1.02, y: -5 }}
           whileTap={{ scale: 0.98 }}
-          className="group relative overflow-hidden flex flex-col items-center justify-center p-10 rounded-[2.5rem] bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-500 cinema-glow-emerald"
+          className="group relative overflow-hidden flex flex-col items-center justify-center p-10 rounded-[2.5rem] bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-500"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           
@@ -187,8 +187,8 @@ export function ContactSelection({ lang, subscriberId }: ContactSelectionProps) 
             <MessageCircle className="w-10 h-10 text-emerald-500" />
           </div>
           
-          <h4 className="relative z-10 text-2xl font-black uppercase tracking-tighter italic text-white mb-2">WhatsApp</h4>
-          <p className="relative z-10 text-[10px] font-black uppercase tracking-widest text-emerald-500/60 mb-6">Confirmar Vía Chat</p>
+          <h4 className="relative z-10 text-2xl font-black uppercase tracking-tighter italic text-[#1a1a22] mb-2">WhatsApp</h4>
+          <p className="relative z-10 text-[10px] font-black uppercase tracking-widest text-emerald-600/70 mb-6">Confirmar Vía Chat</p>
           
           <div className="relative z-10 flex items-center gap-2 px-6 py-3 bg-emerald-500 text-white rounded-xl font-black text-[10px] uppercase tracking-widest group-hover:bg-white group-hover:text-emerald-500 transition-all duration-300">
             Contactar ahora <ExternalLink className="w-3 h-3" />
@@ -200,28 +200,28 @@ export function ContactSelection({ lang, subscriberId }: ContactSelectionProps) 
           href={emailUrl}
           whileHover={{ scale: 1.02, y: -5 }}
           whileTap={{ scale: 0.98 }}
-          className="group relative overflow-hidden flex flex-col items-center justify-center p-10 rounded-[2.5rem] bg-white/5 border border-white/10 hover:border-sasori-red/50 transition-all duration-500"
+          className="group relative overflow-hidden flex flex-col items-center justify-center p-10 rounded-[2.5rem] bg-white border border-black/10 hover:border-sasori-red/40 transition-all duration-500 shadow-sm"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-sasori-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
           
-          <div className="relative z-10 w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border border-white/10 group-hover:border-sasori-red/30">
-            <Mail className="w-10 h-10 text-white/50 group-hover:text-sasori-red transition-colors" />
+          <div className="relative z-10 w-20 h-20 rounded-3xl bg-black/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border border-black/10 group-hover:border-sasori-red/30">
+            <Mail className="w-10 h-10 text-[#1a1a22]/40 group-hover:text-sasori-red transition-colors" />
           </div>
           
-          <h4 className="relative z-10 text-2xl font-black uppercase tracking-tighter italic text-white mb-2">Email</h4>
-          <p className="relative z-10 text-[10px] font-black uppercase tracking-widest text-white/30 mb-6">Confirmar Vía Mail</p>
+          <h4 className="relative z-10 text-2xl font-black uppercase tracking-tighter italic text-[#1a1a22] mb-2">Email</h4>
+          <p className="relative z-10 text-[10px] font-black uppercase tracking-widest text-[#1a1a22]/40 mb-6">Confirmar Vía Mail</p>
           
-          <div className="relative z-10 flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-xl font-black text-[10px] uppercase tracking-widest group-hover:bg-sasori-red transition-all duration-300 border border-white/10">
+          <div className="relative z-10 flex items-center gap-2 px-6 py-3 bg-black/5 text-[#1a1a22] rounded-xl font-black text-[10px] uppercase tracking-widest group-hover:bg-sasori-red group-hover:text-white transition-all duration-300 border border-black/10">
             Enviar correo <ArrowRight className="w-3 h-3" />
           </div>
         </motion.a>
       </div>
 
-      <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center gap-4">
+      <div className="p-6 rounded-2xl bg-black/[0.03] border border-black/8 flex items-center gap-4">
         <div className="w-10 h-10 rounded-full bg-sasori-red/10 flex items-center justify-center flex-shrink-0">
           <Sparkles className="w-5 h-5 text-sasori-red animate-pulse" />
         </div>
-        <p className="text-[9px] font-black text-white/30 uppercase tracking-[0.2em] leading-relaxed text-left">
+        <p className="text-[9px] font-black text-[#1a1a22]/40 uppercase tracking-[0.2em] leading-relaxed text-left">
           Tus preferencias de contacto han sido registradas. El Sasori Master revisará tu diagnóstico y te contactará en la ventana seleccionada.
         </p>
       </div>

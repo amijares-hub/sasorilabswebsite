@@ -1,10 +1,6 @@
 import React from 'react';
 import { BlogPostSection } from '../components/ui/blog-posts';
 import { BlogSection } from '../components/ui/blog-section';
-import { Footer } from '../components/ui/footer';
-import { FooterBackgroundGradient } from '../components/ui/hover-footer';
-import { SasoriLogo } from '../components/ui/sasori-logo';
-import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import EnhancedBackgroundPaths from '../components/ui/modern-background-paths';
 
@@ -60,12 +56,9 @@ export default function BlogPage({ lang = 'es' }: { lang?: 'es' | 'en' | 'zh' | 
         <section className="mt-20 px-4">
           <EnhancedBackgroundPaths lang={lang} />
         </section>
-
-        <Footer lang={lang} />
       </main>
 
       <div className="fixed inset-0 -z-10 bg-bg-dark">
-        <FooterBackgroundGradient />
       </div>
     </div>
   );

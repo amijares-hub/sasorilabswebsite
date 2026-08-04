@@ -2,8 +2,15 @@ import React, { useState } from 'react';
 import { cn } from "@/src/lib/utils";
 import { AIImageHover } from '../ai/AIImageHover';
 
+export interface AccordionItemData {
+  id?: string | number;
+  title: string;
+  description?: string;
+  imageUrl?: string;
+}
+
 // --- Accordion Item Component ---
-const AccordionItem = ({ item, isActive, onMouseEnter }: { item: any, isActive: boolean, onMouseEnter: () => void }) => {
+const AccordionItem = ({ item, isActive, onMouseEnter }: { item: AccordionItemData, isActive: boolean, onMouseEnter: () => void }) => {
   return (
     <div
       className={cn(
@@ -64,7 +71,7 @@ const AccordionItem = ({ item, isActive, onMouseEnter }: { item: any, isActive: 
 };
 
 // --- Mobile Accordion Item Component ---
-const MobileAccordionItem = ({ item, isActive, onClick }: { item: any, isActive: boolean, onClick: () => void }) => {
+const MobileAccordionItem = ({ item, isActive, onClick }: { item: AccordionItemData, isActive: boolean, onClick: () => void }) => {
   return (
     <div
       className={cn(
@@ -120,7 +127,7 @@ export function LandingAccordionItem({
 }: { 
   title: string, 
   subtitle: string, 
-  items: any[], 
+  items: AccordionItemData[], 
   ctaText?: string,
   onCtaClick?: () => void 
 }) {

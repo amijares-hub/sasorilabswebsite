@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeroText from "../components/ui/hero-shutter-text";
-import { FeatureHighlightCard } from "../components/ui/feature-highlight-card";
+import { PremiumContact } from "../components/ui/premium-contact";
 import { TextScrollAnimation } from "../components/ui/text-scroll-animation";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -38,7 +38,7 @@ const FaqItem = ({ question, answer }: { question: string; answer: string }) => 
 export function ModernizationPage({ lang = "es" }: { lang?: string }) {
   const navigate = useNavigate();
   const t = translations[lang as keyof typeof translations] || translations.es;
-  const tp = t.servicesPages.modernization;
+  const tp = (t.servicesPages as any).modernization;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -316,28 +316,8 @@ export function ModernizationPage({ lang = "es" }: { lang?: string }) {
         </div>
       </section>
 
-      {/* 7. CTA Final */}
-      <section className="bg-[#111111] py-32 px-6 relative items-center justify-center flex overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[#0A0A0A] mix-blend-multiply" />
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&q=80" alt="Supercar tech engine" className="w-full h-full object-cover opacity-20" />
-        </div>
-        <div className="relative z-10 w-full max-w-5xl mx-auto text-center bg-black/60 backdrop-blur-md p-10 md:p-16 rounded-[3rem] border border-white/10 shadow-[0_0_100px_rgba(226,6,19,0.1)] hover:border-sasori-red/30 transition-colors duration-500">
-          <Rocket className="w-16 h-16 text-sasori-red mx-auto mb-8" />
-          <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-6 leading-tight">
-            {tp.ctaTitle}
-          </h2>
-          <p className="text-white/60 text-lg mb-10 max-w-2xl mx-auto">
-            {tp.ctaDesc}
-          </p>
-          <button 
-            onClick={handleCta}
-            className="px-10 py-5 bg-sasori-red hover:bg-[#C2000B] text-white font-bold uppercase tracking-widest text-sm rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(226,6,19,0.3)] hover:shadow-[0_0_50px_rgba(226,6,19,0.5)] hover:-translate-y-1"
-          >
-            {tp.ctaBtn}
-          </button>
-        </div>
-      </section>
+      {/* 7. Contacto */}
+      <PremiumContact lang={lang} />
     </div>
   );
 }

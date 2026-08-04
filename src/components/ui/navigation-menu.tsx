@@ -2,13 +2,117 @@
 
 import * as React from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { Menu, ChevronDown, Languages, ArrowRight, UserCircle2, X, LogOut } from "lucide-react";
+import { Menu, ChevronDown, Languages, ArrowRight, UserCircle2, X, LogOut, Settings } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { supabase } from "../../lib/supabaseClient";
+import { Session } from "@supabase/supabase-js";
 import { SasoriLogo } from "./sasori-logo";
 import { ThemeToggle } from "./theme-toggle";
 import { useNavigate } from "react-router-dom";
 import { Button } from "./button";
+import { useFunnelStore } from "@/src/store/useFunnelStore";
+
+export const SERVICES_DROPDOWN_ITEMS = [
+  {
+    id: "frontend-ux",
+    path: "/services/frontend-ux",
+    title: {
+      es: "STACK TECNOLÓGICO FRONTEND Y EXPERIENCIA DE USUARIO (UX/UI)",
+      en: "FRONTEND TECH STACK & USER EXPERIENCE (UX/UI)",
+      pt: "STACK TECNOLÓGICO FRONTEND E EXPERIÊNCIA DO USUÁRIO (UX/UI)",
+      ru: "СТЕК ФРОНТЕНД-ТЕХНОЛОГИЙ И ПОЛЬЗОВАТЕЛЬСКИЙ ОПЫТ (UX/UI)",
+      zh: "前端技术栈与用户体验 (UX/UI)"
+    }
+  },
+  {
+    id: "backend-relational",
+    path: "/services/backend-relational",
+    title: {
+      es: "BASE DE DATOS RELACIONAL Y BACKEND ENTERPRISE",
+      en: "RELATIONAL DATABASE & ENTERPRISE BACKEND",
+      pt: "BANCO DE DADOS RELACIONAL E BACKEND ENTERPRISE",
+      ru: "РЕЛЯЦИОННЫЕ БАЗЫ ДАННЫХ И КОРПОРАТИВНЫЙ БЭКЕНД",
+      zh: "关系型数据库与企业级后端"
+    }
+  },
+  {
+    id: "cybersecurity",
+    path: "/services/cybersecurity",
+    title: {
+      es: "CIBERSEGURIDAD Y AUDITORÍA ZERO-TRUST",
+      en: "CYBERSECURITY & ZERO-TRUST AUDITING",
+      pt: "CIBERSEGURANÇA E AUDITORIA ZERO-TRUST",
+      ru: "КИБЕРБЕЗОПАСНОСТЬ И АУДИТ ZERO-TRUST",
+      zh: "网络安全与零信任审计"
+    }
+  },
+  {
+    id: "infrastructure",
+    path: "/services/infrastructure",
+    title: {
+      es: "RESILIENCIA OPERATIVA E INTEGRACIÓN CLOUD",
+      en: "OPERATIONAL RESILIENCE & CLOUD INTEGRATION",
+      pt: "RESILIÊNCIA OPERACIONAL E INTEGRAÇÃO CLOUD",
+      ru: "ОПЕРАЦИОННАЯ УСТОЙЧИВОСТЬ И ИНТЕГРАЦИЯ В ОБЛАКО",
+      zh: "运营弹性与云端集成"
+    }
+  },
+  {
+    id: "ipaas",
+    path: "/services/ipaas",
+    title: {
+      es: "HUB DE INTEGRACIÓN, APIS Y CONECTIVIDAD EXTERNA",
+      en: "INTEGRATION HUB, APIS & EXTERNAL CONNECTIVITY",
+      pt: "HUB DE INTEGRAÇÃO, APIS E CONECTIVIDADE EXTERNA",
+      ru: "КОНЦЕНТРАТОР ИНТЕГРАЦИИ, API И ВНЕШНИЕ СВЯЗИ",
+      zh: "集成中心、API与外部连接"
+    }
+  },
+  {
+    id: "ai-hardware",
+    path: "/services/ai-hardware",
+    title: {
+      es: "INTELIGENCIA ARTIFICIAL, HARDWARE Y HERRAMIENTAS PREDICTIVAS",
+      en: "ARTIFICIAL INTELLIGENCE, HARDWARE & PREDICTIVE TOOLS",
+      pt: "INTELIGÊNCIA ARTIFICIAL, HARDWARE E FERRAMENTAS PREDITIVAS",
+      ru: "ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ, ОБОРУДОВАНИЕ И ПРОГНОЗИРОВАНИЕ",
+      zh: "人工智能、硬件与预测工具"
+    }
+  },
+  {
+    id: "modernization",
+    path: "/services/modernization",
+    title: {
+      es: "GESTIÓN DE ECOSISTEMAS SAAS Y GOBERNANZA IT",
+      en: "SAAS ECOSYSTEM MANAGEMENT & IT GOVERNANCE",
+      pt: "GESTÃO DE ECOSSISTEMAS SAAS E GOVERNANÇA DE TI",
+      ru: "УПРАВЛЕНИЕ ЭКОСИСТЕМОЙ SAAS И ИТ-УПРАВЛЕНИЕ",
+      zh: "SAAS 生态系统管理与 IT 治理"
+    }
+  },
+  {
+    id: "ai-agents",
+    path: "/services/ai-agents",
+    title: {
+      es: "MOTORES DE RAZONAMIENTO E IA AGÉNTICA",
+      en: "REASONING ENGINES & AGENTIC AI",
+      pt: "MOTORES DE RACIOCÍNIO E IA AGÊNTICA",
+      ru: "МЕХАНИЗМЫ РАССУЖДЕНИЙ И АГЕНТНЫЙ ИИ",
+      zh: "推理引擎与代理人工智能"
+    }
+  },
+  {
+    id: "ai-automation",
+    path: "/services/ai-automation",
+    title: {
+      es: "AUTOMATIZACIÓN DE FLUJOS Y SERVICIOS DE TI",
+      en: "IT FLOWS & SERVICES AUTOMATION",
+      pt: "AUTOMAÇÃO DE FLUXOS E SERVIÇOS DE TI",
+      ru: "АВТОМАТИЗАЦИЯ ИТ-ПОТОКОВ И СЕРВИСОВ",
+      zh: "IT 流程与服务自动化"
+    }
+  }
+];
 
 const EXPAND_SCROLL_THRESHOLD = 80;
 
@@ -76,11 +180,13 @@ const dropdownVariants = {
 };
 
 export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string, onToggleLang?: (l: string) => void }) {
+  const openFunnel = useFunnelStore((state) => state.openFunnel);
   const [showLanguages, setShowLanguages] = React.useState(false);
+  const [isLangOpen, setIsLangOpen] = React.useState(false);
   const [showServices, setShowServices] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isExpanded, setExpanded] = React.useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : false);
-  const [session, setSession] = React.useState<any>(null);
+  const [session, setSession] = React.useState<Session | null>(null);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -128,20 +234,21 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
   const lastScrollY = React.useRef(0);
   const scrollPositionOnCollapse = React.useRef(0);
 
-  const t = (({
+  type TranslationKeys = {
+    home: string; solutions: string; blog: string; contact: string; demo: string;
+    auto: string; emp: string; webs: string; lim: string; account: string; logout: string;
+  };
+
+  const DICTIONARY: Record<string, TranslationKeys> = {
     es: { home: "Inicio", solutions: "Servicios", blog: "Blog", contact: "Contacto", demo: "Demos", auto: "Agentes Autónomos", emp: "Empleados Digitales", webs: "Webs y Aplicaciones de Impacto", lim: "Limpieza y Aceleración de Negocios", account: "Mi Cuenta", logout: "Cerrar Sesión" },
     en: { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account", logout: "Log Out" },
     zh: { home: "首頁", solutions: "服務", blog: "博客", contact: "聯繫", demo: "演示", auto: "自主代理", emp: "數位員工", webs: "影響力網站與應用", lim: "業務加速", account: "我的帳戶", logout: "登出" },
     ru: { home: "Главная", solutions: "Услуги", blog: "Блог", contact: "Контакт", demo: "Демо", auto: "Автономные Агенты", emp: "Цифровые Сотрудники", webs: "Влиятельные Веб-сайты", lim: "Ускорение Бизнеса", account: "Мой Аккаунт", logout: "Выйти" },
     pt: { home: "Início", solutions: "Serviços", blog: "Blog", contact: "Contato", demo: "Demos", auto: "Agentes Autônomos", emp: "Funcionários Digitais", webs: "Webs e Apps de Impacto", lim: "Aceleração de Negócios", account: "Minha Conta", logout: "Sair" },
-  } as any)[lang] || { home: "Home", solutions: "Services", blog: "Blog", contact: "Contact", demo: "Demos", auto: "Autonomous Agents", emp: "Digital Employees", webs: "Impact Webs & Apps", lim: "Business Acceleration", account: "My Account", logout: "Log Out" });
+  };
 
-  const services = [
-    { name: t.auto, href: "/services/ai-automation" },
-    { name: t.emp, href: "/services/digital-employees" },
-    { name: t.webs, href: "/services/immersive-webs" },
-    { name: t.lim, href: "/services/modernization" },
-  ];
+  const t = DICTIONARY[lang] || DICTIONARY.en;
+
 
   const translatedNavItems = [
     { name: t.home, href: "/" },
@@ -284,19 +391,22 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                       className="absolute top-full left-0 mt-4 w-64 p-3 rounded-2xl border border-sasori-red/20 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.2)] backdrop-blur-2xl pointer-events-auto z-[999] overflow-visible"
                     >
                       <div className="flex flex-col gap-1">
-                        {services.map((service) => (
-                          <button
-                            key={service.name}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleLinkClick(service.href);
-                            }}
-                            className="text-left px-4 py-3 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-widest text-black/70 hover:text-sasori-red hover:bg-sasori-red/5 transition-all flex items-center justify-between group"
-                          >
-                            {service.name}
-                            <div className="w-1.5 h-1.5 rounded-full bg-sasori-red opacity-0 group-hover:opacity-100 transition-opacity cinema-glow-red" />
-                          </button>
-                        ))}
+                        {SERVICES_DROPDOWN_ITEMS.map((service) => {
+                          const titleText = service.title[lang as keyof typeof service.title] || service.title.en;
+                          return (
+                            <button
+                              key={service.id}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleLinkClick(service.path);
+                              }}
+                              className="text-left px-4 py-2.5 rounded-xl text-[11px] font-bold uppercase tracking-wider text-[#1a1a22] hover:text-[#E20613] hover:bg-[#E20613]/10 transition-colors duration-200 flex items-center justify-between group leading-snug"
+                            >
+                              {titleText}
+                              <div className="w-1.5 h-1.5 rounded-full bg-sasori-red opacity-0 group-hover:opacity-100 transition-opacity shadow-[0_0_8px_rgba(226,6,19,0.8)]" />
+                            </button>
+                          );
+                        })}
                       </div>
                     </motion.div>
                   )}
@@ -352,55 +462,58 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
           {/* Language Selector Inside Menu */}
           <div 
             className="pl-1 sm:pl-2 border-l border-black/10 relative"
-            onMouseLeave={handleLangLeave}
+            onMouseEnter={() => setIsLangOpen(true)}
+            onMouseLeave={() => setIsLangOpen(false)}
           >
             <motion.button
               variants={itemVariants}
-              onMouseEnter={handleLangEnter}
               onClick={(e) => {
                 e.stopPropagation();
-                setShowLanguages(!showLanguages);
+                setIsLangOpen(!isLangOpen);
               }}
               className="group flex items-center gap-3 px-4 py-3 rounded-full hover:bg-sasori-red/5 transition-all text-black/70 hover:text-sasori-red"
+              aria-expanded={isLangOpen}
             >
               <Languages className="w-4 h-4 md:w-6 md:h-6 group-hover:rotate-12 transition-transform" />
               <span className="text-xs md:text-sm font-black tracking-widest uppercase">
                 {lang.toUpperCase()}
               </span>
-              <ChevronDown className={cn("w-3 h-3 transition-transform", showLanguages && "rotate-180")} />
+              <ChevronDown className={cn("w-3 h-3 transition-transform", isLangOpen && "rotate-180")} />
             </motion.button>
 
             <AnimatePresence>
-              {showLanguages && (
+              {isLangOpen && (
                 <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  variants={dropdownVariants}
-                  className="absolute top-full right-0 mt-2 w-32 p-1 rounded-xl border border-sasori-red/10 bg-white/95 shadow-2xl backdrop-blur-xl pointer-events-auto overflow-hidden"
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                  className="absolute top-full right-0 pt-2 z-50 w-32"
                 >
-                  {[
-                    { code: 'es', label: 'Español' },
-                    { code: 'en', label: 'English' },
-                    { code: 'zh', label: '中文' },
-                    { code: 'ru', label: 'Русский' },
-                    { code: 'pt', label: 'Português' },
-                  ].map((l) => (
-                    <button
-                      key={l.code}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onToggleLang?.(l.code);
-                        setShowLanguages(false);
-                      }}
-                      className={cn(
-                        "w-full text-left px-3 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
-                        lang === l.code ? "bg-sasori-red text-white" : "text-black/70 hover:text-sasori-red hover:bg-sasori-red/5"
-                      )}
-                    >
-                      {l.label}
-                    </button>
-                  ))}
+                  <div className="bg-white/95 rounded-xl shadow-2xl backdrop-blur-xl border border-sasori-red/10 p-1 flex flex-col pointer-events-auto">
+                    {[
+                      { code: 'es', label: 'Español' },
+                      { code: 'en', label: 'English' },
+                      { code: 'zh', label: '中文' },
+                      { code: 'ru', label: 'Русский' },
+                      { code: 'pt', label: 'Português' },
+                    ].map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onToggleLang?.(l.code);
+                          setIsLangOpen(false);
+                        }}
+                        className={cn(
+                          "w-full text-left px-3 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all",
+                          lang === l.code ? "bg-sasori-red text-white" : "text-black/70 hover:text-sasori-red hover:bg-sasori-red/5"
+                        )}
+                      >
+                        {l.label}
+                      </button>
+                    ))}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -471,19 +584,22 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                       className="overflow-hidden"
                     >
                       <div className="flex flex-col gap-1 pl-4 pb-4">
-                        {services.map((service) => (
-                          <button
-                            key={`mob-${service.name}`}
-                            onClick={() => {
-                              handleLinkClick(service.href);
-                              setIsMobileMenuOpen(false);
-                            }}
-                            className="py-3 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-black/60 hover:text-sasori-red transition-all text-left flex items-center group gap-2"
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-sasori-red opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                            {service.name}
-                          </button>
-                        ))}
+                        {SERVICES_DROPDOWN_ITEMS.map((service) => {
+                          const titleText = service.title[lang as keyof typeof service.title] || service.title.en;
+                          return (
+                            <button
+                              key={`mob-${service.id}`}
+                              onClick={() => {
+                                handleLinkClick(service.path);
+                                setIsMobileMenuOpen(false);
+                              }}
+                              className="py-2.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-black/60 hover:text-[#E20613] transition-all text-left flex items-center group gap-2 leading-snug"
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full bg-sasori-red opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                              {titleText}
+                            </button>
+                          );
+                        })}
                       </div>
                     </motion.div>
                   )}
@@ -496,7 +612,7 @@ export function AnimatedNavFramer({ lang = 'es', onToggleLang }: { lang?: string
                 variant="outline"
                 className="w-full rounded-full gap-2 h-12 border-sasori-red text-sasori-red hover:bg-sasori-red hover:text-white transition-colors shadow-[0_0_10px_rgba(226,6,19,0.2)]"
                 onClick={() => {
-                  handleLinkClick('/#contact');
+                  openFunnel();
                   setIsMobileMenuOpen(false);
                 }}
               >

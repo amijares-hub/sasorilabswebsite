@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
-import { Footer } from '../components/ui/footer';
 import { AnimatedNavFramer } from '../components/ui/navigation-menu';
 import { MorphingSquare } from '../components/ui/morphing-square';
 import { ArrowLeft, Clock, Eye, Share2, Calendar, User, ChevronRight } from 'lucide-react';
@@ -173,8 +172,6 @@ export function BlogDetailPage({ lang, setLang }: { lang: string, setLang: any }
                 <Share2 size={16} className="text-sasori-red transition-transform group-hover:scale-110" /> {dict.share}
             </button>
         </div>
-
-      <Footer lang={lang} />
     </div>
   );
 }

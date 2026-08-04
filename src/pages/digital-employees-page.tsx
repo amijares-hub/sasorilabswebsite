@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import HeroText from "../components/ui/hero-shutter-text";
-import { FeatureHighlightCard } from "../components/ui/feature-highlight-card";
+import { PremiumContact } from "../components/ui/premium-contact";
 import { LandingAccordionItem } from "../components/ui/interactive-image-accordion";
 import { TextScrollAnimation } from "../components/ui/text-scroll-animation";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,7 @@ const FaqItem = ({ question, answer }: { question: string; answer: string }) => 
 export function DigitalEmployeesPage({ lang = "es" }: { lang?: string }) {
   const navigate = useNavigate();
   const t = translations[lang as keyof typeof translations] || translations.es;
-  const tp = t.servicesPages.employees;
+  const tp = (t.servicesPages as any).employees;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -278,16 +278,8 @@ export function DigitalEmployeesPage({ lang = "es" }: { lang?: string }) {
         </div>
       </section>
 
-      {/* 5. CTA Final */}
-      <section className="bg-white py-32 px-6 border-t border-black/5 relative items-center justify-center flex">
-        <FeatureHighlightCard 
-          imageSrc="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80"
-          title={tp.ctaTitle}
-          description={tp.ctaDesc}
-          buttonText={tp.ctaBtn}
-          onButtonClick={handleCta}
-        />
-      </section>
+      {/* 5. Contacto */}
+      <PremiumContact lang={lang} />
     </div>
   );
 }

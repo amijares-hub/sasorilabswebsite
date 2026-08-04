@@ -20,6 +20,8 @@ model User {
   email            String            @unique
   companyName      String            @map("company_name")
   apiKeySecret     String            @map("api_key_secret")
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
   digitalEmployees DigitalEmployee[] @relation("UserToEmployees")
 
   @@map("users")
@@ -31,9 +33,12 @@ model DigitalEmployee {
   status        EmployeeStatus  @default(IDLE)
   configuration Json            @db.JsonB
   userId        String          @map("user_id")
-  user          User            @relation("UserToEmployees", fields: [userId], references: [id])
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  user          User            @relation("UserToEmployees", fields: [userId], references: [id], onDelete: Cascade)
   logs          AutomationLog[] @relation("EmployeeToLogs")
 
+  @@index([userId])
   @@map("digital_employees")
 }
 
@@ -44,7 +49,9 @@ model AutomationLog {
   tokensUsed      Int             @map("tokens_used")
   metadata        Json            @db.JsonB
   employeeId      String          @map("employee_id")
-  employee        DigitalEmployee @relation("EmployeeToLogs", fields: [employeeId], references: [id])
+  employee        DigitalEmployee @relation("EmployeeToLogs", fields: [employeeId], references: [id], onDelete: Cascade)
 
+  @@index([employeeId])
+  @@index([createdAt])
   @@map("automation_logs")
 }

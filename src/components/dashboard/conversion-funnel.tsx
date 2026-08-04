@@ -131,23 +131,23 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center p-8 md:p-12 glass-metallic-dark rounded-3xl border border-sasori-red/20 max-w-2xl mx-auto shadow-2xl relative overflow-hidden"
+        className="flex flex-col items-center p-8 md:p-12 bg-white rounded-3xl border border-black/10 max-w-2xl mx-auto shadow-[0_30px_80px_rgba(0,0,0,0.1)] relative overflow-hidden"
       >
-        <div className="absolute top-0 left-0 w-full h-1 bg-sasori-red cinema-glow-red" />
+        <div className="absolute top-0 left-0 w-full h-1 bg-sasori-red" />
         
         <div className="text-center mb-10">
-          <div className="w-16 h-16 rounded-full bg-sasori-red/10 flex items-center justify-center mx-auto mb-6 cinema-glow-red border border-sasori-red/30">
+          <div className="w-16 h-16 rounded-full bg-sasori-red/10 flex items-center justify-center mx-auto mb-6 border border-sasori-red/20">
             <CheckCircle2 className="w-8 h-8 text-sasori-red animate-pulse" />
           </div>
-          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-[0.2em] text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-[0.2em] text-[#1a1a22] mb-4">
             {t.thanks}
           </h2>
-          <p className="text-white/40 text-sm leading-relaxed max-w-lg mx-auto">
+          <p className="text-[#1a1a22]/40 text-sm leading-relaxed max-w-lg mx-auto">
             {t.successMsg}
           </p>
         </div>
 
-        <div className="w-full bg-white/5 rounded-[2rem] p-8 border border-white/10">
+        <div className="w-full bg-black/[0.02] rounded-[2rem] p-8 border border-black/8">
            <ContactSelection 
              lang={lang}
              subscriberId={subscriberId}
@@ -165,13 +165,13 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
           <div key={s.id} className="flex flex-col items-center gap-2 group flex-1">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 border ${
               currentStep >= s.id 
-                ? 'bg-sasori-red border-sasori-red cinema-glow-red text-white' 
-                : 'bg-white/5 border-white/10 text-white/20'
+                ? 'bg-sasori-red border-sasori-red text-white' 
+                : 'bg-black/5 border-black/10 text-[#1a1a22]/30'
             }`}>
               {s.icon}
             </div>
             <span className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-500 ${
-              currentStep >= s.id ? 'text-sasori-red' : 'text-white/10'
+              currentStep >= s.id ? 'text-sasori-red' : 'text-[#1a1a22]/20'
             }`}>
               {s.title}
             </span>
@@ -179,7 +179,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
         ))}
       </div>
 
-      <div className="relative glass-metallic-dark rounded-3xl border border-white/5 p-8 md:p-12 shadow-2xl overflow-hiddenMin">
+      <div className="relative bg-white rounded-3xl border border-black/8 p-8 md:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.08)] overflow-hidden">
         <AnimatePresence mode="wait">
           {currentStep === 1 && (
             <motion.div
@@ -191,10 +191,10 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
             >
               <div className="space-y-6">
                 <div className="relative group">
-                  <span className="absolute -top-3 left-4 px-2 bg-[#090909] text-[10px] font-black uppercase tracking-widest text-sasori-red/60 z-10">
+                  <span className="absolute -top-3 left-4 px-2 bg-white text-[10px] font-black uppercase tracking-widest text-sasori-red/70 z-10">
                     {t.company}
                   </span>
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1a1a22]/30">
                     <Building2 className="w-5 h-5" />
                   </div>
                   <input
@@ -202,15 +202,15 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
                     value={formData.company_name}
                     onChange={(e) => setFormData({...formData, company_name: e.target.value})}
                     placeholder="E.g. SasoriLabs"
-                    className="w-full bg-white/[0.02] border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-white/10 focus:outline-none focus:border-sasori-red/50 transition-all text-lg font-bold"
+                    className="w-full bg-black/5 border border-black/10 rounded-2xl py-4 pl-12 pr-6 text-[#1a1a22] placeholder:text-[#1a1a22]/20 focus:outline-none focus:border-sasori-red/50 transition-all text-lg font-bold"
                   />
                 </div>
 
                 <div className="relative group">
-                  <span className="absolute -top-3 left-4 px-2 bg-[#090909] text-[10px] font-black uppercase tracking-widest text-sasori-red/60 z-10">
+                  <span className="absolute -top-3 left-4 px-2 bg-white text-[10px] font-black uppercase tracking-widest text-sasori-red/70 z-10">
                     {t.industry}
                   </span>
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1a1a22]/30">
                     <Target className="w-5 h-5" />
                   </div>
                   <input
@@ -218,7 +218,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
                     value={formData.industry}
                     onChange={(e) => setFormData({...formData, industry: e.target.value})}
                     placeholder="E.g. Technology"
-                    className="w-full bg-white/[0.02] border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-white placeholder:text-white/10 focus:outline-none focus:border-sasori-red/50 transition-all text-lg font-bold"
+                    className="w-full bg-black/5 border border-black/10 rounded-2xl py-4 pl-12 pr-6 text-[#1a1a22] placeholder:text-[#1a1a22]/20 focus:outline-none focus:border-sasori-red/50 transition-all text-lg font-bold"
                   />
                 </div>
               </div>
@@ -226,7 +226,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
               <Button 
                 onClick={handleNext}
                 disabled={!formData.company_name || !formData.industry}
-                className="w-full h-16 rounded-2xl bg-sasori-red hover:bg-black text-white font-black uppercase tracking-widest gap-2 shadow-xl group"
+                className="w-full h-16 rounded-2xl bg-sasori-red hover:bg-[#1a1a22] text-white font-black uppercase tracking-widest gap-2 shadow-xl group"
               >
                 {t.next}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -243,7 +243,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
               className="space-y-8"
             >
               <div className="relative">
-                <span className="absolute -top-3 left-4 px-2 bg-[#090909] text-[10px] font-black uppercase tracking-widest text-sasori-red/60 z-10">
+                <span className="absolute -top-3 left-4 px-2 bg-white text-[10px] font-black uppercase tracking-widest text-sasori-red/70 z-10">
                   Business Challenge
                 </span>
                 <textarea
@@ -251,21 +251,21 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
                   onChange={(e) => setFormData({...formData, challenge: e.target.value})}
                   rows={6}
                   placeholder={t.challenge}
-                  className="w-full bg-white/[0.02] border border-white/10 rounded-3xl p-6 text-white placeholder:text-white/10 focus:outline-none focus:border-sasori-red/50 transition-all text-xl font-medium leading-relaxed resize-none"
+                  className="w-full bg-black/5 border border-black/10 rounded-3xl p-6 text-[#1a1a22] placeholder:text-[#1a1a22]/20 focus:outline-none focus:border-sasori-red/50 transition-all text-xl font-medium leading-relaxed resize-none"
                 />
               </div>
 
               <div className="flex gap-4">
                 <button 
                   onClick={handleBack}
-                  className="px-8 h-16 rounded-2xl border border-white/5 bg-white/[0.02] text-white/40 hover:text-white hover:border-white/10 transition-all flex items-center justify-center"
+                  className="px-8 h-16 rounded-2xl border border-black/10 bg-black/5 text-[#1a1a22]/40 hover:text-[#1a1a22] hover:border-black/20 transition-all flex items-center justify-center"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <Button 
                   onClick={handleNext}
                   disabled={!formData.challenge}
-                  className="flex-1 h-16 rounded-2xl bg-sasori-red hover:bg-black text-white font-black uppercase tracking-widest gap-2 shadow-xl group"
+                  className="flex-1 h-16 rounded-2xl bg-sasori-red hover:bg-[#1a1a22] text-white font-black uppercase tracking-widest gap-2 shadow-xl group"
                 >
                   {t.next}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -283,7 +283,7 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
               className="space-y-8"
             >
               <div className="space-y-6">
-                <h3 className="text-white/40 text-[10px] font-black uppercase tracking-widest text-center">
+                <h3 className="text-[#1a1a22]/40 text-[10px] font-black uppercase tracking-widest text-center">
                   {t.budget}
                 </h3>
                 <div className="grid grid-cols-1 gap-4">
@@ -293,18 +293,18 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
                       onClick={() => setFormData({...formData, estimated_budget: range.value})}
                       className={`relative overflow-hidden group p-6 rounded-2xl border transition-all duration-300 text-left ${
                         formData.estimated_budget === range.value 
-                          ? 'bg-sasori-red/10 border-sasori-red cinema-shadow-red' 
-                          : 'bg-white/[0.02] border-white/10 hover:border-white/20'
+                          ? 'bg-sasori-red/8 border-sasori-red' 
+                          : 'bg-black/5 border-black/10 hover:border-black/20'
                       }`}
                     >
                       <div className="flex justify-between items-center">
                         <span className={`text-xl font-black uppercase tracking-widest ${
-                          formData.estimated_budget === range.value ? 'text-sasori-red' : 'text-white/60'
+                          formData.estimated_budget === range.value ? 'text-sasori-red' : 'text-[#1a1a22]/60'
                         }`}>
                           {range.label}
                         </span>
                         {formData.estimated_budget === range.value && (
-                          <div className="w-2 h-2 rounded-full bg-sasori-red cinema-glow-red animate-pulse" />
+                          <div className="w-2 h-2 rounded-full bg-sasori-red animate-pulse" />
                         )}
                       </div>
                       <div className={`absolute bottom-0 left-0 h-0.5 bg-sasori-red transition-all duration-500 ${
@@ -318,14 +318,14 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
               <div className="flex gap-4">
                 <button 
                   onClick={handleBack}
-                  className="px-8 h-16 rounded-2xl border border-white/5 bg-white/[0.02] text-white/40 hover:text-white hover:border-white/10 transition-all flex items-center justify-center"
+                  className="px-8 h-16 rounded-2xl border border-black/10 bg-black/5 text-[#1a1a22]/40 hover:text-[#1a1a22] hover:border-black/20 transition-all flex items-center justify-center"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
                 <Button 
                   onClick={handleSubmit}
                   disabled={!formData.estimated_budget || isSubmitting}
-                  className="flex-1 h-16 rounded-2xl bg-sasori-red hover:bg-black text-white font-black uppercase tracking-widest gap-2 shadow-xl group disabled:opacity-50"
+                  className="flex-1 h-16 rounded-2xl bg-sasori-red hover:bg-[#1a1a22] text-white font-black uppercase tracking-widest gap-2 shadow-xl group disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>
@@ -348,15 +348,15 @@ export function ConversionFunnel({ subscriberId, email, lang, onSuccess }: Conve
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="absolute inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center text-center p-10"
+            className="absolute inset-0 z-50 bg-white/90 backdrop-blur-md flex flex-col items-center justify-center text-center p-10"
           >
             <div className="relative mb-8">
               <div className="w-16 h-16 rounded-full border-t-2 border-r-2 border-sasori-red animate-spin" />
               <div className="absolute inset-0 flex items-center justify-center">
-                 <div className="w-2 h-2 rounded-full bg-sasori-red shadow-[0_0_15px_rgba(239,68,68,0.8)]" />
+                 <div className="w-2 h-2 rounded-full bg-sasori-red" />
               </div>
             </div>
-            <h3 className="text-xl font-black uppercase tracking-[0.3em] text-white mb-2">{t.loading}</h3>
+            <h3 className="text-xl font-black uppercase tracking-[0.3em] text-[#1a1a22] mb-2">{t.loading}</h3>
             <p className="text-sasori-red/60 text-[10px] font-bold uppercase tracking-widest animate-pulse">{t.scanning}</p>
           </motion.div>
         )}

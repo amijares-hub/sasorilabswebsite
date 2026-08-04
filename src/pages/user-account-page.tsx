@@ -10,7 +10,6 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SasoriLogo } from '../components/ui/sasori-logo';
-import { Footer } from '../components/ui/footer';
 import { AnimatedNavFramer } from '../components/ui/navigation-menu';
 import { MorphingSquare } from '../components/ui/morphing-square';
 import { ConversionFunnel } from '../components/dashboard/conversion-funnel';
@@ -82,17 +81,17 @@ function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang:
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
       {/* Hero Welcome */}
       {!hasSubmitted && (
-        <div className="relative p-10 md:p-16 rounded-[3rem] bg-gradient-to-br from-sasori-red/10 via-zinc-900 to-black border border-white/5 overflow-hidden mb-12">
+        <div className="relative p-10 md:p-16 rounded-[3rem] bg-gradient-to-br from-sasori-red/8 via-white to-[#f1f1f7] border border-sasori-red/20 overflow-hidden mb-12">
           <div className="absolute top-0 right-0 w-96 h-96 bg-sasori-red/5 blur-[100px] -mr-20 -mt-20" />
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
-            <div className="w-24 h-24 rounded-3xl bg-sasori-red/20 border border-sasori-red/30 flex items-center justify-center rotate-3 flex-shrink-0">
+            <div className="w-24 h-24 rounded-3xl bg-sasori-red/10 border border-sasori-red/20 flex items-center justify-center rotate-3 flex-shrink-0">
               <Sparkles className="w-12 h-12 text-sasori-red" />
             </div>
             <div className="text-center md:text-left space-y-4">
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight italic">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight italic text-[#1a1a22]">
                 {lang === 'es' ? 'Tu viaje con' : 'Your journey with'} <span className="text-sasori-red">Sasori Labs</span> {lang === 'es' ? 'comienza aquí' : 'starts here'}
               </h2>
-              <p className="text-zinc-400 text-lg font-medium max-w-2xl leading-relaxed">
+              <p className="text-[#1a1a22]/50 text-lg font-medium max-w-2xl leading-relaxed">
                 {lang === 'es' 
                   ? 'Como suscriptor, estás a un paso de desbloquear el poder de la IA. Completa tu diagnóstico para empezar.' 
                   : 'As a subscriber, you are one step away from unlocking the power of AI. Complete your diagnostic to start.'}
@@ -105,16 +104,16 @@ function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang:
       {hasSubmitted ? (
         <div className="max-w-3xl mx-auto space-y-12">
            <div className="text-center space-y-4">
-              <div className="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6 cinema-glow-emerald">
+              <div className="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6">
                  <CheckCircle className="w-10 h-10 text-emerald-500" />
               </div>
-              <h3 className="text-3xl font-black uppercase tracking-widest italic">¡Todo listo!</h3>
-              <p className="text-white/40 text-sm max-w-md mx-auto uppercase tracking-widest">
+              <h3 className="text-3xl font-black uppercase tracking-widest italic text-[#1a1a22]">¡Todo listo!</h3>
+              <p className="text-[#1a1a22]/40 text-sm max-w-md mx-auto uppercase tracking-widest">
                  Elige cómo prefieres continuar para agendar tu sesión técnica:
               </p>
            </div>
            
-           <div className="bg-white/5 rounded-[2.5rem] p-8 md:p-12 border border-white/10 shadow-2xl">
+           <div className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/8 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
               <ContactSelection 
                 lang={lang}
                 subscriberId={profile.id}
@@ -129,28 +128,6 @@ function SubscriberDashboard({ profile, lang, t }: { profile: UserProfile, lang:
           onSuccess={() => setHasSubmitted(true)} 
         />
       )}
-      
-      {/* Recommended Content */}
-      <div className="space-y-6 pt-12 border-t border-white/5">
-        <div className="flex justify-between items-end">
-           <h3 className="text-2xl font-black uppercase tracking-tighter italic">Contenido para Ti</h3>
-           <button onClick={() => navigate('/blog')} className="text-[10px] font-black underline text-zinc-500 uppercase">Ver Todo</button>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-           {[1, 2].map(i => (
-             <div key={i} className="h-48 rounded-[2rem] bg-zinc-900 border border-white/5 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
-                <img src={`https://images.unsplash.com/photo-${1550000000000+i}?auto=format&fit=crop&q=80&w=800`} alt="Contenido recomendado" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-60" />
-                <div className="absolute bottom-6 left-6 z-20">
-                   <div className="px-2 py-1 bg-sasori-red text-[8px] font-black uppercase tracking-widest inline-block mb-2">Exclusive</div>
-                   <h4 className="text-lg font-bold uppercase tracking-tight italic">
-                      {i === 1 ? 'El auge de los Agentes Autónomos' : 'Automatización de Pipelines 2026'}
-                   </h4>
-                </div>
-             </div>
-           ))}
-        </div>
-      </div>
     </div>
   );
 }
@@ -273,22 +250,22 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
         )}
       </AnimatePresence>
 
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-12 bg-white/[0.02] border border-white/5 p-8 rounded-[2.5rem] backdrop-blur-xl">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-12 bg-white border border-black/8 p-8 rounded-[2.5rem] shadow-sm">
         <div className="flex items-center gap-6">
           <div className="w-20 h-20 rounded-3xl bg-sasori-red/10 border border-sasori-red/20 flex items-center justify-center">
              {profile.full_name ? <span className="text-3xl font-black text-sasori-red">{profile.full_name[0]}</span> : <User className="w-10 h-10 text-sasori-red" />}
           </div>
           <div>
             <p className="text-[9px] font-black uppercase tracking-[0.4em] text-sasori-red mb-1">{t.member}</p>
-            <h1 className="text-3xl font-black uppercase tracking-tighter">{profile.full_name || t.welcome}</h1>
-            <p className="text-white/40 text-xs mt-1">{profile.email}</p>
+            <h1 className="text-3xl font-black uppercase tracking-tighter text-[#1a1a22]">{profile.full_name || t.welcome}</h1>
+            <p className="text-[#1a1a22]/40 text-xs mt-1">{profile.email}</p>
           </div>
         </div>
         <div className="flex flex-wrap gap-3">
-          <button onClick={() => setIsNewProjectModalOpen(true)} className="px-6 py-3 bg-white/5 border border-white/10 hover:border-sasori-red text-white font-black text-[10px] uppercase tracking-widest rounded-2xl transition-all">
+          <button onClick={() => setIsNewProjectModalOpen(true)} className="px-6 py-3 bg-black/5 border border-black/10 hover:border-sasori-red text-[#1a1a22] font-black text-[10px] uppercase tracking-widest rounded-2xl transition-all">
              SOLICITAR PROYECTO NUEVO
           </button>
-          <button onClick={() => setIsRequestModalOpen(true)} className="px-6 py-3 bg-sasori-red hover:bg-white text-white hover:text-sasori-red font-black text-[10px] uppercase tracking-widest rounded-2xl transition-all">
+          <button onClick={() => setIsRequestModalOpen(true)} className="px-6 py-3 bg-sasori-red hover:bg-[#1a1a22] text-white font-black text-[10px] uppercase tracking-widest rounded-2xl transition-all">
             {t.newRequest}
           </button>
         </div>
@@ -298,7 +275,7 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
         {tabs.map(tab => (
           <button key={tab.id} onClick={() => setActiveTab(tab.id as Tab)}
             className={cn("flex flex-shrink-0 items-center gap-3 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all border",
-              activeTab === tab.id ? "bg-sasori-red border-sasori-red text-white shadow-lg shadow-sasori-red/30" : "bg-white/5 border-white/5 text-white/40 hover:text-white hover:bg-white/10")}>
+              activeTab === tab.id ? "bg-sasori-red border-sasori-red text-white shadow-lg shadow-sasori-red/30" : "bg-white border-black/8 text-[#1a1a22]/50 hover:text-[#1a1a22] hover:border-black/20")}>
             <tab.icon className="w-4 h-4" /> {tab.label}
           </button>
         ))}
@@ -308,17 +285,17 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
         {activeTab === 'overview' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
-              <div className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-8">
+              <div className="bg-white border border-black/8 rounded-[2.5rem] p-8 shadow-sm">
                  <div className="flex justify-between items-center mb-8">
-                    <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white/30 truncate">Fases del Proyecto</h3>
+                    <h3 className="text-sm font-black uppercase tracking-[0.2em] text-[#1a1a22]/40 truncate">Fases del Proyecto</h3>
                     {projects.length > 1 && (
                       <select 
                         value={selectedProjectId || ''} 
                         onChange={(e) => setSelectedProjectId(e.target.value)}
                         title="Seleccionar Proyecto"
-                        className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-[10px] font-black uppercase outline-none focus:border-sasori-red transition-all text-white"
+                        className="bg-black/5 border border-black/10 rounded-xl px-4 py-2 text-[10px] font-black uppercase outline-none focus:border-sasori-red transition-all text-[#1a1a22]"
                       >
-                        {projects.map(p => <option key={p.id} value={p.id} className="bg-black">{p.name}</option>)}
+                        {projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                       </select>
                     )}
                  </div>
@@ -326,35 +303,35 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {milestones.filter(m => m.project_id === selectedProjectId).length > 0 ? 
                       milestones.filter(m => m.project_id === selectedProjectId).map(m => (
-                      <div key={m.id} className="p-6 rounded-[2rem] bg-white/5 border border-white/10 group hover:border-sasori-red/30 transition-all">
+                      <div key={m.id} className="p-6 rounded-[2rem] bg-black/3 border border-black/8 group hover:border-sasori-red/30 transition-all">
                          <div className="flex justify-between items-start mb-6">
-                            <div><p className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-1">HIT {m.id.slice(0,3)}</p><h4 className="text-lg font-black uppercase truncate">{m.name}</h4></div>
-                            <span className={cn("text-[8px] font-black px-2 py-1 rounded-md uppercase", m.status === 'completed' ? "bg-emerald-500/10 text-emerald-400" : "bg-white/10 text-white/40")}>{m.status}</span>
+                            <div><p className="text-[9px] font-black uppercase tracking-widest text-[#1a1a22]/30 mb-1">HIT {m.id.slice(0,3)}</p><h4 className="text-lg font-black uppercase truncate text-[#1a1a22]">{m.name}</h4></div>
+                            <span className={cn("text-[8px] font-black px-2 py-1 rounded-md uppercase", m.status === 'completed' ? "bg-emerald-500/10 text-emerald-600" : "bg-black/5 text-[#1a1a22]/40")}>{m.status}</span>
                          </div>
                          <div className="relative pt-4">
-                            <div className="flex justify-between text-[10px] font-black mb-2 uppercase"><span>Progreso</span><span className={m.progress === 100 ? "text-emerald-400" : "text-sasori-red"}>{m.progress}%</span></div>
-                            <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                               <motion.div initial={{ width: 0 }} animate={{ width: `${m.progress}%` }} className={cn("h-full rounded-full Shadows-red", m.progress === 100 ? "bg-emerald-400" : "bg-sasori-red")} />
+                            <div className="flex justify-between text-[10px] font-black mb-2 uppercase text-[#1a1a22]"><span>Progreso</span><span className={m.progress === 100 ? "text-emerald-500" : "text-sasori-red"}>{m.progress}%</span></div>
+                            <div className="h-1 bg-black/8 rounded-full overflow-hidden">
+                               <motion.div initial={{ width: 0 }} animate={{ width: `${m.progress}%` }} className={cn("h-full rounded-full", m.progress === 100 ? "bg-emerald-500" : "bg-sasori-red")} />
                             </div>
                          </div>
                       </div>
-                    )) : <div className="col-span-2 py-20 text-center text-white/10 uppercase font-black tracking-widest">Selecciona un proyecto para ver sus hitos</div>}
+                    )) : <div className="col-span-2 py-20 text-center text-[#1a1a22]/20 uppercase font-black tracking-widest">Selecciona un proyecto para ver sus hitos</div>}
                  </div>
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-sasori-red/20 to-gray-900 border border-sasori-red/30 rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col items-center justify-center">
-               <h3 className="text-xs font-black uppercase tracking-widest text-white/50 mb-10 text-center">Total Completado</h3>
+            <div className="bg-white border border-black/8 rounded-[2.5rem] p-10 relative overflow-hidden flex flex-col items-center justify-center shadow-sm">
+               <h3 className="text-xs font-black uppercase tracking-widest text-[#1a1a22]/40 mb-10 text-center">Total Completado</h3>
                <div className="relative w-48 h-48">
                   <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-                     <circle className="text-white/5" strokeWidth="6" fill="transparent" r="42" cx="50" cy="50" />
-                     <motion.circle initial={{ pathLength: 0 }} animate={{ pathLength: getProjectProgress(selectedProjectId || '') / 100 }} transition={{ duration: 1.5, ease: "easeOut" }} className="text-sasori-red Shadow-red" strokeWidth="6" strokeDasharray="100 100" strokeLinecap="round" stroke="currentColor" fill="transparent" r="42" cx="50" cy="50" />
+                     <circle className="text-black/8" strokeWidth="6" fill="transparent" r="42" cx="50" cy="50" />
+                     <motion.circle initial={{ pathLength: 0 }} animate={{ pathLength: getProjectProgress(selectedProjectId || '') / 100 }} transition={{ duration: 1.5, ease: "easeOut" }} className="text-sasori-red" strokeWidth="6" strokeDasharray="100 100" strokeLinecap="round" stroke="currentColor" fill="transparent" r="42" cx="50" cy="50" />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                     <span className="text-5xl font-black">{getProjectProgress(selectedProjectId || '')}%</span>
+                     <span className="text-5xl font-black text-[#1a1a22]">{getProjectProgress(selectedProjectId || '')}%</span>
                   </div>
                </div>
-               <p className="mt-10 text-center text-[10px] text-white/40 leading-relaxed font-black uppercase tracking-widest">
+               <p className="mt-10 text-center text-[10px] text-[#1a1a22]/40 leading-relaxed font-black uppercase tracking-widest">
                   {getProjectProgress(selectedProjectId || '') === 100 ? '✓ Proyecto Entregado' : '⚡ Desarrollo en Curso'}
                </p>
             </div>
@@ -364,11 +341,11 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
         {activeTab === 'projects' && (
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 uppercase">
               {projects.map(p => (
-                <div key={p.id} className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-8">
-                  <h4 className="text-2xl font-black tracking-tighter mb-4">{p.name}</h4>
-                  <p className="text-white/40 text-[10px] font-black tracking-widest mb-6">ID: {p.id.slice(0, 8)}</p>
+                <div key={p.id} className="bg-white border border-black/8 rounded-[2.5rem] p-8 shadow-sm">
+                  <h4 className="text-2xl font-black tracking-tighter mb-4 text-[#1a1a22]">{p.name}</h4>
+                  <p className="text-[#1a1a22]/40 text-[10px] font-black tracking-widest mb-6">ID: {p.id.slice(0, 8)}</p>
                   <div className="flex gap-4">
-                     <button className="flex-1 py-4 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-black">DOCUMENTACIÓN</button>
+                     <button className="flex-1 py-4 rounded-2xl bg-black/5 border border-black/10 text-[10px] font-black text-[#1a1a22]">DOCUMENTACIÓN</button>
                      <button className="flex-1 py-4 rounded-2xl bg-sasori-red text-white text-[10px] font-black">DETALLES</button>
                   </div>
                 </div>
@@ -378,40 +355,40 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
 
         {/* 3. PAYMENTS */}
         {activeTab === 'payments' && (
-          <div className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-8 md:p-12">
+          <div className="bg-white border border-black/8 rounded-[2.5rem] p-8 md:p-12 shadow-sm">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
-              <h3 className="text-2xl font-black uppercase tracking-tighter">Historial de Pagos</h3>
-              <button onClick={() => window.print()} className="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
+              <h3 className="text-2xl font-black uppercase tracking-tighter text-[#1a1a22]">Historial de Pagos</h3>
+              <button onClick={() => window.print()} className="px-4 py-2 bg-black/5 hover:bg-black/10 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all text-[#1a1a22]">
                  Imprimir Resumen Anual
               </button>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="border-b border-white/10 text-[10px] font-black uppercase tracking-widest text-white/30">
+                  <tr className="border-b border-black/8 text-[10px] font-black uppercase tracking-widest text-[#1a1a22]/40">
                     <th className="pb-6">ID</th><th className="pb-6">FECHA</th>
                     <th className="pb-6 text-right">MONTO</th><th className="pb-6 text-center">ESTADO</th><th className="pb-6 text-right">ACCIONES</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-black/5">
                   {payments.length > 0 ? payments.map(p => (
-                    <tr key={p.id} className="text-white/80">
+                    <tr key={p.id} className="text-[#1a1a22]/80">
                       <td className="py-6 font-mono text-[10px]">#{p.id.slice(0, 8)}</td>
                       <td className="py-6 text-xs">{new Date(p.payment_date).toLocaleDateString()}</td>
-                      <td className="py-6 text-right text-sm font-bold">${p.amount} <small className="text-white/30 font-medium">{p.currency}</small></td>
+                      <td className="py-6 text-right text-sm font-bold">${p.amount} <small className="text-[#1a1a22]/30 font-medium">{p.currency}</small></td>
                       <td className="py-6 text-center">
-                         <span className={cn("px-2 py-1 rounded-md text-[8px] font-black uppercase", p.status === 'paid' ? "bg-emerald-500/10 text-emerald-400" : "bg-sasori-red/10 text-sasori-red")}>{p.status}</span>
+                         <span className={cn("px-2 py-1 rounded-md text-[8px] font-black uppercase", p.status === 'paid' ? "bg-emerald-500/10 text-emerald-600" : "bg-sasori-red/10 text-sasori-red")}>{p.status}</span>
                       </td>
                       <td className="py-6 text-right">
                          <button 
                            onClick={() => alert(`Generando Factura #${p.id.slice(0, 8)}...`)}
-                           className="text-[9px] font-black uppercase tracking-widest text-sasori-red hover:text-white transition-colors border-b border-sasori-red/30 hover:border-white"
+                           className="text-[9px] font-black uppercase tracking-widest text-sasori-red hover:text-[#1a1a22] transition-colors border-b border-sasori-red/30 hover:border-[#1a1a22]/30"
                          >
                            RECIBO PDF
                          </button>
                       </td>
                     </tr>
-                  )) : <tr><td colSpan={5} className="py-20 text-center text-white/10 font-black uppercase">{t.noData}</td></tr>}
+                  )) : <tr><td colSpan={5} className="py-20 text-center text-[#1a1a22]/20 font-black uppercase">{t.noData}</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -421,13 +398,13 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
         {/* 4. REQUESTS HISTORY */}
         {activeTab === 'requests' && (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
-            <div className="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-8 md:p-12 text-white overflow-hidden">
+            <div className="bg-white border border-black/8 rounded-[2.5rem] p-8 md:p-12 overflow-hidden shadow-sm">
                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                   <div>
-                     <h3 className="text-3xl font-black uppercase tracking-tighter mb-2">Mis Solicitudes</h3>
-                     <p className="text-[10px] font-black uppercase tracking-widest text-white/30 truncate">Seguimiento de ajustes y cambios de hitos</p>
+                     <h3 className="text-3xl font-black uppercase tracking-tighter mb-2 text-[#1a1a22]">Mis Solicitudes</h3>
+                     <p className="text-[10px] font-black uppercase tracking-widest text-[#1a1a22]/30 truncate">Seguimiento de ajustes y cambios de hitos</p>
                   </div>
-                  <button onClick={() => setIsRequestModalOpen(true)} className="px-6 py-4 bg-sasori-red text-white text-[10px] font-black rounded-[1.2rem] hover:bg-white hover:text-sasori-red transition-all shadow-xl shadow-sasori-red/20">
+                  <button onClick={() => setIsRequestModalOpen(true)} className="px-6 py-4 bg-sasori-red text-white text-[10px] font-black rounded-[1.2rem] hover:bg-[#1a1a22] transition-all shadow-xl shadow-sasori-red/20">
                      + NUEVA SOLICITUD
                   </button>
                </div>
@@ -435,32 +412,32 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
                <div className="overflow-x-auto">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="border-b border-white/5 text-[10px] font-black uppercase tracking-[0.2em] text-white/20">
+                      <tr className="border-b border-black/8 text-[10px] font-black uppercase tracking-[0.2em] text-[#1a1a22]/30">
                         <th className="pb-6 pl-4">Ticket / Asunto</th>
                         <th className="pb-6">Asociado a</th>
                         <th className="pb-6 text-center">Estado</th>
                         <th className="pb-6 text-right pr-4">Acción</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/[0.03]">
-                      <tr className="group hover:bg-white/[0.01] transition-colors">
+                    <tbody className="divide-y divide-black/5">
+                      <tr className="group hover:bg-black/[0.02] transition-colors">
                         <td className="py-8 pl-4">
                            <div className="flex items-center gap-4">
                               <div className="w-10 h-10 rounded-xl bg-sasori-red/10 flex items-center justify-center text-sasori-red font-black text-xs">#01</div>
                               <div>
-                                 <p className="text-xs font-black uppercase mb-1 tracking-tight">Análisis Inicial de Proyecto</p>
-                                 <p className="text-[8px] font-mono opacity-30">REF: SYNC-PRO</p>
+                                 <p className="text-xs font-black uppercase mb-1 tracking-tight text-[#1a1a22]">Análisis Inicial de Proyecto</p>
+                                 <p className="text-[8px] font-mono text-[#1a1a22]/30">REF: SYNC-PRO</p>
                               </div>
                            </div>
                         </td>
                         <td className="py-8">
-                           <p className="text-[10px] font-black uppercase mb-1">General</p>
+                           <p className="text-[10px] font-black uppercase mb-1 text-[#1a1a22]">General</p>
                         </td>
                         <td className="py-8 text-center">
-                           <span className="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg text-[8px] font-black uppercase tracking-widest">ACTIVA</span>
+                           <span className="px-3 py-1.5 bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 rounded-lg text-[8px] font-black uppercase tracking-widest">ACTIVA</span>
                         </td>
                         <td className="py-8 text-right pr-4">
-                           <button className="text-[10px] font-black opacity-40 hover:opacity-100 hover:text-sasori-red transition-all underline underline-offset-4 decoration-sasori-red/30">DETALLES →</button>
+                           <button className="text-[10px] font-black text-[#1a1a22]/40 hover:text-sasori-red transition-all underline underline-offset-4 decoration-sasori-red/30">DETALLES →</button>
                         </td>
                       </tr>
                     </tbody>
@@ -475,20 +452,20 @@ function ClientDashboard({ profile, lang, t }: { profile: UserProfile, lang: str
       <AnimatePresence>
         {isRequestModalOpen && (
           <div className="fixed inset-0 z-[300] flex items-center justify-center p-4">
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/95 backdrop-blur-xl" onClick={() => setIsRequestModalOpen(false)} />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setIsRequestModalOpen(false)} />
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-xl bg-gradient-to-b from-[#111] to-black border border-white/10 rounded-[3rem] p-10 md:p-14 shadow-2xl"
+              className="relative w-full max-w-xl bg-white border border-black/10 rounded-[3rem] p-10 md:p-14 shadow-[0_30px_80px_rgba(0,0,0,0.15)]"
             >
-              <form onSubmit={handleRequestSubmit} className="space-y-6 text-white text-left">
-                <h2 className="text-3xl font-black uppercase tracking-tighter">Nueva Solicitud</h2>
+              <form onSubmit={handleRequestSubmit} className="space-y-6 text-[#1a1a22] text-left">
+                <h2 className="text-3xl font-black uppercase tracking-tighter text-[#1a1a22]">Nueva Solicitud</h2>
                 <div className="space-y-2">
-                   <label className="text-[9px] font-black uppercase tracking-widest text-white/30 ml-2">Asunto</label>
-                   <input type="text" placeholder="Asunto de la solicitud" title="Asunto" required className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-bold outline-none focus:border-sasori-red transition-all" onChange={e => setRequestForm({...requestForm, title: e.target.value})} />
+                   <label className="text-[9px] font-black uppercase tracking-widest text-[#1a1a22]/40 ml-2">Asunto</label>
+                   <input type="text" placeholder="Asunto de la solicitud" title="Asunto" required className="w-full bg-black/5 border border-black/10 rounded-2xl p-5 text-sm font-bold outline-none focus:border-sasori-red transition-all text-[#1a1a22]" onChange={e => setRequestForm({...requestForm, title: e.target.value})} />
                 </div>
                 <div className="space-y-2">
-                   <label className="text-[9px] font-black uppercase tracking-widest text-white/30 ml-2">Descripción</label>
-                   <textarea required rows={4} placeholder="Escribe aquí los detalles de tu solicitud..." title="Descripción" className="w-full bg-white/5 border border-white/10 rounded-2xl p-5 text-sm font-bold resize-none outline-none focus:border-sasori-red transition-all" onChange={e => setRequestForm({...requestForm, description: e.target.value})} />
+                   <label className="text-[9px] font-black uppercase tracking-widest text-[#1a1a22]/40 ml-2">Descripción</label>
+                   <textarea required rows={4} placeholder="Escribe aquí los detalles de tu solicitud..." title="Descripción" className="w-full bg-black/5 border border-black/10 rounded-2xl p-5 text-sm font-bold resize-none outline-none focus:border-sasori-red transition-all text-[#1a1a22]" onChange={e => setRequestForm({...requestForm, description: e.target.value})} />
                 </div>
                 <button type="submit" className="w-full py-5 bg-sasori-red text-white font-black uppercase tracking-[0.2em] rounded-2xl">PROCESAR →</button>
               </form>
@@ -540,7 +517,7 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
 
   if (loading || !profile) {
     return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center">
+      <div className="min-h-screen bg-[#f1f1f7] flex flex-col items-center justify-center">
         <MorphingSquare message="Sincronizando Sasori Node..." />
       </div>
     );
@@ -548,12 +525,12 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-black flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-1000">
-         <div className="w-20 h-20 rounded-full bg-sasori-red/10 border border-sasori-red/30 flex items-center justify-center mb-10 cinema-glow-red">
+      <div className="min-h-screen bg-[#f1f1f7] flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-1000">
+         <div className="w-20 h-20 rounded-full bg-sasori-red/10 border border-sasori-red/30 flex items-center justify-center mb-10">
             <AlertCircle className="w-10 h-10 text-sasori-red" />
          </div>
-         <h2 className="text-4xl font-black uppercase tracking-widest text-white mb-6 italic">Acceso Denegado</h2>
-         <p className="text-white/40 max-w-lg mb-12 text-sm font-medium leading-relaxed uppercase tracking-widest">
+         <h2 className="text-4xl font-black uppercase tracking-widest text-[#1a1a22] mb-6 italic">Acceso Denegado</h2>
+         <p className="text-[#1a1a22]/50 max-w-lg mb-12 text-sm font-medium leading-relaxed uppercase tracking-widest">
             {error.message || 'No se pudo sincronizar el nodo de usuario. La firma digital no ha sido validada en los servidores de SasoriLabs.'}
          </p>
          <div className="flex flex-col sm:flex-row gap-4">
@@ -565,7 +542,7 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
            </button>
            <button 
              onClick={() => navigate('/')} 
-             className="px-10 py-5 bg-white/5 border border-white/10 text-white font-black uppercase rounded-[1.5rem] hover:bg-white/10 transition-all"
+             className="px-10 py-5 bg-white border border-black/10 text-[#1a1a22] font-black uppercase rounded-[1.5rem] hover:bg-black/5 transition-all"
            >
              REGRESAR AL INICIO
            </button>
@@ -575,7 +552,7 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#f1f1f7] text-[#1a1a22] font-sans overflow-x-hidden">
       <AnimatedNavFramer lang={lang} />
 
       <main className="pt-32 px-4 md:px-8 max-w-7xl mx-auto pb-20 text-center md:text-left">
@@ -584,11 +561,11 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
         <div className="mb-10 flex justify-between items-center px-4">
            <div className="flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/20">Secure Session Active</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1a1a22]/30">Secure Session Active</span>
            </div>
            <button 
              onClick={handleLogout} 
-             className="px-4 py-2 rounded-full border border-white/5 bg-white/[0.02] text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-sasori-red hover:border-sasori-red/20 hover:bg-sasori-red/5 flex items-center gap-2 transition-all group"
+             className="px-4 py-2 rounded-full border border-black/8 bg-white text-[10px] font-black uppercase tracking-widest text-[#1a1a22]/40 hover:text-sasori-red hover:border-sasori-red/20 hover:bg-sasori-red/5 flex items-center gap-2 transition-all group"
            >
               <LogOut className="w-3 h-3 transition-transform group-hover:-translate-x-0.5" /> 
               {t.logout}
@@ -602,8 +579,6 @@ export function UserAccountPage({ lang = 'es' }: { lang?: string }) {
         )}
 
       </main>
-
-      <Footer lang={lang as any} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import HeroText from "../components/ui/hero-shutter-text";
-import { FeatureHighlightCard } from "../components/ui/feature-highlight-card";
+import { PremiumContact } from "../components/ui/premium-contact";
 import { TextScrollAnimation } from "../components/ui/text-scroll-animation";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -37,7 +37,7 @@ const FaqItem = ({ question, answer }: { question: string; answer: string }) => 
 export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
   const navigate = useNavigate();
   const t = translations[lang as keyof typeof translations] || translations.es;
-  const tp = t.servicesPages.immersive;
+  const tp = (t.servicesPages as any).immersive;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -363,16 +363,8 @@ export function ImmersiveWebsPage({ lang = "es" }: { lang?: string }) {
         </div>
       </section>
 
-      {/* 7. CTA Final */}
-      <section className="bg-white py-32 px-6 border-t border-black/5 relative items-center justify-center flex">
-        <FeatureHighlightCard 
-          imageSrc="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80"
-          title={tp.ctaTitle}
-          description={tp.ctaDesc}
-          buttonText={tp.ctaBtn}
-          onButtonClick={handleCta}
-        />
-      </section>
+      {/* 7. Contacto */}
+      <PremiumContact lang={lang} />
     </div>
   );
 }

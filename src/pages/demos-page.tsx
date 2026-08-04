@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import HeroText from "../components/ui/hero-shutter-text";
-import { Footer } from "../components/ui/footer";
 import { useNavigate } from "react-router-dom";
 import { FeatureHighlightCard } from "../components/ui/feature-highlight-card";
 import { TextScrollAnimation } from "../components/ui/text-scroll-animation";
@@ -69,6 +68,17 @@ export function DemosPage({ lang = 'es' }: { lang?: string }) {
       image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80",
       tags: ["AI Agent", "WhatsApp", "Sales"],
       type: lang === 'es' ? "Automatización" : "Automation"
+    },
+    {
+      title: "Ecommerce SaaS",
+      description: lang === 'es' 
+        ? "Es una plataforma basada en la nube diseñada para simplificar la creación, administración y escalado de tiendas en línea. Ofrece herramientas integradas para la gestión de catálogo, control de inventario, procesamiento de pedidos y analíticas de ventas desde un panel centralizado. Con esta solución, los comerciantes pueden optimizar sus operaciones digitales y brindar una experiencia de compra fluida y eficiente a sus clientes." 
+        : "A cloud-based platform designed to simplify the creation, management, and scaling of online stores. It offers integrated tools for catalog management, inventory control, order processing, and sales analytics from a centralized dashboard.",
+      icon: <Globe className="w-8 h-8" />,
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+      tags: ["SaaS", "Ecommerce", "Cloud"],
+      type: "SaaS",
+      url: "https://e-commerce-saas-sigma.vercel.app/"
     }
   ];
 
@@ -214,7 +224,10 @@ export function DemosPage({ lang = 'es' }: { lang?: string }) {
                   </div>
 
                   {/* Button */}
-                  <button className="w-full flex items-center justify-center gap-2 border border-sasori-red/20 text-sasori-red hover:bg-sasori-red hover:text-white transition-all duration-300 py-4 rounded-2xl uppercase font-black tracking-[0.2em] text-[10px] group/btn shadow-sm">
+                  <button 
+                    onClick={() => (demo as any).url ? window.open((demo as any).url, '_blank') : null}
+                    className="w-full flex items-center justify-center gap-2 border border-sasori-red/20 text-sasori-red hover:bg-sasori-red hover:text-white transition-all duration-300 py-4 rounded-2xl uppercase font-black tracking-[0.2em] text-[10px] group/btn shadow-sm"
+                  >
                     {t.viewDemo}
                     <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
@@ -235,8 +248,6 @@ export function DemosPage({ lang = 'es' }: { lang?: string }) {
           onButtonClick={handleCta}
         />
       </section>
-
-      <Footer lang={lang} />
     </div>
   );
 }

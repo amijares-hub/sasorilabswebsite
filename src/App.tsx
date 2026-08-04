@@ -17,44 +17,46 @@ import {
   Building, Store
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BackgroundPaths } from './components/ui/background-paths';
-import { ParticleTextEffect } from './components/ui/particle-text-effect';
 import { AnimatedNavFramer } from './components/ui/navigation-menu';
 import { SasoriLogo } from './components/ui/sasori-logo';
-import { TextScrollAnimation } from './components/ui/text-scroll-animation';
-import { RulerCarousel, type CarouselItem } from './components/ui/ruler-carousel';
-import { ServicesScrollFX } from './components/ui/services-scroll-fx';
 
 // --- Lazy loaded components for performance ---
-const ZoomParallax = React.lazy(() => import('./components/ui/zoom-parallax').then(m => ({ default: m.ZoomParallax })));
-const Timeline = React.lazy(() => import('./components/ui/timeline').then(m => ({ default: m.Timeline })));
-const CombinedPromotionalSections = React.lazy(() => import('./components/ui/promotional-sections').then(m => ({ default: m.CombinedPromotionalSections })));
-const IntegrationHero = React.lazy(() => import('./components/ui/integration-hero').then(m => ({ default: m.IntegrationHero })));
 const BlogPostSection = React.lazy(() => import('./components/ui/blog-posts').then(m => ({ default: m.BlogPostSection })));
-const CreativeDemosSection = React.lazy(() => import('./components/ui/creative-demos').then(m => ({ default: m.CreativeDemosSection })));
 const PremiumContact = React.lazy(() => import('./components/ui/premium-contact').then(m => ({ default: m.PremiumContact })));
-const Footer = React.lazy(() => import('./components/ui/footer').then(m => ({ default: m.Footer })));
-const MobileServicesFeatures = React.lazy(() => import('./components/ui/mobile-services-features').then(m => ({ default: m.MobileServicesFeatures })));
 
 import BlogPage from './pages/blog-page';
 import { ProcessAutomationPage } from './pages/process-automation-page';
 import { DigitalEmployeesPage } from './pages/digital-employees-page';
 import { ImmersiveWebsPage } from './pages/immersive-webs-page';
 import { ModernizationPage } from './pages/modernization-page';
+import { FrontendUXPage } from './pages/frontend-ux-page';
+import { BackendRelationalPage } from './pages/backend-relational-page';
+import { CybersecurityPage } from './pages/cybersecurity-page';
+import { InfrastructurePage } from './pages/infrastructure-page';
+import { IpaasPage } from './pages/ipaas-page';
+import { AiHardwarePage } from './pages/ai-hardware-page';
+import { FinopsPage } from './pages/finops-page';
+import { AiAgentsPage } from './pages/ai-agents-page';
+import { ItsmOrchestrationPage } from './pages/itsm-orchestration-page';
+import { DataBiPage } from './pages/data-bi-page';
+import { MarketingGeoPage } from './pages/marketing-geo-page';
+import { DevSecOpsPage } from './pages/devsecops-page';
 import { BlogDetailPage } from './pages/blog-detail-page';
 import { UserAuthPage } from './pages/user-auth-page';
 import { UserAccountPage } from './pages/user-account-page';
 import { UnsubscribePage } from './pages/unsubscribe-page';
 import { DemosPage } from './pages/demos-page';
-// import { Footer } from './components/ui/footer'; // Moved to lazy
-// import { BlogPostSection } from './components/ui/blog-posts'; // Moved to lazy
-// import { CreativeDemosSection } from './components/ui/creative-demos'; // Moved to lazy
-// import { IntegrationHero } from './components/ui/integration-hero'; // Moved to lazy
-import ClientSlideshow from './components/ui/slideshow';
+import { LandingPageInteractiva } from './pages/landing-page-interactiva';
+
+import { FunnelModal } from './components/ui/funnel-modal';
 import { NewsletterPopup } from './components/ui/newsletter';
 import { FloatingWhatsApp } from './components/ui/floating-whatsapp';
-import MinimalHero from './components/ui/hero-minimalism';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
+
+interface CarouselItem {
+  id: number;
+  title: string;
+}
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { translations } from './i18n/translations';
@@ -251,110 +253,7 @@ export default function App() {
 
   // --- Hook and State Initializations ---
 
-  const timelineData = [
-    {
-      title: t.services.entrepreneurs.title,
-      content: (
-        <div className="reveal w-full">
-          <h3 className="text-sasori-dark font-extrabold text-2xl md:text-3xl mb-4 uppercase tracking-[0.15em]">{t.services.entrepreneurs.subtitle}</h3>
-          <p className="text-gray-600 font-medium text-base md:text-lg mb-10 leading-relaxed max-w-3xl">
-            {t.services.entrepreneurs.desc}
-          </p>
-          
-          <div className="flex flex-col justify-center space-y-6 p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
-            <div className="space-y-5">
-              {t.services.entrepreneurs.items.map((item, i) => (
-                <div key={i} className="flex items-start gap-4 text-base md:text-lg font-semibold uppercase tracking-wide text-white/90">
-                  <div className="mt-1.5 w-2 h-2 rounded-full bg-sasori-red flex-shrink-0 shadow-[0_0_12px_rgba(226,6,19,0.8)]" />
-                  <span className="leading-snug">{item}</span>
-                </div>
-              ))}
-            </div>
-            <div className="pt-8">
-              <button
-                onClick={() => {
-                  navigate('/services/ai-automation');
-                  window.scrollTo(0, 0);
-                }}
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-sasori-red text-white text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
-              >
-                {t.common.viewDetails}
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: t.services.companies.title,
-      content: (
-        <div className="reveal w-full">
-          <h3 className="text-sasori-dark font-extrabold text-2xl md:text-3xl mb-4 uppercase tracking-[0.15em]">{t.services.companies.subtitle}</h3>
-          <p className="text-gray-600 font-medium text-base md:text-lg mb-10 leading-relaxed max-w-3xl">
-            {t.services.companies.desc}
-          </p>
-          
-          <div className="flex flex-col justify-center space-y-6 p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
-            <div className="space-y-5">
-              {t.services.companies.items.map((item, i) => (
-                <div key={i} className="flex items-start gap-4 text-base md:text-lg font-semibold uppercase tracking-wide text-white/90">
-                  <div className="mt-1.5 w-2 h-2 rounded-full bg-sasori-red flex-shrink-0 shadow-[0_0_12px_rgba(226,6,19,0.8)]" />
-                  <span className="leading-snug">{item}</span>
-                </div>
-              ))}
-            </div>
-            <div className="pt-8">
-              <button
-                onClick={() => {
-                  navigate('/services/modernization');
-                  window.scrollTo(0, 0);
-                }}
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-sasori-red text-white text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
-              >
-                {t.common.viewDetails}
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: t.services.pymes.title,
-      content: (
-        <div className="reveal w-full">
-          <h3 className="text-sasori-dark font-extrabold text-2xl md:text-3xl mb-4 uppercase tracking-[0.15em]">{t.services.pymes.subtitle}</h3>
-          <p className="text-gray-600 font-medium text-base md:text-lg mb-10 leading-relaxed max-w-3xl">
-            {t.services.pymes.desc}
-          </p>
 
-          <div className="flex flex-col justify-center space-y-6 p-8 md:p-12 metallic-vinotinto-card rounded-3xl border border-white/10 shadow-2xl">
-            <div className="space-y-5">
-              {t.services.pymes.items.map((item, i) => (
-                <div key={i} className="flex items-start gap-4 text-base md:text-lg font-semibold uppercase tracking-wide text-white/90">
-                  <div className="mt-1.5 w-2 h-2 rounded-full bg-sasori-red flex-shrink-0 shadow-[0_0_12px_rgba(226,6,19,0.8)]" />
-                  <span className="leading-snug">{item}</span>
-                </div>
-              ))}
-            </div>
-            <div className="pt-8">
-              <button
-                onClick={() => {
-                  navigate('/services/immersive-webs');
-                  window.scrollTo(0, 0);
-                }}
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-sasori-red text-white text-sm font-bold uppercase tracking-widest rounded-full hover:bg-white hover:text-sasori-red transition-all duration-300 shadow-[0_0_20px_rgba(226,6,19,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
-              >
-                {t.common.viewDetails}
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-  ];
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -593,160 +492,27 @@ export default function App() {
         <Route path="/services/digital-employees" element={<DigitalEmployeesPage lang={lang} />} />
         <Route path="/services/immersive-webs" element={<ImmersiveWebsPage lang={lang} />} />
         <Route path="/services/modernization" element={<ModernizationPage lang={lang} />} />
+        <Route path="/services/frontend-ux" element={<FrontendUXPage lang={lang} />} />
+        <Route path="/services/backend-relational" element={<BackendRelationalPage lang={lang} />} />
+        <Route path="/services/cybersecurity" element={<CybersecurityPage lang={lang} />} />
+        <Route path="/services/infrastructure" element={<InfrastructurePage lang={lang} />} />
+        <Route path="/services/ipaas" element={<IpaasPage lang={lang} />} />
+        <Route path="/services/ai-hardware" element={<AiHardwarePage lang={lang} />} />
+        <Route path="/services/finops" element={<FinopsPage lang={lang} />} />
+        <Route path="/services/ai-agents" element={<AiAgentsPage lang={lang} />} />
+        <Route path="/services/itsm-orchestration" element={<ItsmOrchestrationPage lang={lang} />} />
+        <Route path="/services/data-bi" element={<DataBiPage lang={lang} />} />
+        <Route path="/services/marketing-geo" element={<MarketingGeoPage lang={lang} />} />
+        <Route path="/services/devsecops" element={<DevSecOpsPage lang={lang} />} />
         {/* User routes */}
         <Route path="/login" element={<UserAuthPage lang={lang} />} />
         <Route path="/mi-cuenta" element={<UserAccountPage lang={lang} />} />
         <Route path="/unsubscribe" element={<UnsubscribePage />} />
         <Route path="/demos" element={<DemosPage lang={lang} />} />
         {/* Home page */}
-        <Route path="/*" element={
-          <div className="relative min-h-screen">
-            {/* Main Content */}
-            <main className="relative z-10">
-              {/* Hero Section */}
-              <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg-dark">
-                <div className="absolute inset-0 z-0">
-                  {isMobile ? (
-                    <MinimalHero
-                      brandText="SASORILABS"
-                      ctaText={t.common.startProject}
-                      kickerText={t.entrance.tagline}
-                      title={<>{lang === 'es' ? "Soluciones" : lang === 'zh' ? "數字" : lang === 'ru' ? "Цифровые" : lang === 'pt' ? "Soluções" : "Digital"}<br/>{lang === 'es' ? "Digitales" : lang === 'zh' ? "解決方案" : lang === 'ru' ? "Решения" : lang === 'pt' ? "Digitais" : "Solutions"}</>}
-                      subtitle={t.hero.subheadline}
-                      scrollPrompt={t.hero.scrollToSeeMore}
-                      onCtaClick={() => {
-                        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                      }}
-                    />
-                  ) : (
-                    <BackgroundPaths
-                      title="SASORILABS"
-                      subtitle={t.hero.subheadline}
-                      ctaText={t.common.startProject}
-                      onCtaClick={() => {
-                        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                      }}
-                      showContent={true}
-                    />
-                  )}
-                </div>
-                {!isMobile && (
-                  <div className="absolute inset-0 z-[1] pointer-events-none">
-                    <ParticleTextEffect words={t.hero.words} />
-                  </div>
-                )}
-              </section>
-
-              {/* Text Scroll Animation Section */}
-              <section className="relative z-20">
-                <TextScrollAnimation lang={lang}>
-                  <div className="max-w-7xl mx-auto">
-                    <RulerCarousel originalItems={carouselItems} />
-                  </div>
-                </TextScrollAnimation>
-              </section>
-
-              <React.Suspense fallback={<div className="h-40" />}>
-                {isMobile ? (
-                  <MobileServicesFeatures lang={lang} />
-                ) : (
-                  <ZoomParallax 
-                    lang={lang}
-                    categories={{
-                      audio: t.showcase?.categories?.audio,
-                      creative: t.showcase?.categories?.creative,
-                      data: t.showcase?.categories?.data
-                    }}
-                    items={parallaxItems} 
-                  />
-                )}
-              </React.Suspense>
-
-              {/* Timeline Section */}
-              {!isMobile && (
-                <section className="bg-bg-dark">
-                  <React.Suspense fallback={<div className="h-96" />}>
-                    <Timeline data={timelineData} />
-                  </React.Suspense>
-                </section>
-              )}
-
-              {/* Digital Employees Special Promotion Section */}
-              <div id="contact" className="scroll-mt-20">
-                <React.Suspense fallback={<div className="h-96" />}>
-                  <CombinedPromotionalSections lang={lang} />
-                </React.Suspense>
-              </div>
-
-              {/* Creative Demos Showcase */}
-              <section className="relative z-20">
-                <React.Suspense fallback={<div className="h-96" />}>
-                  <CreativeDemosSection lang={lang} />
-                </React.Suspense>
-              </section>
-
-              {/* Integrations Hero Section */}
-              <React.Suspense fallback={<div className="h-96" />}>
-                <IntegrationHero 
-                  lang={lang}
-                  badge={t.integrations.badge}
-                  title={t.integrations.title}
-                  subtext={t.integrations.subtext}
-                  ctaText={t.integrations.cta}
-                />
-              </React.Suspense>
-
-              {/* Blog Highlights Section */}
-              <section className="relative z-20 bg-bg-dark border-y border-black/5">
-                <React.Suspense fallback={<div className="h-96" />}>
-                  <BlogPostSection
-                    lang={lang}
-                    title={t.blog.title}
-                    description={t.blog.desc}
-                    backgroundLabel="NEWS"
-                  />
-                </React.Suspense>
-                <div className="flex justify-center pb-20">
-                  <button
-                    onClick={() => navigate('/blog')}
-                    className="group flex items-center gap-3 bg-sasori-red text-white font-black px-10 py-5 rounded-full shadow-[0_0_40px_rgba(226,6,19,0.3)] hover:bg-white hover:text-sasori-red transition-all duration-300 uppercase tracking-widest text-xs"
-                  >
-                    {t.common.viewFullBlog}
-                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              </section>
-
-              {/* Final CTA Section */}
-              <section className="relative z-20">
-                <BackgroundPaths
-                  title={t.common.transformFuture}
-                  subtitle={t.common.techVision}
-                  ctaText={t.common.scheduleConsultation}
-                  onCtaClick={() => {
-                    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  showContent={true}
-                />
-              </section>
-
-              {/* Satisfied Clients Slideshow Section */}
-              <section className="relative z-20">
-                <ClientSlideshow lang={lang} />
-              </section>
-
-              {/* Contact Section */}
-              <React.Suspense fallback={<div className="h-96" />}>
-                <PremiumContact lang={lang} />
-              </React.Suspense>
-
-              <React.Suspense fallback={<div className="h-40" />}>
-                <Footer lang={lang as any} />
-              </React.Suspense>
-            </main>
-          </div>
-        } />
+        <Route path="/*" element={<LandingPageInteractiva lang={lang} />} />
       </Routes>
+      <FunnelModal lang={lang} />
     </ThemeProvider>
   );
 }
