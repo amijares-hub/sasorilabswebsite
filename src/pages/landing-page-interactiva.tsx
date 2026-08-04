@@ -20,7 +20,7 @@ const PERSP = 2200; // px — camera distance
 
 type SupportedLang = 'es' | 'en' | 'pt' | 'ru' | 'zh';
 
-// 🌐 DICCIONARIO COMPLETO DE TRADUCCIONES (Incluye Dock)
+// 🌐 DICCIONARIO COMPLETO DE TRADUCCIONES
 const I18N_TEXTS = {
   cta: {
     es: "CONSULTA GRATIS",
@@ -252,15 +252,12 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
   const navigate = useNavigate();
   const openFunnel = useFunnelStore((state) => state.openFunnel);
   
-  // Estado para controlar el índice del servicio actual
   const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
 
-  // Helper para obtener textos según idioma con fallback a 'en'
   const getText = (obj: Record<SupportedLang, string>): string => {
     return obj[lang] || obj.en;
   };
 
-  // Construcción dinámica de los ítems del Dock traducidos
   const dockItems = [
     { id: "ui-ux", label: getText(I18N_TEXTS.dockLabels.uiUx), icon: <Monitor /> },
     { id: "database", label: getText(I18N_TEXTS.dockLabels.databases), icon: <Database /> },
@@ -269,7 +266,6 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
     { id: "crm", label: getText(I18N_TEXTS.dockLabels.crm), icon: <Users /> },
   ];
 
-  // Efecto para cambiar el servicio cada 5 segundos
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentServiceIndex((prevIndex) => (prevIndex + 1) % I18N_TEXTS.servicesLoop.length);
@@ -337,6 +333,23 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
         .logo-container {
           animation: logo-glow 6s ease-in-out infinite;
         }
+
+        /* Responsive position & sizing for the 3D Text Carousel */
+        .carousel-3d-wrapper {
+          transform: translateY(-5vh);
+        }
+        .carousel-3d-phrase {
+          font-size: 10vh;
+        }
+
+        @media (min-width: 768px) {
+          .carousel-3d-wrapper {
+            transform: translateY(15vh);
+          }
+          .carousel-3d-phrase {
+            font-size: 13vh;
+          }
+        }
       `}</style>
 
       <section
@@ -361,8 +374,9 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
           }}
         />
 
-        {/* ── 3D Text Carousel ── */}
+        {/* ── 3D Text Carousel (Ajustado para Móvil/Escritorio) ── */}
         <div
+          className="carousel-3d-wrapper"
           style={{
             position: "absolute",
             inset: 0,
@@ -371,18 +385,16 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
             perspectiveOrigin: "50% 48%",
             overflow: "hidden",
             pointerEvents: "none",
-            transform: "translateY(15vh)", 
           }}
         >
           <div className="sasori-stage absolute inset-0">
             {phrases.map((p, i) => (
               <span
                 key={p}
-                className="sasori-phrase absolute inset-0 grid place-items-center"
+                className="sasori-phrase carousel-3d-phrase absolute inset-0 grid place-items-center"
                 style={{
                   fontFamily: DISPLAY,
                   fontWeight: 900,
-                  fontSize: "13vh",
                   lineHeight: 1,
                   letterSpacing: "-0.05em",
                   whiteSpace: "nowrap",
@@ -483,7 +495,7 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
             </span>
           </div>
 
-          {/* Loop Content con AnimatePresence en contenedor flex centrado */}
+          {/* Loop Content con AnimatePresence */}
           <div className="z-10 my-auto relative h-32 flex flex-col justify-center overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
@@ -504,7 +516,7 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
             </AnimatePresence>
           </div>
 
-          {/* Action Button inferior fijo */}
+          {/* Action Button */}
           <div className="flex items-center text-[#1a1a22] text-xs font-bold tracking-widest uppercase z-10 shrink-0">
             <span>{getText(I18N_TEXTS.servicesAction)}</span>
             <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1.5 transition-transform duration-300" />
@@ -538,14 +550,14 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
             </p>
           </div>
 
-          {/* Action Button inferior fijo */}
+          {/* Action Button */}
           <div className="flex items-center text-white text-xs font-bold tracking-widest uppercase z-10 shrink-0">
             <span>{getText(I18N_TEXTS.promo.action)}</span>
             <ArrowRight className="w-3.5 h-3.5 ml-2 group-hover:translate-x-1.5 transition-transform duration-300" />
           </div>
         </motion.div>
 
-        {/* ── Magnetic Dock Traducido (Servicios) ── */}
+        {/* ── Magnetic Dock Traducido ── */}
         <div className="absolute bottom-28 z-30 w-full flex justify-center">
           <MagneticDock 
             items={dockItems} 
@@ -561,7 +573,7 @@ export function LandingPageInteractiva({ lang }: LandingPageInteractivaProps) {
           />
         </div>
 
-        {/* ── CTA Button (Consulta Gratis) ── */}
+        {/* ── CTA Button ── */}
         <div className="absolute bottom-16 z-40 w-full flex justify-center">
           <button
             onClick={openFunnel}
